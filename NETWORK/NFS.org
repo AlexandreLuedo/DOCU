@@ -1,0 +1,14 @@
+#+title: Nfs
+See also : [[https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/storage_administration_guide/ch-nfs][Redhat NFS documentation]]
+* Network File System
+* Versions
+Theres are 3 versions of NFS :
+** NFSv2 (older but wildely supported)
+*** TCP
+Optionnal
+** NFSv3 (newer and support asynchronous)
+*** TCP
+Optionnal
+** NFSv4 (use TCP)
+*** TCP
+Use
