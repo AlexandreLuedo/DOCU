@@ -1,0 +1,64 @@
+#+title: Bind 
+LANGUAGE:en
+Reffer to bind format syntax configuration file. Synonym is also: zonefile
+file.zone
+* Vocabulary
+** Base
+|------------------------------+-------------------------------------------------------------------------------------------------------------------|
+| Name                         | Description                                                                                                       |
+|------------------------------+-------------------------------------------------------------------------------------------------------------------|
+| $TTL                         | Time-to-*,  his Lifetime                                                                                          |
+| @                            | Represent the zone (example.com)                                                                                  |
+| IN                           | Internet, this is a DNS class                                                                                     |
+| SOA                          | Start of authority, store main zone (example.com) also admin infos (admin.example.com) other administration infos |
+| NS                           | Authoritary server names                                                                                          |
+| A, AAAA, CNAME, MX, TXT, SRV | Other types of records                                                                                            |
+|------------------------------+-------------------------------------------------------------------------------------------------------------------|
+** Other types of records
+|-------+----------------------------------------------------+----------------------------------|
+| Name  | Example                                            | Description                      |
+|-------+----------------------------------------------------+----------------------------------|
+| A     | A 192.158.1.23                                     | Ipv4                             |
+| AAAA  | AAAA 3818:8991:53d3:9e34:c2bd:79e8:cf7d:3406       | Ipv6                             |
+| CNAME | blog IN CNAME www                                  | alias forward another name       |
+| MX    | @ IN MX 10 mail.example.com                        | Mail server (priority)           |
+| TXT   | @ IN TXT "v=spf1 -all"                             | Free text (SPF/DKIM)             |
+| NS    | @ IN NS ns1.example.com                            | Authoritary name server          |
+| PTR   | 10.0.0.127.in‑addr.arpa. IN PTR localhost.         | Inverse resolution (IP => name)  |
+| SRV   | _sip._tcp IN SRV 10 60 5060 sipserver.example.com. | Service (port, priority, weight) |
+| CAA   | @ IN CAA 0 issue "letsencrypt.org"                 | Autorisation CA                  |
+|-------+----------------------------------------------------+----------------------------------|
+** Directives
+|-------------+-------------------------------------------+--------------------------------------------|
+| Name        | Example                                   | Description                                |
+|-------------+-------------------------------------------+--------------------------------------------|
+| $ORIGIN     | Change suffix name by default             | $ORIGIN sub.example.com                    |
+| $TTL        | Default TTL for all followings records    | $TTL 859598                                |
+| $INCLUDE    | Include another file to the conf          | $INCLUDE db.subzone                        |
+| $GENERATION | Generate multiples records (for Ip block) | $GENERATE 1-254 $ CNAME host$.example.com. |
+|-------------+-------------------------------------------+--------------------------------------------|
+#+begin_quote Warning
+ending every absolute name with a =.= (example.com.)
+#+end_quote
+* Live Example
+#+begin_src conf
+$TTL    <valeur_par_défaut>
+@       IN      SOA     ns1.exemple.com. admin.exemple.com. (
+                2025110401 ; Serial
+                7200       ; Refresh (2 h)
+                1800       ; Retry   (30 min)
+                1209600    ; Expire  (14 j)
+                3600 )     ; Minimum (1 h)
+
+        IN      NS      ns1.exemple.com.
+        IN      NS      ns2.exemple.com.
+
+ns1     IN      A       192.0.2.10
+ns2     IN      A       192.0.2.11
+www     IN      A       192.0.2.20
+mail    IN      A       192.0.2.30
+        IN      MX 10   mail.exemple.com.
+#+end_src
+* Debian
+** Bind file location
+/etc/bind/ (named.conf, db.*)

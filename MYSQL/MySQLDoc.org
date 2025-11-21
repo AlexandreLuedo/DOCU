@@ -1,0 +1,50 @@
+#+title: My Sql Doc
+Control the database with the *MySQL monitor*
+
+- Query aren't case-sensitives
+
+* Commands
+**   Connecte and disconnect
+***  Connect
+~mysql -u root -p~ same machine as root
+~mysql -u lemac -p~ same machine as user
+~mysql -h host -u user -p~ to the server
+***  Disconnect
+~exit~
+~QUIT~
+**  Create
+~create database test;~ Database under Unix are case sensitives
+create table tableTest;
+** Use/make usable db
+USE test
+**   Accessing db
+mysql -u root -p test
+**   List/show
+show databases;
+show tables;
+**   Perms
+***  Grant
+mysql> GRANT ALL ON menagerie.* TO 'your_mysql_name'@'your_client_host';
+*   Vocable
+| Word    | Meaning            |
+|---------+--------------------|
+| *Query* | Command ends with; |
+| *db*    | database           |
+| *dbs*   | databases          |
+*   Syntax
+- No lettercase effect querys: ~VERSION()~ / ~VeRsIoN()~ / ~version()~
+- End with ~;~
+- Espace with ~,~
+- Run Multiple with ~SELECT VERSION(); SELECT VERSION();~
+- If no ~;~ get *multiple-line statement*
+- For making pause in query type ~\c~
+
+**  State of command line
+| Prompt | Meaning                                        |
+|--------+------------------------------------------------|
+| mysql> | Ready for new query                            |
+| ->     | Waiting for next line of multpiple-line query  |
+| '>     | " Completion of a string began with a ~'~      |
+| ">     | " Completion of a string began with a ~“~      |
+| `>     | " Completion of an identifier began with a ~`~ |
+| /*>    | " Completion of a comment that began with ~/*~ |

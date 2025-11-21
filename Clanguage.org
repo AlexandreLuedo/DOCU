@@ -1,0 +1,114 @@
+#+title: Clanguage
+
+[[http://ressources.unit.eu/cours/Cfacile/co/Cours_C_facile_1.html][C language documentation FR]]
+
+* Compilation and compiler
+When a C programm are send to the compiler, he split the work in tree parts :
+** The pre-compilation
+The compiler will take the file.c and include all the pre-compilation directives who are include white an ~#~ before the declaration. Like ~#include <stdio.h>~ and send it the processor.
+
+** The compilation
+If the pre-compilation process doesn't fail, the compiler will start the compilation process. The compiler will translate all the code into machine code (binary code).
+
+** The links editing
+For example, in the code we have include the ~<stdio.h>~ library, who are compiled and store in another location. So the links editing will make the link between library and the code for giving an code result.
+
+
+Between the differents tasks, the file aren't in .c the file is in an intermmediate state. Normally after compiling the compiler will erase this intermmediate files, but you can specify with options to keep this files.
+
+*   First C elements
+** Definition
+The C is case-sensitive, so upper-case and lower-cases are considerable and important for the compiler.
+Like Java you must finish lines with an ~;~
+For adding one-line commentary use ~//~ and for an paragraph use ~/* ... */~
+*   Algorithm
+**   How to
+For solving, or writing problems in code, you must follow this differents rules
+*** Clarly define the problem
+- Define all the datas, links, docs etc...
+- Define goals, calculs, and what you will use to resolve the problem.
+- Define all frontiers and what you can't do
+*** Research an solution method
+****    In first of all you must :
+- Clarify the state "énoncé"
+- Simplify the problem
+- Verifing if the problem is solvable and can be traited.
+****    Search an strategy for the algoritm build.
+- Cut the problem into tiny multiples problems who can be more simple to resolve
+- Make successive refinements
+- The most succesive raffinement possible are the instructions.
+*** creation of an algorithm
+****    Definition
+The algoritm are multiples rules or instructions who are here to solve the problem. He must be construct regardless of the programming language.
+**** Warn
+- The algorithm must be execute with an finish number of operations
+- The algorithm must be clarly speciefed, without embiguitty
+- The data must be precize (integer, real, etc...)
+- The algorithm give at least one result
+- The algorithm must be effective (an human can simulate them with an finish time)
+
+* Identificators
+An identificator are construction name who aiming to have an special syntax. Especially in C.
+The identificator only begine with an letter and can't have space.
+** Correct indentificators
+- x
+- speed_object
+- Pi
+- true54
+* C structure
+- The C are structured and typed language, all the variables must have an type.
+
+
+[[https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c/7669586-declarez-des-variables][Cours C Open Classroom FR]]
+*   Different types of variables
+
+**  Values of variables
+Table of min and max values
+| Name of type |             Min |            Max |
+|--------------+-----------------+----------------|
+| signed char  |            -128 |            127 |
+| int          |          -32768 |          32767 |
+| long         |     -2147483648 |     2147483647 |
+| float        |  1.17549*10^+38 | 3.40282*10^+38 |
+| double       | 2.22507*10^-308 | 2.22507*10^+308 |
+
+For the int types (~singed char~, ~int~, ~long~) there are ~unsigned~ variables, who store unicly *positives* values.
+| unsigend char | 0 - 255           |
+| unsigend int  | 0 - 65535         |
+| unsgined long | 0 - 4 294 967 295 |
+So they can store *twice* the values of ~signed char~
+** declaration of variable
+~int noteDeMaths;~
+One declaration for multiples variables
+~int numberOfLives, level, ageOfThePlayer;~
+*** Constant
+~const int NUMBER_OF_LIVES_INITIAL = 5;~
+** Playing with variables
+*** The %
+~printf("there is %d lives");~ / There are no *variables* in the example
+The ~%d~ noted that we want display an ~int~
+There are the possibilities
+| Format | Types        |
+| %d     | int          |
+| %u     | unsigned int |
+| %ld    | long         |
+| %f     | float        |
+| %f     | double       |
+
+*** Display the variables
+- One variable
+~printf"there is %d lives", numberOfLives);~
+- Multiples variables
+  ~printf("you have %d lives and you are at level n° %d", numberOfLives, level);~
+*** Recieving values
+:LOGBOOK:
+CLOCK: [2024-01-27 Sat 19:50]--[2024-01-27 Sat 20:16] =>  0:26
+:END:
+use ~scanf~
+#+begin_src c
+int age = 0;
+scanf("%d", &age);
+#+end_src
+ Must have :
+ - ~%d~ in quotes
+ - ~&~ before the variable name who recieve the value

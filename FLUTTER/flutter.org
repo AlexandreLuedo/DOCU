@@ -1,0 +1,552 @@
+#+title: Flutter
+#+lang: fr en
+Sources [[*Container][flutter docs]] 
+* Principe
+** [[https://docs.flutter.dev/ui#basic-widgets][Tout es widget]]
+- chaques composants sont considérés comme des widgets.
+#+begin_src dart
+void main(){
+  runApp(
+    const Center(
+      child: Text('Hello, world!', textDirection:
+      TextDirectionltr),
+    ),
+    );
+}
+#+end_src
+la fonction ~runApp()~ prend le widget ~Center()~ et le rend fonction racine de l'ensemble.
+*** Text
+*** Row column
+sert au layout
+*** Stack
+Sert à placer les widgets les uns sur les autres
+**** Positioned
+~child~ sert à positionner vers le haut, bas, droite, gauche, left edge. Basé sur le *web absolute positionning layout model*
+*** Container
+- rectangular visual element
+- peux être décorer avec [[*BoxDecoration][BoxDecoration]]
+-  
+**** BoxDecoration
+- background, border, shadow
+- Peux avoir du ~marging~ et du ~padding~
+*** Expanded
+- Sert à expendre pour combler toute la place
+#+begin_src dart
+const Expanded(child: Center(child: Text('Hello world')))
+#+end_src
+** MaterialApp
+- Beaucoup de widget en material design on besoin d'être dedans.
+*** GestureDetector()
+sert à détecter les mouvements de l'utilisateur. 
+#+begin_src dart
+//...
+return GestureDetector(
+ onTap(){
+ print('my button was tapped');
+},
+child: Container(
+//...
+),
+child: const Center(child: Text('engage')),
+)
+#+end_src
+** StatefullWidgets
+~StatefulWidgets~ sont des widgets qui servent à gérer l'état (a ~state~) d'un objet, qui sont ensuite utilisés pour stocker cet état. [[*Exemple d'ajout de ~stateless widget~ avec un bouton plutôt esthétique][exemple]]
+*** Déclaration
+#+begin_src dart
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+  return const Placeholder();
+  }
+}
+#+end_src
+** State
+relatif et ressemblant à [[*StatefullWidgets][StatefullWidgets]], cet objet est persistant dans sa manière à stocker l'état / ~state~. Il retient les informations.
+** Explication rapide de la différence entre stateless et statefull
+- Utilisez StatelessWidget si le widget n'a pas besoin de changer après sa création.
+- Utilisez StatefullWidget si le widget doit changer sson apparence ou ses données itnernes en réponses à des événements ou des interactions.
+* Début d'un programme
+Contenu par défaut
+#+begin_src dart
+import 'package:flutter/material.dart'
+
+void main() {
+ runApp(MyApp()); // myApp est l'entrée de l'application
+ /* alternativement, cela peux être :
+ runApp(
+const Center(
+child: Text("Hello world", textDirection: TextDirection.ltr),),
+); */
+} -> pré initialisation
+
+class MyApp extends StatelessWidget {
+const MyApp({super.key}) // -> définit une constante avec une clée unique
+
+@override
+Widget build(BuildContext context) { // -> est appelé à chaque fois que le widget se construit ou ce met à jour, retourne un widget qui sera affiché à l'écran
+return const Placeholder(); // -> le placeholder est souvent replacer par MaterialApp() qui s'ouvre sur scaffold ou home : etc..
+}
+}
+#+end_src
+* Page principale
+#+begin_src dart
+return const MaterialApp(
+home: Scaffold(),
+)
+#+end_src
+* En utilisant material app
+** Exemple
+#+begin_src dart
+import 'package:flutter/material.dart';
+
+class MyAppBar extends StatelessWidget {
+  const MyAppBar({required this.title, super.key});
+
+  // Fields in a Widget subclass are always marked "final".
+
+  final Widget title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 56, // in logical pixels
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(color: Colors.blue[500]),
+      // Row is a horizontal, linear layout.
+      child: Row(
+        children: [
+          const IconButton(
+            icon: Icon(Icons.menu),
+            tooltip: 'Navigation menu',
+            onPressed: null, // null disables the button
+          ),
+          // Expanded expands its child
+          // to fill the available space.
+          Expanded(child: title),
+          const IconButton(
+            icon: Icon(Icons.search),
+            tooltip: 'Search',
+            onPressed: null,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyScaffold extends StatelessWidget {
+  const MyScaffold({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Material is a conceptual piece
+    // of paper on which the UI appears.
+    return Material(
+      // Column is a vertical, linear layout.
+      child: Column(
+        children: [
+          MyAppBar(
+            title: Text(
+              'Example title',
+              style:
+                  Theme.of(context) //
+                  .primaryTextTheme.titleLarge,
+            ),
+          ),
+          const Expanded(child: Center(child: Text('Hello, world!'))),
+        ],
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(
+    const MaterialApp(
+      title: 'My app', // used by the OS task switcher
+      home: SafeArea(child: MyScaffold()),
+    ),
+  );
+}
+#+end_src
+** Exemple d'ajout de ~stateless widget~ avec un bouton plutôt esthétique
+#+begin_src dart
+import 'package:flutter/material.dart';
+
+class Counter extends StatefulWidget {
+  // This class is the configuration for the state.
+  // It holds the values (in this case nothing) provided
+  // by the parent and used by the build  method of the
+  // State. Fields in a Widget subclass are always marked
+  // "final".
+
+  const Counter({super.key});
+
+  @override
+  State<Counter> createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  int _counter = 0;
+
+  void _increment() {
+    setState(() {
+      // This call to setState tells the Flutter framework
+      // that something has changed in this State, which
+      // causes it to rerun the build method below so that
+      // the display can reflect the updated values. If you
+      // change _counter without calling setState(), then
+      // the build method won't be called again, and so
+      // nothing would appear to happen.
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called,
+    // for instance, as done by the _increment method above.
+    // The Flutter framework has been optimized to make
+    // rerunning build methods fast, so that you can just
+    // rebuild anything that needs updating rather than
+    // having to individually changes instances of widgets.
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        ElevatedButton(onPressed: _increment, child: const Text('Increment')),
+        const SizedBox(width: 16),
+        Text('Count: $_counter'),
+      ],
+    );
+  }
+}
+
+void main() {
+  runApp(const MaterialApp(home: Scaffold(body: Center(child: Counter()))));
+}
+#+end_src
+
+* [[https://api.flutter.dev/flutter/painting/TextStyle-class.html][Mise en page de texte]]
+** Mise en page basique
+#+begin_src dart
+Text('Hello, Flutter !'),
+#+end_src
+Avec ~TextStyle()~
+#+begin_src dart
+Text('Hello, Flutter !',
+style: TextStyle(
+decoration:
+),
+)
+#+end_src
+** Mise en page avec le thème utilisé plus tôt
+#+begin_src dart
+Text(
+'Hello, Flutter !',
+style: Theme.of(
+context,
+).textTheme.body1,
+)
+#+end_src
+* [[https://docs.flutter.dev/ui/widgets/basics][Widgets de base]](doc)
+* Cookbook
+#+begin_src dart
+// Obtenir un titre
+ style: Theme.of(context).textTheme.headlineSmall,
+// Obtenir la couleur via le thème
+ color: Theme.of(context).colorScheme.primaryContainer,
+// Obtenir en gras
+ fontweight: FontWeight.bold
+// Obtenir en italique
+ fontstyle: FontStyle.italic
+#+end_src
+* SVG
+** Fixer les svg
+https://jakearchibald.github.io/svgomg/
+* Packages interressents
+https://pub.dev/packages/settings_tiles/install
+* Run
+** Tourner sous web
+#+begin_src bash
+$ flutter run -d web-server
+#+end_src
+* Architecture
+** Génération
+Pour une architecture clean il faut "générer" des container, des listTiles etc...
+*** Règles simples à retenir
+- ~list_item.dart~ / Modèle => structure, types, champs
+- ~parameters.dart~ / Données => cosntenu concret, listes d'items
+- ~screens~ => affichage & logique, utilise le modèle et les données
+
+ListItem => Parameters => Screen
+
+** Manuel Architecture Chatgpt
+*** Introduction
+Ce manuel a pour objectif d'expliquer comment organiser et structurer proprement
+les éléments générés dans un projet Flutter (ex: paramètres, listes dynamiques,
+containers personnalisés).
+
+Une bonne architecture :
+- rend le code plus lisible
+- facilite la réutilisation des composants
+- évite les duplications
+- aide à travailler en équipe
+
+*** Principes de base
+
+** Séparer le "quoi" du "comment"
+- *Modèle (Model)* :: définit la structure des données (les propriétés).
+- *Données (Data)* :: contient les instances concrètes des modèles.
+- *Widgets (UI)* :: affichent les données sous forme visuelle.
+- *Écrans (Screens)* :: assemblent les widgets et les données pour créer une page.
+
+** Avantages
+- Plus simple à maintenir
+- Réutilisable (le même modèle peut servir sur plusieurs écrans)
+- Plus clair pour les nouveaux développeurs
+
+*** Exemple d'organisation de projet
+
+Voici une arborescence recommandée :
+
+#+BEGIN_SRC text
+lib/
+├─ models/              # Définitions des structures de données
+│  ├─ list_item.dart
+│  └─ custom_container_item.dart
+├─ data/                # Données concrètes (listes d'items)
+│  ├─ parameters.dart
+│  └─ custom_container_items.dart
+├─ widgets/             # Widgets réutilisables
+│  └─ custom_container.dart
+├─ screens/             # Pages complètes
+│  └─ parameter_screen.dart
+└─ utils/               # Fonctions utilitaires (ex: email_helper.dart)
+#+END_SRC
+
+*** Cas pratique : une liste de paramètres
+
+** 1. Définir le modèle
+Dans ~lib/models/list_item.dart~ :
+
+#+BEGIN_SRC dart
+class ListItem {
+  final Widget? leading;
+  final String title;
+  final String subtitle;
+  final bool isClickable;
+  final void Function(BuildContext context)? onTap;
+
+  ListItem({
+    this.leading,
+    required this.title,
+    this.subtitle = '',
+    this.isClickable = true,
+    this.onTap,
+  });
+}
+#+END_SRC
+
+** 2. Définir les données
+Dans ~lib/data/parameters.dart~ :
+
+#+BEGIN_SRC dart
+import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import '../models/list_item.dart';
+import '../utils/email_helper.dart';
+import '../screens/license_page_screen.dart';
+
+final items = [
+  ListItem(
+    leading: CircleAvatar(child: Icon(Symbols.license)),
+    title: "Licence",
+    subtitle: "Propriétaire",
+    onTap: (context) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const LicensePageScreen()),
+      );
+    },
+  ),
+  ListItem(
+    leading: CircleAvatar(child: Icon(Symbols.mail)),
+    title: "Contact",
+    subtitle: "hadrien.ganache@pm.me",
+    onTap: (context) => openEmail(),
+  ),
+];
+#+END_SRC
+
+** 3. Construire l'écran
+Dans ~lib/screens/parameter_screen.dart~ :
+
+#+BEGIN_SRC dart
+import 'package:flutter/material.dart';
+import '../data/parameters.dart';
+
+class ParameterScreen extends StatelessWidget {
+  const ParameterScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Paramètres')),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return ListTile(
+            leading: item.leading,
+            title: Text(item.title),
+            subtitle: item.subtitle.isNotEmpty ? Text(item.subtitle) : null,
+            onTap: item.isClickable ? () => item.onTap?.call(context) : null,
+          );
+        },
+      ),
+    );
+  }
+}
+#+END_SRC
+
+*** Cas pratique : un widget personnalisé
+
+** 1. Créer le widget
+Dans ~lib/widgets/custom_container.dart~ :
+
+#+BEGIN_SRC dart
+import 'package:flutter/material.dart';
+
+class CustomContainer extends StatelessWidget {
+  final Color? color;
+  final double padding;
+  final double margin;
+  final double borderRadius;
+  final double? borderWidth;
+  final Color? borderColor;
+  final Widget child;
+
+  const CustomContainer({
+    super.key,
+    this.color,
+    this.padding = 20.0,
+    this.margin = 10.0,
+    this.borderRadius = 1.0,
+    this.borderWidth,
+    this.borderColor,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final Color background = color ?? Theme.of(context).colorScheme.primaryContainer;
+    final Color resolvedBorderColor = borderColor ?? Theme.of(context).dividerColor;
+
+    return Container(
+      margin: EdgeInsets.all(margin),
+      padding: EdgeInsets.all(padding),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(borderRadius),
+        border: borderWidth != null
+            ? Border.all(width: borderWidth!, color: resolvedBorderColor)
+            : null,
+      ),
+      clipBehavior: Clip.hardEdge,
+      child: child,
+    );
+  }
+}
+#+END_SRC
+
+** 2. Définir un modèle de données pour ce widget
+Dans ~lib/models/custom_container_item.dart~ :
+
+#+BEGIN_SRC dart
+import 'package:flutter/material.dart';
+
+class CustomContainerItem {
+  final String title;
+  final String? subtitle;
+  final IconData? icon;
+  final Color? color;
+  final VoidCallback? onTap;
+
+  CustomContainerItem({
+    required this.title,
+    this.subtitle,
+    this.icon,
+    this.color,
+    this.onTap,
+  });
+}
+#+END_SRC
+
+** 3. Définir une liste d'instances
+Dans ~lib/data/custom_container_items.dart~ :
+
+#+BEGIN_SRC dart
+import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import '../models/custom_container_item.dart';
+
+final customContainerItems = [
+  CustomContainerItem(
+    title: "Contact",
+    subtitle: "hadrien.ganache@pm.me",
+    icon: Symbols.mail,
+    color: Colors.amber,
+    onTap: () { /* action */ },
+  ),
+];
+#+END_SRC
+
+** 4. Afficher la liste avec CustomContainer
+Dans ~lib/screens/parameter_screen.dart~ (ou un autre écran) :
+
+#+BEGIN_SRC dart
+import 'package:flutter/material.dart';
+import '../widgets/custom_container.dart';
+import '../data/custom_container_items.dart';
+
+class CustomContainerDemo extends StatelessWidget {
+  const CustomContainerDemo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: customContainerItems.length,
+      itemBuilder: (context, index) {
+        final item = customContainerItems[index];
+        return CustomContainer(
+          borderRadius: 12,
+          borderWidth: 1,
+          color: item.color,
+          child: ListTile(
+            leading: item.icon != null ? Icon(item.icon) : null,
+            title: Text(item.title),
+            subtitle: item.subtitle != null ? Text(item.subtitle!) : null,
+            onTap: item.onTap,
+          ),
+        );
+      },
+    );
+  }
+}
+#+END_SRC
+
+*** Bonnes pratiques
+
+- Toujours mettre les modèles dans =models/=
+- Mettre les instances concrètes dans =data/=
+- Centraliser les widgets réutilisables dans =widgets/=
+- Ne jamais mélanger données + UI dans le même fichier écran
+- Favoriser les imports =package:mon_app/...= plutôt que =../= pour éviter les erreurs de chemin
+- Ajouter des commentaires/docstrings au-dessus des classes
+
+*** Conclusion
+En suivant ce modèle, vous gardez un projet Flutter organisé, clair, et facilement évolutif.
+Vous pouvez ajouter autant de modèles, données et widgets que nécessaire, la structure reste la même.

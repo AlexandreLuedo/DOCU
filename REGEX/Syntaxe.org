@@ -1,0 +1,29 @@
+#+title: Syntaxe
+#+LANGUAGE:fr
+* Selection de ligne
+#+begin_src regex
+'^ma ligne$'
+#+end_src
+~^~ = début de lgine
+~$~ = fin de ligne
+* Tout caractères
+.* = selectionne tout caractères
+* VIM transformer en commentaire une selection
+tapper ~:~
+#+begin_src bash
+'<,'> s/^/#/
+#+end_src
+* Liste
+#+begin_src bash
+.    # match n'importe quel caractère
+^    # match le début d'une chaîne de caractères
+$    # match la fin d'une chaîne de caractères
+|    # équivaut à OR
+[]   # ensemble de caractères, match ceux contenus dans l'ensemble
+[^ ] # comme [] mais match ceux NON contenus dans l'ensemble
+()   # match l'expression contenue entre parenthèses (exactement)
+{n}  # match n fois le caractère ou l'expression précédente
+\s   # match un espace
+\d   # match un chiffre
+\w   # match une lettre
+#+end_src

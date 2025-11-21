@@ -1,0 +1,15 @@
+#+title: Keys
+LANGUAGE:en
+* Cryptographics keys
+* Sorts
+|------+-------------+--------------+--------------------------------------------------------|
+| Name | Algorithm   | Description  | Generation                                             |
+|------+-------------+--------------+--------------------------------------------------------|
+| TSIG | HMAC‑SHA256 | Used for DNS | =$ openssl rand -base64 32=                              |
+|      |             |              | =$ dnssec-keygen -a HMAC-SHA256 -b 256 -n HOST nsupdate= |
+|------+-------------+--------------+--------------------------------------------------------|
+* Storage
+** SSH keys
+~/.ssh
+** Ansible
+- Using ansible [[file:~/INFOR/DOCU/ANSIBLE/ansible.org::Vault][vault]]

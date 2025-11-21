@@ -1,0 +1,21 @@
+#+title: Config Une Clée
+#+begin_src bash
+# Génère une clé SSH si elle n'existe pas déjà
+[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -t ed25519 -C "tonemail@example.com" -f ~/.ssh/id_ed25519 -N ""
+
+# Crée ou met à jour la config SSH
+echo -e "\nHost github.com\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_ed25519\n  IdentitiesOnly yes" >> ~/.ssh/config
+
+# Lance l'agent SSH et ajoute la clé
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+# Affiche la clé publique à coller sur GitHub
+echo -e "\n👉 Voici ta clé publique à ajouter sur https://github.com/settings/keys :\n"
+cat ~/.ssh/id_ed25519.pub
+
+# Teste la connexion SSH à GitHub
+echo -e "\n🔁 Test de la connexion SSH à GitHub :\n"
+ssh -T git@github.com
+
+#+end_src

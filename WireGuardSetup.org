@@ -1,0 +1,227 @@
+#+title: Wire Guard Setup
+
+The full tutorial [[https://dev.to/tangramvision/exploring-ansible-via-setting-up-a-wireguard-vpn-3389][here]]
+
+
+
+* Setup Ansible
+#+begin_src
+sudo apt-get update
+
+sudo apt-get install --no-install-recomends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+curl https://pyenv.run | bash
+#+end_src
+
+
+#+begin_src
+export PATH="/home/lemac/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+#+end_src
+
+Python
+#+begin_src
+pyenv install --list
+
+pyenv install 3.9.2
+
+pyenv global 3.9.2
+#+end_src
+
+
+Creating virtual environment
+#+begin_src
+pyenv virtualenv 3.9.2 ansible-wireguardsetup
+pyenv local ansible-wireguardsetup
+#+end_src
+
+Installing Ansible
+#+begin_src
+pip install ansible
+
+ansible --version
+#+end_src
+
+* Connecting with ansible
+#+begin_src
+vpn_server ansible_host=192.168.1.23 ansible_user=root
+#+end_src
+After that go on ssh connecting has root user
+
+For testing ansible :
+#+begin_src
+ansible -i inventory.ini -m setup vpn
+ansible -i inventory.ini -m debug -a "var=hostvars" vpn
+#+end_src
+** Writing playbook
+In the same folder as inventory.ini
+
+playbook.yml
+#+begin_src
+---
+- name: setup vpn server
+  hosts: vpn_server
+  tasks:
+  - name: ping
+    ping:
+  - name: show variables and facts
+    debug: var=hostvars
+#+end_src
+Run the playbook
+#+begin_src
+ansible-playbook -i inventory.ini playbook.yml
+#+end_src
+
+* Wireguard server setup
+Genberate keys with ~wg genkey~ and ~wg pubkey~
+#+begin_src
+privkey=$(wg genkey) sh -c 'echo"
+server_privkey: $privkey
+server_pubkey: $(echo $privkey | wg pubkey)"'
+#+end_src
+Copy  the Output lines and adding them to a new ~vars~ in the playbook.yml
+#+begin_src
+---
+- name: setup vpn server
+  hosts: vpn_server
+  vars:
+    server_privkey: thePrivKey
+    server_pubkey: thePubKey
+  tasks:
+#+end_src
+**   Encrypting keys
+*** Encrypting the private key
+#+begin_src
+ansible-vault encvrypt_string --ask-vault-password --stdin-name server_privkey
+#+end_src
+After that paste your ~privkey~ value and hit ~C + d~ twice.
+Copy the output into the playbook, like that :
+#+begin_src
+--------
+- name: setup vpn server
+  hosts: vpn_server
+  vars:
+    server_privkey: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          646438636565343063343631326136386239623935393637336539653636386135363
+          663386639393232346534643163656363316234306439306566306534610a31326664
+          363763663139383034636632343230376365333130333230373866353033326563303
+          5636138373830633534373033303536303566663166616539360a3936353033663263
+          336662663034376661616631343661333164363134373061343739633637623739306
+          465653532383838393662396333623966343165366635353132396332313762343534
+          65313761623964653532623839356633343838
+    server_pubkey: 7/6f7bUT+2hWMEP5BxeK51PGuMuTnQ9pRpkxg5jUSTo=
+  tasks:
+#+end_src
+Save the encryption password into the password manager
+**   Installing and config wireguard
+This is the rest of the code block above that
+This is a test, normally it should not working
+#+begin_src YML
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+  - name: install wireguard package
+    apt:
+      name: wireguard
+      state: present
+      update_cache: yes
+
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+  - name: create server wireguard config
+    template:
+      dest: /etc/wireguard/wg0.conf
+      src: server_wg0.conf.j2
+      owner: root
+      group: root
+      mode: '0600'
+
+  # https://docs.ansible.com/ansible/latest/collections/ansible/posix/sysctl_module.html
+  - name: enable and persist ip forwarding
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: "1"
+      state: present
+      sysctl_set: yes
+      reload: yes
+
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html
+  - name: start wireguard and enable on boot
+    systemd:
+      name: wg-quick@wg0
+      enabled: yes
+      state: started
+#+end_src
+You normally installed wireguard but creating the config failed.
+We are trying to use to create the server's configuration couldn't be found. Let's create it at ~templates/server_wg0.conf.j2~
+#+begin_src yml
+# {{ ansible_managed }}
+[Interface]
+Address = 10.0.1.1/24
+ListenPort = 51820
+PrivateKey = {{ server_privkey }}
+#+end_src
+
+** Wireguard Client Setup
+***   On the localhost
+Because we're targeting a new host (~localhost~), we need to write a new play in ~playbook.yml~.
+#+begin_src yml
+--------
+- name: setup vpn client
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    # Use system python so apt package is available
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    # Coming soon
+
+- name: setup vpn server
+  hosts: vpn
+  # Rest of server vars/tasks here...
+#+end_src
+*** Client setup tasks and config
+#+begin_src
+--------
+- name: setup vpn clients
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    # Use system python so apt package is available
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+  - name: install wireguard package
+    apt:
+      name: wireguard
+      state: present
+      update_cache: yes
+
+  - name: generate private key
+    shell:
+      cmd: umask 077 && wg genkey | tee privatekey | wg pubkey > publickey
+      chdir: /etc/wireguard
+      creates: /etc/wireguard/publickey
+
+  - name: get public key
+    command: cat /etc/wireguard/publickey
+    register: publickey_contents
+    changed_when: False
+
+  # Save pubkey as a fact, so we can use it to template wg0.conf for the server
+  - name: set public key fact
+    set_fact:
+      pubkey: "{{ publickey_contents.stdout }}"
+
+  - name: create client wireguard config
+    template:
+      dest: /etc/wireguard/wg0.conf
+      src: client_wg0.conf.j2
+      owner: root
+      group: root
+      mode: '0600'
+
+- name: setup vpn server
+  hosts: vpn_server
+  # Rest of server vars/tasks here...
+#+end_src

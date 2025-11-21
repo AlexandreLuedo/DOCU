@@ -1,0 +1,4962 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-05-19 lun. 22:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux</title>
+<meta name="author" content="HK" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>*{font-family: 'JetBrains Mono', monospace !important;}</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Linux</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org7ae7d26">1. Paquets de logiciels</a>
+<ul>
+<li><a href="#orgc701c53">1.1. Rpm</a>
+<ul>
+<li><a href="#org7d4790b">1.1.1. .rpm</a></li>
+<li><a href="#orge8a734d">1.1.2. .rpmsave</a></li>
+<li><a href="#orge6388f0">1.1.3. Options</a></li>
+<li><a href="#orgb979806">1.1.4. Extraction cpio</a></li>
+<li><a href="#orgc0d7a92">1.1.5. Cas noyau</a></li>
+</ul>
+</li>
+<li><a href="#org47a9bc5">1.2. <span class="todo TODO">TODO</span> YUM</a>
+<ul>
+<li><a href="#orgf452663">1.2.1. <span class="todo TODO">TODO</span> Config des dépôts</a></li>
+<li><a href="#orgc90a1c2">1.2.2. <span class="todo TODO">TODO</span> Utilisation des dépôts</a></li>
+</ul>
+</li>
+<li><a href="#orga1d0c7e">1.3. <span class="todo TODO">TODO</span> DNF</a></li>
+<li><a href="#org2b2cfa4">1.4. <span class="todo TODO">TODO</span> DPKG</a></li>
+<li><a href="#org9b8bac0">1.5. <span class="todo TODO">TODO</span> APT</a></li>
+<li><a href="#orgd3e8105">1.6. <span class="todo TODO">TODO</span> APTITUDE</a></li>
+<li><a href="#org7b21e12">1.7. <span class="todo TODO">TODO</span> ZYPPER</a></li>
+</ul>
+</li>
+<li><a href="#orgfc1dd4e">2. Shell</a>
+<ul>
+<li>
+<ul>
+<li><a href="#orgbf943cf">2.0.1. Diriger</a></li>
+</ul>
+</li>
+<li><a href="#org100814c">2.1. Commandes</a>
+<ul>
+<li><a href="#org336cc75">2.1.1. Commandes de bases</a></li>
+<li><a href="#org769a1a1">2.1.2. Commandes avancées</a></li>
+<li><a href="#org2b91517">2.1.3. Echainements de commandes</a></li>
+<li><a href="#org0738e94">2.1.4. Commandes externes</a></li>
+<li><a href="#org5260b3c">2.1.5. Commandes internes</a></li>
+</ul>
+</li>
+<li><a href="#org3428a5d">2.2. Fichiers</a>
+<ul>
+<li><a href="#orgb1f9b3a">2.2.1. Types</a></li>
+<li><a href="#orge71eecd">2.2.2. Nommage</a></li>
+<li><a href="#org67bcb68">2.2.3. Caractères génériques / jokers</a></li>
+<li><a href="#org55dda4e">2.2.4. <span class="todo TODO">TODO</span> Commande find</a></li>
+</ul>
+</li>
+<li><a href="#org000f9a0">2.3. Entrées/Sorties standard</a>
+<ul>
+<li><a href="#org8466d56">2.3.1. stdin</a></li>
+<li><a href="#org4dc6503">2.3.2. stdout</a></li>
+<li><a href="#orgb7bda21">2.3.3. stderr</a></li>
+<li><a href="#org4c09fd8">2.3.4. Rediriger sortie standart</a></li>
+<li><a href="#orge8a96b8">2.3.5. Rediriger sortie standart &amp; sortie erreur</a></li>
+<li><a href="#org4ac58fb">2.3.6. Rediriger entrée standart</a></li>
+</ul>
+</li>
+<li><a href="#org6d06232">2.4. Ouverture de descripteurs de fichiers supplémentaires</a>
+<ul>
+<li><a href="#org2ed1f5c">2.4.1. <span class="done ___">[?]</span> Ouverture (pas tout compris)</a></li>
+<li><a href="#org5761b2d">2.4.2. Fermeture</a></li>
+</ul>
+</li>
+<li><a href="#org1f95be0">2.5. Tubes (pipes)</a></li>
+<li><a href="#orgdf2eab0">2.6. Filtres</a>
+<ul>
+<li><a href="#orgdf932d1">2.6.1. Grep</a></li>
+<li><a href="#orgf294b26">2.6.2. egrep</a></li>
+<li><a href="#org9fa80db">2.6.3. fgrep</a></li>
+<li><a href="#org94fefdd">2.6.4. sed</a></li>
+<li><a href="#orgf53b44e">2.6.5. Cut</a></li>
+<li><a href="#orgfbda413">2.6.6. <span class="todo TODO">TODO</span> sort</a></li>
+<li><a href="#orga9e3ebc">2.6.7. join</a></li>
+<li><a href="#org19036d6">2.6.8. paste</a></li>
+<li><a href="#orge305b1a">2.6.9. split</a></li>
+<li><a href="#orgdeb2446">2.6.10. tr</a></li>
+<li><a href="#orga500766">2.6.11. xargs</a></li>
+<li><a href="#orgb6f82a3">2.6.12. Affichage</a></li>
+</ul>
+</li>
+<li><a href="#orgb3ab049">2.7. Gestion des processus</a>
+<ul>
+<li><a href="#org3459a6d">2.7.1. Attributs</a></li>
+<li><a href="#orgbc255a9">2.7.2. États process state</a></li>
+<li><a href="#org77e7789">2.7.3. Lancement de commande en tâche de fond</a></li>
+<li><a href="#orgcd93202">2.7.4. Tâches avant/arrière plan</a></li>
+<li><a href="#orgeaff7f2">2.7.5. Envoie signal à un processus</a></li>
+<li><a href="#orgc9c7044">2.7.6. nohup</a></li>
+<li><a href="#org0f0ea89">2.7.7. nice &amp; renice</a></li>
+<li><a href="#org4783c7c">2.7.8. time</a></li>
+<li><a href="#org333916f">2.7.9. exec</a></li>
+</ul>
+</li>
+<li><a href="#org16db0fe">2.8. Alias</a>
+<ul>
+<li><a href="#orgd4bcb06">2.8.1. Exemples</a></li>
+</ul>
+</li>
+<li><a href="#org3f48aa2">2.9. Groupement de commandes</a></li>
+<li><a href="#orgf9982bd">2.10. Conditionnel</a>
+<ul>
+<li><a href="#org867a0aa">2.10.1. Réussite ou échec</a></li>
+<li><a href="#orgd77ea18">2.10.2. Variables</a></li>
+<li><a href="#org6303e02">2.10.3. Variables système</a></li>
+<li><a href="#orgfc09b97">2.10.4. Variable spéciales</a></li>
+<li><a href="#orge9851d8">2.10.5. Longueur d&rsquo;une chaîne</a></li>
+<li><a href="#org8897095">2.10.6. Tableau</a></li>
+<li><a href="#org5721056">2.10.7. Variable numériques</a></li>
+</ul>
+</li>
+<li><a href="#orgcd3fe89">2.11. Config bash</a>
+<ul>
+<li><a href="#org1159d66">2.11.1. Lancement</a></li>
+</ul>
+</li>
+<li><a href="#org572c93c">2.12. Script shell</a>
+<ul>
+<li><a href="#orgd948f09">2.12.1. Placer script dans PATH</a></li>
+<li><a href="#org050a590">2.12.2. Ajouter repertoire courant à PATH</a></li>
+<li><a href="#org520db22">2.12.3. shebang</a></li>
+<li><a href="#org95a16a7">2.12.4. Arguments script</a></li>
+<li><a href="#orgfa92e18">2.12.5. Redéfinition arguments</a></li>
+<li><a href="#orga21f6fa">2.12.6. Parcous des arguments</a></li>
+<li><a href="#orga5c71ef">2.12.7. Terminaison</a></li>
+<li><a href="#org1b091c2">2.12.8. Environnement d&rsquo;un processus</a></li>
+<li><a href="#org23bb89c">2.12.9. Substitution de commande</a></li>
+<li><a href="#org563dcec">2.12.10. Test bash</a></li>
+<li><a href="#org24bb4e5">2.12.11. Conditionnel</a></li>
+<li><a href="#org933e8ba">2.12.12. Structure de choix multiples</a></li>
+<li><a href="#orgdc0f932">2.12.13. Saisie utilisateur</a></li>
+<li><a href="#orgbc7a443">2.12.14. Boucle</a></li>
+<li><a href="#orgbbb346d">2.12.15. While</a></li>
+<li><a href="#orga783c78">2.12.16. Until</a></li>
+<li><a href="#org44c0f5a">2.12.17. true &amp; false</a></li>
+<li><a href="#org1fb6b1c">2.12.18. break &amp; continue</a></li>
+<li><a href="#org59292d8">2.12.19. <span class="done ___">[?]</span> boucle select</a></li>
+<li><a href="#orgdcd560f">2.12.20. Fonctions</a></li>
+<li><a href="#org9a28ac8">2.12.21. Calculs et expressions</a></li>
+<li><a href="#org0e8f079">2.12.22. Calculs avec bash</a></li>
+<li><a href="#org084a728">2.12.23. Calculs sur nombres réels</a></li>
+<li><a href="#orgad9999c">2.12.24. Traitement des signaux</a></li>
+</ul>
+</li>
+<li><a href="#org373d9ee">2.13. Terminaux</a></li>
+</ul>
+</li>
+<li><a href="#org3bd5c70">3. Disques et le système de fichier</a>
+<ul>
+<li><a href="#org32870d2">3.1. Disques</a>
+<ul>
+<li><a href="#org3a7c6d2">3.1.1. Norme SCSI</a></li>
+<li><a href="#org2bb14cc">3.1.2. lsscsi</a></li>
+<li><a href="#orga65b8ba">3.1.3. Smart Array</a></li>
+<li><a href="#org1175b6d">3.1.4. Virualisation</a></li>
+<li><a href="#org749c34e">3.1.5. Multipathing</a></li>
+</ul>
+</li>
+<li><a href="#orgabc3fe2">3.2. hdparm</a></li>
+<li><a href="#org0c097cf">3.3. Système de fichiers</a>
+<ul>
+<li><a href="#org5b82f2b">3.3.1. Métadonnées</a></li>
+<li><a href="#orgb1ea080">3.3.2. ext*</a></li>
+<li><a href="#orgf93ab20">3.3.3. XFS</a></li>
+<li><a href="#org6ff953f">3.3.4. BTRFS</a></li>
+<li><a href="#org8cdc64d">3.3.5. Les FAT</a></li>
+<li><a href="#orgb98682c">3.3.6. FUSE</a></li>
+</ul>
+</li>
+<li><a href="#org6c2920d">3.4. Partitionnement</a>
+<ul>
+<li><a href="#orgd022da7">3.4.1. Méthodes</a></li>
+<li><a href="#org70c53c3">3.4.2. Manipuler des partitions</a></li>
+<li><a href="#org3bfdc19">3.4.3. Manipuler les systèmes de fichiers</a></li>
+</ul>
+</li>
+<li><a href="#orge727218">3.5. Installation sur clé usb iso</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7ae7d26" class="outline-2">
+<h2 id="org7ae7d26"><span class="section-number-2">1.</span> Paquets de logiciels</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgc701c53" class="outline-3">
+<h3 id="orgc701c53"><span class="section-number-3">1.1.</span> Rpm</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+redhat, opensuse
+<code>/var/lib/rpm</code> (jamais modifier cette base de donnée)
+ne fonctionnera pas si les dépendances ne sont pas résolues.
+</p>
+</div>
+<div id="outline-container-org7d4790b" class="outline-4">
+<h4 id="org7d4790b"><span class="section-number-4">1.1.1.</span> .rpm</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+<code>nom-version-edition.architecture.rpm</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orge8a734d" class="outline-4">
+<h4 id="orge8a734d"><span class="section-number-4">1.1.2.</span> .rpmsave</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+sauvegarde d&rsquo;ancienne config si update d&rsquo;un package.
+</p>
+</div>
+</div>
+<div id="outline-container-orge6388f0" class="outline-4">
+<h4 id="orge6388f0"><span class="section-number-4">1.1.3.</span> Options</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Options</th>
+<th scope="col" class="org-left">Explication</th>
+<th scope="col" class="org-left">Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">-i</td>
+<td class="org-left">installation</td>
+<td class="org-left"><code>rpm -i *.rpm</code></td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;force</td>
+<td class="org-left">va avec installtion</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;nodeps</td>
+<td class="org-left">si problème de dépendances</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">-v</td>
+<td class="org-left">nom du paquet</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">-h</td>
+<td class="org-left">progression installation</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">-U</td>
+<td class="org-left">Update paquet</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">-e</td>
+<td class="org-left">suppr</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-shell">rpm -e php
+</pre>
+</div>
+<p class="verse">
+Eviter d&rsquo;utiliser <code>--force</code> et <code>--nodeps</code> peux casser des dépendances<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org194e6e3"></a>Requêtes RPM<br />
+<div class="outline-text-5" id="text-1-1-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Options</th>
+<th scope="col" class="org-left">Explications</th>
+<th scope="col" class="org-left">Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">-a</td>
+<td class="org-left">tout les paquets</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">-i</td>
+<td class="org-left">information (résumé)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">-l</td>
+<td class="org-left">list</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">-f</td>
+<td class="org-left">trouve le paquet qui contient le fichier donné</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">-p</td>
+<td class="org-left">recherche dans le fichier de paquet</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;requires</td>
+<td class="org-left">dépendances du paquet</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;provides</td>
+<td class="org-left">ce que fournit le paquet</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;scripts</td>
+<td class="org-left">scripts exécutés à installation &amp; suppression</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;changelog</td>
+<td class="org-left">changelog</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-shell">// informations et fichierse install&#233;s par le paquet
+rpm -qil emacss-27.2-6.e19_1.1.x86_64
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-shell">// d&#233;pendances
+rpm -gp --requires php-8.1.14
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orga14e053"></a>Vérification des paquets<br />
+<div class="outline-text-5" id="text-1-1-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Options</th>
+<th scope="col" class="org-left">Explications</th>
+<th scope="col" class="org-left">Exemples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">-V</td>
+<td class="org-left">Contrôle le paquet</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-shell">rpm -V emacs
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="orge300bc4"></a>Erreures<br />
+<div class="outline-text-6" id="text-1-1-3-2-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">S</td>
+<td class="org-left">taille du fichier modifié</td>
+</tr>
+
+<tr>
+<td class="org-left">5</td>
+<td class="org-left">somme MD5 ne coresspond plus</td>
+</tr>
+
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">date de modification n&rsquo;est plus la même</td>
+</tr>
+
+<tr>
+<td class="org-left">U</td>
+<td class="org-left">propriétaire modifié</td>
+</tr>
+
+<tr>
+<td class="org-left">G</td>
+<td class="org-left">groupe modifié</td>
+</tr>
+
+<tr>
+<td class="org-left">L</td>
+<td class="org-left">lien symbolique modifié</td>
+</tr>
+
+<tr>
+<td class="org-left">M</td>
+<td class="org-left">perms modifiées</td>
+</tr>
+
+<tr>
+<td class="org-left">D</td>
+<td class="org-left">Périférique modifié</td>
+</tr>
+
+<tr>
+<td class="org-left">c</td>
+<td class="org-left">indique un fichier de config</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><a id="org379def8"></a>Clés GPG<br />
+<div class="outline-text-6" id="text-1-1-3-2-2">
+<p>
+obtenir clé
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">rpm -qa gpg-pubkey*
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="org8f89791"></a>Contrôler la clé d&rsquo;un paquet<br />
+<div class="outline-text-7" id="text-1-1-3-2-2-1">
+<div class="org-src-container">
+<pre class="src src-shell">rpm --checksig libjpeg-turbo-1.5.3-10.e18.x86_64.rpm
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgb979806" class="outline-4">
+<h4 id="orgb979806"><span class="section-number-4">1.1.4.</span> Extraction cpio</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<p>
+archive format <code>cpio</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #928374;"># </span><span style="color: #928374;">extraction</span>
+rpm2cpio
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc0d7a92" class="outline-4">
+<h4 id="orgc0d7a92"><span class="section-number-4">1.1.5.</span> Cas noyau</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<p>
+Update le noyau:
+</p>
+<ul class="org-ul">
+<li>installer avec l&rsquo;option <code>-i</code></li>
+<li>redémarrer et test logiciels / périphériques</li>
+<li>Si fonctionne, suppression eventuelle de l&rsquo;ancien noyau <code>-e</code></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgfb29159"></a>Grub1<br />
+<div class="outline-text-5" id="text-1-1-5-1">
+<p>
+<code>/boot/grub/grub.conf</code> modifier la ligne <code>default</code> pour redémarrer sur le nouveau noyau, si première version de grub utilisée
+</p>
+</div>
+</li>
+<li><a id="orga5e227f"></a>Grub2<br />
+<div class="outline-text-5" id="text-1-1-5-2">
+<ul class="org-ul">
+<li>lancer commande</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">grub2-mkconfig
+</pre>
+</div>
+<p>
+Régenère <code>/boot/grub2/grub.cfg</code>
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org47a9bc5" class="outline-3">
+<h3 id="org47a9bc5"><span class="section-number-3">1.2.</span> <span class="todo TODO">TODO</span> YUM</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+(Yellow dog Updater Modified)
+</p>
+</div>
+<div id="outline-container-orgf452663" class="outline-4">
+<h4 id="orgf452663"><span class="section-number-4">1.2.1.</span> <span class="todo TODO">TODO</span> Config des dépôts</h4>
+</div>
+<div id="outline-container-orgc90a1c2" class="outline-4">
+<h4 id="orgc90a1c2"><span class="section-number-4">1.2.2.</span> <span class="todo TODO">TODO</span> Utilisation des dépôts</h4>
+</div>
+</div>
+<div id="outline-container-orga1d0c7e" class="outline-3">
+<h3 id="orga1d0c7e"><span class="section-number-3">1.3.</span> <span class="todo TODO">TODO</span> DNF</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+(Dantified Yum)
+</p>
+</div>
+</div>
+<div id="outline-container-org2b2cfa4" class="outline-3">
+<h3 id="org2b2cfa4"><span class="section-number-3">1.4.</span> <span class="todo TODO">TODO</span> DPKG</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Equivalent de <a href="#orgc701c53">RPM</a> pour les paquets <code>.deb</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org9b8bac0" class="outline-3">
+<h3 id="org9b8bac0"><span class="section-number-3">1.5.</span> <span class="todo TODO">TODO</span> APT</h3>
+</div>
+<div id="outline-container-orgd3e8105" class="outline-3">
+<h3 id="orgd3e8105"><span class="section-number-3">1.6.</span> <span class="todo TODO">TODO</span> APTITUDE</h3>
+</div>
+<div id="outline-container-org7b21e12" class="outline-3">
+<h3 id="org7b21e12"><span class="section-number-3">1.7.</span> <span class="todo TODO">TODO</span> ZYPPER</h3>
+</div>
+</div>
+<div id="outline-container-orgfc1dd4e" class="outline-2">
+<h2 id="orgfc1dd4e"><span class="section-number-2">2.</span> Shell</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #928374;"># </span><span style="color: #928374;">list des shell install&#233;s</span>
+nvim /etc/shells
+</pre>
+</div>
+</div>
+<div id="outline-container-orgbf943cf" class="outline-4">
+<h4 id="orgbf943cf"><span class="section-number-4">2.0.1.</span> Diriger</h4>
+<div class="outline-text-4" id="text-2-0-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">option</th>
+<th scope="col" class="org-left">explication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-d</td>
+<td class="org-left">exit du shell</td>
+</tr>
+
+<tr>
+<td class="org-left">C-a</td>
+<td class="org-left">début</td>
+</tr>
+
+<tr>
+<td class="org-left">C-e</td>
+<td class="org-left">fin</td>
+</tr>
+
+<tr>
+<td class="org-left">C-l</td>
+<td class="org-left">suppr tout</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u</td>
+<td class="org-left">suppr début ligne</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org100814c" class="outline-3">
+<h3 id="org100814c"><span class="section-number-3">2.1.</span> Commandes</h3>
+<div class="outline-text-3" id="text-2-1">
+</div>
+<div id="outline-container-org336cc75" class="outline-4">
+<h4 id="org336cc75"><span class="section-number-4">2.1.1.</span> Commandes de bases</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #928374;"># </span><span style="color: #928374;">syntax</span>
+commande <span style="color: #fe8019;">[</span>options<span style="color: #fe8019;">]</span> <span style="color: #fe8019;">[</span>arguments<span style="color: #fe8019;">]</span>
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">nom</th>
+<th scope="col" class="org-left">explications</th>
+<th scope="col" class="org-left">options</th>
+<th scope="col" class="org-left">arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">date</td>
+<td class="org-left">Aff. date + heure</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">pwd</td>
+<td class="org-left">chemin d&rsquo;accès</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cal</td>
+<td class="org-left">affiche calendrier</td>
+<td class="org-left">mois + année / -m (monday) -s (sunday)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cal -m3</td>
+<td class="org-left">affiche trois mois</td>
+<td class="org-left">-3 marche aussi</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">echo</td>
+<td class="org-left">Aff. texte</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">texte</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\n saut ligne</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\t tabulation horizontale (en gros TAB)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\c pas de saut ligne après arguments</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\b retour un caractère arrière</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\\ aff. antislash</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\nnn affiche caractère code octal <code>nnn</code></td>
+</tr>
+
+<tr>
+<td class="org-left">type</td>
+<td class="org-left">Aff. si com. externe ou interne</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">sort</td>
+<td class="org-left">trie les lignes</td>
+<td class="org-left">-f non-case sensitive</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-n tri numérique</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-u affiche qu&rsquo;une fois les doublons</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-t trie en fonction des ASCII mais sans la casse (case-sens.)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-r trie inverse</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-k trie selon la définition chclef</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-c affiche le nombre devant chaques ligne</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-d affiche qu&rsquo;une fois les ligne en doublons groupe par grpe.</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-i pas de distinctions majuscules minuscules.</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">history</td>
+<td class="org-left">historique des commandes</td>
+<td class="org-left">-s [int] réexecution</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">file</td>
+<td class="org-left">infor nature contenu d&rsquo;un fichier</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cat</td>
+<td class="org-left">affiche contenu du fichier</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">man</td>
+<td class="org-left">explique la commande</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ls</td>
+<td class="org-left">liste</td>
+<td class="org-left">-l informations détaillés</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-a fichiers cachés</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-d informations répertoire &amp; contenu</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-F spécifier type: * (exec) @ (lien symbolique) / (repertoire)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-R parcours toute l&rsquo;arborescence depuis folder (mode récurcif)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-t trier par date de mof recent vers ancien</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-c date de changement état du fichier</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-u date accès au fichier</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-r inversé</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-i numéro inode</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-C colonnes (par défault)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-1 colonne</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-Z attribut fichier lié système fichier / contexte sécurité</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">touche</td>
+<td class="org-left">créer un fichier</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&gt;</td>
+<td class="org-left">créer une redirection (stdout)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&gt;&gt;</td>
+<td class="org-left">ne remet pas à zéro le fichier cible</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">2&gt;</td>
+<td class="org-left">sortie d&rsquo;erreure standart (stderr)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">2&gt;&amp;1</td>
+<td class="org-left">stdout &amp; stderr</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">mkdir</td>
+<td class="org-left">créer un répertoire</td>
+<td class="org-left">-p (créer l&rsquo;arborescence complète)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">rmdir</td>
+<td class="org-left">suppr un répertoire</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cp</td>
+<td class="org-left">copier</td>
+<td class="org-left">-i demande confirmation pour chaques fichiers</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-r recursif: copie repertoire + arborescence</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-p perms et dates du fichiers sont conservés</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-f forcer la copie</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">mv</td>
+<td class="org-left">déplace</td>
+<td class="org-left">-i confirmation</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-f force</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-u si objet cible plus rescent, n&rsquo;est pas écrasé</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">rm</td>
+<td class="org-left">suppr</td>
+<td class="org-left">-i confirmation</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-r si argument répertoire alors récurcif</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-f force</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ln -s</td>
+<td class="org-left">créer un lien simbolique</td>
+<td class="org-left">-s symbolique</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-i</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">find</td>
+<td class="org-left">chercher un fichier</td>
+<td class="org-left">-f</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">fd</td>
+<td class="org-left">chercher également un fichier</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">whereis</td>
+<td class="org-left">localise la commande</td>
+<td class="org-left">-b uniquetement executables</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-m uniquement manuels</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-s uniquemtn sources</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">which</td>
+<td class="org-left">trouve l&rsquo;executable dans PATH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">wc</td>
+<td class="org-left">workd counter</td>
+<td class="org-left">-l nombre de ligne</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-c nombre d&rsquo;octets</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-w nombre de mots</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-m nombre de caractères</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">grep</td>
+<td class="org-left">selectionne des lignes</td>
+<td class="org-left">-v recherche inverse: affiche lignes pas en recherche</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-c nombre lignes trouvés sans les aff.</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-i pas distinctions entre majuscules et minuscules</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-n affiche numéro devant chaques lignes trouvées</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-l affiche nom du fichier ayant des lignes qui correspondes.</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">egrep</td>
+<td class="org-left">plus critères de recherche</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">sed</td>
+<td class="org-left">remplace et edite un fichier</td>
+<td class="org-left">-f lit les commandes d&rsquo;éditions dans le fichier</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cut</td>
+<td class="org-left">coupe une position sur une ligne</td>
+<td class="org-left"><a href="#org7697d4a">Position</a></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-f selection par champ (mots)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-d délimitateur fonctionne avec champ</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">who</td>
+<td class="org-left">liste les infos sur les utilisateurs</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">split</td>
+<td class="org-left">copie et divise le fichier copier</td>
+<td class="org-left">-l en fonction des lignes -l 2 fichier fichierSplited*</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-b en fonction dse bytes -b 2 fichier fichierSplited*</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tr</td>
+<td class="org-left">substitue un caractère d&rsquo;un fichier</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">basename</td>
+<td class="org-left">extrait la partie nom de fichier</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">dirname</td>
+<td class="org-left">extrait la partie chemin d&rsquo;accès</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">diff</td>
+<td class="org-left">compare fichier  diff [-b] fic1 fic2</td>
+<td class="org-left">-b enlève les blancs</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">fg</td>
+<td class="org-left">relance une commande foreground</td>
+<td class="org-left">n de la commande (eg: 1)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">bg</td>
+<td class="org-left">relance une commande background</td>
+<td class="org-left">"</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">jobs</td>
+<td class="org-left">liste les commandes en actions</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ps</td>
+<td class="org-left">liste les processus (<i>process status</i>)</td>
+<td class="org-left">-f affiche détaillé</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-e tous les processus du système</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-u un ou plusieurs utilisateurs</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-g groupes</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-t terminaux</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-p PID précis</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-l liste processus infos plus techniques</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">kill</td>
+<td class="org-left">envoie un signal via le PID</td>
+<td class="org-left">kill [-l] [-Num<sub>signal</sub>] PID [PID2&#x2026;]</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">pkill</td>
+<td class="org-left">envoie signal via le noms</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">nohup</td>
+<td class="org-left">tourner la commande après ferm. term.</td>
+<td class="org-left">nohup ls -l</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">nice</td>
+<td class="org-left">priorise l&rsquo;execution d&rsquo;une commande</td>
+<td class="org-left">-20 à 19 (+ la valeur négative, plus elle est forte)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">renice</td>
+<td class="org-left">priorise l&rsquo;exec. en fonction de user</td>
+<td class="org-left">-p <a href="#org17dc2b3">PID</a></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-g GID</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-u UID</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">time</td>
+<td class="org-left">mesure le temps d&rsquo;exec d&rsquo;une commande</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">alias</td>
+<td class="org-left">raccourcis pour exec commande</td>
+<td class="org-left">Alias NomAlias = &rsquo;ligne de commande&rsquo;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">alias # liste les différents alias par défaut</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">chmod</td>
+<td class="org-left">give perm pour exec. un script</td>
+<td class="org-left">chmod u+x monscript</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">systemctl</td>
+<td class="org-left">gère un systeme</td>
+<td class="org-left">start démarre un service</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">enable démarre le service dès la mise en route du pc</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="org-ol">
+<li><a id="org1a416a6"></a>Exemple<br />
+<div class="outline-text-5" id="text-2-1-1-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fabd2f;">echo</span> -e <span style="color: #b8bb26;">"Salut.\tJe m'appelle </span><span style="color: #d3869b; font-weight: bold;">XXX</span><span style="color: #b8bb26;">\b\b\bPesronne\n"</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org769a1a1" class="outline-4">
+<h4 id="org769a1a1"><span class="section-number-4">2.1.2.</span> Commandes avancées</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">nom</th>
+<th scope="col" class="org-left">explication</th>
+<th scope="col" class="org-left">options</th>
+<th scope="col" class="org-left">arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">mknode</td>
+<td class="org-left">créer un fichier spécial périphérique</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">efibootmgr</td>
+<td class="org-left">Permet de voir la variable de la NVRAM</td>
+<td class="org-left">-v verbose</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org2b91517" class="outline-4">
+<h4 id="org2b91517"><span class="section-number-4">2.1.3.</span> Echainements de commandes</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<ul class="org-ul">
+<li><code>&amp;&amp;</code></li>
+<li><code>;</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0738e94" class="outline-4">
+<h4 id="org0738e94"><span class="section-number-4">2.1.4.</span> Commandes externes</h4>
+<div class="outline-text-4" id="text-2-1-4">
+<p>
+appel des programmes stockés dansx des fichiers
+</p>
+</div>
+</div>
+<div id="outline-container-org5260b3c" class="outline-4">
+<h4 id="org5260b3c"><span class="section-number-4">2.1.5.</span> Commandes internes</h4>
+<div class="outline-text-4" id="text-2-1-5">
+<p>
+code executable dansle <code>primitive shell</code>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3428a5d" class="outline-3">
+<h3 id="org3428a5d"><span class="section-number-3">2.2.</span> Fichiers</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-orgb1f9b3a" class="outline-4">
+<h4 id="orgb1f9b3a"><span class="section-number-4">2.2.1.</span> Types</h4>
+<div class="outline-text-4" id="text-2-2-1">
+</div>
+<ol class="org-ol">
+<li><a id="org9d03b5e"></a>Ordinaires<br />
+<div class="outline-text-5" id="text-2-2-1-1">
+<ul class="org-ul">
+<li>aussi appelés réguliers (ordinary, regulare files)</li>
+<li>img, texte, son, programme executable</li>
+</ul>
+</div>
+</li>
+<li><a id="org0f79ddd"></a>Répertoire<br />
+<div class="outline-text-5" id="text-2-2-1-2">
+<ul class="org-ul">
+<li>structure l&rsquo;espace disque en arborescence</li>
+<li>contient une table identifiant nom et numéro interne (numéro inode)</li>
+</ul>
+</div>
+</li>
+<li><a id="org0fdcf18"></a>Spécial<br />
+<div class="outline-text-5" id="text-2-2-1-3">
+<ul class="org-ul">
+<li><code>/dev</code></li>
+<li>peuvent être crée partout avec <code>mknode</code></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgb284dc8"></a>bloc<br />
+<div class="outline-text-6" id="text-2-2-1-3-1">
+<ul class="org-ul">
+<li>accéde à des blocs de données (disque dure)</li>
+</ul>
+</div>
+</li>
+<li><a id="org7b94582"></a>caractère<br />
+<div class="outline-text-6" id="text-2-2-1-3-2">
+<ul class="org-ul">
+<li>accède phériphérique octet par octet (écran de terminal, lecteur de bandes)</li>
+</ul>
+</div>
+</li>
+<li><a id="orge646b8b"></a>FIFO<br />
+<div class="outline-text-6" id="text-2-2-1-3-3">
+<ul class="org-ul">
+<li><i>First In First Out</i></li>
+<li>tubes (pipes), canaux de communications d&rsquo;échange de données entres processus</li>
+</ul>
+</div>
+</li>
+<li><a id="orgef6225a"></a>socket<br />
+<div class="outline-text-6" id="text-2-2-1-3-4">
+<ul class="org-ul">
+<li>permet également échange de données entre processus mais via protocole réseau classique</li>
+</ul>
+</div>
+</li>
+<li><a id="org8c494f4"></a>liens symboliques<br />
+<div class="outline-text-6" id="text-2-2-1-3-5">
+<ul class="org-ul">
+<li>fichiers renvoient à d&rsquo;autres fichiers, contenant interne: chemin d&rsquo;accès du fichier cible</li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div id="outline-container-orge71eecd" class="outline-4">
+<h4 id="orge71eecd"><span class="section-number-4">2.2.2.</span> Nommage</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<ul class="org-ul">
+<li>Éviter en début de nom:</li>
+<li><code>&amp; ; () ~ &lt;espace&gt; \ / | ` ? -</code></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgc260273"></a>Valide<br />
+<div class="outline-text-5" id="text-2-2-2-1">
+<ul class="org-ul">
+<li>Fichier1</li>
+<li>Paie.txt</li>
+<li>123traitement.sh</li>
+<li>Paie<sub>juin</sub><sub>2002.xls</sub></li>
+<li>8</li>
+</ul>
+</div>
+</li>
+<li><a id="orgc8d2b0b"></a>Potentiellement problématiques<br />
+<div class="outline-text-5" id="text-2-2-2-2">
+<ul class="org-ul">
+<li>Fichier*</li>
+<li>Paie(decembre)</li>
+<li>Ben&amp;Nuts</li>
+<li>Paie juin 2002.xls</li>
+<li>-f</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org67bcb68" class="outline-4">
+<h4 id="org67bcb68"><span class="section-number-4">2.2.3.</span> Caractères génériques / jokers</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+Permet de désigner/afficher selon certains critères
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">caractère</th>
+<th scope="col" class="org-left">rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">*</td>
+<td class="org-left">tout</td>
+</tr>
+
+<tr>
+<td class="org-left">?</td>
+<td class="org-left">caractère unique</td>
+</tr>
+
+<tr>
+<td class="org-left">[&#x2026;]</td>
+<td class="org-left">un seul caractère appartenant à la liste unique</td>
+</tr>
+
+<tr>
+<td class="org-left">[a-b]</td>
+<td class="org-left">entre a-b</td>
+</tr>
+
+<tr>
+<td class="org-left">[!&#x2026;]</td>
+<td class="org-left">un seul n&rsquo;appartenant pas à la liste</td>
+</tr>
+
+<tr>
+<td class="org-left">[^&#x2026;]</td>
+<td class="org-left">un seul n&rsquo;appartenant pas à la liste</td>
+</tr>
+
+<tr>
+<td class="org-left">[x,y]</td>
+<td class="org-left">liste éléments, chiffres, n&rsquo;importe</td>
+</tr>
+
+<tr>
+<td class="org-left">[x..y]</td>
+<td class="org-left">suite d&rsquo;éléments incrémentés de x à y</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="org-ol">
+<li><a id="orgbba0ec2"></a>Exemples<br />
+<div class="outline-text-5" id="text-2-2-3-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fabd2f;">echo</span> ???? <span style="color: #928374;"># </span><span style="color: #928374;">touts les fichiers contenants uniquement 4 caract&#232;res</span>
+<span style="color: #fabd2f;">echo</span> b????* <span style="color: #928374;"># </span><span style="color: #928374;">touts les fichiers commen&#231;ant par la lettre b de au moins 5 caract&#232;res</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #fe8019;">[</span>bd<span style="color: #fe8019;">]</span>* <span style="color: #928374;">#</span><span style="color: #928374;">tout les fichiers commen&#231;ant par b ou d</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #fe8019;">[</span><span style="color: #ebdbb2; font-weight: bold;">!</span>bd<span style="color: #fe8019;">]</span>* <span style="color: #928374;"># </span><span style="color: #928374;">tout les fichiers ne commen&#231;ant pas ni par b ni par d</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #fe8019;">[</span>^bd<span style="color: #fe8019;">]</span>* <span style="color: #928374;"># </span><span style="color: #928374;">"</span>
+<span style="color: #fabd2f;">echo</span> *<span style="color: #fe8019;">{</span>df,c2,3<span style="color: #fe8019;">}</span>* <span style="color: #928374;"># </span><span style="color: #928374;">tout les fichiers du r&#233;pertoire courant qui o&#249; le nom contient df ou c2 ou 3</span>
+<span style="color: #fabd2f;">echo</span> ~/.* <span style="color: #928374;"># </span><span style="color: #928374;">tout les fichiers commen&#231;ant par un point</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org55dda4e" class="outline-4">
+<h4 id="org55dda4e"><span class="section-number-4">2.2.4.</span> <span class="todo TODO">TODO</span> Commande find</h4>
+</div>
+</div>
+<div id="outline-container-org000f9a0" class="outline-3">
+<h3 id="org000f9a0"><span class="section-number-3">2.3.</span> Entrées/Sorties standard</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Un programme non-graphique utilise souvent les entrées/sorties standards
+</p>
+</div>
+<div id="outline-container-org8466d56" class="outline-4">
+<h4 id="org8466d56"><span class="section-number-4">2.3.1.</span> stdin</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+0
+</p>
+</div>
+</div>
+<div id="outline-container-org4dc6503" class="outline-4">
+<h4 id="org4dc6503"><span class="section-number-4">2.3.2.</span> stdout</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<p>
+1
+</p>
+</div>
+</div>
+<div id="outline-container-orgb7bda21" class="outline-4">
+<h4 id="orgb7bda21"><span class="section-number-4">2.3.3.</span> stderr</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<p>
+2
+</p>
+</div>
+</div>
+<div id="outline-container-org4c09fd8" class="outline-4">
+<h4 id="org4c09fd8"><span class="section-number-4">2.3.4.</span> Rediriger sortie standart</h4>
+<div class="outline-text-4" id="text-2-3-4">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fabd2f;">ls</span> -l &gt; resultat <span style="color: #928374;"># </span><span style="color: #928374;">redirige stdout vers le fichier r&#233;sultat.</span>
+</pre>
+</div>
+<p>
+tant bien même le shell n&rsquo;aurait pas eu un fichier de redirection existant, il l&rsquo;aurai créer puis traité la commande.
+Le shell traite d&rsquo;abord les redirections puis exécute la commande.
+</p>
+</div>
+</div>
+<div id="outline-container-orge8a96b8" class="outline-4">
+<h4 id="orge8a96b8"><span class="section-number-4">2.3.5.</span> Rediriger sortie standart &amp; sortie erreur</h4>
+<div class="outline-text-4" id="text-2-3-5">
+</div>
+<ol class="org-ol">
+<li><a id="org1ac82c2"></a>L&rsquo;un vers l&rsquo;autre<br />
+<div class="outline-text-5" id="text-2-3-5-1">
+<p>
+<code>2&gt;&amp;1</code> ou <code>1&gt;&amp;2</code>
+</p>
+</div>
+</li>
+<li><a id="org47e073e"></a>Les deux<br />
+<div class="outline-text-5" id="text-2-3-5-2">
+<p>
+<code>&amp;&gt;</code>
+</p>
+</div>
+</li>
+<li><a id="org8ee53cb"></a>Exemple<br />
+<div class="outline-text-5" id="text-2-3-5-3">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fabd2f;">ls</span> -l fic* NoFic &gt; resultats <span style="color: #d3869b; font-weight: bold;">2</span>&gt;&amp;<span style="color: #d3869b; font-weight: bold;">1</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org4ac58fb" class="outline-4">
+<h4 id="org4ac58fb"><span class="section-number-4">2.3.6.</span> Rediriger entrée standart</h4>
+<div class="outline-text-4" id="text-2-3-6">
+<ul class="org-ul">
+<li>On utilise <code>&lt;</code> suivi du path du fichier à lire.</li>
+<li>Fonctionne avec tout ce qui traite du texte <code>cat, sort, grep...</code></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org67a3628"></a>Exemple<br />
+<div class="outline-text-5" id="text-2-3-6-1">
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> notri
+aaaaaaa
+ccccccc
+bbbbbbb
+$ sort &lt; notri
+aaaaaa
+bbbbbb
+cccccc
+</pre>
+</div>
+<ul class="org-ul">
+<li><p>
+multiligne
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ sort &lt;&lt; vrac
+<span style="color: #b8bb26;">  &gt; rrr</span>
+<span style="color: #b8bb26;">  &gt; aaa</span>
+<span style="color: #b8bb26;">  &gt; vrac</span>
+<span style="color: #b8bb26;">aaa</span>
+<span style="color: #b8bb26;">rrr</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org6d06232" class="outline-3">
+<h3 id="org6d06232"><span class="section-number-3">2.4.</span> Ouverture de descripteurs de fichiers supplémentaires</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>Permet d&rsquo;ouvrir max.7 canaux de 3 à 9.</li>
+<li>La commande exec permet d&rsquo;ouvrir ces canaux, une fois ouvert le shell peux y acceder jusqu&rsquo;à la finde la session.</li>
+</ul>
+</div>
+<div id="outline-container-org2ed1f5c" class="outline-4">
+<h4 id="org2ed1f5c"><span class="section-number-4">2.4.1.</span> <span class="done ___">[?]</span> Ouverture (pas tout compris)</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">exec</span> <span style="color: #d3869b; font-weight: bold;">3</span>&gt;fic3 <span style="color: #d3869b; font-weight: bold;">4</span>&gt;fic4 <span style="color: #d3869b; font-weight: bold;">5</span>&gt;fic5 <span style="color: #d3869b; font-weight: bold;">6</span>&gt;fic6
+<span style="color: #fabd2f;">ls</span> &gt;&amp;<span style="color: #d3869b; font-weight: bold;">3</span>
+<span style="color: #fabd2f;">ls</span> NoFic <span style="color: #d3869b; font-weight: bold;">2</span>&gt;&amp;<span style="color: #d3869b; font-weight: bold;">6</span>
+<span style="color: #fabd2f;">cat</span> fic3
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5761b2d" class="outline-4">
+<h4 id="org5761b2d"><span class="section-number-4">2.4.2.</span> Fermeture</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">exec</span> <span style="color: #d3869b; font-weight: bold;">3</span>&gt;&amp;-
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f95be0" class="outline-3">
+<h3 id="org1f95be0"><span class="section-number-3">2.5.</span> Tubes (pipes)</h3>
+<div class="outline-text-3" id="text-2-5">
+<ul class="org-ul">
+<li>relie la sortie standart d&rsquo;un programme à celle d&rsquo;un autre</li>
+</ul>
+<p>
+<code>commande 1 | commande 2 | ... | commande N</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf2eab0" class="outline-3">
+<h3 id="orgdf2eab0"><span class="section-number-3">2.6.</span> Filtres</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+<code>wc</code> permet de compter des lignes et des fichiers passés en caractères.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">ls</span> -l |wc -l
+</pre>
+</div>
+</div>
+<div id="outline-container-orgdf932d1" class="outline-4">
+<h4 id="orgdf932d1"><span class="section-number-4">2.6.1.</span> Grep</h4>
+<div class="outline-text-4" id="text-2-6-1">
+<p>
+toujours afficher les <code>pattern</code> de recherche <code>^[bB]</code> avec des <code>"</code> =&gt; <code>"^[bB]"</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fabd2f;">grep</span> <span style="color: #b8bb26;">"^[bB]"</span> Linux.org <span style="color: #928374;"># </span><span style="color: #928374;">n'affiche que les lignes qui commence par b ou B</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf294b26" class="outline-4">
+<h4 id="orgf294b26"><span class="section-number-4">2.6.2.</span> egrep</h4>
+<div class="outline-text-4" id="text-2-6-2">
+<p>
+recherche plus étendue
+équivaut à <code>grep -E</code>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org690205f"></a>Critères de recherche<br />
+<div class="outline-text-5" id="text-2-6-2-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&lt;pipe&gt;</td>
+<td class="org-left">Ou logique, l&rsquo;expression située avant ou après doit apparaître</td>
+</tr>
+
+<tr>
+<td class="org-left">(&#x2026;)</td>
+<td class="org-left">Groupement de caractères</td>
+</tr>
+
+<tr>
+<td class="org-left">[&#x2026;]</td>
+<td class="org-left">Un caractère à cette position parmis ceux indiqués</td>
+</tr>
+
+<tr>
+<td class="org-left">.</td>
+<td class="org-left">Un caractère quelconque.</td>
+</tr>
+
+<tr>
+<td class="org-left">+</td>
+<td class="org-left">Répétition, le caractère placé avant doti apparaître au moins une fois.</td>
+</tr>
+
+<tr>
+<td class="org-left">*</td>
+<td class="org-left">Répétition, le caractère situé avant doit apparaître de zéro à n fois</td>
+</tr>
+
+<tr>
+<td class="org-left">?</td>
+<td class="org-left">Le caractère situé avant doit apparaître exactement n fois</td>
+</tr>
+
+<tr>
+<td class="org-left">{n}</td>
+<td class="org-left">le caractère situé avant doit apparaître n nombre de fois</td>
+</tr>
+
+<tr>
+<td class="org-left">{n, }</td>
+<td class="org-left">il apparaît n fois ou plus.</td>
+</tr>
+
+<tr>
+<td class="org-left">{n,m}</td>
+<td class="org-left">il apparaît entre n et m fois</td>
+</tr>
+
+<tr>
+<td class="org-left">^</td>
+<td class="org-left">en début de chaîne</td>
+</tr>
+
+<tr>
+<td class="org-left">$</td>
+<td class="org-left">en fin de chaîne</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org9fa80db" class="outline-4">
+<h4 id="org9fa80db"><span class="section-number-4">2.6.3.</span> fgrep</h4>
+<div class="outline-text-4" id="text-2-6-3">
+<ul class="org-ul">
+<li>Simplifié et plus rapide <code>grep -F</code></li>
+<li>Ne gère pas les expressions régulières, recherche que des chaînes de caractère.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org94fefdd" class="outline-4">
+<h4 id="org94fefdd"><span class="section-number-4">2.6.4.</span> sed</h4>
+<div class="outline-text-4" id="text-2-6-4">
+<ul class="org-ul">
+<li>Editeur de flux permettant de filtrer et de transformer du text. Utilise quasimenent les mêmes commandes que vim.</li>
+</ul>
+<p>
+<code>s/ancien/nouveau/[g]</code>
+</p>
+<ul class="org-ul">
+<li>Le g optionnel final permet de remplacer tout les occurences.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Je m'appelle _nom_, Jean _nom_."</span> | sed -e <span style="color: #b8bb26;">'s/_nom_/Durand/'</span>
+je m<span style="color: #b8bb26;">'appelle durand, Jean _nom_. # manque le g</span>
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Je m'appelle _nom_, Jean _nom_."</span> | sed -e <span style="color: #b8bb26;">'s/_nom_/Durand/g'</span>
+je m<span style="color: #b8bb26;">'appelle durand, Jean Durand.</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>Supprimer les lignes vides (en utilisant la syntax vim)</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> fichier
+Ligne <span style="color: #d3869b; font-weight: bold;">1</span>
+Ligne <span style="color: #d3869b; font-weight: bold;">2</span>
+
+Ligne <span style="color: #d3869b; font-weight: bold;">3</span>
+
+
+FIN
+$ sed -e <span style="color: #b8bb26;">'/^ *$/d'</span> fichier
+Ligne <span style="color: #d3869b; font-weight: bold;">1</span>
+Ligne <span style="color: #d3869b; font-weight: bold;">2</span>
+Ligne <span style="color: #d3869b; font-weight: bold;">3</span>
+FIN
+</pre>
+</div>
+<ul class="org-ul">
+<li>Argumentaires de commande</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #b8bb26;">'/^ *$/d'</span> <span style="color: #928374;"># </span><span style="color: #928374;">suppr tout les espaces d'une ligne</span>
+<span style="color: #b8bb26;">'^'</span> <span style="color: #928374;">#</span><span style="color: #928374;">selectionner le d&#233;but de la ligne</span>
+<span style="color: #b8bb26;">' *'</span> <span style="color: #928374;">#</span><span style="color: #928374;">un ou plusieurs espaces</span>
+<span style="color: #b8bb26;">'$'</span> <span style="color: #928374;">#</span><span style="color: #928374;">fin de ligne</span>
+<span style="color: #b8bb26;">'//'</span> <span style="color: #928374;">#</span><span style="color: #928374;">servent &#224; d&#233;limiter la zone d'action</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf53b44e" class="outline-4">
+<h4 id="orgf53b44e"><span class="section-number-4">2.6.5.</span> Cut</h4>
+<div class="outline-text-4" id="text-2-6-5">
+<p>
+permet de selectionner une partie de la ligne, et l&rsquo;affiche.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org9093828"></a>Position<br />
+<div class="outline-text-5" id="text-2-6-5-1">
+<p>
+<code>cut -cPositions fichier</code>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-c5</td>
+<td class="org-left">position 5 (unique)</td>
+</tr>
+
+<tr>
+<td class="org-left">-c1-4</td>
+<td class="org-left">position 1 à 4</td>
+</tr>
+
+<tr>
+<td class="org-left">-c5-</td>
+<td class="org-left">position de 5 jusqu&rsquo;à la fin</td>
+</tr>
+
+<tr>
+<td class="org-left">-c1,8</td>
+<td class="org-left">liste deposition 1 et 8</td>
+</tr>
+
+<tr>
+<td class="org-left">-c1-3,5,6,12-</td>
+<td class="org-left">ensemble de position</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><a id="orgb5e4a22"></a>Exemples<br />
+<div class="outline-text-5" id="text-2-6-5-2">
+<ul class="org-ul">
+<li>Utiliser champ</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">cut -f1 fichier <span style="color: #928374;"># </span><span style="color: #928374;">va afficher la premi&#232;re colonne</span>
+cut -f1,3 fichier <span style="color: #928374;"># </span><span style="color: #928374;">va afficher la premiere et troisi&#232;me colonne.</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li><p>
+Utilise la commande who pour un remplacement (donc on va utiliser <code>s</code> pour <b>substituer</b>)
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ who | sed -e<span style="color: #b8bb26;">'s/ */ /g'</span> | cut -d<span style="color: #b8bb26;">' '</span> -f1,2 <span style="color: #928374;">#</span><span style="color: #928374;">affiche les utilisateurs, substitue tout les &lt;espaces&gt; et les changent en un seul &lt;espace&gt; gr&#226;ce &#224; g qui g&#233;n&#233;ralise</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgfbda413" class="outline-4">
+<h4 id="orgfbda413"><span class="section-number-4">2.6.6.</span> <span class="todo TODO">TODO</span> sort</h4>
+</div>
+<div id="outline-container-orga9e3ebc" class="outline-4">
+<h4 id="orga9e3ebc"><span class="section-number-4">2.6.7.</span> join</h4>
+<div class="outline-text-4" id="text-2-6-7">
+<ul class="org-ul">
+<li>permet de faire une jointure de fichiers</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">join <span style="color: #fe8019;">[</span>-tc<span style="color: #fe8019;">]</span> <span style="color: #fe8019;">[</span>-1 n<span style="color: #fe8019;">]</span> <span style="color: #fe8019;">[</span>-2 m<span style="color: #fe8019;">]</span> fic1 fic2 <span style="color: #928374;"># </span><span style="color: #928374;">-t indique le s&#233;parateur, -1 champ fic1, -2 champ fic2</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org19036d6" class="outline-4">
+<h4 id="org19036d6"><span class="section-number-4">2.6.8.</span> paste</h4>
+<div class="outline-text-4" id="text-2-6-8">
+<ul class="org-ul">
+<li>Regroupe <code>n</code> nombre de fichiers, écrit sur la sortie standard. Elle concatène chaqu&rsquo;une des lignes de chacuns des fichiers en une.</li>
+<li>Séparateur de champ sorti par défaut</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge305b1a" class="outline-4">
+<h4 id="orge305b1a"><span class="section-number-4">2.6.9.</span> split</h4>
+<div class="outline-text-4" id="text-2-6-9">
+<div class="org-src-container">
+<pre class="src src-shell">split -l <span style="color: #d3869b; font-weight: bold;">2</span> fichier fichierSpliteN <span style="color: #928374;">#</span><span style="color: #928374;">le fichier sera copier, la copie sera coup&#233;e en morceaux de 2 phrases gr&#226;ce &#224; -l 2</span>
+split -b <span style="color: #d3869b; font-weight: bold;">2</span> fichier fichierSpliteN <span style="color: #928374;">#</span><span style="color: #928374;">le fichier sera copier, la copie sera coup&#233;e en morceaux de 2bytes gr&#226;ce &#224; -b 2b (2bytes/2kilobytes/2megabytes)</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>utilisation de <code>cat</code> peux ressouder les fichiers</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fabd2f;">cat</span> fichierSplit* &gt;Fichier
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdeb2446" class="outline-4">
+<h4 id="orgdeb2446"><span class="section-number-4">2.6.10.</span> tr</h4>
+<div class="outline-text-4" id="text-2-6-10">
+<ul class="org-ul">
+<li>substitue un caractère d&rsquo;un autre</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">tr <span style="color: #fe8019;">[</span>options<span style="color: #fe8019;">]</span> chOriginal chDestination
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="org2972556"></a>Exemple<br />
+<div class="outline-text-5" id="text-2-6-10-1">
+<ul class="org-ul">
+<li><p>
+transformer des minuscules en maj
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> liste
+$ tr <span style="color: #b8bb26;">'[a-z]'</span> <span style="color: #b8bb26;">'[A-Z]'</span> &lt; liste &gt; liste_maj
+$ <span style="color: #fabd2f;">cat</span> liste_maj
+</pre>
+</div></li>
+<li>supprimer des caractères</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> listebad
+fmljsdlfdjs flkdsjflkdsjf klfjsdklfj ^M
+fjmdlskjfdslk jdlskfjsdf jfmlsdfdjsk ^M
+fldjsflmdjsf fjdlsmfdsmlkf jfdlsfjff ^M
+<span style="color: #928374;"># </span><span style="color: #928374;">retours chariots repr&#233;sent&#233;s par ^M g&#233;n&#233;r&#233;s par Windows</span>
+$ tr -d <span style="color: #b8bb26;">'\r'</span> &lt;listebad &gt;listeok
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orga500766" class="outline-4">
+<h4 id="orga500766"><span class="section-number-4">2.6.11.</span> xargs</h4>
+<div class="outline-text-4" id="text-2-6-11">
+<ul class="org-ul">
+<li>Lit les éléments sur son entrée standard, délimite par défaut par un espace ou retour à la ligne.</li>
+<li>Les passe en arguments à une commande qu&rsquo;elle execute</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orge8df453"></a>Exemple<br />
+<div class="outline-text-5" id="text-2-6-11-1">
+<p>
+Afficher tout les noms d&rsquo;utilisateurs d&rsquo;un fichier <code>/etc/passwd</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ cut -d: -f1 &lt; /etc/passwd | sort | xargs <span style="color: #fabd2f;">echo</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgb6f82a3" class="outline-4">
+<h4 id="orgb6f82a3"><span class="section-number-4">2.6.12.</span> Affichage</h4>
+<div class="outline-text-4" id="text-2-6-12">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">nom</th>
+<th scope="col" class="org-left">action</th>
+<th scope="col" class="org-left">options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">more</td>
+<td class="org-left">page par pages</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">less</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">pg</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cat</td>
+<td class="org-left">tout le contenu</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tac</td>
+<td class="org-left">de la fin vers le début</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">hexdump</td>
+<td class="org-left">dump hexadecimal</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">od</td>
+<td class="org-left">dump octal</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">banner</td>
+<td class="org-left">création d&rsquo;une bannière</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">pr</td>
+<td class="org-left">formatage impression</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">fmt</td>
+<td class="org-left">paragraphe</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cat -n, nl</td>
+<td class="org-left">numéroter les lignes</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">head</td>
+<td class="org-left">affiche n de ligne</td>
+<td class="org-left">-n indique n de ligne à afficher (10 default)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-10 indique n de ligne à afficher</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-c précise nombre d&rsquo;octets de début à afficher</td>
+</tr>
+
+<tr>
+<td class="org-left">tail</td>
+<td class="org-left">affichage dernière ligne</td>
+<td class="org-left">-nb[c] affiche les nb dernière ligne</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-c affiche dernièrs caractères</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">+nb[c] affiche les nb suivant la ligne selec</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">avec le suffix c affiche suivant caractères</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-f affiche toutes les secondes les lignes spécifiés</td>
+</tr>
+
+<tr>
+<td class="org-left">column</td>
+<td class="org-left">formate sous forme de colonne</td>
+<td class="org-left">-t combien de colonnes</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">-s quel est le séparateur</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="#org336cc75">ps</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="org-ol">
+<li><a id="org14b06b4"></a>Exemple<br />
+<ol class="org-ol">
+<li><a id="orge337d21"></a>head<br />
+<div class="outline-text-6" id="text-2-6-12-1-1">
+<div class="org-src-container">
+<pre class="src src-shell">$ head <span style="color: #fe8019;">[</span>-c nbcar<span style="color: #fe8019;">]</span> <span style="color: #fe8019;">[</span>-n nblignes<span style="color: #fe8019;">]</span> <span style="color: #fe8019;">[</span>fic1...<span style="color: #fe8019;">]</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org5522611"></a>tail<br />
+<div class="outline-text-6" id="text-2-6-12-1-2">
+<div class="org-src-container">
+<pre class="src src-shell">$ tail <span style="color: #fe8019;">[</span>+/-valeur<span style="color: #b16286;">[</span>b/c<span style="color: #b16286;">]</span><span style="color: #fe8019;">]</span> <span style="color: #fe8019;">[</span>-f<span style="color: #fe8019;">]</span> <span style="color: #fe8019;">[</span>fic1...<span style="color: #fe8019;">]</span>
+$ tail -5 liste <span style="color: #928374;">#</span><span style="color: #928374;">affiche les 5 lignes</span>
+$ tail -5c liste <span style="color: #928374;">#</span><span style="color: #928374;">affiche les 5 caract&#232;res</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgefccf8b"></a>column<br />
+<div class="outline-text-6" id="text-2-6-12-1-3">
+<div class="org-src-container">
+<pre class="src src-shell">$ column -s: -t /etc/group
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgb3ab049" class="outline-3">
+<h3 id="orgb3ab049"><span class="section-number-3">2.7.</span> Gestion des processus</h3>
+<div class="outline-text-3" id="text-2-7">
+<ul class="org-ul">
+<li>tout processus possède sa mémoire privée qui n&rsquo;entre pas dans celle des autres.</li>
+</ul>
+</div>
+<div id="outline-container-org3459a6d" class="outline-4">
+<h4 id="org3459a6d"><span class="section-number-4">2.7.1.</span> Attributs</h4>
+<div class="outline-text-4" id="text-2-7-1">
+</div>
+<ol class="org-ol">
+<li><a id="org17dc2b3"></a>PID<br />
+<div class="outline-text-5" id="text-2-7-1-1">
+<ul class="org-ul">
+<li>Process ID</li>
+<li>Numéro unique du processus.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org785409e"></a>Exemple<br />
+<div class="outline-text-6" id="text-2-7-1-1-1">
+<ul class="org-ul">
+<li>Le premier processus créer par le noyau avec <code>PID 1</code> est soit <code>init</code> ou <code>systemd</code>.</li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+<li><a id="orgaf33412"></a>PPID<br />
+<div class="outline-text-5" id="text-2-7-1-2">
+<ul class="org-ul">
+<li>Parent Processus ID</li>
+<li>Processus toujours créer par un autre (sauf le processus initial créer par le noyau), via l&rsquo;appel <code>fork</code></li>
+</ul>
+</div>
+</li>
+<li><a id="org78bc4b8"></a>UID &amp; GID<br />
+<div class="outline-text-5" id="text-2-7-1-3">
+<ul class="org-ul">
+<li>User ID</li>
+<li>Group ID</li>
+<li>Portent ensemble les mêmes droits que le group principal de l&rsquo;appareil. Ils donnent les droits pour tous les utilisateurs, determinent les chemins d&rsquo;accès aux objets du système (fichiers, répertoire etc).</li>
+</ul>
+</div>
+</li>
+<li><a id="orgbfde900"></a>Duré de traitement &amp; priorité<br />
+<div class="outline-text-5" id="text-2-7-1-4">
+<ul class="org-ul">
+<li>Correspond entre le temps du réveil du processeur et celui du processus.</li>
+<li>Dans un environement multitâche
+<ul class="org-ul">
+<li>Les processus de haute prioritée sont executés d&rsquo;abord</li>
+<li>Ensuite, les processus inactifs sont d&rsquo;avantage prioritaire par apport à ceux déjà executés.</li>
+</ul></li>
+<li>ordonnateurs des tâche qui gère les priorités et les temps d&rsquo;éxecution.</li>
+</ul>
+</div>
+</li>
+<li><a id="orgc162886"></a>Répertoire courant<br />
+<div class="outline-text-5" id="text-2-7-1-5">
+<ul class="org-ul">
+<li>Repertoire depuis lequel le processus a été lancé.</li>
+<li>Est transmis au processus. Servira de base pour les chemins relatifs.</li>
+</ul>
+</div>
+</li>
+<li><a id="orge8464a8"></a>Fichiers ouverts<br />
+<div class="outline-text-5" id="text-2-7-1-6">
+<ul class="org-ul">
+<li>trois descripteurs sont asssociés à des fichiers: 0, 1, 2 (entrées/sorties standards). A chaques ouverture de fichier ou de nouveau canal, la table se remplit.</li>
+<li>Fermeture, ces fichiers sont fermés.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgbc255a9" class="outline-4">
+<h4 id="orgbc255a9"><span class="section-number-4">2.7.2.</span> États process state</h4>
+<div class="outline-text-4" id="text-2-7-2">
+</div>
+<ol class="org-ol">
+<li><a id="org593d53d"></a>user mode<br /></li>
+<li><a id="orgbaa8bfb"></a>kernel mode<br /></li>
+<li><a id="orge469791"></a>waiting<br /></li>
+<li><a id="org13c1db1"></a>sleeping<br /></li>
+<li><a id="orgcbde286"></a>runable<br /></li>
+<li><a id="org49a9220"></a>swapped<br /></li>
+<li><a id="org354fb78"></a>zombie<br /></li>
+</ol>
+</div>
+<div id="outline-container-org77e7789" class="outline-4">
+<h4 id="org77e7789"><span class="section-number-4">2.7.3.</span> Lancement de commande en tâche de fond</h4>
+<div class="outline-text-4" id="text-2-7-3">
+</div>
+<ol class="org-ol">
+<li><a id="org6b11912"></a>Fonctionnement des processus<br />
+<div class="outline-text-5" id="text-2-7-3-1">
+
+<div id="orgf1831a6" class="figure">
+<p><img src="file:///tmp/babel-2RRyBk/plantuml-R6S9iN.png" alt="plantuml-R6S9iN.png" />
+</p>
+</div>
+<ul class="org-ul">
+<li>Lancer une tâche de fond avec <code>&amp;</code></li>
+</ul>
+</div>
+</li>
+<li><a id="org52e5d7b"></a>Exemple<br />
+<div class="outline-text-5" id="text-2-7-3-2">
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">sleep</span> <span style="color: #d3869b; font-weight: bold;">100</span> &amp; <span style="color: #928374;"># </span><span style="color: #928374;">l'utilisateur pourra entrer une autre commande en attendant execution de celle-ci</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgcd93202" class="outline-4">
+<h4 id="orgcd93202"><span class="section-number-4">2.7.4.</span> Tâches avant/arrière plan</h4>
+<div class="outline-text-4" id="text-2-7-4">
+<ul class="org-ul">
+<li>Arrêter une commande <code>C-z</code></li>
+<li><code>fg</code> <i>foreground</i> relancer la commande qui est en premier plan</li>
+<li><code>bg</code> <i>background</i> relance la commande qui est en arrière plan</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgeaff7f2" class="outline-4">
+<h4 id="orgeaff7f2"><span class="section-number-4">2.7.5.</span> Envoie signal à un processus</h4>
+<div class="outline-text-4" id="text-2-7-5">
+<ul class="org-ul">
+<li><code>kill</code></li>
+</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">signal</th>
+<th scope="col" class="org-left">action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">1 (SIGHUP)</td>
+<td class="org-left">(Hang Up) envoyé via un shell de connexion à tous ses processus enfants lorsqu&rsquo;il est terminé</td>
+</tr>
+
+<tr>
+<td class="org-left">2 (SIGINT)</td>
+<td class="org-left">Interruption du processus (C-c)</td>
+</tr>
+
+<tr>
+<td class="org-left">3 (SIGQUIT)</td>
+<td class="org-left">idem mais vidage de mémoire dans un fichier <code>core</code></td>
+</tr>
+
+<tr>
+<td class="org-left">9 (SIGKILL)</td>
+<td class="org-left">Ne peux être ignoré ni traité, termine le processus</td>
+</tr>
+
+<tr>
+<td class="org-left">15 (SIGTERM)</td>
+<td class="org-left">Signal par défaut de la commande kill (demande au processus de se terminer)</td>
+</tr>
+</tbody>
+</table>
+<ul class="org-ul">
+<li><code>pkill</code> envoie un signal par leurs noms</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgf2bccf9"></a>Exemple<br />
+<ol class="org-ol">
+<li><a id="org140961b"></a>kill<br />
+<div class="outline-text-6" id="text-2-7-5-1-1">
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">sleep</span> <span style="color: #d3869b; font-weight: bold;">100</span> &amp; <span style="color: #928374;"># </span><span style="color: #928374;">met la commande en fond</span>
+$ <span style="color: #fabd2f;">kill</span> PID <span style="color: #928374;"># </span><span style="color: #928374;">ex. </span><span style="color: #928374;">kill</span><span style="color: #928374;"> 19844 (envoie le signal 15)</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org7ef03bd"></a>pkill<br />
+<div class="outline-text-6" id="text-2-7-5-1-2">
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">sleep</span> <span style="color: #d3869b; font-weight: bold;">100</span> &amp;
+$ <span style="color: #fabd2f;">sleep</span> <span style="color: #d3869b; font-weight: bold;">100</span> &amp;
+$ <span style="color: #fabd2f;">pgrep</span> <span style="color: #fabd2f;">sleep</span> <span style="color: #928374;"># </span><span style="color: #928374;">va liste toutes les commandes </span><span style="color: #928374;">sleep</span><span style="color: #928374;"> et retourner leurs PID</span>
+$ <span style="color: #fabd2f;">pkill</span> <span style="color: #fabd2f;">sleep</span> <span style="color: #928374;"># </span><span style="color: #928374;">termine toutes les commandes </span><span style="color: #928374;">sleep</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgc9c7044" class="outline-4">
+<h4 id="orgc9c7044"><span class="section-number-4">2.7.6.</span> nohup</h4>
+<div class="outline-text-4" id="text-2-7-6">
+<ul class="org-ul">
+<li>Ne temrine pas une tâche lorsque le terminal est terminé.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0f0ea89" class="outline-4">
+<h4 id="org0f0ea89"><span class="section-number-4">2.7.7.</span> nice &amp; renice</h4>
+<div class="outline-text-4" id="text-2-7-7">
+<ul class="org-ul">
+<li><code>nice</code> commande</li>
+<li><code>renice</code> commande en fonction d&rsquo;un utilisateur</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ renice <span style="color: #fe8019;">[</span>-n prio<span style="color: #fe8019;">]</span> <span style="color: #fe8019;">[</span>-p|-g|-u<span style="color: #fe8019;">]</span> ID
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4783c7c" class="outline-4">
+<h4 id="org4783c7c"><span class="section-number-4">2.7.8.</span> time</h4>
+<div class="outline-text-4" id="text-2-7-8">
+<ul class="org-ul">
+<li><code>real</code> durée totale</li>
+<li><code>user</code> processus en mode utilisateur</li>
+<li><code>system</code> utilisation du processeurs en mode noyau (appels systèmes)</li>
+<li>résultat écrit sur <code>stderr</code></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ time <span style="color: #fabd2f;">ls</span> -lR /home
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org333916f" class="outline-4">
+<h4 id="org333916f"><span class="section-number-4">2.7.9.</span> exec</h4>
+<div class="outline-text-4" id="text-2-7-9">
+<ul class="org-ul">
+<li><p>
+Avec du code en argument elle remplace du code executable du processeur courant
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ bash <span style="color: #928374;"># </span><span style="color: #928374;">cr&#233;er un bash enfant</span>
+$ ps -f <span style="color: #928374;"># </span><span style="color: #928374;">liste les processus</span>
+$ exec ps -f <span style="color: #928374;"># </span><span style="color: #928374;">il va remplacer l'enfant bash par le processus "ps -f"</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org16db0fe" class="outline-3">
+<h3 id="org16db0fe"><span class="section-number-3">2.8.</span> Alias</h3>
+<div class="outline-text-3" id="text-2-8">
+</div>
+<div id="outline-container-orgd4bcb06" class="outline-4">
+<h4 id="orgd4bcb06"><span class="section-number-4">2.8.1.</span> Exemples</h4>
+<div class="outline-text-4" id="text-2-8-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fe8019;">alias</span> <span style="color: #fabd2f;">ls</span>=<span style="color: #b8bb26;">'</span><span style="color: #b8bb26;">ls</span><span style="color: #b8bb26;"> --color=auto'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org3f48aa2" class="outline-3">
+<h3 id="org3f48aa2"><span class="section-number-3">2.9.</span> Groupement de commandes</h3>
+<div class="outline-text-3" id="text-2-9">
+<ul class="org-ul">
+<li><p>
+<code>()</code> placer les commandes dedans, va créer un shell enfant
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fe8019;">(</span>uname -a ; ps -f ; <span style="color: #fabd2f;">pwd</span><span style="color: #fe8019;">)</span> &gt; resultat.txt
+</pre>
+</div></li>
+<li><code>{}</code> placer les commandes dednas, va executer dans le shell courant</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf9982bd" class="outline-3">
+<h3 id="orgf9982bd"><span class="section-number-3">2.10.</span> Conditionnel</h3>
+<div class="outline-text-3" id="text-2-10">
+</div>
+<div id="outline-container-org867a0aa" class="outline-4">
+<h4 id="org867a0aa"><span class="section-number-4">2.10.1.</span> Réussite ou échec</h4>
+<div class="outline-text-4" id="text-2-10-1">
+<ul class="org-ul">
+<li>retourne normalement <code>0</code> (suivant la convention)</li>
+<li><p>
+variable de stockage <code>$?</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">ls</span> fic1
+$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span> <span style="color: #928374;">#</span><span style="color: #928374;">retournera 0 si le fichier existe sinon retournera 2</span>
+</pre>
+</div></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org71e978a"></a>Liaisons<br />
+<div class="outline-text-5" id="text-2-10-1-1">
+<ul class="org-ul">
+<li><code>&amp;&amp;</code> executera la prochaine commande uniquement si la première retourne 0</li>
+<li><code>||</code> executera la prochaine commande si précédente retourne autre chose que 0</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgd77ea18" class="outline-4">
+<h4 id="orgd77ea18"><span class="section-number-4">2.10.2.</span> Variables</h4>
+<div class="outline-text-4" id="text-2-10-2">
+<ul class="org-ul">
+<li>Ne commence pas par des chiffres sauf les variable prédéfinies</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org15e07b7"></a>Déclaration &amp; affectation<br />
+<div class="outline-text-5" id="text-2-10-2-1">
+<ul class="org-ul">
+<li>Déclarée lorsqu&rsquo;une valeur lui est affectée</li>
+<li>affecté lorsque le signe =, sans espaces avant ou après le signe</li>
+</ul>
+</div>
+</li>
+<li><a id="org2fe83ac"></a>Accès &amp; affichage<br />
+<div class="outline-text-5" id="text-2-10-2-2">
+<ul class="org-ul">
+<li><code>$</code> pour accéder</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #83a598;">montmp</span>=/tmp/pba
+$ <span style="color: #fabd2f;">cp</span> fic $<span style="color: #83a598;">montmp</span> <span style="color: #928374;"># </span><span style="color: #928374;">copie fic vers /tmp/pba</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li><code>env</code> affiche variable du shell courant &amp; enfant.</li>
+<li><p>
+<code>set</code> affiche viarable du shell courant
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ env <span style="color: #928374;"># </span><span style="color: #928374;">retourne les variable</span>
+$ env | <span style="color: #fabd2f;">grep</span> montmp
+$ set | <span style="color: #fabd2f;">grep</span> montmp
+<span style="color: #83a598;">montmp</span>=/tmp/pba
+</pre>
+</div></li>
+<li><code>""</code> caractères à l&rsquo;interieurs ne sont pas interprétés par le shell sauf le <code>$</code></li>
+<li><code>''</code> caractères à l&rsquo;interieurs ne sont pas interprétés par le shell</li>
+</ul>
+</div>
+</li>
+<li><a id="orgd61cd35"></a>Suppr<br />
+<div class="outline-text-5" id="text-2-10-2-3">
+<ul class="org-ul">
+<li><code>unset</code> suppr une/plusieurs variables</li>
+<li><code>readonly</code> protège contre la supression</li>
+</ul>
+</div>
+</li>
+<li><a id="orgff2d01e"></a>Export<br />
+<div class="outline-text-5" id="text-2-10-2-4">
+<ul class="org-ul">
+<li><code>export</code> permet d&rsquo;exporter une variable, par exemple dans un shell enfant.</li>
+</ul>
+</div>
+</li>
+<li><a id="org7fcb00b"></a>Délimitation<br />
+<div class="outline-text-5" id="text-2-10-2-5">
+<ul class="org-ul">
+<li><code>{}</code> délimite</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #83a598;">unit</span>=gramme
+$ <span style="color: #fabd2f;">echo</span> <span style="color: #d3869b; font-weight: bold;">1</span> $<span style="color: #83a598;">unit</span> <span style="color: #d3869b; font-weight: bold;">2</span> $<span style="color: #83a598;">units</span> <span style="color: #928374;">#</span><span style="color: #928374;">retournera 1 gramme 2 gramme</span>
+$ <span style="color: #fabd2f;">echo</span> <span style="color: #d3869b; font-weight: bold;">1</span> $<span style="color: #83a598;">unit</span> <span style="color: #d3869b; font-weight: bold;">2</span> $<span style="color: #fe8019;">{</span><span style="color: #83a598;">units</span><span style="color: #fe8019;">}</span>s <span style="color: #928374;">#</span><span style="color: #928374;">retournera 1 gramme 2 grammes</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org52414b2"></a>Remplaçement<br />
+<div class="outline-text-5" id="text-2-10-2-6">
+<ul class="org-ul">
+<li><p>
+<code>{variable:repmplacement}</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fe8019;">{</span>x:-texte<span style="color: #fe8019;">}</span> <span style="color: #928374;">#</span><span style="color: #928374;">x vide remplace, sinon par contenu de variable</span>
+<span style="color: #fe8019;">{</span>x:=texte<span style="color: #fe8019;">}</span> <span style="color: #928374;">#</span><span style="color: #928374;">x vide remplace, remplace</span>
+<span style="color: #fe8019;">{</span>x:+texte<span style="color: #fe8019;">}</span> <span style="color: #928374;">#</span><span style="color: #928374;">x vide remplace, additionne</span>
+<span style="color: #fe8019;">{</span>x:?texte<span style="color: #fe8019;">}</span> <span style="color: #928374;">#</span><span style="color: #928374;">x vide commande echoue, texte absent stderr affich&#233;</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org6303e02" class="outline-4">
+<h4 id="org6303e02"><span class="section-number-4">2.10.3.</span> Variables système</h4>
+<div class="outline-text-4" id="text-2-10-3">
+<ul class="org-ul">
+<li><p>
+set de variables prédéfinies
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Variable</th>
+<th scope="col" class="org-left">contenu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">HOME</td>
+<td class="org-left">user path</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">liste dans lequelle shell va chercher pour executer commande</td>
+</tr>
+
+<tr>
+<td class="org-left">PS1</td>
+<td class="org-left">prompte affiché par le shell en attente de commande</td>
+</tr>
+
+<tr>
+<td class="org-left">PS2</td>
+<td class="org-left">prompte secondaire, si la saisie doit être complétée</td>
+</tr>
+
+<tr>
+<td class="org-left">IFS</td>
+<td class="org-left">Internal File Separator, sépare lles mots d&rsquo;une ligne de commande (espaces, tab etc&#x2026;)</td>
+</tr>
+
+<tr>
+<td class="org-left">MAIL</td>
+<td class="org-left">Chemin d&rsquo;accès du fichier contenant les messages de l&rsquo;utilisateur</td>
+</tr>
+
+<tr>
+<td class="org-left">LANG</td>
+<td class="org-left">langue à utilisé et jeu de caractères.</td>
+</tr>
+
+<tr>
+<td class="org-left">USER</td>
+<td class="org-left">Nom utilisateur en cours</td>
+</tr>
+
+<tr>
+<td class="org-left">LOGNAME</td>
+<td class="org-left">nom du login</td>
+</tr>
+
+<tr>
+<td class="org-left">HISTFILE</td>
+<td class="org-left">chemin d&rsquo;accès historique $HOME/.sh<sub>history</sub></td>
+</tr>
+
+<tr>
+<td class="org-left">HISTSIZE</td>
+<td class="org-left">taille en nombre de ligne de l&rsquo;historique</td>
+</tr>
+
+<tr>
+<td class="org-left">OLDPWD</td>
+<td class="org-left">path du répertoire précédent</td>
+</tr>
+
+<tr>
+<td class="org-left">PWD</td>
+<td class="org-left">path courant</td>
+</tr>
+
+<tr>
+<td class="org-left">RANDOM</td>
+<td class="org-left">À chaques utilisations gen un nombre random entre 0 &amp; 32767</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfc09b97" class="outline-4">
+<h4 id="orgfc09b97"><span class="section-number-4">2.10.4.</span> Variable spéciales</h4>
+<div class="outline-text-4" id="text-2-10-4">
+<ul class="org-ul">
+<li><p>
+Appartient au shell, en lecture uniquement
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">variable</td>
+<td class="org-left">contenu</td>
+</tr>
+
+<tr>
+<td class="org-left">$?</td>
+<td class="org-left">Code retour dernière commande</td>
+</tr>
+
+<tr>
+<td class="org-left">$$</td>
+<td class="org-left">PID processus courant</td>
+</tr>
+
+<tr>
+<td class="org-left">$!</td>
+<td class="org-left">PID dernier processus lancé en bg</td>
+</tr>
+
+<tr>
+<td class="org-left">$-</td>
+<td class="org-left">options shell courant</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge9851d8" class="outline-4">
+<h4 id="orge9851d8"><span class="section-number-4">2.10.5.</span> Longueur d&rsquo;une chaîne</h4>
+<div class="outline-text-4" id="text-2-10-5">
+<ul class="org-ul">
+<li><p>
+<code>${#variable}</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #83a598;">a</span>=Jules
+$ <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Longueur de </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">a</span><span style="color: #b8bb26;"> : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">{#a}</span><span style="color: #b8bb26;">"</span> <span style="color: #928374;"># </span><span style="color: #928374;">Longueur de Jules : 5</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8897095" class="outline-4">
+<h4 id="org8897095"><span class="section-number-4">2.10.6.</span> Tableau</h4>
+<div class="outline-text-4" id="text-2-10-6">
+<ul class="org-ul">
+<li><p>
+<code>NomTableau[Index]=Contenu</code> ou <code>NomTableau=(Contenu1 ... ContenuN)</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fe8019;">{</span>NomTableau<span style="color: #b16286;">[</span>Index<span style="color: #b16286;">]</span><span style="color: #fe8019;">}</span> <span style="color: #928374;">#</span><span style="color: #928374;">Contenu d'un &#233;l&#233;ment'</span>
+$ <span style="color: #fe8019;">{</span>NomTableau<span style="color: #b16286;">[</span>*<span style="color: #b16286;">]</span><span style="color: #fe8019;">}</span> <span style="color: #928374;">#</span><span style="color: #928374;">Liste de tous les &#233;l&#233;ments</span>
+$ <span style="color: #fe8019;">{</span>#NomTableau<span style="color: #b16286;">[</span>*<span style="color: #b16286;">]</span><span style="color: #fe8019;">}</span> <span style="color: #928374;">#</span><span style="color: #928374;">Nombre d'&#233;l&#233;ments</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5721056" class="outline-4">
+<h4 id="org5721056"><span class="section-number-4">2.10.7.</span> Variable numériques</h4>
+<div class="outline-text-4" id="text-2-10-7">
+<ul class="org-ul">
+<li><code>typeset -i</code> pour typer une variable en integer</li>
+</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Opérateur</th>
+<th scope="col" class="org-left">rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">+ - * /</td>
+<td class="org-left">arithmétique</td>
+</tr>
+
+<tr>
+<td class="org-left">%</td>
+<td class="org-left">modulo</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt; &gt; &lt;= &gt;=</td>
+<td class="org-left">Comparaison, 1 si vrai, 0 si faux</td>
+</tr>
+
+<tr>
+<td class="org-left">==</td>
+<td class="org-left">egal !=différent</td>
+</tr>
+
+<tr>
+<td class="org-left">&amp;&amp; &lt;pipe&gt;&lt;pipe&gt;</td>
+<td class="org-left">Comparaison ET comparaison OU</td>
+</tr>
+
+<tr>
+<td class="org-left">&amp; &lt;pipe&gt; ^</td>
+<td class="org-left">AND OR XOR</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-shell">$ typeset -i resultat
+$ <span style="color: #83a598;">resulstat</span>=6*4
+$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">resultat</span>
+<span style="color: #d3869b; font-weight: bold;">42</span>
+$ <span style="color: #83a598;">val</span>=bonjour
+$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">val</span>
+bonjour
+</pre>
+</div>
+<ul class="org-ul">
+<li><code>let</code> &amp; <code>expr</code> ainsi que <code>$(())</code> permettent d&rsquo;effectuer des calculs.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcd3fe89" class="outline-3">
+<h3 id="orgcd3fe89"><span class="section-number-3">2.11.</span> Config bash</h3>
+<div class="outline-text-3" id="text-2-11">
+</div>
+<div id="outline-container-org1159d66" class="outline-4">
+<h4 id="org1159d66"><span class="section-number-4">2.11.1.</span> Lancement</h4>
+<div class="outline-text-4" id="text-2-11-1">
+<ul class="org-ul">
+<li><p>
+options de lancements
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">option</th>
+<th scope="col" class="org-left">résultats</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">-a ou -o</td>
+<td class="org-left">variable exportés</td>
+</tr>
+
+<tr>
+<td class="org-left">-u -o nounset</td>
+<td class="org-left">par défaut le shell ignore les variables vides, retourne erreur variable vide</td>
+</tr>
+
+<tr>
+<td class="org-left">-x ou -o xtrace</td>
+<td class="org-left">affiche toutes les commandes au fure et à mesure de leurs execution</td>
+</tr>
+
+<tr>
+<td class="org-left">-e</td>
+<td class="org-left">si erreur de commande, le shell se ferme</td>
+</tr>
+
+<tr>
+<td class="org-left">-o vi</td>
+<td class="org-left">rappel de commande avec la syntaxe vi</td>
+</tr>
+
+<tr>
+<td class="org-left">-o emacs</td>
+<td class="org-left">rappel de commande emacs</td>
+</tr>
+
+<tr>
+<td class="org-left">-c ou -o noclobber</td>
+<td class="org-left">itnerdit rediction simple &gt; des sorties si le fichier existe pour pas écraser</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org572c93c" class="outline-3">
+<h3 id="org572c93c"><span class="section-number-3">2.12.</span> Script shell</h3>
+<div class="outline-text-3" id="text-2-12">
+<ul class="org-ul">
+<li>Chmod</li>
+</ul>
+</div>
+<div id="outline-container-orgd948f09" class="outline-4">
+<h4 id="orgd948f09"><span class="section-number-4">2.12.1.</span> Placer script dans PATH</h4>
+<div class="outline-text-4" id="text-2-12-1">
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">PATH</span>
+$ <span style="color: #83a598;">PATH</span>=$<span style="color: #83a598;">PATH</span>:$<span style="color: #83a598;">HOME</span>/scripts
+$ <span style="color: #fabd2f;">mv</span> monscript $<span style="color: #83a598;">HOME</span>/scripts
+$ monscript
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org050a590" class="outline-4">
+<h4 id="org050a590"><span class="section-number-4">2.12.2.</span> Ajouter repertoire courant à PATH</h4>
+<div class="outline-text-4" id="text-2-12-2">
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #83a598;">PATH</span>=!PATH:.
+<span style="color: #928374;">#</span><span style="color: #928374;">ou</span>
+$ <span style="color: #83a598;">PATH</span>=!PATH:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org520db22" class="outline-4">
+<h4 id="org520db22"><span class="section-number-4">2.12.3.</span> shebang</h4>
+<div class="outline-text-4" id="text-2-12-3">
+<ul class="org-ul">
+<li><code>#!pathInterpreteur</code> chemin d&rsquo;acc<sub>s</sub> du programme à utiliser pour lire et exécuter le script.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #928374;">#</span><span style="color: #928374;">!/bin/</span><span style="color: #fb4934;">bash</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li><p>
+Si l&rsquo;on connais pas l&rsquo;emplacement du fichier exécutable (<code>bash</code>)
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #928374;">#</span><span style="color: #928374;">!/usr/bin/</span><span style="color: #fb4934;">env</span><span style="color: #928374;"> bash</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org95a16a7" class="outline-4">
+<h4 id="org95a16a7"><span class="section-number-4">2.12.4.</span> Arguments script</h4>
+<div class="outline-text-4" id="text-2-12-4">
+</div>
+<ol class="org-ol">
+<li><a id="org7697d4a"></a>Position<br />
+<div class="outline-text-5" id="text-2-12-4-1">
+<ul class="org-ul">
+<li><p>
+Utilisé lors d&rsquo;un passage d&rsquo;argument de la console au script
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">variable</td>
+<td class="org-left">contenu</td>
+</tr>
+
+<tr>
+<td class="org-left">$0</td>
+<td class="org-left">Nom de la commande utilisée poru lancer le script</td>
+</tr>
+
+<tr>
+<td class="org-left">$1 à $9</td>
+<td class="org-left">neufs premiers arg. passé au script</td>
+</tr>
+
+<tr>
+<td class="org-left">$#</td>
+<td class="org-left">nombre d&rsquo;arguments passés au script</td>
+</tr>
+
+<tr>
+<td class="org-left">$*</td>
+<td class="org-left">tous les arguments</td>
+</tr>
+
+<tr>
+<td class="org-left">$@</td>
+<td class="org-left">tous tout les arguments encadré de guillments double</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> param.sh
+<span style="color: #928374;">#</span><span style="color: #928374;">!/bin/bash</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Nom : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">0</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Nombre de parametres : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">#</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Parametres : 1=</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">1</span><span style="color: #b8bb26;"> 2=</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">2</span><span style="color: #b8bb26;"> 3=</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">3</span><span style="color: #b8bb26;"> 9=</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">9</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Liste : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">*</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Elements : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">@</span><span style="color: #b8bb26;">"</span>
+
+$ /.param.sh un deux <span style="color: #d3869b; font-weight: bold;">3</span> <span style="color: #d3869b; font-weight: bold;">4</span> <span style="color: #d3869b; font-weight: bold;">5</span> <span style="color: #d3869b; font-weight: bold;">6</span> <span style="color: #d3869b; font-weight: bold;">7</span> huit neuf dix onze FIN
+
+ ./param.sh un deux <span style="color: #d3869b; font-weight: bold;">3</span> <span style="color: #d3869b; font-weight: bold;">4</span> <span style="color: #d3869b; font-weight: bold;">5</span> <span style="color: #d3869b; font-weight: bold;">6</span> <span style="color: #d3869b; font-weight: bold;">7</span> huit neuf dix onze FIN
+Nom : ./param.sh
+Nombre de parametres : <span style="color: #d3869b; font-weight: bold;">12</span>
+Parametres : <span style="color: #d3869b; font-weight: bold;">1</span>=un <span style="color: #d3869b; font-weight: bold;">2</span>=deux <span style="color: #d3869b; font-weight: bold;">3</span>=<span style="color: #d3869b; font-weight: bold;">3</span> <span style="color: #d3869b; font-weight: bold;">9</span>=neuf
+Liste : un deux <span style="color: #d3869b; font-weight: bold;">3</span> <span style="color: #d3869b; font-weight: bold;">4</span> <span style="color: #d3869b; font-weight: bold;">5</span> <span style="color: #d3869b; font-weight: bold;">6</span> <span style="color: #d3869b; font-weight: bold;">7</span> huit neuf dix onze FIN
+Elements : un deux <span style="color: #d3869b; font-weight: bold;">3</span> <span style="color: #d3869b; font-weight: bold;">4</span> <span style="color: #d3869b; font-weight: bold;">5</span> <span style="color: #d3869b; font-weight: bold;">6</span> <span style="color: #d3869b; font-weight: bold;">7</span> huit neuf dix onze FIN
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgfa92e18" class="outline-4">
+<h4 id="orgfa92e18"><span class="section-number-4">2.12.5.</span> Redéfinition arguments</h4>
+<div class="outline-text-4" id="text-2-12-5">
+<ul class="org-ul">
+<li><code>set valeur1 valeur2 valeur3</code> $1 prend <code>valeur1</code> $2 prend <code>valeur2</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga21f6fa" class="outline-4">
+<h4 id="orga21f6fa"><span class="section-number-4">2.12.6.</span> Parcous des arguments</h4>
+<div class="outline-text-4" id="text-2-12-6">
+<ul class="org-ul">
+<li><code>shift</code> décalle les arguments <code>$1</code> est détruit <code>$2</code> devient <code>$1</code> etc&#x2026;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga5c71ef" class="outline-4">
+<h4 id="orga5c71ef"><span class="section-number-4">2.12.7.</span> Terminaison</h4>
+<div class="outline-text-4" id="text-2-12-7">
+<ul class="org-ul">
+<li><p>
+<code>exit</code> provoque terminaison, retourne <code>0</code> mais en argument peux retourner de <code>0</code> à <code>255</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> monls.sh <span style="color: #928374;"># </span><span style="color: #928374;">si r&#233;ussit, retourne 0 sinon retourne 1</span>
+<span style="color: #fabd2f;">ls</span> -ldi $<span style="color: #d3869b; font-weight: bold;">1</span> <span style="color: #d3869b; font-weight: bold;">2</span>&gt;/dev/null &amp;&amp; <span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">0</span> || <span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">1</span>
+$ ./monls.sh fic
+$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">0</span>
+$ ./monls.sh noficici
+$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">1</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1b091c2" class="outline-4">
+<h4 id="org1b091c2"><span class="section-number-4">2.12.8.</span> Environnement d&rsquo;un processus</h4>
+<div class="outline-text-4" id="text-2-12-8">
+<ul class="org-ul">
+<li><code>env</code> et <code>export</code> peuvent lister les variables d&rsquo;environnement.</li>
+<li><p>
+Spécifier des variable uniquement dans l&rsquo;environnement courant <code>var1=valeur1 var2=valeur2 ... command</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">LANG</span>
+fr_FR.UTF-8
+$ <span style="color: #fabd2f;">date</span>
+dim. <span style="color: #d3869b; font-weight: bold;">13</span> avril <span style="color: #d3869b; font-weight: bold;">2025</span> 10:33:42 CEST
+$ <span style="color: #83a598;">LANG</span>=c <span style="color: #fabd2f;">date</span>
+Sun Apr <span style="color: #d3869b; font-weight: bold;">13</span> 10:35:00 CEST <span style="color: #d3869b; font-weight: bold;">2025</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org23bb89c" class="outline-4">
+<h4 id="org23bb89c"><span class="section-number-4">2.12.9.</span> Substitution de commande</h4>
+<div class="outline-text-4" id="text-2-12-9">
+<ul class="org-ul">
+<li><p>
+Place le résultat de la commande dans une variable
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #83a598;">Variable</span>=$<span style="color: #fe8019;">(</span><span style="color: #ebdbb2; font-weight: bold;">ligne de commande</span><span style="color: #fe8019;">)</span>
+<span style="color: #928374;">#</span><span style="color: #928374;">exemple:</span>
+$ <span style="color: #83a598;">machine</span>=$<span style="color: #fe8019;">(</span><span style="color: #ebdbb2; font-weight: bold;">hostname</span><span style="color: #fe8019;">)</span>
+$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">machine</span>
+nobara-pc
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org563dcec" class="outline-4">
+<h4 id="org563dcec"><span class="section-number-4">2.12.10.</span> Test bash</h4>
+<div class="outline-text-4" id="text-2-12-10">
+</div>
+<ol class="org-ol">
+<li><a id="orgb6dc5e2"></a>Tests logiques<br />
+<div class="outline-text-5" id="text-2-12-10-1">
+<ul class="org-ul">
+<li><p>
+<code>test</code> permet de vérifier si c&rsquo;est vrai retourne <code>0</code> faux retourne <code>1</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fe8019;">test</span> testLogique
+<span style="color: #928374;"># </span><span style="color: #928374;">ou</span>
+<span style="color: #fe8019;">[</span>testLogique<span style="color: #fe8019;">]</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+<li><a id="org44b0e16"></a>test sur une chaîne de caractères<br />
+<div class="outline-text-5" id="text-2-12-10-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">arguments</td>
+<td class="org-left">explication</td>
+</tr>
+
+<tr>
+<td class="org-left">-z</td>
+<td class="org-left">vrai si chaîne est vide</td>
+</tr>
+
+<tr>
+<td class="org-left">-n</td>
+<td class="org-left">vrai si chaine pas vide</td>
+</tr>
+
+<tr>
+<td class="org-left">chaine == chaine1</td>
+<td class="org-left">vrai si identiques</td>
+</tr>
+
+<tr>
+<td class="org-left">chaine != chaine1</td>
+<td class="org-left">vrai si différents</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fe8019;">test</span> chaine == chaine1
+<span style="color: #d3869b; font-weight: bold;">0</span>
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #83a598;">a</span>=
+$ test -z <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">a</span><span style="color: #b8bb26;">"</span>; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">0</span>
+$ test -n <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">a</span><span style="color: #b8bb26;">"</span> ; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">1</span>
+$ <span style="color: #83a598;">a</span>=Jules
+$ test <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">a</span><span style="color: #b8bb26;">"</span> = Jules ; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">0</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>Si la variable est vide et spécifiée sans guillemets doubles:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #83a598;">a</span>=
+$ test $<span style="color: #83a598;">a</span> = $<span style="color: #83a598;">b</span> ; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+-bash: test: = : op&#233;rateur unaire attendu
+<span style="color: #d3869b; font-weight: bold;">2</span>
+$ test <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">a</span><span style="color: #b8bb26;">"</span> = $<span style="color: #83a598;">b</span> ; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">1</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org068df25"></a>Tests integer<br />
+<div class="outline-text-5" id="text-2-12-10-3">
+<ul class="org-ul">
+<li>bash ne gère que des valeurs entières</li>
+</ul>
+</div>
+</li>
+<li><a id="org2635e97"></a>Syntaxe<br />
+<div class="outline-text-5" id="text-2-12-10-4">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fe8019;">test</span> valeur1 OperateurTest valeur2
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">opérateur</th>
+<th scope="col" class="org-left">rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">-eq</td>
+<td class="org-left">equal</td>
+</tr>
+
+<tr>
+<td class="org-left">-ne</td>
+<td class="org-left">not equal</td>
+</tr>
+
+<tr>
+<td class="org-left">-lt</td>
+<td class="org-left">less than (inferieur)</td>
+</tr>
+
+<tr>
+<td class="org-left">-gt</td>
+<td class="org-left">greater than (supérieur)</td>
+</tr>
+
+<tr>
+<td class="org-left">-le</td>
+<td class="org-left">less or equal</td>
+</tr>
+
+<tr>
+<td class="org-left">-ge</td>
+<td class="org-left">greater or equal (supérieur ou égale)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><a id="orgdf2f4f4"></a>Exemple<br />
+<div class="outline-text-5" id="text-2-12-10-5">
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #83a598;">a</span>=<span style="color: #d3869b; font-weight: bold;">10</span>
+$ <span style="color: #83a598;">b</span>=<span style="color: #d3869b; font-weight: bold;">20</span>
+$ <span style="color: #fe8019;">[</span> $<span style="color: #83a598;">a</span> -ne $<span style="color: #83a598;">b</span> <span style="color: #fe8019;">]</span>; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">0</span>
+$ <span style="color: #fe8019;">[</span> $<span style="color: #83a598;">a</span> -ge $<span style="color: #83a598;">b</span> <span style="color: #fe8019;">]</span>; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">1</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org30ad48b"></a>Test sur les fichiers<br />
+<div class="outline-text-5" id="text-2-12-10-6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Option</td>
+<td class="org-left">Rôle</td>
+</tr>
+
+<tr>
+<td class="org-left">-f</td>
+<td class="org-left">fichier</td>
+</tr>
+
+<tr>
+<td class="org-left">-d</td>
+<td class="org-left">repertoire <i>folder</i></td>
+</tr>
+
+<tr>
+<td class="org-left">-c</td>
+<td class="org-left">fichier en mode caractère</td>
+</tr>
+
+<tr>
+<td class="org-left">-b</td>
+<td class="org-left">fichier en mode bloc</td>
+</tr>
+
+<tr>
+<td class="org-left">-p</td>
+<td class="org-left">tube nommé (pipe)</td>
+</tr>
+
+<tr>
+<td class="org-left">-r</td>
+<td class="org-left">autorisation en lecture</td>
+</tr>
+
+<tr>
+<td class="org-left">-w</td>
+<td class="org-left">auotrisation en écrtiure</td>
+</tr>
+
+<tr>
+<td class="org-left">-x</td>
+<td class="org-left">autorisation en exécution</td>
+</tr>
+
+<tr>
+<td class="org-left">-s</td>
+<td class="org-left">fichier non vide</td>
+</tr>
+
+<tr>
+<td class="org-left">-e</td>
+<td class="org-left">fichier existant</td>
+</tr>
+
+<tr>
+<td class="org-left">-L</td>
+<td class="org-left">lien symbolique</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fe8019;">[</span> -f /etc <span style="color: #fe8019;">]</span> ; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">1</span>
+$ <span style="color: #fe8019;">[</span> -d /etc <span style="color: #fe8019;">]</span> ; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">0</span>
+$ <span style="color: #fe8019;">[</span> -s /etc/hosts <span style="color: #fe8019;">]</span> ; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">0</span>
+$ <span style="color: #fe8019;">[</span> -d $<span style="color: #83a598;">HOME</span> <span style="color: #fe8019;">]</span>; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+<span style="color: #d3869b; font-weight: bold;">0</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org9f4234f"></a>Test combiné par des opérateurs logiques<br />
+<div class="outline-text-5" id="text-2-12-10-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Opérateur</td>
+<td class="org-left">Action</td>
+</tr>
+
+<tr>
+<td class="org-left">-a</td>
+<td class="org-left">AND, ET logique</td>
+</tr>
+
+<tr>
+<td class="org-left">-o</td>
+<td class="org-left">OR, OU logique</td>
+</tr>
+
+<tr>
+<td class="org-left">!</td>
+<td class="org-left">NON logique</td>
+</tr>
+
+<tr>
+<td class="org-left">\(...\)</td>
+<td class="org-left">Groupement de tests</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-shell">$ test -d <span style="color: #b8bb26;">"rep1"</span> -a -w <span style="color: #b8bb26;">"repl"</span> &amp;&amp; <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"rep1: repertoire, droit en ecriture"</span>
+repl: repertoire, droit en ecriture
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgc6ea374"></a>Nouvelles syntaxes<br />
+<div class="outline-text-5" id="text-2-12-10-8">
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #83a598;">a</span>=
+$ <span style="color: #83a598;">b</span>=<span style="color: #d3869b; font-weight: bold;">10</span>
+$ <span style="color: #fe8019;">[</span><span style="color: #b16286;">[</span> a -eq $<span style="color: #83a598;">b</span> <span style="color: #b16286;">]</span><span style="color: #fe8019;">]</span>; <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org24bb4e5" class="outline-4">
+<h4 id="org24bb4e5"><span class="section-number-4">2.12.11.</span> Conditionnel</h4>
+<div class="outline-text-4" id="text-2-12-11">
+<ul class="org-ul">
+<li><code>if then else fi</code></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">if</span> Commande
+   <span style="color: #fb4934;">then</span>
+       commande execut&#233;e si code retour est <span style="color: #d3869b; font-weight: bold;">0</span>
+   <span style="color: #fe8019;">[</span>else<span style="color: #fe8019;">]</span>
+   commande executer si diff&#233;rent de <span style="color: #d3869b; font-weight: bold;">0</span>
+
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="orgf86d6d8"></a>Exemple<br />
+<div class="outline-text-5" id="text-2-12-11-1">
+<ul class="org-ul">
+<li><p>
+Contrôle du nombre d&rsquo;arguments reçus par un script:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">$ <span style="color: #fabd2f;">cat</span> param4.sh
+<span style="color: #928374;">#</span><span style="color: #928374;">!/usr/bin/env sh</span>
+
+<span style="color: #fb4934;">if</span> <span style="color: #fe8019;">[</span> $<span style="color: #83a598;">#</span> -ne <span style="color: #d3869b; font-weight: bold;">0</span> <span style="color: #fe8019;">]</span>
+<span style="color: #fb4934;">then</span>
+    <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">#</span><span style="color: #b8bb26;"> param&#232;tres en ligne de commande"</span>
+<span style="color: #fb4934;">else</span>
+    <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Aucun param&#232;tres, mis en ligne de commande"</span>
+    <span style="color: #fe8019;">set</span> alfred oscar romeo zoulou
+<span style="color: #fb4934;">fi</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"nombre de param&#232;tres : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">#</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Param&#232;tres:"</span> <span style="color: #d3869b; font-weight: bold;">1</span>=$<span style="color: #d3869b; font-weight: bold;">1</span> <span style="color: #d3869b; font-weight: bold;">2</span>=$<span style="color: #d3869b; font-weight: bold;">2</span> <span style="color: #d3869b; font-weight: bold;">3</span>=$<span style="color: #d3869b; font-weight: bold;">3</span> <span style="color: #d3869b; font-weight: bold;">4</span>=$<span style="color: #d3869b; font-weight: bold;">4</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Liste : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">*</span><span style="color: #b8bb26;">"</span>
+</pre>
+</div></li>
+<li><p>
+test du code retour d&rsquo;une commande grep (option -q qui n&rsquo;affiche rien mais retourne 0 ou 1)
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">if</span> <span style="color: #fabd2f;">grep</span> -q <span style="color: #b8bb26;">"^pba"</span> /etc/passwd
+   <span style="color: #fb4934;">then</span>
+       <span style="color: #fabd2f;">echo</span> l<span style="color: #b8bb26;">\'</span>utilisateur pba existe
+       <span style="color: #fb4934;">else</span>
+           <span style="color: #fabd2f;">echo</span> l<span style="color: #b8bb26;">\'</span>utilsateur pba n<span style="color: #b8bb26;">\'</span>existe pas
+           <span style="color: #fb4934;">fi</span>
+<span style="color: #928374;">#</span><span style="color: #928374;">l'utilisateur pba existe</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org933e8ba" class="outline-4">
+<h4 id="org933e8ba"><span class="section-number-4">2.12.12.</span> Structure de choix multiples</h4>
+<div class="outline-text-4" id="text-2-12-12">
+<ul class="org-ul">
+<li><code>case ... esac</code> permet de tester une chaîne par apport à une autre</li>
+<li><p>
+l&rsquo;on peux entre un argument qui sera trié dans le programme.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">case</span> valeur<span style="color: #fb4934;"> in</span>
+    Modele1) Commandes ;;
+    Modele2) Commandes ;;
+    *) action_defaut ;; <span style="color: #928374;"># </span><span style="color: #928374;">facultatif</span>
+<span style="color: #fb4934;">esac</span>
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">caractères spéciaux</th>
+<th scope="col" class="org-left">role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">$</td>
+<td class="org-left">Chaîne quelconque (même vide)</td>
+</tr>
+
+<tr>
+<td class="org-left">?</td>
+<td class="org-left">Un et un seul caractère</td>
+</tr>
+
+<tr>
+<td class="org-left">[&#x2026;]</td>
+<td class="org-left">Une plage de caractères</td>
+</tr>
+
+<tr>
+<td class="org-left">[!&#x2026;]</td>
+<td class="org-left">Négation de la plage de caractères</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;pipe&gt;</td>
+<td class="org-left">OU logique</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fabd2f;">cat</span> param4.sh
+<span style="color: #fb4934;">case</span> $<span style="color: #d3869b; font-weight: bold;">1</span><span style="color: #fb4934;"> in</span>
+    a*)
+        <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"commence par a"</span>
+        ;;
+    b*)
+        <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"commence par b"</span>
+        ;;
+    fic<span style="color: #fe8019;">[</span><span style="color: #d3869b; font-weight: bold;">123</span><span style="color: #fe8019;">]</span>)
+        <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"fic1 fic2 fic3"</span>
+        ;;
+    *)
+        <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Autre"</span>
+        ;;
+<span style="color: #fb4934;">esac</span>
+$ ./param4.sh <span style="color: #b8bb26;">"bonjour"</span>
+commence par b
+$ ./param4.sh <span style="color: #b8bb26;">"arthur"</span>
+commence par a
+$ ./param4.sh <span style="color: #b8bb26;">"musique"</span>
+Autre
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdc0f932" class="outline-4">
+<h4 id="orgdc0f932"><span class="section-number-4">2.12.13.</span> Saisie utilisateur</h4>
+<div class="outline-text-4" id="text-2-12-13">
+<ul class="org-ul">
+<li><code>read</code> permet de saisir une chaîne et la stoquer dans une ou plusieurs variable (passés en arguments)</li>
+<li><code>read var1 [var2 ...]</code> dans ce cas là, chaques mots sera sotcké dans une variable différente.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> read.sh
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Continuer (O/N) ? \c"</span>
+<span style="color: #fe8019;">read</span> reponse
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"reponse=</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">reponse</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fb4934;">case</span> $<span style="color: #83a598;">reponse</span><span style="color: #fb4934;"> in</span>
+    O)
+        <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Vous avez selectionn&#233; oui"</span>
+        ;;
+    N)
+        <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Vous avez selectionn&#233; non"</span>
+        <span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">0</span>
+        ;;
+    *)
+        <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"erreur, veuillez tapper une r&#233;ponse valide"</span>
+        <span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">1</span>
+        ;;
+<span style="color: #fb4934;">esac</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Vous avez continu&#233;. Tapez deux mots ou plus :\c"</span>
+<span style="color: #fe8019;">read</span> mot1 mot2
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"mot1=</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">mot1</span><span style="color: #b8bb26;">\nmot2=</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">mot2</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">0</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbc7a443" class="outline-4">
+<h4 id="orgbc7a443"><span class="section-number-4">2.12.14.</span> Boucle</h4>
+<div class="outline-text-4" id="text-2-12-14">
+<ul class="org-ul">
+<li><code>do</code> &amp; <code>done</code> encadrent une boucle.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">for</span> params<span style="color: #fb4934;"> in</span> $<span style="color: #83a598;">@</span>
+<span style="color: #fb4934;">do</span>
+    <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">params</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fb4934;">done</span>
+<span style="color: #928374;"># </span><span style="color: #928374;">deuxi&#232;me exemple</span>
+<span style="color: #fb4934;">for</span> params<span style="color: #fb4934;"> in</span> * <span style="color: #928374;"># </span><span style="color: #928374;">on parcourt la liste des objets du r&#233;pertoire courant</span>
+              <span style="color: #fb4934;">do</span>
+                 <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">params</span><span style="color: #b8bb26;"> \c"</span>
+                 <span style="color: #83a598;">type_fic</span>=<span style="color: #ebdbb2; font-weight: bold;">`</span><span style="color: #ebdbb2; font-weight: bold;">ls</span><span style="color: #ebdbb2; font-weight: bold;"> -ls $params | cut -cl`</span>
+                 <span style="color: #fb4934;">case</span> $<span style="color: #83a598;">type_fic</span><span style="color: #fb4934;"> in</span>
+                     -) <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Fichier normal"</span> ;;
+                     d) <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Repertoire"</span> ;;
+                     b) <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"mode boc"</span> ;;
+                     l) <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"lien symbolique"</span> ;;
+                     c) <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"mode caractere"</span> ;;
+                     *) <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"autre"</span> ;;
+                 <span style="color: #fb4934;">esac</span>
+<span style="color: #fb4934;">done</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbbb346d" class="outline-4">
+<h4 id="orgbbb346d"><span class="section-number-4">2.12.15.</span> While</h4>
+<div class="outline-text-4" id="text-2-12-15">
+<ul class="org-ul">
+<li>Boucle conditionnelle &laquo;&nbsp;tant que&nbsp;&raquo;. Tant que la condition est réaliser, bloc de commande executé.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">while</span> condition
+      <span style="color: #fb4934;">do</span>
+          something
+<span style="color: #fb4934;">done</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>Parcours de tous les arguments d&rsquo;un script, avec la commande <code>shift</code> et une boucle <code>while</code></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> args.sh
+<span style="color: #83a598;">cpt</span>=<span style="color: #d3869b; font-weight: bold;">0</span>
+<span style="color: #fb4934;">while</span> <span style="color: #fe8019;">[</span> $<span style="color: #83a598;">#</span> -gt <span style="color: #d3869b; font-weight: bold;">0</span> <span style="color: #fe8019;">]</span>
+      <span style="color: #83a598;">cpt</span>=$<span style="color: #fe8019;">(</span><span style="color: #b16286; font-weight: bold;">(</span><span style="color: #ebdbb2; font-weight: bold;">cpt+1</span><span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span> <span style="color: #928374;"># </span><span style="color: #928374;">incr&#233;mentation variable compteur</span>
+      <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Argument num </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">cpt</span><span style="color: #b8bb26;"> : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">1</span><span style="color: #b8bb26;">"</span>
+      <span style="color: #fe8019;">shift</span>
+<span style="color: #fb4934;">done</span>
+<span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">0</span>
+$ ./args.sh *
+Argument num <span style="color: #d3869b; font-weight: bold;">1</span> : Archives
+Argument num <span style="color: #d3869b; font-weight: bold;">2</span> : args.sh
+</pre>
+</div>
+<ul class="org-ul">
+<li>Parcours des ligne d&rsquo;un fichier, avec la commande <code>read</code> et une boucle <code>while</code>.
+<ul class="org-ul">
+<li><p>
+la boucle <code>while</code> accepte une redirection de son entrée standard, placée arpès le mot-clé <code>done</code>. Dans ce cas, si la commande testée lit l&rsquo;entré&amp;e standard, elle lira la ligne courante du fichier:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> litfic.sh
+<span style="color: #83a598;">cpt</span>=<span style="color: #d3869b; font-weight: bold;">0</span>
+<span style="color: #fb4934;">while </span><span style="color: #fe8019;">read</span> ligne
+      <span style="color: #fb4934;">do</span>
+          <span style="color: #83a598;">cpt</span>=$<span style="color: #fe8019;">(</span><span style="color: #b16286; font-weight: bold;">(</span><span style="color: #ebdbb2; font-weight: bold;">cpt+1</span><span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+          <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">ligne</span>
+          <span style="color: #fb4934;">done</span> &lt; $<span style="color: #d3869b; font-weight: bold;">1</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Nb lignees lues : </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">cpt</span><span style="color: #b8bb26;">"</span>
+</pre>
+</div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga783c78" class="outline-4">
+<h4 id="orga783c78"><span class="section-number-4">2.12.16.</span> Until</h4>
+<div class="outline-text-4" id="text-2-12-16">
+<ul class="org-ul">
+<li>Execute une boucle conditionnelle jusqu&rsquo;à que.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">until</span> condition
+      <span style="color: #fb4934;">do</span>
+          commande
+<span style="color: #fb4934;">done</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org44c0f5a" class="outline-4">
+<h4 id="org44c0f5a"><span class="section-number-4">2.12.17.</span> true &amp; false</h4>
+<div class="outline-text-4" id="text-2-12-17">
+<ul class="org-ul">
+<li><code>true</code> retourne <code>0</code>, false retourne <code>1</code>.</li>
+<li>permet de créer des boucles sans fin.</li>
+<li><p>
+On peux trouver dans les scripts <code>while true</code> et <code>while :</code> dans les deux cas, il s&rsquo;agit d&rsquo;une boucle infinie <code>true</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> boucle.sh
+<span style="color: #fb4934;">while</span> true
+      <span style="color: #fb4934;">do</span>
+          <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"On continue ?"</span>
+          <span style="color: #fe8019;">read</span> rep
+          <span style="color: #fb4934;">if</span> <span style="color: #fe8019;">[</span> <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">rep</span><span style="color: #b8bb26;">"</span> != <span style="color: #b8bb26;">"o"</span> <span style="color: #fe8019;">]</span>
+             <span style="color: #fb4934;">then</span>
+                 <span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">0</span>
+                 <span style="color: #fb4934;">fi</span>
+          <span style="color: #fb4934;">done</span>
+$ bash bouche.sh
+on continue ?
+n
+$ bash boucle.sh
+On continue ?
+O
+$ bash boucle.she
+On continue ?
+N
+$
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1fb6b1c" class="outline-4">
+<h4 id="org1fb6b1c"><span class="section-number-4">2.12.18.</span> break &amp; continue</h4>
+<div class="outline-text-4" id="text-2-12-18">
+<ul class="org-ul">
+<li><code>break</code> permet de sortir</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">while</span> true
+      <span style="color: #fb4934;">do</span>
+          <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"chaine ? \c"</span>
+          <span style="color: #fe8019;">read</span> a
+          <span style="color: #fb4934;">if</span> <span style="color: #fe8019;">[</span> -z <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">a</span><span style="color: #b8bb26;">"</span> <span style="color: #fe8019;">]</span>
+          <span style="color: #fb4934;">then</span>
+              <span style="color: #fb4934;">break</span>
+          <span style="color: #fb4934;">fi</span>
+      <span style="color: #fb4934;">done</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>la commande <code>continue</code> permet d&rsquo;interrompre l&rsquo;exécution de la boucle et passe a l&rsquo;occurance suivante.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org59292d8" class="outline-4">
+<h4 id="org59292d8"><span class="section-number-4">2.12.19.</span> <span class="done ___">[?]</span> boucle select</h4>
+<div class="outline-text-4" id="text-2-12-19">
+<ul class="org-ul">
+<li><code>select</code> permet de créer des menus simples avec selection par numéros.</li>
+<li><p>
+saisie s&rsquo;effectue avecle <code>PS3</code> (le 3ème prompt). Si incorecte menu s&rsquo;affiche de nouveau.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fb4934;">select</span> var <span style="color: #fe8019;">[</span>in list_contenu<span style="color: #fe8019;">]</span>
+       <span style="color: #fb4934;">do</span>
+           traitement
+           <span style="color: #fb4934;">done</span>
+</pre>
+</div></li>
+<li><p>
+la chaîne associé au numéro saisi par l&rsquo;utilisateur est placée dans la variable <code>var</code>. Si <code>in liste_contenu</code> n&rsquo;est pas précisé, ce sont les arguments reçus par le script sont utilisés et affichés.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> select.sh
+<span style="color: #83a598;">PS3</span>=<span style="color: #b8bb26;">"Votre choix :"</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"quelle donnee ?"</span>
+<span style="color: #fb4934;">select</span> reponse<span style="color: #fb4934;"> in</span> Jules Romain Fran&#231;ois quitte
+                  <span style="color: #fb4934;">do</span>
+                      <span style="color: #fb4934;">if</span> <span style="color: #fe8019;">[</span><span style="color: #b16286;">[</span> <span style="color: #b8bb26;">"</span><span style="color: #d3869b;">$</span><span style="color: #83a598;">reponse</span><span style="color: #b8bb26;">"</span> = <span style="color: #b8bb26;">"quitte"</span> <span style="color: #b16286;">]</span><span style="color: #fe8019;">]</span>
+                         <span style="color: #fb4934;">then</span>
+                             <span style="color: #fb4934;">break</span>
+                             <span style="color: #fb4934;">fi</span>
+                      <span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Vous avez choisi </span><span style="color: #d3869b;">$</span><span style="color: #83a598;">reponse</span><span style="color: #b8bb26;">"</span>
+<span style="color: #fb4934;">done</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Au revoir"</span>
+<span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">0</span>
+
+$ ./select.sh
+Quelle donnee ?
+<span style="color: #d3869b; font-weight: bold;">1</span><span style="color: #fb4934; font-weight: bold;">)</span> Jules
+<span style="color: #d3869b; font-weight: bold;">2</span><span style="color: #fb4934; font-weight: bold;">)</span> Romain
+<span style="color: #d3869b; font-weight: bold;">3</span><span style="color: #fb4934; font-weight: bold;">)</span> Fran&#231;ois
+<span style="color: #d3869b; font-weight: bold;">4</span><span style="color: #fb4934; font-weight: bold;">)</span> quitte
+Votre choix :1
+Vous avez choisi Jules
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdcd560f" class="outline-4">
+<h4 id="orgdcd560f"><span class="section-number-4">2.12.20.</span> Fonctions</h4>
+<div class="outline-text-4" id="text-2-12-20">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #fe8019;">[</span><span style="color: #fb4934;">function</span><span style="color: #fe8019;">]</span> nom_fonction <span style="color: #fe8019;">()</span>
+<span style="color: #fe8019;">{</span>
+    commande
+    <span style="color: #fb4934;">return</span> Valeur
+<span style="color: #fe8019;">}</span>
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="org0e4ef5b"></a>Appel d&rsquo;une fonction<br />
+<div class="outline-text-5" id="text-2-12-20-1">
+<p>
+<code>nom_fonction [arguments]</code>
+</p>
+<ul class="org-ul">
+<li>la commande <code>return [valeur]</code> termine l&rsquo;exécution d&rsquo;une fonction et peut retourner une valeur au bloc appelant.</li>
+<li><p>
+Si arguments sont passé à fonction par le bloc appelant, les valeurs sont stocké de <code>$1</code> à  <code>$9</code>, elles écrasent les valeurs précédantes (il n&rsquo;y a uniquement que les fonctions qui font ça)
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> fct.sh
+<span style="color: #b8bb26;">lire_infos_fic</span><span style="color: #fe8019;">()</span>
+<span style="color: #fe8019;">{</span>
+    <span style="color: #fabd2f;">echo</span> : Fichier $<span style="color: #d3869b; font-weight: bold;">1</span>
+    <span style="color: #fabd2f;">ls</span> -ldi $<span style="color: #d3869b; font-weight: bold;">1</span>
+    <span style="color: #fb4934;">return</span> $<span style="color: #83a598;">?</span>
+<span style="color: #fe8019;">}</span>
+<span style="color: #fb4934;">for</span> fic
+    <span style="color: #fb4934;">do</span>
+        lire_infos_file $<span style="color: #83a598;">fic</span>
+        <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">?</span>
+        <span style="color: #fb4934;">done</span>
+$ fct.sh toto fic /etc
+: Fichier toto
+ls: impossible d<span style="color: #b8bb26;">'acc&#233;der &#224; '</span>toto<span style="color: #b8bb26;">': Aucun fichier ou dossier de ce type</span>
+<span style="color: #b8bb26;">2</span>
+<span style="color: #b8bb26;">: Fichier fic</span>
+<span style="color: #b8bb26;">5645646 -rw #etc...</span>
+<span style="color: #b8bb26;">0</span>
+<span style="color: #b8bb26;">: Fichier /etc</span>
+<span style="color: #b8bb26;">5464166 -rw #etc...</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org9a28ac8" class="outline-4">
+<h4 id="org9a28ac8"><span class="section-number-4">2.12.21.</span> Calculs et expressions</h4>
+<div class="outline-text-4" id="text-2-12-21">
+<ul class="org-ul">
+<li><code>expr</code> effectue des calculs sur des valeurs numériques, des comparais, recherche de texte. L&rsquo;opérateur doit être encadré par deux espaces.</li>
+</ul>
+<p>
+<a href="#org5721056">Liste des opérateurs</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ expr <span style="color: #d3869b; font-weight: bold;">7</span> + <span style="color: #d3869b; font-weight: bold;">3</span>
+<span style="color: #d3869b; font-weight: bold;">10</span>
+$ expr <span style="color: #d3869b; font-weight: bold;">7</span> /* <span style="color: #d3869b; font-weight: bold;">3</span>
+<span style="color: #d3869b; font-weight: bold;">21</span>
+$ <span style="color: #83a598;">a</span>=$<span style="color: #fe8019;">(</span><span style="color: #ebdbb2; font-weight: bold;">expr 13 - 10</span><span style="color: #fe8019;">)</span>
+$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">a</span>
+<span style="color: #d3869b; font-weight: bold;">3</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e8f079" class="outline-4">
+<h4 id="org0e8f079"><span class="section-number-4">2.12.22.</span> Calculs avec bash</h4>
+<div class="outline-text-4" id="text-2-12-22">
+<ul class="org-ul">
+<li>utilisation de $(()) vu <a href="#org5721056">ici</a></li>
+<li><p>
+si une commande est typé <code>type-set -i</code> alors elle peux directement avoir des valeurs arithmétiques affectée.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ typeset -i a
+$ <span style="color: #83a598;">a</span>=2+2
+$ <span style="color: #fabd2f;">echo</span> $<span style="color: #83a598;">a</span>
+<span style="color: #d3869b; font-weight: bold;">4</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org084a728" class="outline-4">
+<h4 id="org084a728"><span class="section-number-4">2.12.23.</span> Calculs sur nombres réels</h4>
+<div class="outline-text-4" id="text-2-12-23">
+<ul class="org-ul">
+<li><p>
+utilisation de la commande <code>bc</code> (<i>binary calculator</i>), permet d&rsquo;effectuer des calculs sur des nombres réels. Sans arguments, elle fonctionne en mode interactif.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ bc
+bc 10.07.1
+Copyright <span style="color: #928374;">#</span><span style="color: #928374;">etc...</span>
+2*4.56
+<span style="color: #d3869b; font-weight: bold;">9.12</span>
+Quit
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgad9999c" class="outline-4">
+<h4 id="orgad9999c"><span class="section-number-4">2.12.24.</span> Traitement des signaux</h4>
+<div class="outline-text-4" id="text-2-12-24">
+<ul class="org-ul">
+<li><p>
+<code>trap</code> permet de modifier le comportement d&rsquo;un script à la réception d&rsquo;un signal.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">syntaxe</td>
+<td class="org-left">description</td>
+</tr>
+
+<tr>
+<td class="org-left">trap " ListeSignaux</td>
+<td class="org-left">Ignore les signaux de la liste. Les signaux peuvent être spécifiés par numéro ou nom logique (sans SIG)</td>
+</tr>
+
+<tr>
+<td class="org-left">trap &rsquo;Cmd&rsquo; ListeSignaux</td>
+<td class="org-left">Execute Cmd pour chaques signals</td>
+</tr>
+
+<tr>
+<td class="org-left">trap ListeSignaux</td>
+<td class="org-left">restaure les actiosn par défaut pour les signaux de la liste.</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell">$ <span style="color: #fabd2f;">cat</span> trap.sh
+<span style="color: #b8bb26;">sortir</span><span style="color: #fe8019;">()</span>
+<span style="color: #fe8019;">{</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Signal 15 re&#231;u"</span>
+<span style="color: #fb4934;">exit</span> <span style="color: #d3869b; font-weight: bold;">0</span>
+<span style="color: #fe8019;">}</span>
+<span style="color: #928374;"># </span><span style="color: #928374;">Mise en place du traitement du signal 15</span>
+<span style="color: #fabd2f;">echo</span> <span style="color: #b8bb26;">"Je suis le processus de PID $$"</span>
+<span style="color: #928374;"># </span><span style="color: #928374;">boucle sans fin</span>
+<span style="color: #fb4934;">while</span> true
+      <span style="color: #fb4934;">do</span>
+          <span style="color: #fabd2f;">sleep</span> <span style="color: #d3869b; font-weight: bold;">5</span>
+          <span style="color: #fb4934;">done</span>
+$ ./trap.sh &amp;
+<span style="color: #fe8019;">[</span><span style="color: #d3869b; font-weight: bold;">1</span><span style="color: #fe8019;">]</span> <span style="color: #d3869b; font-weight: bold;">2046</span>
+Je suis le processus de PID <span style="color: #d3869b; font-weight: bold;">2046</span>
+
+$ <span style="color: #fabd2f;">kill</span> <span style="color: #d3869b; font-weight: bold;">2046</span>
+Signal <span style="color: #d3869b; font-weight: bold;">15</span> recu
+<span style="color: #fe8019;">[</span><span style="color: #d3869b; font-weight: bold;">1</span><span style="color: #fe8019;">]</span>+ Fini
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org373d9ee" class="outline-3">
+<h3 id="org373d9ee"><span class="section-number-3">2.13.</span> Terminaux</h3>
+<div class="outline-text-3" id="text-2-13">
+<ul class="org-ul">
+<li><code>screen</code> et <code>tmux</code> peuvent gérer plusieurs fenêtre en mode caractère au sein d&rsquo;un même terminal.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org3bd5c70" class="outline-2">
+<h2 id="org3bd5c70"><span class="section-number-2">3.</span> Disques et le système de fichier</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org32870d2" class="outline-3">
+<h3 id="org32870d2"><span class="section-number-3">3.1.</span> Disques</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<div id="org02fd999" class="figure">
+<p><img src="file:///tmp/babel-2RRyBk/plantuml-356ZVE.png" alt="plantuml-356ZVE.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-org3a7c6d2" class="outline-4">
+<h4 id="org3a7c6d2"><span class="section-number-4">3.1.1.</span> Norme SCSI</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ul class="org-ul">
+<li>Distingue les divers types de supports &amp; fichiers spéciaux. (CD, DVD, Blue-ray)</li>
+<li>Maintenant remplacée par SATA pour les hdd, NVMe pour les SSD</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2bb14cc" class="outline-4">
+<h4 id="org2bb14cc"><span class="section-number-4">3.1.2.</span> lsscsi</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<ul class="org-ul">
+<li>Liste tout les composants</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga65b8ba" class="outline-4">
+<h4 id="orga65b8ba"><span class="section-number-4">3.1.3.</span> Smart Array</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<ul class="org-ul">
+<li>Sur serveurs HP, utilise le pilote <code>cciss</code> et place ses fichiers dans <code>/dev/cciss</code> sous les noms <code>cXdYpZ</code>
+<code>X</code> = slot
+<code>Y</code>  = disque
+<code>Z</code> = partition</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1175b6d" class="outline-4">
+<h4 id="org1175b6d"><span class="section-number-4">3.1.4.</span> Virualisation</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<ul class="org-ul">
+<li>La plus part des disques simulés sont du type <code>IDE</code> ou <code>SCSI</code> avec la bibliothèque <code>libata</code>. AWS utilise <code>vdx</code> (<i>virtual disk x</i>) ou <code>xvdx</code>
+<code>xvda</code> = premier disque
+<code>xvdb</code> = deuxième etc&#x2026;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org749c34e" class="outline-4">
+<h4 id="org749c34e"><span class="section-number-4">3.1.5.</span> Multipathing</h4>
+<div class="outline-text-4" id="text-3-1-5">
+<ul class="org-ul">
+<li>Certains disques sont raccordés via un <code>SAN</code> (<i>Storage Area Network</i>) ou <code>iSCSI</code> sont vu comment <code>SCSI</code>. Systèmes de <i>multipathing</i> peuvent donner d&rsquo;autres noms :
+Powerpath donnera: <code>emcpowerx</code>, <code>emcpowera</code> etc&#x2026;
+Système Linux multipath donnera: <code>mpathx</code>, <code>mpatha</code> etc&#x2026;</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgabc3fe2" class="outline-3">
+<h3 id="orgabc3fe2"><span class="section-number-3">3.2.</span> hdparm</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li><p>
+Commande pour manipulation des périphériques gérés par <code>libata</code>.
+<code>-i</code> fournit informations
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ hdparm -I /dev/sda
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0c097cf" class="outline-3">
+<h3 id="org0c097cf"><span class="section-number-3">3.3.</span> Système de fichiers</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li>Les ext*, XFS, BTRFS, exFAT, etc&#x2026; sont des systèmes de fichiers, et donc des types de formatages de périphériques de stockages.</li>
+</ul>
+</div>
+<div id="outline-container-org5b82f2b" class="outline-4">
+<h4 id="org5b82f2b"><span class="section-number-4">3.3.1.</span> Métadonnées</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<ul class="org-ul">
+<li>Elles sont stockés dans un fichier appelé <code>inode</code>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb1ea080" class="outline-4">
+<h4 id="orgb1ea080"><span class="section-number-4">3.3.2.</span> ext*</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<ul class="org-ul">
+<li>Système de fichiers utilisés avec linux.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org0463045"></a>ext2<br />
+<div class="outline-text-5" id="text-3-3-2-1">
+<ul class="org-ul">
+<li>Non journalisé, donc peux corrompre les fichiers en écriture si arrêt brutale de celle-ci. Peu utilisé.</li>
+<li>Limites d&rsquo;écriture: 2To par fichier, sur 32To en tout.</li>
+</ul>
+</div>
+</li>
+<li><a id="org005df52"></a>ext3<br />
+<div class="outline-text-5" id="text-3-3-2-2">
+<ul class="org-ul">
+<li>Optionnellement journalisé, utilisé pour la compatibilité entre <code>ext2</code> et <code>ext3</code>.</li>
+</ul>
+</div>
+</li>
+<li><a id="orga5459a0"></a>ext4<br />
+<div class="outline-text-5" id="text-3-3-2-3">
+<ul class="org-ul">
+<li>Destiné à remplacer le <code>ext3</code>. Gère du 16To par fichier, sur 1Eo. Dates et fichiers peuvent être gérées jusqu&rsquo;en 2514.</li>
+<li>Compatible avec <code>ext3</code> en lecture &amp; écriture.</li>
+<li>Système par défaut de nombreuses distros, surtout Debian.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgf93ab20" class="outline-4">
+<h4 id="orgf93ab20"><span class="section-number-4">3.3.3.</span> XFS</h4>
+<div class="outline-text-4" id="text-3-3-3">
+<ul class="org-ul">
+<li>Système de fichier utilisés pour les très gros serveurs. Nécessite beaucoup de RAM.</li>
+<li>Utilisé par défaut à partir de RHEL7.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6ff953f" class="outline-4">
+<h4 id="org6ff953f"><span class="section-number-4">3.3.4.</span> BTRFS</h4>
+<div class="outline-text-4" id="text-3-3-4">
+<ul class="org-ul">
+<li><p>
+<i>B-tree File System</i>, prononcé <i>butterfs.</i>
+</p>
+
+<div id="org595a42e" class="figure">
+<p><img src="file:///tmp/babel-2RRyBk/plantuml-bH0u3X.png" alt="plantuml-bH0u3X.png" />
+</p>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8cdc64d" class="outline-4">
+<h4 id="org8cdc64d"><span class="section-number-4">3.3.5.</span> Les FAT</h4>
+<div class="outline-text-4" id="text-3-3-5">
+
+<div id="orga3d968c" class="figure">
+<p><img src="file:///tmp/babel-2RRyBk/plantuml-2cvG7L.png" alt="plantuml-2cvG7L.png" />
+</p>
+</div>
+
+
+<div id="orgf31c4e4" class="figure">
+<p><img src="file:///tmp/babel-2RRyBk/plantuml-AHcWcQ.png" alt="plantuml-AHcWcQ.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb98682c" class="outline-4">
+<h4 id="orgb98682c"><span class="section-number-4">3.3.6.</span> FUSE</h4>
+<div class="outline-text-4" id="text-3-3-6">
+<ul class="org-ul">
+<li><i>Filesystem in UserSpacE</i>, permet d&rsquo;accéder à un système de fichier sans privilèges spécifiques.</li>
+<li><i>Libfuse</i> une bibliothèque qui se connecte à un module du noyau.</li>
+<li>Le noyau ne fournit pas de support direct avec un système de fichier.</li>
+<li>Le système de fichier utilise la bibliothèque <code>libfuse</code> pour utiliser.</li>
+<li>Support plusieurs types de fichiers virtuels, et physiques :
+<ul class="org-ul">
+<li><code>s3fs</code> (Bucket AWS S3)</li>
+<li><code>ntfs</code></li>
+<li><code>mtpfs</code> (Android, lecteurs multimédias)</li>
+<li><code>sshfs</code> (sftp comme système de fichier)</li>
+<li><code>wikipediafs</code> (naviguer et modifier les articles comme un fs)</li>
+<li><code>gmailfs</code> (boite gmail comme système de stockage)</li>
+<li><code>exFAT</code></li>
+<li>etc&#x2026;</li>
+</ul></li>
+<li>Outils en espace d&rsquo;utilisateur</li>
+<li>Performances déégradé par espace utilisateurs et surcouches.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org6c2920d" class="outline-3">
+<h3 id="org6c2920d"><span class="section-number-3">3.4.</span> Partitionnement</h3>
+<div class="outline-text-3" id="text-3-4">
+</div>
+<div id="outline-container-orgd022da7" class="outline-4">
+<h4 id="orgd022da7"><span class="section-number-4">3.4.1.</span> Méthodes</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<ul class="org-ul">
+<li><code>MBR</code> -&gt; pour machines sous <code>BIOS</code></li>
+<li><code>GPT</code> -&gt; <code>UEFI</code>, <code>BIOS</code></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org73bae8b"></a>MBR &amp; BIOS<br />
+<div class="outline-text-5" id="text-3-4-1-1">
+<ul class="org-ul">
+<li>Codé sur 32bits, taille max par partition est de 2To.</li>
+<li>Possibilitée d&rsquo;étendre sous plusieurs disques dures le système de fichier.</li>
+</ul>
+</div>
+</li>
+<li><a id="org4932886"></a>MBR<br />
+<div class="outline-text-5" id="text-3-4-1-2">
+<ul class="org-ul">
+<li>Premier secteur disque, est un <code>MBR</code> (<i>Master Boot Record</i>). Il contient une zone d&rsquo;amorce. Contenant 512 octets.</li>
+</ul>
+</div>
+</li>
+<li><a id="org7367457"></a>Les partitions<br />
+<div class="outline-text-5" id="text-3-4-1-3">
+<ul class="org-ul">
+<li><code>IDE</code> = 63 partitions par disque.</li>
+<li><code>SCSI</code> = 15.</li>
+<li><code>libata</code> = 15 pour tout types de disques (pour tout les linux utilisant l&rsquo;API <code>libata</code>).</li>
+<li>Possibilité de dépasser les 15 partitions par disques grâce au <i>device mapper</i> de Linux, (appelant <code>LVM</code> (<i>Logical Volume Management</i>))</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orga7043fe"></a>Numérotation<br />
+<div class="outline-text-6" id="text-3-4-1-3-1">
+<ul class="org-ul">
+<li><code>hda1</code> première partition primaire du disque <code>IDE</code></li>
+<li><code>hda5</code> cinquième partition, premier lecteur logique du second disque <code>IDE</code></li>
+<li><code>sda3</code> troisième partition primaire du premier disque <code>SCSI/libata</code></li>
+<li><code>sda8</code> huitième partition, soit quatrième partition logique du troisième disque <code>SCSI/libata</code></li>
+</ul>
+</div>
+</li>
+<li><a id="org4d0d077"></a>Sortes<br />
+<ol class="org-ol">
+<li><a id="orgda97f3c"></a>Primaires<br />
+<div class="outline-text-7" id="text-3-4-1-3-2-1">
+<ul class="org-ul">
+<li>4max. par disques, (ce sont celles du <code>MBR</code>).</li>
+</ul>
+</div>
+</li>
+<li><a id="orgcc9ea54"></a>Étendues<br />
+<div class="outline-text-7" id="text-3-4-1-3-2-2">
+<ul class="org-ul">
+<li>Primaires étendues, une seul par disque.</li>
+</ul>
+</div>
+</li>
+<li><a id="org98e2674"></a>Logiques<br />
+<div class="outline-text-7" id="text-3-4-1-3-2-3">
+<ul class="org-ul">
+<li>Créés à l&rsquo;intérieur d&rsquo;une partition étendue.</li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a id="org97e1254"></a>Types de partitions<br />
+<div class="outline-text-5" id="text-3-4-1-4">
+<ul class="org-ul">
+<li>Toutes partitions sont nommé en hexadecimal, Linux reconnaît généralement le contenu d&rsquo;une partition par le système de fichiers qui y réside.</li>
+<li>Type <code>0x83</code> (Linux) peut acceuillir tout type de système de fichiers Linux:
+<ul class="org-ul">
+<li>ext2</li>
+<li>ext3</li>
+<li>ext4</li>
+<li>jfs</li>
+<li>XFS</li>
+<li>etc&#x2026;</li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="orga1da08a"></a>Partitionnement GPT<br />
+<div class="outline-text-5" id="text-3-4-1-5">
+<ul class="org-ul">
+<li><code>GPT</code> (<i>GUID Partition Table</i>)</li>
+<li><code>GUID</code> (<i>Globally Unique Identifier</i>) est un standart permettant de décrire la table de partitionnement d&rsquo;un disque dur, faisant partie des spécifications de <code>UEFI</code> (<i>Unified Extensible Firmware Interface</i>)</li>
+<li><code>UEFI</code> remplace le <code>BIOS</code></li>
+<li><code>GPT</code> remplace le partitionnement <code>MBR</code></li>
+</ul>
+</div>
+</li>
+<li><a id="org49cc16d"></a>GPT et UEFI<br />
+<div class="outline-text-5" id="text-3-4-1-6">
+<ul class="org-ul">
+<li>Initié par Intel, toutes les cartes mères sous <code>UEFI</code> tournent <code>GPT</code>.</li>
+<li>L&rsquo;on peux utiliser <code>GPT</code> avec certains BIOS, via partition spéciale comme la <code>BIOS Boot partition</code> couplé à un gestionnaire de démarrage particulier, comme <code>GRUB2</code>.</li>
+<li>L&rsquo;adresse des blocs logiques est codée sur 64 bits.</li>
+<li>Toutes les versions courantes de linux utilisent le partitionnement <code>GPT</code>.</li>
+</ul>
+</div>
+</li>
+<li><a id="orge12ef92"></a>GUID<br />
+<div class="outline-text-5" id="text-3-4-1-7">
+<ul class="org-ul">
+<li>C&rsquo;est un identificateur unique, une valeur codée sur 128 bits servant d&rsquo;identificateur unique à pour un composant logiciel.</li>
+<li>Voici ses ensembles:
+<ul class="org-ul">
+<li>Un bloc de quatre octets</li>
+<li>Trois blocs de deux octets</li>
+<li>Un bloc de siw octets.</li>
+</ul></li>
+<li><p>
+Dans <code>GPT</code> le <code>GUID</code> sert à décrire
+</p>
+<ul class="org-ul">
+<li>L&rsquo;identifiant unique de disque</li>
+<li>L&rsquo;identifiant de type de partition (équilvalent au types de partitions <code>MBR</code>).</li>
+<li>L&rsquo;identifiant unique d&rsquo;une partition</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-hexadecimal">E4A1B2C3-D4F5-6789-ABC0-123456789ABC
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+<li><a id="org94bb032"></a>LBA 0<br />
+<div class="outline-text-5" id="text-3-4-1-8">
+<ul class="org-ul">
+<li>le LBA est les 512 premiers octets du disque. Conserve son rôle de <code>MBR</code>, appelé <code>Protective MBR</code>. Il est la signature des partitions <code>GPT</code>.</li>
+</ul>
+</div>
+</li>
+<li><a id="orgc5c8eee"></a>LBA 1<br />
+<div class="outline-text-5" id="text-3-4-1-9">
+<ul class="org-ul">
+<li>L&rsquo;en-tête de <code>GPT</code> en position <code>LBA 1</code>.</li>
+<li>Une copie existe en <code>LBA -1</code> qui est en partant de la fin du disque.</li>
+<li>Contient les informations concernant la structure GPT.</li>
+<li>Son emplacement et sa taille.</li>
+<li>L&rsquo;emplacement et la taille de l&rsquo;en-tête secondaire (à la fin du disque)</li>
+<li>les sommes de contrôle associées.</li>
+<li>la première et la dernière adresses utilisables pour les paritions.</li>
+<li>le GUID du disque</li>
+<li>l&rsquo;adresse de la table des partitions (normalement LBA 2)</li>
+<li>le nombre et la taille de descripteurs de partitions</li>
+<li>la somme de contrôle de la table des partitions.</li>
+</ul>
+<p>
+L&rsquo;ensemble occupe 92 octets, les 420 restants sont remplis de zéros.
+En cas d&rsquo;erreurs sur le <code>LBA 1</code> le <code>LBA -1</code> prend le relais. En cas d&rsquo;erreurs sur les deux, le disque devient inutilisable.
+Pareil pour le contrôle des tables de partitions
+</p>
+</div>
+</li>
+<li><a id="org1f8c88c"></a>LBA 2 à 33<br />
+<div class="outline-text-5" id="text-3-4-1-10">
+<ul class="org-ul">
+<li>Contiennent des descripteurs de partitions.</li>
+<li>Chaque partitions est écrite sur 128octets soit 4 par LBA.</li>
+<li>Les 32 LBA permettent d&rsquo;écrire 128 partitions. C&rsquo;est le minimum imposé par le standard <code>UEFI</code>, le nombre, la taille de chaques partitions peuvent être modifié dans le <code>LBA 1</code>.</li>
+<li>Une sauvegarde est présente du <code>LBA -2</code> à <code>LBA -33</code> (fin de disque).</li>
+</ul>
+
+<div id="org3d2e966" class="figure">
+<p><img src="file:///home/hk/INFOR/DOCU/LINUX/structureDisqueGPT.jpg" alt="structureDisqueGPT.jpg" />
+</p>
+</div>
+</div>
+</li>
+<li><a id="orgd7e50f1"></a>UEFI Boot manager<br />
+<div class="outline-text-5" id="text-3-4-1-11">
+<ul class="org-ul">
+<li>UEFI remplace BIOS, et est stocké dans le firmware de l&rsquo;ordinateur. Sa config se situe à deux endroits:
+<ul class="org-ul">
+<li>La <code>NVRAM</code> (<i>Non Volatile RAM</i>), équivalent du <code>CMOS</code> des anciens BIOS, à la différence que son contenu est normalisé.</li>
+<li>La partition <code>ESP</code></li>
+<li>Comme il n&rsquo;y a plus de MBR il faut savoir identifier les supports &amp; systèmes amorçables (l&rsquo;équivalent d&rsquo;un menu de démarrage). Donc il y a un menu graphique qui permet de selectionner le système à démarrer.</li>
+<li>Ce que la <code>NVRAM</code> fait:
+<ul class="org-ul">
+<li>Quel système est actuellement démarré</li>
+<li>L&rsquo;ordre d&rsquo;entrée de boot</li>
+<li>Le timeout avant de booter sur l&rsquo;entrée par défaut.</li>
+<li>La liste des entrées (nom, support (disque), fichier à démarrer depuis la partition <code>ESP</code>)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="orgc58cb5d"></a>Partition système EFI<br />
+<div class="outline-text-5" id="text-3-4-1-12">
+<ul class="org-ul">
+<li>UEFI exécute le fichier indiqué dans les options de boot.</li>
+<li>Ils sont stocké sur une partition spéciale appelé <code>ESP</code> (<i>EFI System Partition</i>).</li>
+<li>Elle contient les différents informations liées aux démarrage de chaques OS, de la config d&rsquo;un chargeur de démarrage, parfois, d&rsquo;un chargeur de démarrage comme GRUB.</li>
+<li>Elle se compose d&rsquo;une arborescence de répertoire.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org70c53c3" class="outline-4">
+<h4 id="org70c53c3"><span class="section-number-4">3.4.2.</span> Manipuler des partitions</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<p>
+Différents outils:
+</p>
+<ul class="org-ul">
+<li><code>fdisk</code> le plus ancien</li>
+<li><code>cfdisk</code> visuel avec les flèches</li>
+<li><code>sfdisk</code> interactif ou non</li>
+<li><code>parted</code> permet opérations avancée (redimensionnement). Interactif, scriptable et compatible GPT. Interfaces graphiques: <code>qtparted</code> ou <code>gparted</code></li>
+<li><code>gdisk</code> équivalent de <code>fdisk</code> pour <code>GPT</code></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org14c2749"></a>Manipuler des partitions MBR<br />
+<div class="outline-text-5" id="text-3-4-2-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Syntaxe</td>
+<td class="org-left">action</td>
+<td class="org-left">options</td>
+</tr>
+
+<tr>
+<td class="org-left">fdisk [-l] [disque]</td>
+<td class="org-left">traite le premier disque du système</td>
+<td class="org-left">-l liste [disque]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org3bfdc19" class="outline-4">
+<h4 id="org3bfdc19"><span class="section-number-4">3.4.3.</span> Manipuler les systèmes de fichiers</h4>
+<div class="outline-text-4" id="text-3-4-3">
+</div>
+<ol class="org-ol">
+<li><a id="orgf4090ba"></a>Définition<br />
+<div class="outline-text-5" id="text-3-4-3-1">
+<blockquote>
+<p>
+Un système de fichiers gère des blocs de données dans un espace de stocdkage. Il organise les données dans des fichiers, stockés dans une arborescence structurée par des répertoires.
+Des structures permettent de gérer les attributs généraux de l&rsquo;espace de stockage du système de fichiers.
+<b>Remarque:</b>
+L&rsquo;espace de stockage peut être physique (disque, partition) ou logique (volume logique VLM). Il existe également des systèmes de fichiers virtuels, gérés en mémoire vive.
+</p>
+</blockquote>
+</div>
+</li>
+<li><a id="orgdd216f2"></a>Bloc<br />
+<div class="outline-text-5" id="text-3-4-3-2">
+<p class="verse">
+Unité de base, atomique, de stockage du système de fichiers. Un fichier occupe toujours un nombre entier de blocs. Ainsi, si un fichier ne contient qu&rsquo;un seul osctet et qu&rsquo;un bloc possède une taille de 4096 octets, 4095 octets sont inutilisés.<br />
+<b>Remarque:</b><br />
+Certaines commandes affichent la taille des fichiers en blocs, comme <code>du</code>, <code>df</code>, ou <code>find</code>.<br />
+La taille d&rsquo;un bloc est de 512 octets poru certaines commandes, 1024 pour d&rsquo;autres.<br />
+</p>
+</div>
+</li>
+<li><a id="org7204b4a"></a>superbloc<br />
+<div class="outline-text-5" id="text-3-4-3-3">
+<ul class="org-ul">
+<li>Chaques systèmes de fichiers linux possèdent au moins un <code>superbloc</code> (<i>superblock</i>).</li>
+<li>Zone de métadonnées conteannt des informations sur le système de fichier et son état.
+<ul class="org-ul">
+<li>Type de système de fichiers</li>
+<li>Taille</li>
+<li>État</li>
+<li>Position d&rsquo;autres zones de métadonnées (autres superblocs, table d&rsquo;inodes, etc&#x2026;)</li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="org8f8b955"></a>Table d&rsquo;inodes<br />
+<div class="outline-text-5" id="text-3-4-3-4">
+<ul class="org-ul">
+<li>Un <code>inode</code> (<i>index node</i>) c&rsquo;est un noeud d&rsquo;attributs. C&rsquo;est une structure de données contenant les informations d&rsquo;état d&rsquo;un fichier que l&rsquo;on appelle des <b>attributs</b> ou <b>métadonnées</b>. Chaque fichier comporte son numéro d&rsquo;inode.
+Ces fichiers sont stockés au sein d&rsquo;une table, la table des inodes.</li>
+<li>Une table d&rsquo;inode fait partie des métadonnées.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org7b0b4e2"></a>Contenu d&rsquo;un inode<br />
+<div class="outline-text-6" id="text-3-4-3-4-1">
+<ul class="org-ul">
+<li>Varie d&rsquo;un système de fichier à un autre.</li>
+<li>Respect la norme POSIX</li>
+<li>Contient:
+<ul class="org-ul">
+<li>Taille</li>
+<li>Identifiant du périphérique le contenant</li>
+<li>Propriétaire</li>
+<li>Groupe d&rsquo;utilisateurs associé</li>
+<li>Numéro d&rsquo;inode</li>
+<li>Mode: type et droits d&rsquo;accès</li>
+<li>Date de ernière modification d&rsquo;attribut (<i>change time</i>)</li>
+<li>Date de dernière modification de contenu (<i>modification time</i>)</li>
+<li>Compteur de liens physiques (<i>hard links</i>): nombre de noms de fichiers associés à l&rsquo;inode.</li>
+<li>Adresses vers des blocs de données et/ou des blocs d&rsquo;adresses de blocs de données.</li>
+</ul></li>
+</ul>
+<p>
+La commande <code>stat</code> affiche les attributs de l&rsquo;inode associé ) un fichier.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ stat /boot/vmlinuz-5.10.0-22-amd64
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgbc1d7ae"></a>Adresses<br />
+<div class="outline-text-6" id="text-3-4-3-4-2">
+<ul class="org-ul">
+<li>Adresses pointant sur les premiers blocs de données du fichier</li>
+<li>Adresses pointant sur des blocs contenant d&rsquo;autres champs d&rsquo;adresses.
+<ul class="org-ul">
+<li>Dans le cas ou les adresses se pointent entre elles et pointes d&rsquo;autres adresses etc&#x2026; l&rsquo;on appel ça des blocs d&rsquo;indirections (simple, doubles, triple)</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+<li><a id="org74cbd5f"></a>Les répertoires<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge727218" class="outline-3">
+<h3 id="orge727218"><span class="section-number-3">3.5.</span> Installation sur clé usb iso</h3>
+<div class="outline-text-3" id="text-3-5">
+<ul class="org-ul">
+<li><p>
+N&rsquo;est pas tiré du livre.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">$ <span style="color: #fabd2f;">sudo</span> <span style="color: #fabd2f;">mkdir</span> /mnt/usb <span style="color: #928374;"># </span><span style="color: #928374;">cr&#233;er un point de montage</span>
+$ <span style="color: #fabd2f;">sudo</span> dd <span style="color: #83a598;">if</span>=/path/to/os.iso <span style="color: #83a598;">of</span>=/dev/sdx <span style="color: #83a598;">bs</span>=4M <span style="color: #83a598;">status</span>=progress
+$ <span style="color: #fabd2f;">sudo</span> umount /mnt/usb <span style="color: #928374;"># </span><span style="color: #928374;">alternativement /dev/sdx</span>
+</pre>
+</div></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgd18298c"></a>Méthode alternative<br />
+<div class="outline-text-5" id="text-3-5-0-1">
+<div class="org-src-container">
+<pre class="src src-bash">$ <span style="color: #fabd2f;">sudo</span> umount /dev/sdX <span style="color: #928374;"># </span><span style="color: #928374;">si la cl&#233; est automatiquement mont&#233;e</span>
+$ <span style="color: #fabd2f;">sudo</span> dd <span style="color: #83a598;">if</span>=/path/to/your.iso <span style="color: #83a598;">of</span>=/dev/sdX <span style="color: #83a598;">bs</span>=4M <span style="color: #83a598;">status</span>=progress &amp;&amp; sync
+$ <span style="color: #fabd2f;">sudo</span> eject /dev/sdX
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: HK</p>
+<p class="date">Created: 2025-05-19 lun. 22:41</p>
+</div>
+</body>
+</html>

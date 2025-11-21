@@ -1,0 +1,198 @@
+#+title: Bases
+* Déclaration
+** let / var
+** const
+** (function){"use strict"}
+* Values
+** Falsy values
+#+begin_src js
+false
+undefined
+null
+0
+NaN
+emptyString(" ")
+#+end_src
+* Statements
+Les ~statements~ sont des expressions encrés ou non dans des ~blocs~.
+** switch
+Le statement switch est utile pour évaluer une donnée par apport à plusieurs propositions qui sont illustrés par des ~case~, c'est à dire qu'il sert à choisir quel "statement" avoir en fonction du match ou pas avec la donnée
+#+begin_src js
+fruitTYpe = "Oranges"
+switch (fruitType) {
+  case "Oranges":
+    console.log("Oranges are $0.59 a pound.");
+    break;
+  case "Apples":
+    console.log("Apples are $0.32 a pound.");
+    break;
+  case "Bananas":
+    console.log("Bananas are $0.48 a pound.");
+    break;
+  case "Cherries":
+    console.log("Cherries are $3.00 a pound.");
+    break;
+  case "Mangoes":
+    console.log("Mangoes are $0.56 a pound.");
+    break;
+  case "Papayas":
+    console.log("Papayas are $2.79 a pound.");
+    break;
+  default:
+    console.log(`Sorry, we are out of ${fruitType}.`);
+}
+console.log("Is there anything else you'd like?");
+#+end_src
+
+#+RESULTS:
+** throw
+#+begin_src js
+throw expression;
+// but also any expression
+throw "Error2"; // String type
+throw 42; // Number type
+throw true; // Boolean type
+throw {
+  toString() {
+    return "I'm an object!";
+  },
+};
+
+#+end_src
+** try...catch
+le ~try...catch~ permet de prendre les informations d'un block du dessus pour y "tester" une valeur
+#+begin_src js
+function getMonthName(mo) {
+  mo--; // Adjust month number for array index (so that 0 = Jan, 11 = Dec)
+  const months = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  ];
+  if (months[mo]) {
+    return months[mo];
+  } else {
+    throw new Error("InvalidMonthNo"); // throw keyword is used here
+  }
+}
+
+try {
+  // statements to try
+  monthName = getMonthName(myMonth); // function could throw exception
+} catch (e) {
+  monthName = "unknown";
+  logMyErrors(e); // pass exception object to error handler (i.e. your own function)
+}
+#+end_src
+** finally
+Est executé après le ~cat...try~, c'est une sorte de parachute lorsque une exception se produit.
+#+begin_src js
+openMyFile();
+try {
+  writeMyFile(theData); // This may throw an error
+} catch (e) {
+  handleError(e); // If an error occurred, handle it
+} finally {
+  closeMyFile(); // Always close the resource
+}
+#+end_src
+autre exemple
+#+begin_src js
+function f() {
+  try {
+    console.log(0);
+    throw "bogus";
+  } catch (e) {
+    console.log(1);
+    // This return statement is suspended
+    // until finally block has completed
+    return true;
+    console.log(2); // not reachable
+  } finally {
+    console.log(3);
+    return false; // overwrites the previous "return"
+    console.log(4); // not reachable
+  }
+  // "return false" is executed now
+  console.log(5); // not reachable
+}
+console.log(f()); // 0, 1, 3, false
+#+end_src
+** label
+les labels identifies les ~statements~ comme des ~loops~.
+#+begin_src js
+label:
+ statement
+#+end_src
+** break
+Fini une ~loop~, ~switch~. Lorsque ~break~ est utilisé dans [[*label][label]] il fini par ~statement~ contenu dans le label.
+#+begin_src js
+for (let i = 0; i < a.length; i++) {
+  if (a[i] === theValue) {
+    break;
+  }
+}
+// break with label
+let x = 0;
+let z = 0;
+labelCancelLoops: while (true) {
+  console.log("Outer loops:", x);
+  x += 1;
+  z = 1;
+  while (true) {
+    console.log("Inner loops:", z);
+    z += 1;
+    if (z === 10 && x === 10) {
+      break labelCancelLoops;
+    } else if (z === 10) {
+      break;
+    }
+  }
+}
+#+end_src
+** continue
+
+* Objects
+** error
+#+begin_src js
+error.console("some text")
+error.console(e.name)
+#+end_src
+
+* Nombres
+**
+* Loops & iterations
+[[*label][Statements]] relatifs aux ~loops~
+#+begin_src js
+for (let step = 0; step < 5; setp++){
+console.log("Walking east one step")
+}
+#+end_src
+
+#+RESULTS:
+: Walking east one step
+
+* for
+Se repète jusqu'à qu'une condition soit évaluée à ~false~
+#+begin_src js
+for (initialization; condition; afterthought)
+statement
+#+end_src
+* do..while
+le ~statement~ est toujours executé avant les conditions (à l'inverse d'une boucle ~while~)
+#+begin_src js
+let i = 0;
+do {
+  i += 1;
+  console.log(i);
+} while (i < 5);
+#+end_src
+* while
+La boucle va s'executer tant que le ~statement~ est ~true~.
+#+begin_src js
+let n = 0;
+let x = 0;
+while (n < 3) {
+  n++;
+  x += n;
+}
+#+end_src

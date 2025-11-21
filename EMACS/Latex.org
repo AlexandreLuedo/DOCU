@@ -1,0 +1,28 @@
+#+title: Latex
+#+LANGUAGE:en
+
+* Align
+#+begin_src org
+#+LATEX_HEADER: \raggedright
+#+end_src
+* Font
+#+begin_src org
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{Arial}
+#+LATEX_HEADER: \setsansfont{Helvetica}
+#+LATEX_HEADER: \setmonofont{Courier New}
+#+end_src
+* Margin
+#+begin_src org
+#+LATEX_HEADER: \usepackage[margin=2cm]{geometry}
+#+end_src
+* Links
+#+begin_src org
+#+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+#+end_src
+* Cover page
+#+begin_src org
+#+OPTIONS: title:nil
+#+LATEX_HEADER: \begin{titlepage}\centering \vspace*{5cm} {\Huge \bfseries Mon Super Titre}\\[1cm] {\Large Par Moi-même}\end{titlepage}
+#+end_src

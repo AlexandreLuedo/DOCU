@@ -1,0 +1,348 @@
+#+title: Emacs Shortcuts
+#+OPTIONS:  num:nil
+#+OPTIONS: toc:nil
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+* VIM
+**   Structuring vim sentences
+- *b* + *number* + *motion*
+- b = an operator
+- motion = like $ w e
+
+** Moving
+*This is the motions*
+- $ = end of the line
+- w = forward word
+- e = end of the current word
+- 0 = move to start of the line
+- G = move to the bottom
+- 12G = go to line 12
+- gg = start of the page
+
+** Deleting
+- x = delete letter
+- d = delete
+- dd = delete line
+- dw = delete word
+
+** Inserting
+- i = insert
+- a = insert but after one letter
+- o = insert below the cursor
+- O = insert upper the cursor
+
+** Undo Redo
+- u = undo
+- U = fix the whole line
+- C-r = redo
+
+** Copy, paste & replace
+- y = copy/yank
+- yy = yank line
+- p = for pasting the delted content
+- rx = for remplacing the cursor selected letter with the "x"
+- ce = change until the end of the line
+- cc = the whole line
+**   Search
+- / = search trhough the doc
+- ? = search to the backward position
+- n = search the last thing you search
+- N = same but in the opposite position
+- C-0 = to go back where you are
+- % = search the end of an { ( [ ] ) }
+**   Modify file type
+- s = substitute :s/old/new/g to substitute 'new' for 'old'
+** Commands
+- :! = type an terminal/external command
+- r = retrieving an file (usefull when you make shit)
+- R = to remplace than more than one caracter
+** Tips
+ v + :w nameOfTheFile = you can select an precize part and save it.
+
+* Emacs
+[[https://github.com/niyumard/Doom-Emacs-Cheat-Sheet][Ultimate cheatsheet]]
+** DOC
+*** Org doc
+#+begin_src org
+:org-info
+#+end_src
+** Move line trough the file
+#+begin_src
+alt shift j or k
+#+end_src
+** Help on screen
+*** Open sheetsheat
+:sheat-sheet
+#+begin_quote
+#+end_quote
+SPC h C-q
+**   Browse internet
+- eww
+- M-k
+** Open Org Capture (Todo, Notes, etc...)
+SPC-X
+** Notes
+SPC-n
+** Todo
+- Make an title TODO
+- C-c C-t
+*** Config file for todo
+- #+TODO: TODO | DONE | WAITING
+*** Changing todo and lists format
+Just it when the cursor is on an todo or list caracter
+- Shift right
+- Shift left
+** Buffer
+SPC-b
+*** Afficher les principaux buffers
+SPC-b-b
+*** Afficher tout les  buffers
+SPC-b-B
+** Files
+*** Rename/Move a file
+SPC-f R
+** Directory
+*** Create a directory
+1. go in dired : =SPC . Enter= (même façon pour mettre en plein écran l'explorateur de fichier emacs)
+2. tap on =+= and enter name of the directory
+
+** Tabs
+SPC-TAB
+*** Afficher les tabs
+SPC-TAB-TAB
+
+** Export
+- C-c C-e
+*** Table of content
+#+begin_src org
+,#+OPTIONS: toc:nil        (no default TOC at all)
+,#+OPTIONS: toc:2 (only show 2 column)
+#+end_src
+**** [[https://emacsdocs.org/docs/org/Table-of-Contents][doc]]
+
+*** Export to org
+:org-export-to-org
+*** Export settings
+[[https://emacsdocs.org/docs/org/Export-Settings][Emacs doc]]
+** Open file
+*** Local
+C-x C-f
+spc .
+*** SSH
+C-x C-f
+/ssh:user@host:/path/to/file
+** Open file with default application
+In dired mode: M-w (majuscule + w)
+** Open treemacs
+SPC o p
+** Add *
+- alt right
+** Remove & rename file
+:delete-file
+:rename-file
+** Split and windows manager
+*** Split
+- C-x 2 or C-x 3 etc...
+*** Delete
+- C-x 0
+***   Move to
+- C-x o
+- SPC-w w
+- SPC-TAB TAB
+** Resize text
+C-x + or - or C-+ or C--
+** Comment line
+C-x C-;
+** Inserting links
+- C-c C-l
+** Insert structure template
+#+begin_src
+C-c C-,
+#+end_src ** Images
+*** Insert
+#+begin_src org
+,#+CAPTION: This is a test
+,#+NAME: testnameimg
+[[./path/to/img]]
+#+end_src
+*** Resize
+#+begin_src org
+,#+ATTR_ORG: :width: 100
+[[~/path/to/image.svg]]
+#+end_src
+** Insert time & date
+- "time" TAB
+#+RESULT  Sun Apr 13 08:19:04 2025
+** Calculating table formula
+:org-table-eval-formula or C-c =
+dedicated buffer C-c '
+@6$2: ligne6 colonne2
+***     ou ajouter en dessous du tableau
+#+TBLFM: $2=vsum(@1..@5
+*** Mettre à jour automatiquement (recalculer les formules)
+C-c * ou M-x org-ctrl-star
+** [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Showing table reference (where you are)]]
+C-c ?
+*** Dedicated buffer
+C-c '
+** Journal
+-  SPC M-xj
+** Recherche internet
+- M-k
+
+- tab M-
+** TABS
+*** Create
+cmd t
+*** Switch
+- SPC tab 1 / 2 / 3 / etc...
+- SPC tab .
+*** Delete
+- cmd w
+- spc tab d
+**
+**  Display time
+:display-time-mode
+*** Config time
+(setq display-time-24hr-format t   ; Affiche l'heure en format 24 heures.
+      display-time-day-and-date t) ; Affiche également la date.
+(display-time-mode 1)              ; Active l'horloge.
+** Display float time
+:display-time-world
+** Display buffered time
+(defun open-clock-buffer ()
+  "Open a buffer displaying the current time."
+  (interactive)
+  (let ((buf (get-buffer-create "*Clock*")))
+    (with-current-buffer buf
+      (erase-buffer)
+      (insert (format-time-string "%A, %d %B %Y\n%H:%M:%S"))
+      (goto-char (point-min))
+      (display-buffer buf)
+      (run-with-timer 1 nil (lambda ()
+                              (with-current-buffer "*Clock*"
+                                (erase-buffer)
+                                (insert (format-time-string "%A, %d %B %Y\n%H:%M:%S"))
+                                (goto-char (point-min))))))))
+** Insert date
+M-x org-timestamp =or= :org-timestamp
+<2025-09-17 Wed>
+** Link content
+- SPC n l store link
+- C-c C-l insert link
+
+** Insert Code snippet & Babel
+spc i s
+** Go to item
+SPC s i
+** M-x toggle-read-only
+change le mode soit read only, soit read & write
+** Install iso on usb
+sudo dd if=~/INFOR/OS/lubuntu-25.04-desktop-amd64.iso of=/dev/sdb bs=4M status=progress
+** pantuml
+- C-c C-c compile et affiche
+- C-c C-p prévsiualise
+*** Exemples
+diagram
+#+begin_src plantuml
+@startuml
+actor User
+
+User -> (Start)
+(Start) --> (Login)
+(Login) --> (Dashboard)
+(Dashboard) --> (Logout)
+(Logout) --> (End)
+
+@enduml
+#+end_src
+#+RESULTS:
+[[file:/tmp/babel-hTme0N/plantuml-mCQ8Aw.png]]
+digraph
+#+begin_src plantuml
+digraph G {
+    A -> B;
+    B -> C;
+    A -> C;
+}
+
+#+end_src
+#+RESULTS:
+[[file:/tmp/babel-hTme0N/plantuml-yOIN9L.png]]
+#+begin_src plantuml
+@startuml
+if (color?) is (<color:red>red) then
+:print red;
+else
+:print not red;
+endif
+@enduml
+
+#+end_src
+#+RESULTS:
+[[file:/tmp/babel-hTme0N/plantuml-i7nsXy.png]]
+#+begin_src plantuml
+digraph G {
+    node [shape=box];
+    Start -> Étape1;
+    Étape1 -> Étape2;
+    Étape2 -> Étape3;
+    Étape3 -> Fin;
+}
+
+#+end_src
+#+RESULTS:
+[[file:/tmp/babel-hTme0N/plantuml-8TwCuY.png]]
+
+#+begin_src plantuml
+digraph G {
+    node [shape=box];
+    Start [label="Début"];
+    Condition [shape=diamond, label="Condition?"];
+    Étape1 [label="Étape 1 si Oui"];
+    Étape2 [label="Étape 1 si Non"];
+    Étape3 [label="Étape 2"];
+    Étape4 [label="Étape 3"];
+    Fin [label="Fin"];
+
+    Start -> Condition;
+    Condition -> Étape1 [label="Oui"];
+    Condition -> Étape2 [label="Non"];
+    Étape1 -> Étape3;
+    Étape2 -> Étape6;
+    Étape3 -> Étape4;
+    Étape4 -> Fin;
+}
+#+end_src
+
+#+RESULTS:
+[[file:/tmp/babel-hTme0N/plantuml-kJBMom.png]]
+#+begin_src plantuml
+@startmindmap
++ <color:red>Test
+++ <color:blue>Double
++ <color:green>Another Test
+++ <color:violet>Child
+++ <color:orange>Double Child
+@endmindmap
+#+end_src
+
+#+RESULTS:
+[[file:/tmp/babel-hTme0N/plantuml-ADGLKZ.png]]
+#+begin_src plantuml
+@startmindmap
++ <back:red><color:white>Test
+++ <back:blue><color:white>Double
++ <back:green><color:black>Another Test
+++ <back:yellow><color:black>Child
+++ <back:orange><color:black>Double Child
+@endmindmap
+
+#+end_src
+
+#+RESULTS:
+[[file:/tmp/babel-hTme0N/plantuml-4uH2gH.png]]
+
+* Google
+[[https://kinsta.com/blog/google-search-operators/][Google search operator list]]
+filetype:pdf
+* [[https://github.com/doomemacs/doomemacs/blob/5ad99220b86ae1bf421861dfad24492d768ac4d9/templates/config.example.el][Config files templates]]

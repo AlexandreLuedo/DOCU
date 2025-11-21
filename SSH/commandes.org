@@ -1,0 +1,24 @@
+#+title: Commandes
+* [[https://www.openssh.com/manual.html][DOC]]
+* Connections
+** Connection simple
+#+begin_src bash
+ssh 192.168.1.23
+#+end_src
+** Connection avec nom d'utilisateur
+#+begin_src bash
+ssh umbrel@192.168.1.12
+#+end_src
+** Connection avec un port spécifique
+#+begin_src bash
+ssh -p port_utilisé utilisateur@adresse_ip
+#+end_src
+** Connection avec authentification via clée ssh
+#+begin_src bash
+ssh -i chemin_vers_la_cle_privee utilisateur@adresse_ip
+#+end_src
+* Reconnections
+** Redémarrer une connection interrompue
+#+begin_src bash
+ssh -o ControlMaster=auto -o ControlPath=~/.ssh/sockets/%r@%h:%p -o ControlPersist=600 -N -f user@host
+#+end_src

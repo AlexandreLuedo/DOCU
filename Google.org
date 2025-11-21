@@ -1,0 +1,12 @@
+#+title: Google
+#+LANGUAGE:en
+* Google operators list
+[[https://kinsta.com/blog/google-search-operators/][Google search operator list]]
+|--------------+-----------------------------------|
+| Syntax       | Description                       |
+|--------------+-----------------------------------|
+| "word"       | Find strictly this word as result |
+| filetype:pdf |                                   |
+|              |                                   |
+|--------------+-----------------------------------|
+* TODO Include [[filetype:pdf][Others file types pdf]]

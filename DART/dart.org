@@ -1,0 +1,129 @@
+#+title: Dart
+*   Variables constantes
+| Nom                   | Spécification                                                                                               |
+|-----------------------+-------------------------------------------------------------------------------------------------------------|
+| var                   | ne peux changer le type sous le même nom de variable                                                        |
+| final                 | constante où la valeur est inconnue (et non déclarée)                                                       |
+| const                 | constante où la valeur est connue                                                                           |
+| String interpollation | ~"ceci est un exemple de string $interpollation~                                                              |
+| bool                  | déclaration de type ~boolean~                                                                                 |
+| %                     | *modulo* employé pour retourner le reste d'une fraction                                                      |
+| double                | nombre à virgule                                                                                            |
+| nullsafety            | système de sécurité pour ne pas accéder à des variables vides. Pour empêcher déclarer comme ça ~int? points;~ |
+|-----------------------+-------------------------------------------------------------------------------------------------------------|
+* Opérateurs d'affectation
+| 1+1                                 |
+| 2 * 2                               |
+| 3 / 3                               |
+| 9 % 4 donne le reste d'une fraction |
+| 5 ++ incrémentation                 |
+| 6 -- décrémentation                 |
+* Fonctions
+#+begin_quote
+L'on peux spécifier la nature de la fonction lors de sa déclaration.
+#+end_quote
+- Quand la fonction ne retourne pas de valeurs alors, ajouter ~void~
+**  Différence entre retourner une valeur ou non
+*** Retourner une valeur
+#+begin_quote
+Retourner une valeur sera une fonction comme en mathématique. Elle pourra être réutilisée et la valeur de sortie pourra être l'entrée par chaînage d'une autre fonction
+#+end_quote
+*** Retourne aucune valeur
+#+begin_quote
+Une fonction qui ne retourne rien, execute des instructions tel que la fonction ~main~.
+L'on peux déclarer des variables (où leurs existance) dans les (paramètres) d'une fonction. Et donc l'on les utilisent lorsqu'on emploie la fonction:
+#+end_quote
+
+**  Déclaration de fonction
+#+begin_src dart
+String greet(name, age)
+{
+return "Hi, my name is $name, and I'm $age";
+}
+
+void main
+{
+final greeting = greet(michel, 10);
+print(greeting)
+}
+#+end_src
+#+begin_quote
+A noter que l'ordre des variables dans le paramètrage de la fonction greet utilsée dans ~main~ est importante (sans laquelle cela ne va pas fonctionner)
+#+end_quote
+*** Utilisation dans le désordre des paramètres de fonction
+****    {String name, int age}
+Utiliser les accolades et spécifier le type.
+**** Paramètre requis et non requis
+***** {string? name, int? age}
+***** {required String name, required int age}
+* List
+**  var scores = [];
+Déclaration
+** List<int> score = [15, 13, 14];
+Force à contenir des entiers
+
+
+** print(scores[0])
+Affiche à l'aide de l'index
+** scores[0]=5;
+Modifie un index de la listed
+** scores.add(100) .remove(20) .removeLast() .shuffle() .indexof(0)
+|Ajoute | Supprime | supprime le dernier | mélange l'ordre des données | donne le numéro d'index en fonction de la donnée|
+* Enum
+Une enum est une énumération qui permet de restreindre un choix par ses propositions.
+Ex:
+#+begin_src dart
+enum Calendar {
+day,
+week,
+month,
+}
+#+end_src
+Cela transforme ~Calendar~ en type de variable. Et donc l'on peux l'utiliser comme cela :
+#+begin_src dart
+Calendar.day
+// ou
+Calendar calendarView = Calendar.day;
+#+end_src
+* Getter and Setter
+** Set (setter)
+#+begin_quote
+Utilisé pour contenir des donnée qui ne sont pas en doublons par exemple pour une série de mail dont il ne faut pas dupliquer
+#+end_quote
+** Get (getter)
+
+**   var name = {};
+déclaration
+** .add("bowser")
+ajouter
+** print(name.lenght)
+retourne le nombre d'index ou de vlauers
+** .remove("name");
+supprime
+
+* Control Flow
+#+begin_quote
+Cela concerne les boucles et les "si" "sinon" etc..
+#+end_quote
+**  for (int i = 0; i < 5; i ++);
+|déclaration|limite|action|
+
+**   Combiner avec list
+#+begin_src dart
+List<String> scores=[12, 23, 45];
+for (score in scores)
+{
+ if (score > 100)
+ {
+  print("This is the $score");
+ } else
+  {
+   print("There are no score");
+  }
+}
+#+end_src
+**   Demander uniquement une valeur précise par filtre
+~for(score in scores.where((s)=>s == 100))~
+méthode .where()         pour chaques index qui est égal à 100
+* User input
+**  String? value = stdin.readLineSync();

@@ -1,0 +1,39 @@
+#+title: Sketchibar Algo
+
+* Comment ajouter l'icon wifi qui fonctionne en fonction du réseau.
+
+** Définir le problème
+- Dans un fichier .sh / [[https://felixkratz.github.io/SketchyBar/config/bar][Doc]] / utiliser la norme .sh pour savoir la détection du réseau
+- Afficher le wifi lorsqu'on est déconnecté, utiliser le conditionnel et l'argumentation du shellscript.
+- Je ne peut détécter le nom du réseau. Je dépend de l'outil SketchyBar
+
+** Rechercher une méthode pour résoudre.
+1.
+   - Afficher Connecter ou déconnecter dans la sketchybar avec un icon de wifi.
+   - Afficher Connecter si connecter dans la sketchybar
+   - Problème peut être résolu
+   - Etapes simplifiés
+     - détecter si connecter, afficher connecter, sinon afficher déconnecté
+**   Création de l'algorithme
+
+
+* Notes
+Commentaire du script
+#+begin_src
+The wifi_change event supplies a $INFO variable in which the current SSID
+ is passed to the script.
+#+end_src
+
+Le script à l'air d'indiquer un wifi_change event peut être a-t-il été oublié.
+#+begin_src sh
+sketchybar --subscribe WIFI wifi_change
+
+WIFI=${INFO:-"Disconnected"}
+if [ $WIFI == "Disconnected" ]; then
+   ICON=􀙈
+else
+   ICON=􀙇
+fi
+
+sketchybar --set $NAME label="${WIFI}" icon="${ICON}"
+#+end_src

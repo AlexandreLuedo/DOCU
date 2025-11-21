@@ -1,0 +1,5 @@
+#+title: Nextcloud Local
+
+*   The recommended way
+- Set up your domain correctly to point to your home network
+- Set up a reverse proxy by following the reverse proxy documentation.

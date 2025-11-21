@@ -1,0 +1,19 @@
+#+title: Doc
+* Bienvenue dans le glossaire.
+Vous trouverez toutes les informations relatives à l'équilibrage des ganaches.
+* L'humiditée / AW
+L'humiditée dite aW (/Activity Water/) ou eau libre. Désigne l'ensemble de l'eau présente dans un produit qui peux être disponible à la consommation des micro-organismes, et donc aidant à leurs prolifération. C'est grâce à cette donnée que l'on peux étendre ou diminuer la conservation de notre ganache.
+Le but de ce logiciel est de vous permettre de contrôler votre aW. De la création de la recette à l'enrobage ou l'inclusion dans quelque autre forme.
+* Le point de rosé
+* La texture
+Votre texture est calculée grâce à la différence de beurre de cacao et d'eau présents dans votre recette. En fonction du calcul, nous pouvons donc prévoir une certaine tenue en admettant que vous utilisiez votre ganache à *32°C*. Vous pouvez changer cette valeur soit depuis les paramètres de l'application, soit depuis la création de recette.
+* Le pouvoir sucrant
+Le pouvoir sucrant est une valeur indiquant le goût du sucre en bouche. Elle est définie grâce à des goûteurs effectuants des tests en laboratoire pour définir un degré correspondant à chaques sucres.
+Pour la ganache cet indice vous permet de représenter le goût plus ou moins sucré par apport au saccharose. Ainsi vous maîtriserez d'avantage le goût du produit.
+* Durée de vie
+La durée de vie est liée à l'aW. Mais également à la méthode de fabrication.
+Lorsque l'aW est calculée. Ganache.lab prend en compte la technique employée pour re-calculer le pourcentage d'eau perdue (pour certaines méthodes). Et aviser la conservation en fonction du contexte.
+#+begin_quote
+Contribuez à Ganache.lab en soumetant votre propre technique de fabrication en complétant ce [[https://www.microsoft.com/en-us/microsoft-365/online-surveys-polls-quizzes][formulaire]].
+#+end_quote
+        

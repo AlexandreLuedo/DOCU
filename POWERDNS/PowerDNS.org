@@ -1,0 +1,14 @@
+#+title: Power Dns
+#+LANGUAGE:en
+* Principe
+** Authoritative server
+Manage the recursor.
+** Recursor
+The recursor server is an intermediary between the [[Authoritative server][authoritative]] and user's devices. Seems to be not needed at all.
+=pdns_recursor=
+* Pdns-tools (package name)
+For debugging purposes
+** sdig
+** dnsbulktest
+** dnsscan
+** dnstcpbench

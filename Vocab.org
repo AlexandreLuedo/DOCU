@@ -1,0 +1,12 @@
+#+title: Vocab
+Voici une liste de vocabulaire concernant l'informatique et l'angalais en général.
+* Informatique
+*Handler* = (en anglais gestionnaire) fonction ou une routine, qui s'execute lors d'un événement. Ex : Dans Ansible nous pouvosn ajouter dans la partie Handler d'un playbook ou d'un role le fait de redémarrer le serveur web à chaque fois qu'un fichier configuration à été modifié.
+
+*Web server* : C'est un logiciel installé sur un pc (server) qui permet d'envoyer et recevoir des requêtes http / https d'un client (navigateurs internet). Il reçoit la demande et envoie un fichier html / css / image etc... Exemple de serveurs web :
+Apache, Nginx, Microsoft Internet Information, serveur https intégré à node.js
+*   Anglais
+Whitin = et dedans et dedans
+While = alors que
+Span = porté
+Troncable = tronqué

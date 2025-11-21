@@ -1,0 +1,7 @@
+#+title: Syntax
+* Ajouter des formules dans une cellule de texte
+#+begin_src excel
+="Élaborer "&80*12&"g de"
+# result :
+Élaborer 960g de
+#+end_src

@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-04-18 ven. 10:09 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emacs Shortcuts</title>
+<meta name="author" content="HK" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Emacs Shortcuts</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgaf2aa9d">VIM</a>
+<ul>
+<li><a href="#org5219c8f">Structuring vim sentences</a></li>
+<li><a href="#orged151f3">Moving</a></li>
+<li><a href="#orgfc83b80">Deleting</a></li>
+<li><a href="#org16cd792">Inserting</a></li>
+<li><a href="#org4554921">Undo Redo</a></li>
+<li><a href="#orga7f1dbf">Copy, paste &amp; replace</a></li>
+<li><a href="#org209aa92">Search</a></li>
+<li><a href="#org295ee24">Modify file type</a></li>
+<li><a href="#orgcf9a06b">Commands</a></li>
+<li><a href="#org7d4cbe8">Tips</a></li>
+</ul>
+</li>
+<li><a href="#org993365e">Emacs</a>
+<ul>
+<li><a href="#org6328650">Browse internet</a></li>
+<li><a href="#org7168d40">Todo</a></li>
+<li><a href="#org7a4fbda">Export</a></li>
+<li><a href="#orgfe7ae60">Open file</a></li>
+<li><a href="#org498e2ac">Remove &amp; rename file</a></li>
+<li><a href="#orge75fc7c">Split and windows manager</a></li>
+<li><a href="#orga19427d">Resize text</a></li>
+<li><a href="#org4fc16bf">Inserting links</a></li>
+<li><a href="#orgf8774e3">Insert structure template</a></li>
+<li><a href="#org52e0e9d">Images</a></li>
+<li><a href="#orgcde524b">Insert time &amp; date</a></li>
+<li><a href="#org1d890f3">Calculating table formula</a></li>
+<li><a href="#orgf8d2bb0">Showing table reference (where you are)</a></li>
+<li><a href="#org327d693">Journal</a></li>
+<li><a href="#org4857909">Recherche internet</a></li>
+<li><a href="#org497685a">TABS</a></li>
+<li><a href="#orgfacfa58">Display time</a></li>
+<li><a href="#orge02ddd2">Display float time</a></li>
+<li><a href="#org4bc7359">Display buffered time</a></li>
+<li><a href="#org075e8b3">Link content</a></li>
+<li><a href="#org0c876c3">Insert Code snippet &amp; Babel</a></li>
+<li><a href="#orga9d6d47">Go to item</a></li>
+<li><a href="#orge49b690">M-x toggle-read-only</a></li>
+<li><a href="#orgd394ce1">pantuml</a></li>
+</ul>
+</li>
+<li><a href="#org43b0926">Google</a></li>
+<li><a href="#orgd01fa43">Config files templates</a></li>
+</ul>
+</div>
+</div>
+<p>
+,#+SETUPFILE: <a href="https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup">https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup</a>
+</p>
+<div id="outline-container-orgaf2aa9d" class="outline-2">
+<h2 id="orgaf2aa9d">VIM</h2>
+<div class="outline-text-2" id="text-orgaf2aa9d">
+</div>
+<div id="outline-container-org5219c8f" class="outline-3">
+<h3 id="org5219c8f">Structuring vim sentences</h3>
+<div class="outline-text-3" id="text-org5219c8f">
+<ul class="org-ul">
+<li><b>b</b> + <b>number</b> + <b>motion</b></li>
+<li>b = an operator</li>
+<li>motion = like $ w e</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orged151f3" class="outline-3">
+<h3 id="orged151f3">Moving</h3>
+<div class="outline-text-3" id="text-orged151f3">
+<p>
+<b>This is the motions</b>
+</p>
+<ul class="org-ul">
+<li>$ = end of the line</li>
+<li>w = forward word</li>
+<li>e = end of the current word</li>
+<li>0 = move to start of the line</li>
+<li>G = move to the bottom</li>
+<li>12G = go to line 12</li>
+<li>gg = start of the page</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfc83b80" class="outline-3">
+<h3 id="orgfc83b80">Deleting</h3>
+<div class="outline-text-3" id="text-orgfc83b80">
+<ul class="org-ul">
+<li>x = delete letter</li>
+<li>d = delete</li>
+<li>dd = delete line</li>
+<li>dw = delete word</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org16cd792" class="outline-3">
+<h3 id="org16cd792">Inserting</h3>
+<div class="outline-text-3" id="text-org16cd792">
+<ul class="org-ul">
+<li>i = insert</li>
+<li>a = insert but after one letter</li>
+<li>o = insert below the cursor</li>
+<li>O = insert upper the cursor</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4554921" class="outline-3">
+<h3 id="org4554921">Undo Redo</h3>
+<div class="outline-text-3" id="text-org4554921">
+<ul class="org-ul">
+<li>u = undo</li>
+<li>U = fix the whole line</li>
+<li>C-r = redo</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga7f1dbf" class="outline-3">
+<h3 id="orga7f1dbf">Copy, paste &amp; replace</h3>
+<div class="outline-text-3" id="text-orga7f1dbf">
+<ul class="org-ul">
+<li>y = copy/yank</li>
+<li>yy = yank line</li>
+<li>p = for pasting the delted content</li>
+<li>rx = for remplacing the cursor selected letter with the &ldquo;x&rdquo;</li>
+<li>ce = change until the end of the line</li>
+<li>cc = the whole line</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org209aa92" class="outline-3">
+<h3 id="org209aa92">Search</h3>
+<div class="outline-text-3" id="text-org209aa92">
+<ul class="org-ul">
+<li>/ = search trhough the doc</li>
+<li>? = search to the backward position</li>
+<li>n = search the last thing you search</li>
+<li>N = same but in the opposite position</li>
+<li>C-0 = to go back where you are</li>
+<li>% = search the end of an { ( [ ] ) }</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org295ee24" class="outline-3">
+<h3 id="org295ee24">Modify file type</h3>
+<div class="outline-text-3" id="text-org295ee24">
+<ul class="org-ul">
+<li>s = substitute :s/old/new/g to substitute &rsquo;new&rsquo; for &rsquo;old&rsquo;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf9a06b" class="outline-3">
+<h3 id="orgcf9a06b">Commands</h3>
+<div class="outline-text-3" id="text-orgcf9a06b">
+<ul class="org-ul">
+<li>:! = type an terminal/external command</li>
+<li>r = retrieving an file (usefull when you make shit)</li>
+<li>R = to remplace than more than one caracter</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7d4cbe8" class="outline-3">
+<h3 id="org7d4cbe8">Tips</h3>
+<div class="outline-text-3" id="text-org7d4cbe8">
+<p>
+v + :w nameOfTheFile = you can select an precize part and save it.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org993365e" class="outline-2">
+<h2 id="org993365e">Emacs</h2>
+<div class="outline-text-2" id="text-org993365e">
+<p>
+<a href="https://github.com/niyumard/Doom-Emacs-Cheat-Sheet">Ultimate cheatsheet</a>
+</p>
+</div>
+<div id="outline-container-org6328650" class="outline-3">
+<h3 id="org6328650">Browse internet</h3>
+<div class="outline-text-3" id="text-org6328650">
+<ul class="org-ul">
+<li>wwe</li>
+<li>M-k</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7168d40" class="outline-3">
+<h3 id="org7168d40">Todo</h3>
+<div class="outline-text-3" id="text-org7168d40">
+<ul class="org-ul">
+<li>Make an title TODO</li>
+<li>C-c C-t</li>
+</ul>
+</div>
+<div id="outline-container-org555617b" class="outline-4">
+<h4 id="org555617b">Config file for todo</h4>
+<div class="outline-text-4" id="text-org555617b">
+<ul class="org-ul">
+<li>#+TODO: TODO | DONE | WAITING</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbbb7c0e" class="outline-4">
+<h4 id="orgbbb7c0e">Changing todo and lists format</h4>
+<div class="outline-text-4" id="text-orgbbb7c0e">
+<p>
+Just it when the cursor is on an todo or list caracter
+</p>
+<ul class="org-ul">
+<li>Shift right</li>
+<li>Shift left</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org7a4fbda" class="outline-3">
+<h3 id="org7a4fbda">Export</h3>
+<div class="outline-text-3" id="text-org7a4fbda">
+<ul class="org-ul">
+<li>C-c C-e</li>
+</ul>
+</div>
+<div id="outline-container-org6a974ae" class="outline-4">
+<h4 id="org6a974ae">Remove the table of content when exporting</h4>
+<div class="outline-text-4" id="text-org6a974ae">
+<div class="org-src-container">
+<pre class="src src-nil">#+OPTIONS: toc:nil        (no default TOC at all)
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-nil">#+OPTIONS: num:nil
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org29e486b" class="outline-4">
+<h4 id="org29e486b">Export to org</h4>
+<div class="outline-text-4" id="text-org29e486b">
+<p>
+:org-export-to-org
+</p>
+</div>
+</div>
+<div id="outline-container-org380d979" class="outline-4">
+<h4 id="org380d979">Export settings</h4>
+<div class="outline-text-4" id="text-org380d979">
+<p>
+<a href="https://emacsdocs.org/docs/org/Export-Settings">Emacs doc</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfe7ae60" class="outline-3">
+<h3 id="orgfe7ae60">Open file</h3>
+<div class="outline-text-3" id="text-orgfe7ae60">
+</div>
+<div id="outline-container-org531c958" class="outline-4">
+<h4 id="org531c958">Local</h4>
+<div class="outline-text-4" id="text-org531c958">
+<p>
+C-x C-f
+</p>
+</div>
+</div>
+<div id="outline-container-orgec40d06" class="outline-4">
+<h4 id="orgec40d06">SSH</h4>
+<div class="outline-text-4" id="text-orgec40d06">
+<p>
+C-x C-f
+/ssh:user@host:/path/to/file
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org498e2ac" class="outline-3">
+<h3 id="org498e2ac">Remove &amp; rename file</h3>
+<div class="outline-text-3" id="text-org498e2ac">
+<p>
+:delete-file
+:rename-file
+</p>
+</div>
+</div>
+<div id="outline-container-orge75fc7c" class="outline-3">
+<h3 id="orge75fc7c">Split and windows manager</h3>
+<div class="outline-text-3" id="text-orge75fc7c">
+</div>
+<div id="outline-container-orgeb5504b" class="outline-4">
+<h4 id="orgeb5504b">Split</h4>
+<div class="outline-text-4" id="text-orgeb5504b">
+<ul class="org-ul">
+<li>C-x 2 or C-x 3 etc&#x2026;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0f6078f" class="outline-4">
+<h4 id="org0f6078f">Delete</h4>
+<div class="outline-text-4" id="text-org0f6078f">
+<ul class="org-ul">
+<li>C-x 0</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org697c07c" class="outline-4">
+<h4 id="org697c07c">Move to</h4>
+<div class="outline-text-4" id="text-org697c07c">
+<ul class="org-ul">
+<li>C-x o</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga19427d" class="outline-3">
+<h3 id="orga19427d">Resize text</h3>
+<div class="outline-text-3" id="text-orga19427d">
+<p>
+C-x + or - or C-+ or C&#x2013;
+</p>
+</div>
+</div>
+<div id="outline-container-org4fc16bf" class="outline-3">
+<h3 id="org4fc16bf">Inserting links</h3>
+<div class="outline-text-3" id="text-org4fc16bf">
+<ul class="org-ul">
+<li>C-c C-l</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf8774e3" class="outline-3">
+<h3 id="orgf8774e3">Insert structure template</h3>
+<div class="outline-text-3" id="text-orgf8774e3">
+<div class="org-src-container">
+<pre class="src src-nil">C-c C-,
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org52e0e9d" class="outline-3">
+<h3 id="org52e0e9d">Images</h3>
+<div class="outline-text-3" id="text-org52e0e9d">
+</div>
+<div id="outline-container-orgc9e35da" class="outline-4">
+<h4 id="orgc9e35da">Insert</h4>
+<div class="outline-text-4" id="text-orgc9e35da">
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #928374;">#+CAPTION:</span> <span style="background-color: #3c3836;">This is a test</span>
+<span style="color: #928374;">#+NAME: testnameimg</span>
+<span style="color: #fabd2f; font-weight: bold; text-decoration: underline;"><a href="./path/to/img">./path/to/img</a></span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org52dc834" class="outline-4">
+<h4 id="org52dc834">Resize</h4>
+<div class="outline-text-4" id="text-org52dc834">
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #928374;">#+ATTR_ORG: :width: 100</span>
+<span style="color: #fabd2f; font-weight: bold; text-decoration: underline;"><a href="~/path/to/image.svg">~/path/to/image.svg</a></span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcde524b" class="outline-3">
+<h3 id="orgcde524b">Insert time &amp; date</h3>
+<div class="outline-text-3" id="text-orgcde524b">
+<ul class="org-ul">
+<li>&ldquo;time&rdquo; TAB</li>
+</ul>
+<p>
+#+RESULT  Sun Apr 13 08:19:04 2025
+</p>
+</div>
+</div>
+<div id="outline-container-org1d890f3" class="outline-3">
+<h3 id="org1d890f3">Calculating table formula</h3>
+<div class="outline-text-3" id="text-org1d890f3">
+<p>
+:org-table-eval-formula or C-c =
+dedicated buffer C-c &rsquo;
+@6$2: ligne6 colonne2
+</p>
+</div>
+<div id="outline-container-orga3125b5" class="outline-4">
+<h4 id="orga3125b5">ou ajouter en dessous du tableau</h4>
+<div class="outline-text-4" id="text-orga3125b5">
+</div>
+</div>
+<div id="outline-container-orgba7fedc" class="outline-4">
+<h4 id="orgba7fedc">Mettre à jour automatiquement (recalculer les formules)</h4>
+<div class="outline-text-4" id="text-orgba7fedc">
+<p>
+C-c * ou M-x org-ctrl-star
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf8d2bb0" class="outline-3">
+<h3 id="orgf8d2bb0"><a href="https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html">Showing table reference (where you are)</a></h3>
+<div class="outline-text-3" id="text-orgf8d2bb0">
+<p>
+C-c ?
+</p>
+</div>
+<div id="outline-container-org8493bbe" class="outline-4">
+<h4 id="org8493bbe">Dedicated buffer</h4>
+<div class="outline-text-4" id="text-org8493bbe">
+<p>
+C-c &rsquo;
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org327d693" class="outline-3">
+<h3 id="org327d693">Journal</h3>
+<div class="outline-text-3" id="text-org327d693">
+<ul class="org-ul">
+<li>SPC M-xj</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4857909" class="outline-3">
+<h3 id="org4857909">Recherche internet</h3>
+<div class="outline-text-3" id="text-org4857909">
+<ul class="org-ul">
+<li>M-k</li>
+
+<li>tab M-</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org497685a" class="outline-3">
+<h3 id="org497685a">TABS</h3>
+<div class="outline-text-3" id="text-org497685a">
+</div>
+<div id="outline-container-orgc514df1" class="outline-4">
+<h4 id="orgc514df1">Create</h4>
+<div class="outline-text-4" id="text-orgc514df1">
+<p>
+cmd t
+</p>
+</div>
+</div>
+<div id="outline-container-orgc3faedd" class="outline-4">
+<h4 id="orgc3faedd">Switch</h4>
+<div class="outline-text-4" id="text-orgc3faedd">
+<ul class="org-ul">
+<li>SPC tab 1 / 2 / 3 / etc&#x2026;</li>
+<li>SPC tab .</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2ebc83e" class="outline-4">
+<h4 id="org2ebc83e">Delete</h4>
+<div class="outline-text-4" id="text-org2ebc83e">
+<ul class="org-ul">
+<li>cmd w</li>
+<li>spc tab d</li>
+</ul>
+<p>
+**
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfacfa58" class="outline-3">
+<h3 id="orgfacfa58">Display time</h3>
+<div class="outline-text-3" id="text-orgfacfa58">
+<p>
+:display-time-mode
+</p>
+</div>
+<div id="outline-container-org8ecb9e1" class="outline-4">
+<h4 id="org8ecb9e1">Config time</h4>
+<div class="outline-text-4" id="text-org8ecb9e1">
+<p>
+(setq display-time-24hr-format t   ; Affiche l&rsquo;heure en format 24 heures.
+      display-time-day-and-date t) ; Affiche également la date.
+(display-time-mode 1)              ; Active l&rsquo;horloge.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge02ddd2" class="outline-3">
+<h3 id="orge02ddd2">Display float time</h3>
+<div class="outline-text-3" id="text-orge02ddd2">
+<p>
+:display-time-world
+</p>
+</div>
+</div>
+<div id="outline-container-org4bc7359" class="outline-3">
+<h3 id="org4bc7359">Display buffered time</h3>
+<div class="outline-text-3" id="text-org4bc7359">
+<p>
+(defun open-clock-buffer ()
+  &ldquo;Open a buffer displaying the current time.&rdquo;
+  (interactive)
+  (let ((buf (get-buffer-create &ldquo;<b>Clock</b>&rdquo;)))
+    (with-current-buffer buf
+      (erase-buffer)
+      (insert (format-time-string &ldquo;%A, %d %B %Y\n%H:%M:%S&rdquo;))
+      (goto-char (point-min))
+      (display-buffer buf)
+      (run-with-timer 1 nil (lambda ()
+                              (with-current-buffer &ldquo;<b>Clock</b>&rdquo;
+                                (erase-buffer)
+                                (insert (format-time-string &ldquo;%A, %d %B %Y\n%H:%M:%S&rdquo;))
+                                (goto-char (point-min))))))))
+</p>
+</div>
+</div>
+<div id="outline-container-org075e8b3" class="outline-3">
+<h3 id="org075e8b3">Link content</h3>
+<div class="outline-text-3" id="text-org075e8b3">
+<ul class="org-ul">
+<li>SPC n l store link</li>
+<li>C-c C-l insert link</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0c876c3" class="outline-3">
+<h3 id="org0c876c3">Insert Code snippet &amp; Babel</h3>
+<div class="outline-text-3" id="text-org0c876c3">
+<p>
+spc i s
+</p>
+</div>
+</div>
+<div id="outline-container-orga9d6d47" class="outline-3">
+<h3 id="orga9d6d47">Go to item</h3>
+<div class="outline-text-3" id="text-orga9d6d47">
+<p>
+SPC s i
+</p>
+</div>
+</div>
+<div id="outline-container-orge49b690" class="outline-3">
+<h3 id="orge49b690">M-x toggle-read-only</h3>
+<div class="outline-text-3" id="text-orge49b690">
+<p>
+change le mode soit read only, soit read &amp; write
+</p>
+</div>
+</div>
+<div id="outline-container-orgd394ce1" class="outline-3">
+<h3 id="orgd394ce1">pantuml</h3>
+<div class="outline-text-3" id="text-orgd394ce1">
+<ul class="org-ul">
+<li>C-c C-c compile et affiche</li>
+<li>C-c C-p prévsiualise</li>
+</ul>
+</div>
+<div id="outline-container-orgaa5be1d" class="outline-4">
+<h4 id="orgaa5be1d">Exemples</h4>
+<div class="outline-text-4" id="text-orgaa5be1d">
+<p>
+diagram
+</p>
+<p>
+<img src="file:///tmp/babel-Wq15gG/plantuml-4yXVZH.png" alt="plantuml-4yXVZH.png" />
+digraph
+</p>
+
+<div id="org41ffa00" class="figure">
+<p><img src="file:///tmp/babel-Wq15gG/plantuml-bM68SZ.png" alt="plantuml-bM68SZ.png" />
+</p>
+</div>
+
+<div id="org919bb41" class="figure">
+<p><img src="file:///tmp/babel-Wq15gG/plantuml-xEvotz.png" alt="plantuml-xEvotz.png" />
+</p>
+</div>
+
+<div id="org174f759" class="figure">
+<p><img src="file:///tmp/babel-Wq15gG/plantuml-Lr1bX3.png" alt="plantuml-Lr1bX3.png" />
+</p>
+</div>
+
+
+<div id="org9431186" class="figure">
+<p><img src="file:///tmp/babel-Wq15gG/plantuml-4oCDqz.png" alt="plantuml-4oCDqz.png" />
+</p>
+</div>
+
+<div id="orgf640f43" class="figure">
+<p><img src="file:///tmp/babel-Wq15gG/plantuml-taVxXB.png" alt="plantuml-taVxXB.png" />
+</p>
+</div>
+
+<div id="org711b622" class="figure">
+<p><img src="file:///tmp/babel-Wq15gG/plantuml-JiBalW.png" alt="plantuml-JiBalW.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org43b0926" class="outline-2">
+<h2 id="org43b0926">Google</h2>
+<div class="outline-text-2" id="text-org43b0926">
+<p>
+<a href="https://kinsta.com/blog/google-search-operators/">Google search operator list</a>
+filetype:pdf
+</p>
+</div>
+</div>
+<div id="outline-container-orgd01fa43" class="outline-2">
+<h2 id="orgd01fa43"><a href="https://github.com/doomemacs/doomemacs/blob/5ad99220b86ae1bf421861dfad24492d768ac4d9/templates/config.example.el">Config files templates</a></h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: HK</p>
+<p class="date">Created: 2025-04-18 ven. 10:09</p>
+</div>
+</body>
+</html>

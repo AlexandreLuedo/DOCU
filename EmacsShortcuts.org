@@ -1,0 +1,12 @@
+#+title: Emacs Shortcuts
+#+OPTIONS:  num:nil
+#+OPTIONS: toc:nil
+# #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+* VIM
+# Find me [[file:Vim.org][~/INFOR/DOCU/]] <= This is a link
+* Emacs
+# Find me[[file:EMACS/Emacs.org][ ~/INFOR/DOCU/EMACS]]  <= This is a link
+* Google
+[[https://kinsta.com/blog/google-search-operators/][Google search operator list]]
+filetype:pdf
+* [[https://github.com/doomemacs/doomemacs/blob/5ad99220b86ae1bf421861dfad24492d768ac4d9/templates/config.example.el][Config files templates]]

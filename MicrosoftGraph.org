@@ -1,0 +1,9 @@
+#+title: Microsoft Graph
+
+* Preface
+[[https://learn.microsoft.com/fr-fr/graph/overview][Microsoft Graph]] est une passerelle vers Microsoft 365. Elle permet un grand nombre d'action.
+** Shémas
+#+ATTR_ORG: #+attr_html: :width 1000px
+[[https://learn.microsoft.com/fr-fr/graph/images/microsoft-graph-dataconnect-connectors-enhance.png]]
+
+*   [[https://www.youtube.com/watch?v=PI9NO5rayiY&t=286s][Vidéo de présentation]]

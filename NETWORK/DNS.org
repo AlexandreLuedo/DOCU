@@ -1,0 +1,17 @@
+#+title: Dns
+#+LANGUAGE:en
+* Domain Name System
+This is a system who store a name for each public ip adress.
+* Fondamentals
+** For DNS
+*** TTL
+=Time to live= is the longevity of a domain name in cache of an DNS system.
+*** Recursive resolution
+Is the whol path of an DNS request trough the entire DNS network. Computer => Internet Box => FAI => DNS server who store TLD => DNS server who handle the domain name zone.
+** For Name system
+*** TLD
+=Top level domain= are the =.com= that you can find in an adress.
+**** Whereis
+There is a list of server who store a precise TLD (for eg: .com)
+**** TLD server
+For each request, TLD server can localize who manage the requested domain name zone

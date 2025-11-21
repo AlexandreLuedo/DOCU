@@ -1,0 +1,87 @@
+#+title: Kubernetes
+
+*   Lignes directrices de Kubernetes
+Kubernetes permet la virtualisation de programme dans un serveur. De manière sécurisé. Il permet aussi de containariser. Et donc de gérer des clusters de serveurs.
+** Kubernetes tools
+Kubernetes s'utiliser avec des outils, comme ~kubeadm~, ~kubectl~ et ~kubelet~.
+***  Kubeadm
+C'est un outil de ligne de commande, utilisé pour la configuration initiale d'un kluster. Et dans l'intialisation des *nodes*. Il se charge, de la mise en place du kluster en plusieurs points dont :
+- Création des certificats de sécurité
+- Configuration du panel des composants
+- Configuration du panel de networking
+- Mise en place de meilleurs pratiques de sécurités
+*** kubectl
+C'est aussi un outil en ligne, mais il va s'occuper de la gestion des container et des applications qui sont installés, tout au long du fuctionnement de Kubernetes.
+- Execution des programmes, et des services au sein d'un kluster
+- Mise à jour des systèmes d'informations (logs)
+- Effectue du deboguage.
+- MàJ des configs des applications.
+*** kubelet
+Le kubelet est un système qui gère les nodes, comme une armoire contenant des serveurs (les nodes).
+- Il communique entre l'API server et les nodes
+-
+
+**   Vocabulaire
+| *Noms*              | *Explication*                                                                                                                                                              |
+|---------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *Kluster*           | Un kluster est une sorte de machine virtuelle qui garde, et fait tourner un nombre de logiciels et programmes donnés, il permet de restreindre et de confiner un logiciel. |
+| *Control plane*     | Cerveau d'un kluster, il gère les sous programmes de kubernetes dont les *nodes*, le *ETCD*, et l'*                                                                        |
+| *ETCD*              | C'est la base de donnée intégrée de Kubernetes                                                                                                                             |
+| *Pods*              | Les pods sont dse baleines/cargos qui stockent plusieurs containers.                                                                                                       |
+| *Workload*          | Applications qui tournent dans un cluster kubernetes                                                                                                                       |
+| *Object*            | Une entitée qui représente l'état du cluster.                                                                                                                              |
+| *Nodes*             | C'est une machine virtuelle ou physique qui dépend d'un cluster et qui englobe un pod                                                                                      |
+| *Kubelet*           | Un agent qui tourne dans un node, et qui vérifie que les containaires tournent dans un pod                                                                                 |
+| *Container Runtime* | Le logiciel qui fait tourner les containers                                                                                                                                |
+| *kube-proxy*        | C'est le network proxy qui tourne dans chaques nodes                                                                                                                       |
+| *namespace*         | une abstraction utilisée par Kubernetes pour prendre en charge l'isolation de groupes de ressources au sein d'un seul cluster                                              |
+|                     |                                                                                                                                                                            |
+
+*   Architecture Kubernetes
+
+[[https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg][Main architecture of kubernetes]]
+
+** Nodes
+Les nods sont comment des cargos/baleines, ils sont nécéssaires pour faire tourner les nodes.
+***  Ses composants
+- kubelet
+- kube-proxy
+- container runtime (CRI)
+*** Déploiement
+Le node doit être ajouter au API Server
+~.json~
+#+begin_src json
+{
+  "kind": "Node",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "10.240.79.157",
+    "labels": {
+      "name": "my-first-k8s-node"
+    }
+  }
+}
+#+end_src
+Le nom d'un *node* doit être valide en suivant les règles du [[https://kubernetes.io/docs/concepts/overview/working-with-objects/names#dns-subdomain-names][DNS subdomain name]]
+
+#+begin_quote
+   Pour ajouter un node au cluster, il y a deux manières de le faire :
+   1. Le *kubelet* sur un node (en self register) qui s'est lui-même register à l'*API server*.
+   2. Un humain qui ajoute lui-même le node.
+#+end_quote
+**** Création manuelle
+**** Self-register
+* Exemples
+**   Configuration simpliste d'un pod
+#+begin_src yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mon-pod
+spec:
+  containers:
+  - name: mon-conteneur
+    image: nginx
+#+end_src
+* Installer Kubernetes
+[[https://kubernetes.io/fr/docs/setup/production-environment/tools/kubeadm/install-kubeadm/][Documentation d'installation sous Debian]]

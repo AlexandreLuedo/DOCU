@@ -1,0 +1,6 @@
+#+title: Ollama
+
+
+* Set path to model
+launchctl setenv OLLAMA_MODELS "/Volumes/T7 Shield/ARCH/MACOS/INFOR/MODELS"
+export OLLAMA_MODELS="/path/to/your/models" #in .zshrc

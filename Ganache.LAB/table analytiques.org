@@ -1,0 +1,145 @@
+#+title: Table Analytiques
+ #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-bigblow.setup
+* Advices
+-  For fruited ganache, butyrique must be in small amount
+** Guide to good conservation practices
+Balance of balance of a chocolate ganache.
+• Sugar: It is preferable to have a percentage of 25 to 30% of sugars (including that entering the composition of the coverage used.) For good conservation of the ganache.
+• Cocoa butter: it is advisable to have 20% of the total weight of the recipe. Including that of the composition of the cover used. (For a covered ganache).
+• Water: it is important to have a maximum percentage of water (milk, cream, butter, pulp ...) of 25% or minimum of dry extracts of 75% in order to have good conservation, otherwise we risk:
+		○ unbalance the emulsion
+		○ Promote bacteriological development
+		○ Reduce the shelf life
+* Percentage
+The preconized percentage for each stuff
+** Chocolate percentage in ganache
+| Type            | Percentage |
+|-----------------+------------|
+| Black           |         18 |
+| Milk            |         22 |
+| White           |         23 |
+| Milk & black    |         20 |
+| all type molded |      18-22 |
+
+** Water = 20-25
+** Sugar level
+| Type              | Percentage |
+|-------------------+------------|
+| Sugar level       |         30 |
+| Honey and Caramel |      33-34 |
+| Saccharose        |         15 |
+| Glucose           |       5-10 |
+| Sorbitol          |      max 5 |
+** Dry materials = 70-80
+Fat and folowed stuff are consider as dry material
+- Sugar
+- Fat
+- Dairy fat
+** Fat without cacao butter
+| Type                                |       Percentage | Détails                   |
+|-------------------------------------+------------------+---------------------------|
+| Butyric                             |             9-12 |                           |
+| Butter                              |                5 | Under nothing will change |
+| Fat + cream fat + butter fat + oils | 10-18 best is 14 | To much sinon blanchis    |
+| Fruits                              |               10 |                           |
+* Raw ingredients
+** Sugar
+| Sweetening       | Total Dry Extract / EST | Sweet Power / Sweetening |
+|------------------+-------------------------+--------------------------|
+| Saccharose       |                     100 |                      100 |
+| Glucose atomisé  |                      95 |                       47 |
+| Glucse DE60      |                      80 |                       70 |
+| Sucre inverti    |                      78 |                      127 |
+| Dextrose         |                      92 |                       75 |
+| Miel             |                      80 |                      130 |
+| Lactose          |                     100 |                       16 |
+| Sorbitol cristal |                     100 |                       55 |
+** Dairy
+| %                 | Water | TDE/EST |  Fat | Dry Degreased Extract From Milk = ESDL | Litter Weight | SP = PS     |
+|-------------------+-------+---------+------+----------------------------------------+---------------+-------------|
+| Whole Milk        |    88 |      12 |  3.6 |                                    8.4 |          1036 | DDEFM/2*16% |
+| Skimmed milk      |    91 |     9.3 | 0.06 |                                   9.24 |          1035 | DDEFM/2*16% |
+|-------------------+-------+---------+------+----------------------------------------+---------------+-------------|
+| Milk powder 26%   |     3 |      97 |   26 |                                     71 |               | DDEFM/2*16% |
+| Milk powder 0%    |     3 |      97 |    0 |                                     97 |               | DDEFM/2*16% |
+|-------------------+-------+---------+------+----------------------------------------+---------------+-------------|
+| Cream 30%         |  63.5 |   36.44 |   30 |                                   6.44 |          1000 | DDEFM/2*16% |
+| Cream 35%         |  59.8 |   40.98 |   35 |                                   5.98 |           998 | DDEFM/2*16% |
+| Cream 40%         |  54.4 |   45.52 |   40 |                                   5.52 |           993 | DDEFM/2*16% |
+|-------------------+-------+---------+------+----------------------------------------+---------------+-------------|
+| Dairy Butter      |    16 |      84 |   82 |                                      2 |               | DDEFM/2*16% |
+|-------------------+-------+---------+------+----------------------------------------+---------------+-------------|
+| Yellow of the egg |    50 |      50 |   33 |                                        |               |             |
+** Chocolate infos
+| Dénomination       | Cocoa Butter | De-oiled Cocoa | Total Mg | Sweetening Agent | Milk Mg | Milk Solids |
+|--------------------+--------------+----------------+----------+------------------+---------+-------------|
+| *Valrhona*           |              |                |          |                  |         |             |
+| Araguani 72%       |           43 |             29 |       43 |               26 | /       | /           |
+| Guanaja 70%        |         42.5 |           27.5 |     42.5 |               29 | /       | /           |
+| Caraïbe 66%        |         40.5 |           25.5 |     40.5 |               32 | /       | /           |
+| Alpaco 66%         |           39 |             27 |       39 |               31 | /       | /           |
+| Nyangbo 68%        |           36 |             32 |       36 |               31 | /       | /           |
+| Manjari 64%        |           39 |             25 |       39 |               35 | /       | /           |
+| Ex. bitter 61%     |           39 |             22 |       39 |               37 | /       | /           |
+| Equatori. 55%      |           37 |             18 |       37 |               43 | /       | /           |
+| Extra noir 53%     |           31 |             22 |       31 |               46 | /       | /           |
+| Bahibé 46%         |         28.4 |           17.6 |       42 |               30 | /       | /           |
+| Tanariva 33%       |            / |              / |       37 |               37 | /       | /           |
+| Jivara 40%         |            / |              / |       40 |               33 | /       | /           |
+| Ivoire 35%         |            / |              / |        / |                / | /       | /           |
+| *Barry*              |              |                |          |                  |         |             |
+| Passy 70%          |           41 |             28 |       41 |               30 | /       | /           |
+| Concorde 66%       |           39 |             26 |       39 |               34 | /       | /           |
+| Chocolatamer 60%   |           33 |             27 |       33 |               40 | /       | /           |
+| Force noire 50%    |           28 |             21 |       28 |               50 | /       | /           |
+| Excellence 55%     |           34 |             18 |       34 |               45 | /       | /           |
+| Extrabitter Gu 64% |           41 |             23 |       41 |               36 | /       | /           |
+| Ocoa 70%           |           40 |             31 |       40 |               30 | /       | /           |
+| Evocao 72%         |           41 |             31 |       41 |               28 | /       | /           |
+| Inaya 65%          |           33 |             33 |       33 |               35 | /       | /           |
+| St Domingue 70%    |           42 |             27 |       42 |               30 | /       | /           |
+| Fleur de cao 70%   |           42 |             27 |       42 |               30 | /       | /           |
+| Venezuela 72%      |           42 |             29 |       42 |               28 | /       | /           |
+| Tanzanie 75%       |           45 |             29 |       45 |               25 | /       | /           |
+| Méxique 66%        |           37 |             28 |       37 |               34 | /       | /           |
+| Equateur 76%       |           45 |             31 |       45 |               24 | /       | /           |
+| Alto el sol 65%    |           37 |             27 |       37 |               35 | /       | /           |
+| Ghana 40%          |           33 |              7 |       39 |               39 | 6       | 15          |
+| Papouasie 35%      |           30 |              5 |       37 |               41 | 6       | 17          |
+| Ambrejava 36%      |           32 |              3 |       36 |               40 | 3       | 20          |
+| Lactée Barry 35%   |           32 |              3 |       39 |               64 | 7       | 22          |
+| Elysée 36%         |           30 |              6 |       36 |               41 | 5       | 17          |
+| Alunga 41%         |           31 |             10 |       35 |               35 | 4       | 20          |
+| Lactée sup. 38%    |           32 |              6 |       38 |               39 | 6       | 16          |
+| Zéphyr 34%         |           34 |              / |       40 |               40 | 6       | 20          |
+| Blanc satin 29%    |           29 |              / |       33 |               51 | 4       | 16          |
+| Zéphir cara 35%    |           35 |              / |       39 |               35 | 6       | 26          |
+| *Callebaut*          |              |                |          |                  |         |             |
+| 60-40-41 60.3%     |         42.6 |           19.7 |     42.5 |             39.7 | /       | /           |
+| 70-30-38           |         38.9 |           33.6 |     38.9 |                  |         |             |
+| 2665 32.8%         |         31.9 |            2.5 |     37.5 |             42.8 | 5.6     | 20.2        |
+| W2 28%             |           28 |              / |     35.8 |               50 | 6.3     | 16.7        |
+| *Belcolade*          |              |                |          |                  |         |             |
+| /                  |            / |              / |        / |                / | /       | /           |
+| DGF                |            / |              / |        / |                / | /       | /           |
+| Le Mara 41%        |              |                |          |                  |         |             |
+| Le Cara 70%        |              |                |          |                  |         |             |
+| Le 72              |              |                |          |                  |         |             |
+* Analysis Table (example)
+| Ingredient                    | Weight (g) |   Water | Cocoa Butter | De-oiled Cocoa | Dairy Fat | Total Fat | Sweetening Agent | Sweetening Power |    TDE |
+|-------------------------------+------------+---------+--------------+----------------+-----------+-----------+------------------+------------------+--------|
+| Cream 35%                     |     349.27 |  208.86 |              |         122.24 |    122.24 |      9.43 |             0.15 |           143.13 |        |
+| Sorbitol 5% Max               |            |         |              |                |           |           |                  |                  |        |
+| Inverted Sugar                |            |         |              |                |           |           |                  |                  |        |
+| Guanaja 70% couverture        |        423 |       0 |       179.77 |         116.32 |         0 |    179.77 |            122.6 |            122.6 |    423 |
+| Cocoa Butter                  |            |         |              |                |           |           |                  |                  |        |
+| Dairy Butter                  |        100 |      16 |              |             82 |        82 |           |                  |               84 |        |
+| Sugar                         |      127.2 |         |              |                |           |           |            127.2 |            127.2 |  127.2 |
+| Whole Milk                    |            |         |              |                |           |           |                  |                  |        |
+| Honey                         |            |         |              |                |           |           |                  |                  |        |
+| Glucose 60                    |            |         |              |                |           |           |                  |                  |        |
+| Dextrose                      |            |         |              |                |           |           |                  |                  |        |
+| TOTAL                         |       1000 |  224.56 |       179.77 |         116.32 |    202.24 |    384.01 |           259.23 |            249.9 | 777.33 |
+| TOTAL in %                    |        100 |   22.45 |        17.97 |          11.63 |     20.22 |     38.40 |            25.92 |            24.99 |  77.73 |
+| Parameters for framed ganache |    Max 25% | Min 17% |              |        Min 25% |           |   Min 75% |                  |                  |        |
+TDE = Total dry extract

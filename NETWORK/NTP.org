@@ -1,0 +1,25 @@
+#+title: Ntp
+#+LANGUAGE:en
+see also: [[https://www.ntp.org/documentation/4.2.8-series/warp/][ntp.org]]
+* Network Time Protocole
+This protocol aimed to old time trough an infrastructure. It's stratum layers based trough 1 to 16 value. There is a master server who host time and syncrhonise to slaves devices Each layer increment 1 stratum value.
+** Stratum
+This is a hierarchical system, who organise the time. Each level represent the distance between primary reference clock.
+- 0 is primary reference clock, being the most accurante, (atomic clocks, GPS clocks)
+- 1 
+- 2 is based on primary
+- etc...
+- 16 is to far from the reference clock, it's unsynchronised clock.
+* Convergence time :ATTACH:
+:PROPERTIES:
+:ID:       e8ce53e1-c3b8-4cee-b365-b19e55f2d24c
+:END:
+It is the time between the ntp instance start and the synchronise state. It is the period that the deamon thakes from the moment the deamon beghins this process until the local clock is stable within the target accuracy.
+1. Intial measumerement: The deamon contact one or more ntp servers and record the round-trip delay & offset.
+2. Filtering: Raw measurement contain jitter, netswork & occasionnal spikes. The deamon applied a filter to obtain a cleaner estimate.
+3. CLock discipline: 
+   - Slew the clock, micro ajustements
+   - Step the clock, large & immediate changes
+4. Stability check : Deamon monitors the offset and jitter over a sliding window. 
+
+[[attachment:_20251111_122929screenshot.png]]

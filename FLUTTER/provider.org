@@ -1,0 +1,5 @@
+#+title: Provider
+[[https://docs.flutter.dev/data-and-backend/state-mgmt/simple][doc]]
+
+* Principes
+Provider sert à gérer l'état des widgets en évitant à l'utilisateur de gérer les ~callbacks~ (c'est un retour de l'informations au dessus)ou les ~InheritedWidgets~ (les widgets sans parents).

@@ -1,0 +1,6 @@
+#+title: PATH
+(Source)[https://linfo.org/path_env_var.html]
+
+
+* Definition
+Le ~PATH~ est une variable d'environnement disponible sous les systèmes Linux et Unix. Elle dit au temrinal où se situe les dossiers pour exectuer des fichiers en réponse à des commandes lancés par l'utilisateur.

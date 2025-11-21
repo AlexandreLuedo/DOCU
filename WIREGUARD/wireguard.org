@@ -1,0 +1,37 @@
+#+title: Wireguard
+* Setup Protonvpn
+1. Download the .conf file & ~sudo apt install openresolve~
+2.
+#+begin_src bash
+ nvim confFileName.conf
+#+end_src
+3. Add ~, ::/0~ to AllowedIps end line
+4.
+#+begin_src bash
+$ sudo mv confFileName.conf /etc/wireguard
+#+end_src
+3.
+#+begin_src bash
+$ sudo wg-quick up confFileName
+#+end_src
+4. 
+#+begin_src bash
+$ sudo wb
+return infos # normallyl
+#+end_src
+* Umbrel
+** Start
+#+begin_src bash
+$ sudo wg-quick up Umbre-FR-423
+#+end_src
+** Verify
+sudo wg
+* Nobara-pc
+** Start
+#+begin_src bash
+wg-quick up nobara
+#+end_src
+** Stop
+#+begin_src bash
+wg-quick down nobara
+#+end_src

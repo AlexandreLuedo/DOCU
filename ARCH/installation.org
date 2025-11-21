@@ -1,0 +1,6 @@
+#+title: Installation
+* Booting
+- [[fn:][Desactivate secure boot]]
+* [[https://wiki.archlinux.org/title/General_recommendations][General recommendations]]
+- Wayland is an display server an alternative to Xorg
+  - Composer like Hyprland

@@ -1,0 +1,10 @@
+#+title: Reinstall
+* Reinstall
+#+begin_src bash
+$ rm -rf ~/.doom.d/ && rm -rf ~/.emacs.d
+#+end_src
+* Install
+#+begin_src bash
+$ git clone http://github.com/hlissner/doom-emacs ~/.emacs.d
+$ ~/.emacs.d/bin/doom install
+#+end_src

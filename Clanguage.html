@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-01-30 Tue 19:23 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clanguage</title>
+<meta name="author" content="Hadrien KLOTZ" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Clanguage</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb387928">1. Compilation and compiler</a>
+<ul>
+<li><a href="#orge03ba05">1.1. The pre-compilation</a></li>
+<li><a href="#org5004190">1.2. The compilation</a></li>
+<li><a href="#org2fe7705">1.3. The links editing</a></li>
+</ul>
+</li>
+<li><a href="#orgddf4da6">2. First C elements</a>
+<ul>
+<li><a href="#orge97756e">2.1. Definition</a></li>
+</ul>
+</li>
+<li><a href="#orgfbfa9ab">3. Algorithm</a>
+<ul>
+<li><a href="#org59fe9e3">3.1. How to</a>
+<ul>
+<li><a href="#org072cca3">3.1.1. Clarly define the problem</a></li>
+<li><a href="#org42c0080">3.1.2. Research an solution method</a></li>
+<li><a href="#org2cf3776">3.1.3. creation of an algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgfad4014">4. Identificators</a>
+<ul>
+<li><a href="#orgf1ffe44">4.1. Correct indentificators</a></li>
+</ul>
+</li>
+<li><a href="#org5d045cb">5. C structure</a></li>
+<li><a href="#org14b866a">6. Different types of variables</a>
+<ul>
+<li><a href="#org86ea094">6.1. Values of variables</a></li>
+<li><a href="#orgb99ea82">6.2. declaration of variable</a>
+<ul>
+<li><a href="#orgd05c1a5">6.2.1. Constant</a></li>
+</ul>
+</li>
+<li><a href="#orgc845909">6.3. Playing with variables</a>
+<ul>
+<li><a href="#org69618f1">6.3.1. The %</a></li>
+<li><a href="#orgf121da9">6.3.2. Display the variables</a></li>
+<li><a href="#orgf09c53a">6.3.3. Recieving values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<a href="http://ressources.unit.eu/cours/Cfacile/co/Cours_C_facile_1.html">C language documentation FR</a>
+</p>
+<div id="outline-container-orgb387928" class="outline-2">
+<h2 id="orgb387928"><span class="section-number-2">1.</span> Compilation and compiler</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+When a C programm are send to the compiler, he split the work in tree parts :
+</p>
+</div>
+<div id="outline-container-orge03ba05" class="outline-3">
+<h3 id="orge03ba05"><span class="section-number-3">1.1.</span> The pre-compilation</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The compiler will take the file.c and include all the pre-compilation directives who are include white an <code>#</code> before the declaration. Like <code>#include &lt;stdio.h&gt;</code> and send it the processor.
+</p>
+</div>
+</div>
+<div id="outline-container-org5004190" class="outline-3">
+<h3 id="org5004190"><span class="section-number-3">1.2.</span> The compilation</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+If the pre-compilation process doesn&rsquo;t fail, the compiler will start the compilation process. The compiler will translate all the code into machine code (binary code).
+</p>
+</div>
+</div>
+<div id="outline-container-org2fe7705" class="outline-3">
+<h3 id="org2fe7705"><span class="section-number-3">1.3.</span> The links editing</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+For example, in the code we have include the <code>&lt;stdio.h&gt;</code> library, who are compiled and store in another location. So the links editing will make the link between library and the code for giving an code result.
+</p>
+
+
+<p>
+Between the differents tasks, the file aren&rsquo;t in .c the file is in an intermmediate state. Normally after compiling the compiler will erase this intermmediate files, but you can specify with options to keep this files.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgddf4da6" class="outline-2">
+<h2 id="orgddf4da6"><span class="section-number-2">2.</span> First C elements</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orge97756e" class="outline-3">
+<h3 id="orge97756e"><span class="section-number-3">2.1.</span> Definition</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The C is case-sensitive, so upper-case and lower-cases are considerable and important for the compiler.
+Like Java you must finish lines with an <code>;</code>
+For adding one-line commentary use <code>//</code> and for an paragraph use <code>/* ... */</code>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfbfa9ab" class="outline-2">
+<h2 id="orgfbfa9ab"><span class="section-number-2">3.</span> Algorithm</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org59fe9e3" class="outline-3">
+<h3 id="org59fe9e3"><span class="section-number-3">3.1.</span> How to</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+For solving, or writing problems in code, you must follow this differents rules
+</p>
+</div>
+<div id="outline-container-org072cca3" class="outline-4">
+<h4 id="org072cca3"><span class="section-number-4">3.1.1.</span> Clarly define the problem</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ul class="org-ul">
+<li>Define all the datas, links, docs etc&#x2026;</li>
+<li>Define goals, calculs, and what you will use to resolve the problem.</li>
+<li>Define all frontiers and what you can&rsquo;t do</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org42c0080" class="outline-4">
+<h4 id="org42c0080"><span class="section-number-4">3.1.2.</span> Research an solution method</h4>
+<div class="outline-text-4" id="text-3-1-2">
+</div>
+<ol class="org-ol">
+<li><a id="org8848603"></a>In first of all you must :<br />
+<div class="outline-text-5" id="text-3-1-2-1">
+<ul class="org-ul">
+<li>Clarify the state &ldquo;énoncé&rdquo;</li>
+<li>Simplify the problem</li>
+<li>Verifing if the problem is solvable and can be traited.</li>
+</ul>
+</div>
+</li>
+<li><a id="orgfab16a8"></a>Search an strategy for the algoritm build.<br />
+<div class="outline-text-5" id="text-3-1-2-2">
+<ul class="org-ul">
+<li>Cut the problem into tiny multiples problems who can be more simple to resolve</li>
+<li>Make successive refinements</li>
+<li>The most succesive raffinement possible are the instructions.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org2cf3776" class="outline-4">
+<h4 id="org2cf3776"><span class="section-number-4">3.1.3.</span> creation of an algorithm</h4>
+<div class="outline-text-4" id="text-3-1-3">
+</div>
+<ol class="org-ol">
+<li><a id="orgc101e92"></a>Definition<br />
+<div class="outline-text-5" id="text-3-1-3-1">
+<p>
+The algoritm are multiples rules or instructions who are here to solve the problem. He must be construct regardless of the programming language.
+</p>
+</div>
+</li>
+<li><a id="orgf2de009"></a>Warn<br />
+<div class="outline-text-5" id="text-3-1-3-2">
+<ul class="org-ul">
+<li>The algorithm must be execute with an finish number of operations</li>
+<li>The algorithm must be clarly speciefed, without embiguitty</li>
+<li>The data must be precize (integer, real, etc&#x2026;)</li>
+<li>The algorithm give at least one result</li>
+<li>The algorithm must be effective (an human can simulate them with an finish time)</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfad4014" class="outline-2">
+<h2 id="orgfad4014"><span class="section-number-2">4.</span> Identificators</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+An identificator are construction name who aiming to have an special syntax. Especially in C.
+The identificator only begine with an letter and can&rsquo;t have space.
+</p>
+</div>
+<div id="outline-container-orgf1ffe44" class="outline-3">
+<h3 id="orgf1ffe44"><span class="section-number-3">4.1.</span> Correct indentificators</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>x</li>
+<li>speed<sub>object</sub></li>
+<li>Pi</li>
+<li>true54</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org5d045cb" class="outline-2">
+<h2 id="org5d045cb"><span class="section-number-2">5.</span> C structure</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>The C are structured and typed language, all the variables must have an type.</li>
+</ul>
+
+
+<p>
+<a href="https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c/7669586-declarez-des-variables">Cours C Open Classroom FR</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org14b866a" class="outline-2">
+<h2 id="org14b866a"><span class="section-number-2">6.</span> Different types of variables</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org86ea094" class="outline-3">
+<h3 id="org86ea094"><span class="section-number-3">6.1.</span> Values of variables</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Table of min and max values
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name of type</th>
+<th scope="col" class="org-right">Min</th>
+<th scope="col" class="org-right">Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">signed char</td>
+<td class="org-right">-128</td>
+<td class="org-right">127</td>
+</tr>
+
+<tr>
+<td class="org-left">int</td>
+<td class="org-right">-32768</td>
+<td class="org-right">32767</td>
+</tr>
+
+<tr>
+<td class="org-left">long</td>
+<td class="org-right">-2147483648</td>
+<td class="org-right">2147483647</td>
+</tr>
+
+<tr>
+<td class="org-left">float</td>
+<td class="org-right">1.17549*10<sup>+38</sup></td>
+<td class="org-right">3.40282*10<sup>+38</sup></td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-right">2.22507*10<sup>-308</sup></td>
+<td class="org-right">2.22507*10<sup>+308</sup></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+For the int types (<code>singed char</code>, <code>int</code>, <code>long</code>) there are <code>unsigned</code> variables, who store unicly <b>positives</b> values.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">unsigend char</td>
+<td class="org-left">0 - 255</td>
+</tr>
+
+<tr>
+<td class="org-left">unsigend int</td>
+<td class="org-left">0 - 65535</td>
+</tr>
+
+<tr>
+<td class="org-left">unsgined long</td>
+<td class="org-left">0 - 4 294 967 295</td>
+</tr>
+</tbody>
+</table>
+<p>
+So they can store <b>twice</b> the values of <code>signed char</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb99ea82" class="outline-3">
+<h3 id="orgb99ea82"><span class="section-number-3">6.2.</span> declaration of variable</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<code>int noteDeMaths;</code>
+One declaration for multiples variables
+<code>int numberOfLives, level, ageOfThePlayer;</code>
+</p>
+</div>
+<div id="outline-container-orgd05c1a5" class="outline-4">
+<h4 id="orgd05c1a5"><span class="section-number-4">6.2.1.</span> Constant</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<p>
+<code>const int NUMBER_OF_LIVES_INITIAL = 5;</code>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc845909" class="outline-3">
+<h3 id="orgc845909"><span class="section-number-3">6.3.</span> Playing with variables</h3>
+<div class="outline-text-3" id="text-6-3">
+</div>
+<div id="outline-container-org69618f1" class="outline-4">
+<h4 id="org69618f1"><span class="section-number-4">6.3.1.</span> The %</h4>
+<div class="outline-text-4" id="text-6-3-1">
+<p>
+<code>printf("there is %d lives");</code> / There are no <b>variables</b> in the example
+The <code>%d</code> noted that we want display an <code>int</code>
+There are the possibilities
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Format</td>
+<td class="org-left">Types</td>
+</tr>
+
+<tr>
+<td class="org-left">%d</td>
+<td class="org-left">int</td>
+</tr>
+
+<tr>
+<td class="org-left">%u</td>
+<td class="org-left">unsigned int</td>
+</tr>
+
+<tr>
+<td class="org-left">%ld</td>
+<td class="org-left">long</td>
+</tr>
+
+<tr>
+<td class="org-left">%f</td>
+<td class="org-left">float</td>
+</tr>
+
+<tr>
+<td class="org-left">%f</td>
+<td class="org-left">double</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgf121da9" class="outline-4">
+<h4 id="orgf121da9"><span class="section-number-4">6.3.2.</span> Display the variables</h4>
+<div class="outline-text-4" id="text-6-3-2">
+<ul class="org-ul">
+<li>One variable</li>
+</ul>
+<p>
+<code>printf"there is %d lives", numberOfLives);</code>
+</p>
+<ul class="org-ul">
+<li>Multiples variables
+<code>printf("you have %d lives and you are at level n° %d", numberOfLives, level);</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf09c53a" class="outline-4">
+<h4 id="orgf09c53a"><span class="section-number-4">6.3.3.</span> Recieving values</h4>
+<div class="outline-text-4" id="text-6-3-3">
+<p>
+use <code>scanf</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">age</span> = <span style="color: #da8548; font-weight: bold;">0</span>;
+scanf(<span style="color: #98be65;">"%d"</span>, &amp;age);
+</pre>
+</div>
+<p>
+Must have :
+</p>
+<ul class="org-ul">
+<li><code>%d</code> in quotes</li>
+<li><code>&amp;</code> before the variable name who recieve the value</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Hadrien KLOTZ</p>
+<p class="date">Created: 2024-01-30 Tue 19:23</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+#+title: Internet
+#+LANGUAGE: en
+See also : [[https://www.youtube.com/watch?v=lL3ElCmq6jc][Cocadmin video]]
+* [[file:DNS.org][DNS]]
+* HSTS preload list
+This list stored on user's device web browser, who force a list of sites to connect firstly with https protocole.
+* TCP
+=Transmission Control Protocole=
+The browser attempt to connect with TCP requests to the internet site
+** TCP Handshake
+The discussions who can certify the communication can be establish between two machines.
+#+begin_src plantuml
+@startuml
+actor Client
+participant Server
+Client->Server: Syn
+Server->Client: Syn/Ack
+Client->Server: Ack
+Client<->Server: DATA
+Hide footbox
+@enduml
+#+end_src
+
+#+RESULTS:
+[[file:/var/folders/kr/_kvnstpx04x4y2qn892y7tm80000gn/T/babel-zzYH7L/plantuml-wCLvgs.png]]
+* TLS / SSL
+=Transport Layer security=, before it was SSL. Newest version is =1.3=
+#+begin_src plantuml
+@startuml
+actor Client
+participant Server
+Client->Server: ClientHello
+Client<-Server: ServerHello
+Client<->Server: Encrypted !
+Hide footbox
+@enduml
+#+end_src
+
+#+RESULTS:
+[[file:/var/folders/kr/_kvnstpx04x4y2qn892y7tm80000gn/T/babel-zzYH7L/plantuml-CYGBwn.png]]
+** ClientHello
+What is inside
+*** Version of TLS
+*** Domain ([[SNI][SNI]])
+*** Ciphers
+Encryptions algorithms list that the browser can deal with it.
+*** Public Key
+Short-lived
+*** [[https://en.wikipedia.org/wiki/Cryptographic_nonce][Nonce
+]]Random data trough the paquets to ensure more security
+** ServerHello
+*** Cypher
+The choosen one encryption protocole selected by the server
+*** Public key
+Same as [[ClientHello][ClientHello]]
+*** Certificat
+*** [[https://en.wikipedia.org/wiki/Cryptographic_nonce][Nonce]]
+
+
+** [[https://en.wikipedia.org/wiki/Server_Name_Indication][SNI]]
+=Server Name Indication=
+Is an extension of TLS
+* HTTP
+** HTTP1
+Can send only one ressources per paquet,
+** HTTP2
+Can handle multiples ressources per connection.
+** HTTP3
+** QUIC
+Inside an UDP protocole. Arrange paquets in the right order, and verify theirs presence, to gain TCP's advantages without TCP.
+*** UDP
+More quickly than TCP but send paquet randomely and doesn't verify theirs integrity (ideal for a video conf or call).
+*** 0RT
+=0 Round Trip= is the system to disable TLS echange before enabeling connection for known server (server who already have a previous connection)

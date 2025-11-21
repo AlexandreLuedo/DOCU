@@ -1,0 +1,33 @@
+#+title: Chrony
+#+LANGUAGE:en
+See also: [[https://chrony-project.org/][Chrony-project.org]] 
+* Package
+** Debian
+#+begin_src aptitude & ap
+chrony
+#+end_src
+* Configuration
+** [[https://chrony-project.org/doc/latest/chrony.conf.html][Crony.conf]]
+location: =/etc/crony.conf=
+using for: configure the chronyd deamon
+config others location:
+#+begin_src bash
+chronyd command with -f flag
+#+end_src
+** NTP server
+By default, chronyd does not operate as an NTP server. You need to add an allow directive to the chrony.conf file in order for chronyd to open the server NTP port and respond to client requests.
+#+begin_src conf
+allow 192.168.1.0/24
+#+end_src
+An allow directive with no specified subnet allows access from all IPv4 and IPv6 addresses.
+** Common config
+Povided with a lot of packages (maybe apt & aptitude)
+#+begin_src conf
+pool pool.ntp.org iburst
+driftfile /var/lib/chrony/drift
+makestep 0.1 3
+rtcsync
+#+end_src
+* Ansible
+See blog : [[https://www.redhat.com/en/blog/ansible-chrony-daemon][Redhat blog]]
+[[https://github.com/metno/ansible-role-chrony][Role]]

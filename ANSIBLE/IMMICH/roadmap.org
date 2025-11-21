@@ -1,0 +1,12 @@
+#+title: Roadmap
+* Installation immich
+1. Création du fichier rôle
+2. Voir à quoi ressemble un rôle (syntaxe)
+3. Trouver comment installer immich
+   1. Curl ?
+4. Trouver le module curl
+5. Intégrer le module au rôle
+6. Créer un playbook
+7. Intégrer le rôle au playbook
+8. Lancer
+9. Corriger

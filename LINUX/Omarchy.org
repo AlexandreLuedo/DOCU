@@ -1,0 +1,7 @@
+#+title: Omarchy
+#+LANGUAGE:en
+* Shortcuts
+SUPER k
+* Turn of windows
+SUPER esc
+

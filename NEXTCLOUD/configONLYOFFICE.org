@@ -1,0 +1,7 @@
+#+title: Config Onlyoffice
+Le jeu est de lier ONLY OFFICE document server à ONLY OFFICE nextcloud. Only Office server document souhaiterai que le programme tourne sous un serveru dédié.
+Le problème est dans le port qu'utilise nextcloud et only office. Les deux souhaitent utiliser le même port. Vu que nextcloud n'est pas très flexible il faut demander à Only office de le faire.
+Donc l'on va demander à nginx d'utiliser un autre port pour only office.
+
+*   ONLY OFFICE document server
+* ONLY OFFICE Nextcloud

@@ -1,0 +1,1352 @@
+# Created 2025-04-18 ven. 09:57
+#+title: Linux
+#+author: HK
+#+todo: TODO | DONE | WAITING | [?]
+#+html_head_extra: <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+#+html_head_extra: <style>*{font-family: 'JetBrains Mono', monospace !important;}</style>
+#+language: fr
+#+select_tags: export
+* Paquets de logiciels
+** Rpm
+redhat, opensuse
+~/var/lib/rpm~ (jamais modifier cette base de donnée)
+ne fonctionnera pas si les dépendances ne sont pas résolues.
+*** .rpm
+~nom-version-edition.architecture.rpm~
+*** .rpmsave
+sauvegarde d'ancienne config si update d'un package.
+*** Options
+| Options  | Explication                | Exemple        |
+|----------+----------------------------+----------------|
+| -i       | installation               | ~rpm -i *.rpm~ |
+| --force  | va avec installtion        |                |
+| --nodeps | si problème de dépendances |                |
+| -v       | nom du paquet              |                |
+| -h       | progression installation   |                |
+| -U       | Update paquet              |                |
+| -e       | suppr                      |                |
+#+begin_src shell
+rpm -e php
+#+end_src
+#+begin_verse
+Eviter d'utiliser ~--force~ et ~--nodeps~ peux casser des dépendances
+#+end_verse
+**** Requêtes RPM
+| Options     | Explications                                   | Exemple |
+|-------------+------------------------------------------------+---------|
+| -a          | tout les paquets                               |         |
+| -i          | information (résumé)                           |         |
+| -l          | list                                           |         |
+| -f          | trouve le paquet qui contient le fichier donné |         |
+| -p          | recherche dans le fichier de paquet            |         |
+| --requires  | dépendances du paquet                          |         |
+| --provides  | ce que fournit le paquet                       |         |
+| --scripts   | scripts exécutés à installation & suppression  |         |
+| --changelog | changelog                                      |         |
+#+begin_src shell
+// informations et fichierse installés par le paquet
+rpm -qil emacss-27.2-6.e19_1.1.x86_64
+#+end_src
+#+begin_src shell
+// dépendances
+rpm -gp --requires php-8.1.14
+#+end_src
+**** Vérification des paquets
+| Options | Explications       | Exemples |
+|---------+--------------------+----------|
+| -V      | Contrôle le paquet |          |
+#+begin_src shell
+rpm -V emacs
+#+end_src
+***** Erreures
+| S | taille du fichier modifié               |
+| 5 | somme MD5 ne coresspond plus            |
+| T | date de modification n'est plus la même |
+| U | propriétaire modifié                    |
+| G | groupe modifié                          |
+| L | lien symbolique modifié                 |
+| M | perms modifiées                         |
+| D | Périférique modifié                     |
+| c | indique un fichier de config            |
+***** Clés GPG
+obtenir clé
+#+begin_src shell
+rpm -qa gpg-pubkey*
+#+end_src
+****** Contrôler la clé d'un paquet
+#+begin_src shell
+rpm --checksig libjpeg-turbo-1.5.3-10.e18.x86_64.rpm
+#+end_src
+*** Extraction cpio
+archive format ~cpio~
+#+begin_src shell
+# extraction
+rpm2cpio
+#+end_src
+*** Cas noyau
+Update le noyau:
+- installer avec l'option ~-i~
+- redémarrer et test logiciels / périphériques
+- Si fonctionne, suppression eventuelle de l'ancien noyau ~-e~
+**** Grub1
+~/boot/grub/grub.conf~ modifier la ligne ~default~ pour redémarrer sur le nouveau noyau, si première version de grub utilisée
+**** Grub2
+- lancer commande
+#+begin_src shell
+grub2-mkconfig
+#+end_src
+Régenère ~/boot/grub2/grub.cfg~
+** TODO YUM
+(Yellow dog Updater Modified)
+*** TODO Config des dépôts
+*** TODO Utilisation des dépôts
+** TODO DNF
+(Dantified Yum)
+** TODO DPKG
+Equivalent de [[*RPM][RPM]] pour les paquets ~.deb~
+** TODO APT
+** TODO APTITUDE
+** TODO ZYPPER
+* Shell
+#+begin_src shell
+# list des shell installés
+nvim /etc/shells
+#+end_src
+*** Diriger
+| option | explication       |
+|--------+-------------------|
+| C-d    | exit du shell     |
+| C-a    | début             |
+| C-e    | fin               |
+| C-l    | suppr tout        |
+| C-u    | suppr début ligne |
+** Commandes
+*** Commandes de bases
+#+begin_src shell
+# syntax
+commande [options] [arguments]
+#+end_src
+| nom      | explications                           | options                                                        | arguments                               |
+|----------+----------------------------------------+----------------------------------------------------------------+-----------------------------------------|
+| date     | Aff. date + heure                      |                                                                |                                         |
+| pwd      | chemin d'accès                         |                                                                |                                         |
+| cal      | affiche calendrier                     | mois + année / -m (monday) -s (sunday)                         |                                         |
+| cal -m3  | affiche trois mois                     | -3 marche aussi                                                |                                         |
+| echo     | Aff. texte                             |                                                                | texte                                   |
+|          |                                        |                                                                | \n saut ligne                           |
+|          |                                        |                                                                | \t tabulation horizontale (en gros TAB) |
+|          |                                        |                                                                | \c pas de saut ligne après arguments    |
+|          |                                        |                                                                | \b retour un caractère arrière          |
+|          |                                        |                                                                | \\ aff. antislash                       |
+|          |                                        |                                                                | \nnn affiche caractère code octal ~nnn~ |
+| type     | Aff. si com. externe ou interne        |                                                                |                                         |
+| sort     | trie les lignes                        | -f non-case sensitive                                          |                                         |
+|          |                                        | -n tri numérique                                               |                                         |
+|          |                                        | -u affiche qu'une fois les doublons                            |                                         |
+|          |                                        | -t trie en fonction des ASCII mais sans la casse (case-sens.)  |                                         |
+|          |                                        | -r trie inverse                                                |                                         |
+|          |                                        | -k trie selon la définition chclef                             |                                         |
+|          |                                        | -c affiche le nombre devant chaques ligne                      |                                         |
+|          |                                        | -d affiche qu'une fois les ligne en doublons groupe par grpe.  |                                         |
+|          |                                        | -i pas de distinctions majuscules minuscules.                  |                                         |
+| history  | historique des commandes               | -s [int] réexecution                                           |                                         |
+| file     | infor nature contenu d'un fichier      |                                                                |                                         |
+| cat      | affiche contenu du fichier             |                                                                |                                         |
+| man      | explique la commande                   |                                                                |                                         |
+| ls       | liste                                  | -l informations détaillés                                      |                                         |
+|          |                                        | -a fichiers cachés                                             |                                         |
+|          |                                        | -d informations répertoire & contenu                           |                                         |
+|          |                                        | -F spécifier type: * (exec) @ (lien symbolique) / (repertoire) |                                         |
+|          |                                        | -R parcours toute l'arborescence depuis folder (mode récurcif) |                                         |
+|          |                                        | -t trier par date de mof recent vers ancien                    |                                         |
+|          |                                        | -c date de changement état du fichier                          |                                         |
+|          |                                        | -u date accès au fichier                                       |                                         |
+|          |                                        | -r inversé                                                     |                                         |
+|          |                                        | -i numéro inode                                                |                                         |
+|          |                                        | -C colonnes (par défault)                                      |                                         |
+|          |                                        | -1 colonne                                                     |                                         |
+|          |                                        | -Z attribut fichier lié système fichier / contexte sécurité    |                                         |
+| touche   | créer un fichier                       |                                                                |                                         |
+| >        | créer une redirection (stdout)         |                                                                |                                         |
+| >>       | ne remet pas à zéro le fichier cible   |                                                                |                                         |
+| 2>       | sortie d'erreure standart (stderr)     |                                                                |                                         |
+| 2>&1     | stdout & stderr                        |                                                                |                                         |
+| mkdir    | créer un répertoire                    | -p (créer l'arborescence complète)                             |                                         |
+| rmdir    | suppr un répertoire                    |                                                                |                                         |
+| cp       | copier                                 | -i demande confirmation pour chaques fichiers                  |                                         |
+|          |                                        | -r recursif: copie repertoire + arborescence                   |                                         |
+|          |                                        | -p perms et dates du fichiers sont conservés                   |                                         |
+|          |                                        | -f forcer la copie                                             |                                         |
+| mv       | déplace                                | -i confirmation                                                |                                         |
+|          |                                        | -f force                                                       |                                         |
+|          |                                        | -u si objet cible plus rescent, n'est pas écrasé               |                                         |
+| rm       | suppr                                  | -i confirmation                                                |                                         |
+|          |                                        | -r si argument répertoire alors récurcif                       |                                         |
+|          |                                        | -f force                                                       |                                         |
+| ln -s    | créer un lien simbolique               | -s symbolique                                                  |                                         |
+|          |                                        | -i                                                             |                                         |
+| find     | chercher un fichier                    | -f                                                             |                                         |
+| fd       | chercher également un fichier          |                                                                |                                         |
+| whereis  | localise la commande                   | -b uniquetement executables                                    |                                         |
+|          |                                        | -m uniquement manuels                                          |                                         |
+|          |                                        | -s uniquemtn sources                                           |                                         |
+| which    | trouve l'executable dans PATH          |                                                                |                                         |
+| wc       | workd counter                          | -l nombre de ligne                                             |                                         |
+|          |                                        | -c nombre d'octets                                             |                                         |
+|          |                                        | -w nombre de mots                                              |                                         |
+|          |                                        | -m nombre de caractères                                        |                                         |
+| grep     | selectionne des lignes                 | -v recherche inverse: affiche lignes pas en recherche          |                                         |
+|          |                                        | -c nombre lignes trouvés sans les aff.                         |                                         |
+|          |                                        | -i pas distinctions entre majuscules et minuscules             |                                         |
+|          |                                        | -n affiche numéro devant chaques lignes trouvées               |                                         |
+|          |                                        | -l affiche nom du fichier ayant des lignes qui correspondes.   |                                         |
+| egrep    | plus critères de recherche             |                                                                |                                         |
+| sed      | remplace et edite un fichier           | -f lit les commandes d'éditions dans le fichier                |                                         |
+| cut      | coupe une position sur une ligne       | [[*Position][Position]]                                        |                                         |
+|          |                                        | -f selection par champ (mots)                                  |                                         |
+|          |                                        | -d délimitateur fonctionne avec champ                          |                                         |
+| who      | liste les infos sur les utilisateurs   |                                                                |                                         |
+| split    | copie et divise le fichier copier      | -l en fonction des lignes -l 2 fichier fichierSplited*         |                                         |
+|          |                                        | -b en fonction dse bytes -b 2 fichier fichierSplited*          |                                         |
+| tr       | substitue un caractère d'un fichier    |                                                                |                                         |
+| basename | extrait la partie nom de fichier       |                                                                |                                         |
+| dirname  | extrait la partie chemin d'accès       |                                                                |                                         |
+| diff     | compare fichier  diff [-b] fic1 fic2   | -b enlève les blancs                                           |                                         |
+| fg       | relance une commande foreground        | n de la commande (eg: 1)                                       |                                         |
+| bg       | relance une commande background        | "                                                              |                                         |
+| jobs     | liste les commandes en actions         |                                                                |                                         |
+| ps       | liste les processus (/process status/) | -f affiche détaillé                                            |                                         |
+|          |                                        | -e tous les processus du système                               |                                         |
+|          |                                        | -u un ou plusieurs utilisateurs                                |                                         |
+|          |                                        | -g groupes                                                     |                                         |
+|          |                                        | -t terminaux                                                   |                                         |
+|          |                                        | -p PID précis                                                  |                                         |
+|          |                                        | -l liste processus infos plus techniques                       |                                         |
+| kill     | envoie un signal via le PID            | kill [-l] [-Num_signal] PID [PID2...]                          |                                         |
+| pkill    | envoie signal via le noms              |                                                                |                                         |
+| nohup    | tourner la commande après ferm. term.  | nohup ls -l                                                    |                                         |
+| nice     | priorise l'execution d'une commande    | -20 à 19 (+ la valeur négative, plus elle est forte)           |                                         |
+| renice   | priorise l'exec. en fonction de user   | -p [[*PID][PID]]                                               |                                         |
+|          |                                        | -g GID                                                         |                                         |
+|          |                                        | -u UID                                                         |                                         |
+| time     | mesure le temps d'exec d'une commande  |                                                                |                                         |
+| alias    | raccourcis pour exec commande          | Alias NomAlias = 'ligne de commande'                           |                                         |
+|          |                                        | alias # liste les différents alias par défaut                  |                                         |
+| chmod    | give perm pour exec. un script         | chmod u+x monscript                                            |                                         |
+**** Exemple
+#+begin_src shell
+echo -e "Salut.\tJe m'appelle XXX\b\b\bPesronne\n"
+#+end_src
+*** Commandes avancées
+| nom    | explication                           | options | arguments |
+|--------+---------------------------------------+---------+-----------|
+| mknode | créer un fichier spécial périphérique |         |           |
+|        |                                       |         |           |
+*** Echainements de commandes
+- ~&&~
+- ~;~
+*** Commandes externes
+appel des programmes stockés dansx des fichiers
+*** Commandes internes
+code executable dansle ~primitive shell~
+** Fichiers
+*** Types
+**** Ordinaires
+- aussi appelés réguliers (ordinary, regulare files)
+- img, texte, son, programme executable
+**** Répertoire
+- structure l'espace disque en arborescence
+- contient une table identifiant nom et numéro interne (numéro inode)
+**** Spécial
+- ~/dev~
+- peuvent être crée partout avec ~mknode~
+***** bloc
+- accéde à des blocs de données (disque dure)
+***** caractère
+- accède phériphérique octet par octet (écran de terminal, lecteur de bandes)
+***** FIFO
+- /First In First Out/
+- tubes (pipes), canaux de communications d'échange de données entres processus
+***** socket
+- permet également échange de données entre processus mais via protocole réseau classique
+***** liens symboliques
+- fichiers renvoient à d'autres fichiers, contenant interne: chemin d'accès du fichier cible
+*** Nommage
+- Éviter en début de nom:
+- ~& ; () ~ <espace> \ / | ` ? -~
+**** Valide
+- Fichier1
+- Paie.txt
+- 123traitement.sh
+- Paie_juin_2002.xls
+- 8
+**** Potentiellement problématiques
+- Fichier*
+- Paie(decembre)
+- Ben&Nuts
+- Paie juin 2002.xls
+- -f
+*** Caractères génériques / jokers
+Permet de désigner/afficher selon certains critères
+| caractère | rôle                                            |
+|-----------+-------------------------------------------------|
+| *         | tout                                            |
+| ?         | caractère unique                                |
+| [...]     | un seul caractère appartenant à la liste unique |
+| [a-b]     | entre a-b                                       |
+| [!...]    | un seul n'appartenant pas à la liste            |
+| [^...]    | un seul n'appartenant pas à la liste            |
+| [x,y]     | liste éléments, chiffres, n'importe             |
+| [x..y]    | suite d'éléments incrémentés de x à y           |
+**** Exemples
+#+begin_src shell
+echo ???? # touts les fichiers contenants uniquement 4 caractères
+echo b????* # touts les fichiers commençant par la lettre b de au moins 5 caractères
+echo [bd]* #tout les fichiers commençant par b ou d
+echo [!bd]* # tout les fichiers ne commençant pas ni par b ni par d
+echo [^bd]* # "
+echo *{df,c2,3}* # tout les fichiers du répertoire courant qui où le nom contient df ou c2 ou 3
+echo ~/.* # tout les fichiers commençant par un point
+#+end_src
+*** TODO Commande find
+** Entrées/Sorties standard
+Un programme non-graphique utilise souvent les entrées/sorties standards
+*** stdin
+0
+*** stdout
+1
+*** stderr
+2
+*** Rediriger sortie standart
+#+begin_src shell
+ls -l > resultat # redirige stdout vers le fichier résultat.
+#+end_src
+tant bien même le shell n'aurait pas eu un fichier de redirection existant, il l'aurai créer puis traité la commande.
+Le shell traite d'abord les redirections puis exécute la commande.
+*** Rediriger sortie standart & sortie erreur
+**** L'un vers l'autre
+~2>&1~ ou ~1>&2~
+**** Les deux
+~&>~
+**** Exemple
+#+begin_src shell
+ls -l fic* NoFic > resultats 2>&1
+#+end_src
+*** Rediriger entrée standart
+- On utilise ~<~ suivi du path du fichier à lire.
+- Fonctionne avec tout ce qui traite du texte ~cat, sort, grep...~
+**** Exemple
+#+begin_src shell
+$ cat notri
+aaaaaaa
+ccccccc
+bbbbbbb
+$ sort < notri
+aaaaaa
+bbbbbb
+cccccc
+#+end_src
+- multiligne
+  #+begin_src shell
+  $ sort << vrac
+    > rrr
+    > aaa
+    > vrac
+  aaa
+  rrr
+  #+end_src
+** Ouverture de descripteurs de fichiers supplémentaires
+- Permet d'ouvrir max.7 canaux de 3 à 9.
+- La commande exec permet d'ouvrir ces canaux, une fois ouvert le shell peux y acceder jusqu'à la finde la session.
+*** [?] Ouverture (pas tout compris)
+#+begin_src shell
+exec 3>fic3 4>fic4 5>fic5 6>fic6
+ls >&3
+ls NoFic 2>&6
+cat fic3
+#+end_src
+*** Fermeture
+#+begin_src shell
+exec 3>&-
+#+end_src
+** Tubes (pipes)
+- relie la sortie standart d'un programme à celle d'un autre
+~commande 1 | commande 2 | ... | commande N~
+** Filtres
+~wc~ permet de compter des lignes et des fichiers passés en caractères.
+#+begin_src shell
+$ ls -l |wc -l
+#+end_src
+*** Grep
+toujours afficher les ~pattern~ de recherche ~^[bB]~ avec des ~"~ => ~"^[bB]"~
+#+begin_src shell
+grep "^[bB]" Linux.org # n'affiche que les lignes qui commence par b ou B
+#+end_src
+*** egrep
+recherche plus étendue
+équivaut à ~grep -E~
+**** Critères de recherche
+| <pipe> | Ou logique, l'expression située avant ou après doit apparaître          |
+| (...)  | Groupement de caractères                                                |
+| [...]  | Un caractère à cette position parmis ceux indiqués                      |
+| .      | Un caractère quelconque.                                                |
+| +      | Répétition, le caractère placé avant doti apparaître au moins une fois. |
+| *      | Répétition, le caractère situé avant doit apparaître de zéro à n fois   |
+| ?      | Le caractère situé avant doit apparaître exactement n fois              |
+| {n}    | le caractère situé avant doit apparaître n nombre de fois               |
+| {n, }  | il apparaît n fois ou plus.                                             |
+| {n,m}  | il apparaît entre n et m fois                                           |
+| ^      | en début de chaîne                                                      |
+| $      | en fin de chaîne                                                        |
+*** fgrep
+- Simplifié et plus rapide ~grep -F~
+- Ne gère pas les expressions régulières, recherche que des chaînes de caractère.
+*** sed
+- Editeur de flux permettant de filtrer et de transformer du text. Utilise quasimenent les mêmes commandes que vim.
+~s/ancien/nouveau/[g]~
+- Le g optionnel final permet de remplacer tout les occurences.
+#+begin_src shell
+$ echo "Je m'appelle _nom_, Jean _nom_." | sed -e 's/_nom_/Durand/'
+je m'appelle durand, Jean _nom_. # manque le g
+#+end_src
+#+begin_src shell
+$ echo "Je m'appelle _nom_, Jean _nom_." | sed -e 's/_nom_/Durand/g'
+je m'appelle durand, Jean Durand.
+#+end_src
+- Supprimer les lignes vides (en utilisant la syntax vim)
+#+begin_src shell
+$ cat fichier
+Ligne 1
+Ligne 2
+
+Ligne 3
+
+
+FIN
+$ sed -e '/^ *$/d' fichier
+Ligne 1
+Ligne 2
+Ligne 3
+FIN
+#+end_src
+- Argumentaires de commande
+#+begin_src shell
+'/^ *$/d' # suppr tout les espaces d'une ligne
+'^' #selectionner le début de la ligne
+' *' #un ou plusieurs espaces
+'$' #fin de ligne
+'//' #servent à délimiter la zone d'action
+#+end_src
+*** Cut
+permet de selectionner une partie de la ligne, et l'affiche.
+**** Position
+~cut -cPositions fichier~
+| -c5           | position 5 (unique)          |
+| -c1-4         | position 1 à 4               |
+| -c5-          | position de 5 jusqu'à la fin |
+| -c1,8         | liste deposition 1 et 8      |
+| -c1-3,5,6,12- | ensemble de position         |
+**** Exemples
+- Utiliser champ
+#+begin_src shell
+cut -f1 fichier # va afficher la première colonne
+cut -f1,3 fichier # va afficher la premiere et troisième colonne.
+#+end_src
+- Utilise la commande who pour un remplacement (donc on va utiliser ~s~ pour *substituer*)
+  #+begin_src shell
+  $ who | sed -e's/ */ /g' | cut -d' ' -f1,2 #affiche les utilisateurs, substitue tout les <espaces> et les changent en un seul <espace> grâce à g qui généralise
+  #+end_src
+*** TODO sort
+*** join
+- permet de faire une jointure de fichiers
+#+begin_src shell
+join [-tc] [-1 n] [-2 m] fic1 fic2 # -t indique le séparateur, -1 champ fic1, -2 champ fic2
+#+end_src
+*** paste
+- Regroupe ~n~ nombre de fichiers, écrit sur la sortie standard. Elle concatène chaqu'une des lignes de chacuns des fichiers en une.
+- Séparateur de champ sorti par défaut
+*** split
+#+begin_src shell
+split -l 2 fichier fichierSpliteN #le fichier sera copier, la copie sera coupée en morceaux de 2 phrases grâce à -l 2
+split -b 2 fichier fichierSpliteN #le fichier sera copier, la copie sera coupée en morceaux de 2bytes grâce à -b 2b (2bytes/2kilobytes/2megabytes)
+#+end_src
+- utilisation de ~cat~ peux ressouder les fichiers
+#+begin_src shell
+cat fichierSplit* >Fichier
+#+end_src
+*** tr
+- substitue un caractère d'un autre
+#+begin_src shell
+tr [options] chOriginal chDestination
+#+end_src
+**** Exemple
+- transformer des minuscules en maj
+  #+begin_src shell
+  $ cat liste
+  $ tr '[a-z]' '[A-Z]' < liste > liste_maj
+  $ cat liste_maj
+  #+end_src
+- supprimer des caractères
+#+begin_src shell
+$ cat listebad
+fmljsdlfdjs flkdsjflkdsjf klfjsdklfj ^M
+fjmdlskjfdslk jdlskfjsdf jfmlsdfdjsk ^M
+fldjsflmdjsf fjdlsmfdsmlkf jfdlsfjff ^M
+# retours chariots représentés par ^M générés par Windows
+$ tr -d '\r' <listebad >listeok
+#+end_src
+*** xargs
+- Lit les éléments sur son entrée standard, délimite par défaut par un espace ou retour à la ligne.
+- Les passe en arguments à une commande qu'elle execute
+**** Exemple
+Afficher tout les noms d'utilisateurs d'un fichier ~/etc/passwd~
+#+begin_src shell
+$ cut -d: -f1 < /etc/passwd | sort | xargs echo
+#+end_src
+*** Affichage
+| nom                         | action                        | options                                             |
+|-----------------------------+-------------------------------+-----------------------------------------------------|
+| more                        | page par pages                |                                                     |
+| less                        |                               |                                                     |
+| pg                          |                               |                                                     |
+| cat                         | tout le contenu               |                                                     |
+| tac                         | de la fin vers le début       |                                                     |
+| hexdump                     | dump hexadecimal              |                                                     |
+| od                          | dump octal                    |                                                     |
+| banner                      | création d'une bannière       |                                                     |
+| pr                          | formatage impression          |                                                     |
+| fmt                         | paragraphe                    |                                                     |
+| cat -n, nl                  | numéroter les lignes          |                                                     |
+| head                        | affiche n de ligne            | -n indique n de ligne à afficher (10 default)       |
+|                             |                               | -10 indique n de ligne à afficher                   |
+|                             |                               | -c précise nombre d'octets de début à afficher      |
+| tail                        | affichage dernière ligne      | -nb[c] affiche les nb dernière ligne                |
+|                             |                               | -c affiche dernièrs caractères                      |
+|                             |                               | +nb[c] affiche les nb suivant la ligne selec        |
+|                             |                               | avec le suffix c affiche suivant caractères         |
+|                             |                               | -f affiche toutes les secondes les lignes spécifiés |
+| column                      | formate sous forme de colonne | -t combien de colonnes                              |
+|                             |                               | -s quel est le séparateur                           |
+| [[*Commandes de bases][ps]] |                               |                                                     |
+**** Exemple
+***** head
+#+begin_src shell
+$ head [-c nbcar] [-n nblignes] [fic1...]
+#+end_src
+***** tail
+#+begin_src shell
+$ tail [+/-valeur[b/c]] [-f] [fic1...]
+$ tail -5 liste #affiche les 5 lignes
+$ tail -5c liste #affiche les 5 caractères
+#+end_src
+***** column
+#+begin_src shell
+$ column -s: -t /etc/group
+#+end_src
+** Gestion des processus
+- tout processus possède sa mémoire privée qui n'entre pas dans celle des autres.
+*** Attributs
+**** PID
+- Process ID
+- Numéro unique du processus.
+***** Exemple
+- Le premier processus créer par le noyau avec ~PID 1~ est soit ~init~ ou ~systemd~.
+**** PPID
+- Parent Processus ID
+- Processus toujours créer par un autre (sauf le processus initial créer par le noyau), via l'appel ~fork~
+**** UID & GID
+- User ID
+- Group ID
+- Portent ensemble les mêmes droits que le group principal de l'appareil. Ils donnent les droits pour tous les utilisateurs, determinent les chemins d'accès aux objets du système (fichiers, répertoire etc).
+**** Duré de traitement & priorité
+- Correspond entre le temps du réveil du processeur et celui du processus.
+- Dans un environement multitâche
+  - Les processus de haute prioritée sont executés d'abord
+  - Ensuite, les processus inactifs sont d'avantage prioritaire par apport à ceux déjà executés.
+- ordonnateurs des tâche qui gère les priorités et les temps d'éxecution.
+**** Répertoire courant
+- Repertoire depuis lequel le processus a été lancé.
+- Est transmis au processus. Servira de base pour les chemins relatifs.
+**** Fichiers ouverts
+- trois descripteurs sont asssociés à des fichiers: 0, 1, 2 (entrées/sorties standards). A chaques ouverture de fichier ou de nouveau canal, la table se remplit.
+- Fermeture, ces fichiers sont fermés.
+*** États process state
+**** user mode
+**** kernel mode
+**** waiting
+**** sleeping
+**** runable
+**** swapped
+**** zombie
+*** Lancement de commande en tâche de fond
+**** Fonctionnement des processus
+#+results: 
+[[file:/tmp/babel-Wq15gG/plantuml-84ond2.png]]
+- Lancer une tâche de fond avec ~&~
+**** Exemple
+#+begin_src shell
+$ sleep 100 & # l'utilisateur pourra entrer une autre commande en attendant execution de celle-ci
+#+end_src
+*** Tâches avant/arrière plan
+- Arrêter une commande ~C-z~
+- ~fg~ /foreground/ relancer la commande qui est en premier plan
+- ~bg~ /background/ relance la commande qui est en arrière plan
+*** Envoie signal à un processus
+- ~kill~
+| signal       | action                                                                                        |
+|--------------+-----------------------------------------------------------------------------------------------|
+| 1 (SIGHUP)   | (Hang Up) envoyé via un shell de connexion à tous ses processus enfants lorsqu'il est terminé |
+| 2 (SIGINT)   | Interruption du processus (C-c)                                                               |
+| 3 (SIGQUIT)  | idem mais vidage de mémoire dans un fichier ~core~                                            |
+| 9 (SIGKILL)  | Ne peux être ignoré ni traité, termine le processus                                           |
+| 15 (SIGTERM) | Signal par défaut de la commande kill (demande au processus de se terminer)                   |
+- ~pkill~ envoie un signal par leurs noms
+**** Exemple
+***** kill
+#+begin_src shell
+$ sleep 100 & # met la commande en fond
+$ kill PID # ex. kill 19844 (envoie le signal 15)
+#+end_src
+***** pkill
+#+begin_src shell
+$ sleep 100 &
+$ sleep 100 &
+$ pgrep sleep # va liste toutes les commandes sleep et retourner leurs PID
+$ pkill sleep # termine toutes les commandes sleep
+#+end_src
+*** nohup
+- Ne temrine pas une tâche lorsque le terminal est terminé.
+*** nice & renice
+- ~nice~ commande
+- ~renice~ commande en fonction d'un utilisateur
+#+begin_src shell
+$ renice [-n prio] [-p|-g|-u] ID
+#+end_src
+*** time
+- ~real~ durée totale
+- ~user~ processus en mode utilisateur
+- ~system~ utilisation du processeurs en mode noyau (appels systèmes)
+- résultat écrit sur ~stderr~
+#+begin_src shell
+$ time ls -lR /home
+#+end_src
+*** exec
+- Avec du code en argument elle remplace du code executable du processeur courant
+  #+begin_src shell
+  $ bash # créer un bash enfant
+  $ ps -f # liste les processus
+  $ exec ps -f # il va remplacer l'enfant bash par le processus "ps -f"
+  #+end_src
+** Alias
+*** Exemples
+#+begin_src shell
+alias ls='ls --color=auto'
+#+end_src
+** Groupement de commandes
+- ~()~ placer les commandes dedans, va créer un shell enfant
+  #+begin_src shell
+  $ (uname -a ; ps -f ; pwd) > resultat.txt
+  #+end_src
+- ~{}~ placer les commandes dednas, va executer dans le shell courant
+** Conditionnel
+*** Réussite ou échec
+- retourne normalement ~0~ (suivant la convention)
+- variable de stockage ~$?~
+  #+begin_src shell
+  $ ls fic1
+  $ echo $? #retournera 0 si le fichier existe sinon retournera 2
+  #+end_src
+**** Liaisons
+- ~&&~ executera la prochaine commande uniquement si la première retourne 0
+- ~||~ executera la prochaine commande si précédente retourne autre chose que 0
+*** Variables
+- Ne commence pas par des chiffres sauf les variable prédéfinies
+**** Déclaration & affectation
+- Déclarée lorsqu'une valeur lui est affectée
+- affecté lorsque le signe =, sans espaces avant ou après le signe
+**** Accès & affichage
+- ~$~ pour accéder
+#+begin_src shell
+$ montmp=/tmp/pba
+$ cp fic $montmp # copie fic vers /tmp/pba
+#+end_src
+- ~env~ affiche variable du shell courant & enfant.
+- ~set~ affiche viarable du shell courant
+  #+begin_src shell
+  $ env # retourne les variable
+  $ env | grep montmp
+  $ set | grep montmp
+  montmp=/tmp/pba
+  #+end_src
+- ~""~ caractères à l'interieurs ne sont pas interprétés par le shell sauf le ~$~
+- ~''~ caractères à l'interieurs ne sont pas interprétés par le shell
+**** Suppr
+- ~unset~ suppr une/plusieurs variables
+- ~readonly~ protège contre la supression
+**** Export
+- ~export~ permet d'exporter une variable, par exemple dans un shell enfant.
+**** Délimitation
+- ~{}~ délimite
+#+begin_src shell
+$ unit=gramme
+$ echo 1 $unit 2 $units #retournera 1 gramme 2 gramme
+$ echo 1 $unit 2 ${units}s #retournera 1 gramme 2 grammes
+#+end_src
+**** Remplaçement
+- ~{variable:repmplacement}~
+  #+begin_src shell
+  {x:-texte} #x vide remplace, sinon par contenu de variable
+  {x:=texte} #x vide remplace, remplace
+  {x:+texte} #x vide remplace, additionne
+  {x:?texte} #x vide commande echoue, texte absent stderr affiché
+  #+end_src
+*** Variables système
+- set de variables prédéfinies
+  | Variable | contenu                                                                                 |
+  |----------+-----------------------------------------------------------------------------------------|
+  | HOME     | user path                                                                               |
+  | PATH     | liste dans lequelle shell va chercher pour executer commande                            |
+  | PS1      | prompte affiché par le shell en attente de commande                                     |
+  | PS2      | prompte secondaire, si la saisie doit être complétée                                    |
+  | IFS      | Internal File Separator, sépare lles mots d'une ligne de commande (espaces, tab etc...) |
+  | MAIL     | Chemin d'accès du fichier contenant les messages de l'utilisateur                       |
+  | LANG     | langue à utilisé et jeu de caractères.                                                  |
+  | USER     | Nom utilisateur en cours                                                                |
+  | LOGNAME  | nom du login                                                                            |
+  | HISTFILE | chemin d'accès historique $HOME/.sh_history                                             |
+  | HISTSIZE | taille en nombre de ligne de l'historique                                               |
+  | OLDPWD   | path du répertoire précédent                                                            |
+  | PWD      | path courant                                                                            |
+  | RANDOM   | À chaques utilisations gen un nombre random entre 0 & 32767                             |
+*** Variable spéciales
+- Appartient au shell, en lecture uniquement
+  | variable | contenu                           |
+  | $?       | Code retour dernière commande     |
+  | $$       | PID processus courant             |
+  | $!       | PID dernier processus lancé en bg |
+  | $-       | options shell courant             |
+*** Longueur d'une chaîne
+- ~${#variable}~
+  #+begin_src shell
+  $ a=Jules
+  $ echo "Longueur de $a : ${#a}" # Longueur de Jules : 5
+  #+end_src
+*** Tableau
+- ~NomTableau[Index]=Contenu~ ou ~NomTableau=(Contenu1 ... ContenuN)~
+  #+begin_src shell
+  $ {NomTableau[Index]} #Contenu d'un élément'
+  $ {NomTableau[*]} #Liste de tous les éléments
+  $ {#NomTableau[*]} #Nombre d'éléments
+  #+end_src
+*** Variable numériques
+- ~typeset -i~ pour typer une variable en integer
+| Opérateur       | rôle                              |
+|-----------------+-----------------------------------|
+| + - * /         | arithmétique                      |
+| %               | modulo                            |
+| < > <= >=       | Comparaison, 1 si vrai, 0 si faux |
+| ==              | egal !=différent                  |
+| && <pipe><pipe> | Comparaison ET comparaison OU     |
+| & <pipe> ^      | AND OR XOR                        |
+#+begin_src shell
+$ typeset -i resultat
+$ resulstat=6*4
+$ echo $resultat
+42
+$ val=bonjour
+$ echo $val
+bonjour
+#+end_src
+- ~let~ & ~expr~ ainsi que ~$(())~ permettent d'effectuer des calculs.
+** Config bash
+*** Lancement
+- options de lancements
+  | option             | résultats                                                                     |
+  |--------------------+-------------------------------------------------------------------------------|
+  | -a ou -o           | variable exportés                                                             |
+  | -u -o nounset      | par défaut le shell ignore les variables vides, retourne erreur variable vide |
+  | -x ou -o xtrace    | affiche toutes les commandes au fure et à mesure de leurs execution           |
+  | -e                 | si erreur de commande, le shell se ferme                                      |
+  | -o vi              | rappel de commande avec la syntaxe vi                                         |
+  | -o emacs           | rappel de commande emacs                                                      |
+  | -c ou -o noclobber | itnerdit rediction simple > des sorties si le fichier existe pour pas écraser |
+** Script shell
+- Chmod
+*** Placer script dans PATH
+#+begin_src shell
+$ echo $PATH
+$ PATH=$PATH:$HOME/scripts
+$ mv monscript $HOME/scripts
+$ monscript
+#+end_src
+*** Ajouter repertoire courant à PATH
+#+begin_src shell
+$ PATH=!PATH:.
+#ou
+$ PATH=!PATH:
+#+end_src
+*** shebang
+- ~#!pathInterpreteur~ chemin d'acc_s du programme à utiliser pour lire et exécuter le script.
+#+begin_src bash
+#!/bin/bash
+#+end_src
+- Si l'on connais pas l'emplacement du fichier exécutable (~bash~)
+  #+begin_src bash
+  #!/usr/bin/env bash
+  #+end_src
+*** Arguments script
+**** Position
+- Utilisé lors d'un passage d'argument de la console au script
+  | variable | contenu                                              |
+  | $0       | Nom de la commande utilisée poru lancer le script    |
+  | $1 à $9  | neufs premiers arg. passé au script                  |
+  | $#       | nombre d'arguments passés au script                  |
+  | $*       | tous les arguments                                   |
+  | $@       | tous tout les arguments encadré de guillments double |
+#+begin_src shell
+$ cat param.sh
+#!/bin/bash
+echo "Nom : $0"
+echo "Nombre de parametres : $#"
+echo "Parametres : 1=$1 2=$2 3=$3 9=$9"
+echo "Liste : $*"
+echo "Elements : $@"
+
+$ /.param.sh un deux 3 4 5 6 7 huit neuf dix onze FIN
+
+ ./param.sh un deux 3 4 5 6 7 huit neuf dix onze FIN
+Nom : ./param.sh
+Nombre de parametres : 12
+Parametres : 1=un 2=deux 3=3 9=neuf
+Liste : un deux 3 4 5 6 7 huit neuf dix onze FIN
+Elements : un deux 3 4 5 6 7 huit neuf dix onze FIN
+#+end_src
+*** Redéfinition arguments
+- ~set valeur1 valeur2 valeur3~ $1 prend ~valeur1~ $2 prend ~valeur2~
+*** Parcous des arguments
+- ~shift~ décalle les arguments ~$1~ est détruit ~$2~ devient ~$1~ etc...
+*** Terminaison
+- ~exit~ provoque terminaison, retourne ~0~ mais en argument peux retourner de ~0~ à ~255~.
+  #+begin_src shell
+  $ cat monls.sh # si réussit, retourne 0 sinon retourne 1
+  ls -ldi $1 2>/dev/null && exit 0 || exit 1
+  $ ./monls.sh fic
+  $ echo $?
+  0
+  $ ./monls.sh noficici
+  $ echo $?
+  1
+  #+end_src
+*** Environnement d'un processus
+- ~env~ et ~export~ peuvent lister les variables d'environnement.
+- Spécifier des variable uniquement dans l'environnement courant ~var1=valeur1 var2=valeur2 ... command~
+  #+begin_src shell
+  $ echo $LANG
+  fr_FR.UTF-8
+  $ date
+  dim. 13 avril 2025 10:33:42 CEST
+  $ LANG=c date
+  Sun Apr 13 10:35:00 CEST 2025
+  #+end_src
+*** Substitution de commande
+- Place le résultat de la commande dans une variable
+  #+begin_src shell
+  Variable=$(ligne de commande)
+  #exemple:
+  $ machine=$(hostname)
+  $ echo $machine
+  nobara-pc
+  #+end_src
+*** Test bash
+**** Tests logiques
+- ~test~ permet de vérifier si c'est vrai retourne ~0~ faux retourne ~1~
+  #+begin_src shell
+  test testLogique
+  # ou
+  [testLogique]
+  #+end_src
+**** test sur une chaîne de caractères
+| arguments         | explication             |
+| -z                | vrai si chaîne est vide |
+| -n                | vrai si chaine pas vide |
+| chaine == chaine1 | vrai si identiques      |
+| chaine != chaine1 | vrai si différents      |
+#+begin_src shell
+test chaine == chaine1
+0
+#+end_src
+#+begin_src shell
+$ a=
+$ test -z "$a"; echo $?
+0
+$ test -n "$a" ; echo $?
+1
+$ a=Jules
+$ test "$a" = Jules ; echo $?
+0
+#+end_src
+- Si la variable est vide et spécifiée sans guillemets doubles:
+#+begin_src shell
+$ a=
+$ test $a = $b ; echo $?
+-bash: test: = : opérateur unaire attendu
+2
+$ test "$a" = $b ; echo $?
+1
+#+end_src
+**** Tests integer
+- bash ne gère que des valeurs entières
+**** Syntaxe
+#+begin_src shell
+test valeur1 OperateurTest valeur2
+#+end_src
+| opérateur | rôle                                  |
+|-----------+---------------------------------------|
+| -eq       | equal                                 |
+| -ne       | not equal                             |
+| -lt       | less than (inferieur)                 |
+| -gt       | greater than (supérieur)              |
+| -le       | less or equal                         |
+| -ge       | greater or equal (supérieur ou égale) |
+**** Exemple
+#+begin_src shell
+$ a=10
+$ b=20
+$ [ $a -ne $b ]; echo $?
+0
+$ [ $a -ge $b ]; echo $?
+1
+#+end_src
+**** Test sur les fichiers
+| Option | Rôle                      |
+| -f     | fichier                   |
+| -d     | repertoire /folder/       |
+| -c     | fichier en mode caractère |
+| -b     | fichier en mode bloc      |
+| -p     | tube nommé (pipe)         |
+| -r     | autorisation en lecture   |
+| -w     | auotrisation en écrtiure  |
+| -x     | autorisation en exécution |
+| -s     | fichier non vide          |
+| -e     | fichier existant          |
+| -L     | lien symbolique           |
+#+begin_src shell
+$ [ -f /etc ] ; echo $?
+1
+$ [ -d /etc ] ; echo $?
+0
+$ [ -s /etc/hosts ] ; echo $?
+0
+$ [ -d $HOME ]; echo $?
+0
+#+end_src
+**** Test combiné par des opérateurs logiques
+| Opérateur | Action              |
+| -a        | AND, ET logique     |
+| -o        | OR, OU logique      |
+| !         | NON logique         |
+| \(...\)   | Groupement de tests |
+#+begin_src shell
+$ test -d "rep1" -a -w "repl" && echo "rep1: repertoire, droit en ecriture"
+repl: repertoire, droit en ecriture
+#+end_src
+**** Nouvelles syntaxes
+#+begin_src shell
+$ a=
+$ b=10
+$ [[ a -eq $b ]]; echo $?
+#+end_src
+*** Conditionnel
+- ~if then else fi~
+#+begin_src shell
+if Commande
+   then
+       commande executée si code retour est 0
+   [else]
+   commande executer si différent de 0
+#+end_src
+**** Exemple
+- Contrôle du nombre d'arguments reçus par un script:
+  #+begin_src bash
+  $ cat param4.sh
+  #!/usr/bin/env sh
+
+  if [ $# -ne 0 ]
+  then
+      echo "$# paramètres en ligne de commande"
+  else
+      echo "Aucun paramètres, mis en ligne de commande"
+      set alfred oscar romeo zoulou
+  fi
+  echo "nombre de paramètres : $#"
+  echo "Paramètres:" 1=$1 2=$2 3=$3 4=$4
+  echo "Liste : $*"
+  #+end_src
+- test du code retour d'une commande grep (option -q qui n'affiche rien mais retourne 0 ou 1)
+  #+begin_src shell
+  if grep -q "^pba" /etc/passwd
+     then
+         echo l\'utilisateur pba existe
+         else
+             echo l\'utilsateur pba n\'existe pas
+             fi
+  #l'utilisateur pba existe
+  #+end_src
+*** Structure de choix multiples
+- ~case ... esac~ permet de tester une chaîne par apport à une autre
+- l'on peux entre un argument qui sera trié dans le programme.
+  #+begin_src shell
+  case valeur in
+      Modele1) Commandes ;;
+      Modele2) Commandes ;;
+      ,*) action_defaut ;; # facultatif
+  esac
+  #+end_src
+  | caractères spéciaux | role                               |
+  |---------------------+------------------------------------|
+  | $                   | Chaîne quelconque (même vide)      |
+  | ?                   | Un et un seul caractère            |
+  | [...]               | Une plage de caractères            |
+  | [!...]              | Négation de la plage de caractères |
+  | <pipe>              | OU logique                         |
+#+begin_src shell
+cat param4.sh
+case $1 in
+    a*)
+        echo "commence par a"
+        ;;
+    b*)
+        echo "commence par b"
+        ;;
+    fic[123])
+        echo "fic1 fic2 fic3"
+        ;;
+    ,*)
+        echo "Autre"
+        ;;
+esac
+$ ./param4.sh "bonjour"
+commence par b
+$ ./param4.sh "arthur"
+commence par a
+$ ./param4.sh "musique"
+Autre
+#+end_src
+*** Saisie utilisateur
+- ~read~ permet de saisir une chaîne et la stoquer dans une ou plusieurs variable (passés en arguments)
+- ~read var1 [var2 ...]~ dans ce cas là, chaques mots sera sotcké dans une variable différente.
+#+begin_src shell
+$ cat read.sh
+echo "Continuer (O/N) ? \c"
+read reponse
+echo "reponse=$reponse"
+case $reponse in
+    O)
+        echo "Vous avez selectionné oui"
+        ;;
+    N)
+        echo "Vous avez selectionné non"
+        exit 0
+        ;;
+    ,*)
+        echo "erreur, veuillez tapper une réponse valide"
+        exit 1
+        ;;
+esac
+echo "Vous avez continué. Tapez deux mots ou plus :\c"
+read mot1 mot2
+echo "mot1=$mot1\nmot2=$mot2"
+exit 0
+#+end_src
+*** Boucle
+- ~do~ & ~done~ encadrent une boucle.
+#+begin_src shell
+for params in $@
+do
+    echo "$params"
+done
+# deuxième exemple
+for params in * # on parcourt la liste des objets du répertoire courant
+              do
+                 echo "$params \c"
+                 type_fic=`ls -ls $params | cut -cl`
+                 case $type_fic in
+                     -) echo "Fichier normal" ;;
+                     d) echo "Repertoire" ;;
+                     b) echo "mode boc" ;;
+                     l) echo "lien symbolique" ;;
+                     c) echo "mode caractere" ;;
+                     ,*) echo "autre" ;;
+                 esac
+done
+#+end_src
+*** While
+- Boucle conditionnelle "tant que". Tant que la condition est réaliser, bloc de commande executé.
+#+begin_src shell
+while condition
+      do
+          something
+done
+#+end_src
+- Parcours de tous les arguments d'un script, avec la commande ~shift~ et une boucle ~while~
+#+begin_src shell
+$ cat args.sh
+cpt=0
+while [ $# -gt 0 ]
+      cpt=$((cpt+1)) # incrémentation variable compteur
+      echo "Argument num $cpt : $1"
+      shift
+done
+exit 0
+$ ./args.sh *
+Argument num 1 : Archives
+Argument num 2 : args.sh
+#+end_src
+- Parcours des ligne d'un fichier, avec la commande ~read~ et une boucle ~while~.
+  - la boucle ~while~ accepte une redirection de son entrée standard, placée arpès le mot-clé ~done~. Dans ce cas, si la commande testée lit l'entré&e standard, elle lira la ligne courante du fichier:
+    #+begin_src shell
+    $ cat litfic.sh
+    cpt=0
+    while read ligne
+          do
+              cpt=$((cpt+1))
+              echo $ligne
+              done < $1
+    echo "Nb lignees lues : $cpt"
+    #+end_src
+*** Until
+- Execute une boucle conditionnelle jusqu'à que.
+#+begin_src shell
+until condition
+      do
+          commande
+done
+#+end_src
+*** true & false
+- ~true~ retourne ~0~, false retourne ~1~.
+- permet de créer des boucles sans fin.
+- On peux trouver dans les scripts ~while true~ et ~while :~ dans les deux cas, il s'agit d'une boucle infinie ~true~.
+  #+begin_src shell
+  $ cat boucle.sh
+  while true
+        do
+            echo "On continue ?"
+            read rep
+            if [ "$rep" != "o" ]
+               then
+                   exit 0
+                   fi
+            done
+  $ bash bouche.sh
+  on continue ?
+  n
+  $ bash boucle.sh
+  On continue ?
+  O
+  $ bash boucle.she
+  On continue ?
+  N
+  $
+  #+end_src
+*** break & continue
+- ~break~ permet de sortir
+#+begin_src shell
+while true
+      do
+          echo "chaine ? \c"
+          read a
+          if [ -z "$a" ]
+          then
+              break
+          fi
+      done
+#+end_src
+- la commande ~continue~ permet d'interrompre l'exécution de la boucle et passe a l'occurance suivante.
+*** [?] boucle select
+- ~select~ permet de créer des menus simples avec selection par numéros.
+- saisie s'effectue avecle ~PS3~ (le 3ème prompt). Si incorecte menu s'affiche de nouveau.
+  #+begin_src shell
+  select var [in list_contenu]
+         do
+             traitement
+             done
+  #+end_src
+- la chaîne associé au numéro saisi par l'utilisateur est placée dans la variable ~var~. Si ~in liste_contenu~ n'est pas précisé, ce sont les arguments reçus par le script sont utilisés et affichés.
+  #+begin_src shell
+  $ cat select.sh
+  PS3="Votre choix :"
+  echo "quelle donnee ?"
+  select reponse in Jules Romain François quitte
+                    do
+                        if [[ "$reponse" = "quitte" ]]
+                           then
+                               break
+                               fi
+                        echo "Vous avez choisi $reponse"
+  done
+  echo "Au revoir"
+  exit 0
+
+  $ ./select.sh
+  Quelle donnee ?
+  1) Jules
+  2) Romain
+  3) François
+  4) quitte
+  Votre choix :1
+  Vous avez choisi Jules
+  #+end_src
+*** Fonctions
+#+begin_src shell
+[function] nom_fonction ()
+{
+    commande
+    return Valeur
+}
+#+end_src
+**** Appel d'une fonction
+~nom_fonction [arguments]~
+- la commande ~return [valeur]~ termine l'exécution d'une fonction et peut retourner une valeur au bloc appelant.
+- Si arguments sont passé à fonction par le bloc appelant, les valeurs sont stocké de ~$1~ à  ~$9~, elles écrasent les valeurs précédantes (il n'y a uniquement que les fonctions qui font ça)
+  #+begin_src shell
+  $ cat fct.sh
+  lire_infos_fic()
+  {
+      echo : Fichier $1
+      ls -ldi $1
+      return $?
+  }
+  for fic
+      do
+          lire_infos_file $fic
+          echo $?
+          done
+  $ fct.sh toto fic /etc
+  : Fichier toto
+  ls: impossible d'accéder à 'toto': Aucun fichier ou dossier de ce type
+  2
+  : Fichier fic
+  5645646 -rw #etc...
+  0
+  : Fichier /etc
+  5464166 -rw #etc...
+  #+end_src
+*** Calculs et expressions
+- ~expr~ effectue des calculs sur des valeurs numériques, des comparais, recherche de texte. L'opérateur doit être encadré par deux espaces.
+[[Variable numériques][Liste des opérateurs]]
+#+begin_src shell
+$ expr 7 + 3
+10
+$ expr 7 /* 3
+21
+$ a=$(expr 13 - 10)
+$ echo $a
+3
+#+end_src
+*** Calculs avec bash
+- utilisation de $(()) vu [[Variable numériques][ici]]
+- si une commande est typé ~type-set -i~ alors elle peux directement avoir des valeurs arithmétiques affectée.
+  #+begin_src shell
+  $ typeset -i a
+  $ a=2+2
+  $ echo $a
+  4
+  #+end_src
+*** Calculs sur nombres réels
+- utilisation de la commande ~bc~ (/binary calculator/), permet d'effectuer des calculs sur des nombres réels. Sans arguments, elle fonctionne en mode interactif.
+  #+begin_src shell
+  $ bc
+  bc 10.07.1
+  Copyright #etc...
+  2*4.56
+  9.12
+  Quit
+  #+end_src
+*** Traitement des signaux
+- ~trap~ permet de modifier le comportement d'un script à la réception d'un signal.
+  | syntaxe                 | description                                                                                             |
+  | trap " ListeSignaux     | Ignore les signaux de la liste. Les signaux peuvent être spécifiés par numéro ou nom logique (sans SIG) |
+  | trap 'Cmd' ListeSignaux | Execute Cmd pour chaques signals                                                                        |
+  | trap ListeSignaux       | restaure les actiosn par défaut pour les signaux de la liste.                                           |
+#+begin_src shell
+$ cat trap.sh
+sortir()
+{
+echo "Signal 15 reçu"
+exit 0
+}
+# Mise en place du traitement du signal 15
+echo "Je suis le processus de PID $$"
+# boucle sans fin
+while true
+      do
+          sleep 5
+          done
+$ ./trap.sh &
+[1] 2046
+Je suis le processus de PID 2046
+
+$ kill 2046
+Signal 15 recu
+[1]+ Fini
+#+end_src
+** Terminaux
+- ~screen~ et ~tmux~ peuvent gérer plusieurs fenêtre en mode caractère au sein d'un même terminal.
+* Disques et le système de fichier
+** Disques
+#+results: 
+[[file:/tmp/babel-Wq15gG/plantuml-NUGP6h.png]]
+*** Norme SCSI
+- Distingue les divers types de supports & fichiers spéciaux. (CD, DVD, Blue-ray)
+- Maintenant remplacée par SATA pour les hdd, NVMe pour les SSD
+*** lsscsi
+- Liste tout les composants
+*** Smart Array
+- Sur serveurs HP, utilise le pilote ~cciss~ et place ses fichiers dans ~/dev/cciss~ sous les noms ~cXdYpZ~
+  ~X~ = slot
+  ~Y~  = disque
+  ~Z~ = partition
+*** Virualisation
+- La plus part des disques simulés sont du type ~IDE~ ou ~SCSI~ avec la bibliothèque ~libata~. AWS utilise ~vdx~ (/virtual disk x/) ou ~xvdx~
+  ~xvda~ = premier disque
+  ~xvdb~ = deuxième etc...
+*** Multipathing
+- Certains disques sont raccordés via un ~SAN~ (/Storage Area Network/) ou ~iSCSI~ sont vu comment ~SCSI~. Systèmes de /multipathing/ peuvent donner d'autres noms :
+  Powerpath donnera: ~emcpowerx~, ~emcpowera~ etc...
+  Système Linux multipath donnera: ~mpathx~, ~mpatha~ etc...
+** hdparm
+- Commande pour manipulation des périphériques gérés par ~libata~.
+  ~-i~ fournit informations
+  #+begin_src shell
+  $ hdparm -I /dev/sda
+  #+end_src
+** Système de fichiers
+- Les ext*, XFS, BTRFS, exFAT, etc... sont des systèmes de fichiers, et donc des types de formatages de périphériques de stockages.
+*** Métadonnées
+- Elles sont stockés dans un fichier appelé ~inode~.
+*** ext*
+- Système de fichiers utilisés avec linux.
+**** ext2
+- Non journalisé, donc peux corrompre les fichiers en écriture si arrêt brutale de celle-ci. Peu utilisé.
+- Limites d'écriture: 2To par fichier, sur 32To en tout.
+**** ext3
+- Optionnellement journalisé, utilisé pour la compatibilité entre ~ext2~ et ~ext3~.
+**** ext4
+- Destiné à remplacer le ~ext3~. Gère du 16To par fichier, sur 1Eo. Dates et fichiers peuvent être gérées jusqu'en 2514.
+- Compatible avec ~ext3~ en lecture & écriture.
+- Système par défaut de nombreuses distros, surtout Debian.
+*** XFS
+- Système de fichier utilisés pour les très gros serveurs. Nécessite beaucoup de RAM.
+- Utilisé par défaut à partir de RHEL7.
+*** BTRFS
+- /B-tree File System/, prononcé /butterfs./
+  #+results: 
+  [[file:/tmp/babel-Wq15gG/plantuml-S943Lg.png]]
+*** Les FAT
+#+results: 
+[[file:/tmp/babel-Wq15gG/plantuml-Bjyqpl.png]]
+
+#+results: 
+[[file:/tmp/babel-Wq15gG/plantuml-mmOzV1.png]]
+#+begin_quote
+nil#+end_quote

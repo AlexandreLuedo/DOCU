@@ -1,0 +1,23 @@
+#+title: Main
+
+*   Ordres du maître
+Install docker « standard » pas AIO. 1 conteneur nextcloud, un sql et un redis.
+
+** [[https://github.com/docker-library/docs/blob/master/nextcloud/README.md][Guide]]
+
+- Follow *Using an external database*
+
+*   MySQL & Redis
+Voyez une grande bibliothèque (mysql) avec des livres (tableaux) qui comportent des chapitres (tableaux) et des histoires (lignes de données). Redis, comme une liste de tâches et de notes sur un bureau.
+MySQL stoque tout les livres, et redis ne peux tout stocker car le bureau est trop petit.
+
+- En soit redis n'est qu'un système de mise en cache de données c'est une sorte de plugin.
+
+*   Installation de nextcloud
+**  Lier la database au docker
+--link my-mysql:mysql
+
+** DONE Installer MySQL
+** TODO Setup database
+** TODO Installer redis
+** TODO Configurer redis

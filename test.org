@@ -1,0 +1,10 @@
+#+title: Ansible
+* Guide
+Les playbooks sont des fichiers YAML et ils ne possèdent pas de syntaxe ou de features spéciales
+#+begin_example
+THis is an example
+#+end_example
+
+#+begin_comment
+I like to draw
+#+end_comment
