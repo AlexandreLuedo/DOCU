@@ -11,4 +11,53 @@ Optionnal
 Optionnal
 ** NFSv4 (use TCP)
 *** TCP
-Use
+Use it
+* Download
+** Server
+#+begin_src bash
+$ sudo apt-install nfs-kernel-server
+#+end_src
+** Client
+#+begin_src bash
+$ sudo apt install nfs-common
+#+end_src
+* Config
+** Server
+*** Approriate access and permissiosn
+For example purposes
+#+begin_src bash
+$ sudo chown root:staff /nfs/exports/myshare
+$ sudo chmod 775 /nfs/exports/myshare
+#+end_src
+*** Editing config
+#+begin_src bash
+
+# In /etc/exports
+/nfs/exports/myshare 192.168.122.0/24(rw,sync,no_subtree_check)
+
+#+end_src
+*** Reload config
+#+begin_src bash
+sudo exportfs -arv
+#+end_src
+*** Configure firewall
+Only if =firewalld= run.
+#+begin_src bash
+$ sudo firewall-cmd --add-service nfs --permanent
+$ sudo firewall-cmd --reload
+#+end_src
+** Client
+*** Create a local mount point and mount the NFS share using the server’s IP address and the shared directory path
+#+begin_src bash
+$ sudo mkdir /nfs/imports/myshare
+$ sudo mount -t nfs 192.168.122.17:/nfs/exports/myshare /nfs/imports/myshare
+#+end_src
+* Start
+** Found [[https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/storage_administration_guide/ch-nfs#s2-nfs-how-daemons][here]] (not sure about the infos)
+#+begin_src bash
+$ service nfs start
+#+end_src
+** Verify if NFS service run
+#+begin_src bash
+$ systemctl status nfs-kernel-server
+#+end_src
