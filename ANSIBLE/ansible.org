@@ -117,11 +117,20 @@ Un playbooks doit être *idempotent*
 #+end_src
 
 * Role
+#+begin_quote
+[!NOTE]
 - Les roles sont une façon d'organiser ses packages de code pour qu'ils soit réutilisable.
 Ils sont utilisé pour gérer des charges complexes et les roles peuvent être utilisé dans des playbooks.
+#+end_quote
+#+begin_quote
+[!TIP]
 - *Analogie :* Un playbook est une liste de directive et un role et un composant de cette liste.
+#+end_quote
 ** Structure et dossier
+#+begin_quote
+[!NOTE]
 Un role ansible à une structuration de dossier spéciale. Il comporte normalement un certains nombre de dossiers, cependant si ils ne sont pas utilisés ils ne sont pas nécéssaires.
+#+end_quote
 ***   Organisation
 #+begin_src ascii
 my_role/
@@ -174,6 +183,18 @@ tasks:
   name: role_test
    #+end_src
 ***** Import
+** Handlers
+*** Utilisation dans un role (fonctionne aussi dans un playbook)
+#+begin_src yaml
+- Name: Deploy {{ networkd }} config
+  templates:
+    src: 25-wired.network.j2
+    dest: /etc/systemd/network/25-wired.network
+    owner: root
+    group: root
+    mode: "0640"
+    notify: Restart {{ networkd }} service
+#+end_src
 * Vault
 ** Création d'un vault
 #+begin_src bash
