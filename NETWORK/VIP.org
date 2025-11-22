@@ -7,3 +7,43 @@ An flexible IP adress who is floating. Instead of being attached to a device. Th
 2. One is using it.
 3. [[https://en.wikipedia.org/wiki/Failover][fail-over]] switch the VIP to another server.
 4. [OPT] Can be place behind an [[https://en.wikipedia.org/wiki/Load_balancing_(computing)][load-balancer]] to share traffic between multiples servers.
+* Config
+** Temp vip assignation
+#+begin_src bash
+$ sudo ip addr add 192.168.56.109/24 brd 192.168.56.255 dev enp0s8
+#+end_src
+** Debian
+*** Identify physical interface
+#+begin_src bash
+$ ip link show
+#+end_src
+*** Enable and active systemd-networkd
+#+begin_src
+$ sudo systemctl enable systemd-networkd
+$ sudo systemctl start systemd-networkd
+#+end_src
+*** Create config file
+#+begin_src /etc/systemd/network/25-wired.network
+[Match]
+Name=eth0
+
+[Network]
+Addres=192.168.1.10/24
+Gateway=192.168.1.1
+
+[Address]
+# Virtual ip adress
+Adres=192.168.1.20/24
+#+end_src
+*** Restart
+#+begin_src bash
+$ sudo systemctl restart systemd-networkd
+#+end_src
+*** Verify
+#+begin_src bash
+$ networkctl status eth0
+#+end_src
+*** Delete vip
+#+begin_src bash
+$ sudo ip addr del 192.168.1.30/24 dev eth0
+#+end_src
