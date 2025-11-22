@@ -123,14 +123,8 @@ C-x + or - or C-+ or C--
 C-x C-;
 ** Execute a terminal command
 #+begin_src
-s-L (SUPER shift l)
+SUPER s-L (SUPER shift l)
 #+end_src
-#+begin_quote
-#+begin_quote
-#+end_quote
-#+end_quote
-#+begin_quote
-#+end_quote
 ** Insert structure template
 #+begin_src melpa
 C-c C-,
