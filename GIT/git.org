@@ -1,0 +1,75 @@
+#+title: Git
+#+LANGUAGE:fr
+See also: [[file:Magit.org][Magit]]
+* Explications
+Voir : [[http://umbrel:8098/read/32/epub#epubcfi(/6/114!/4\[F8900-45a50d77d589472cbeb4687a562223a9\]/2/2\[heading-2\]/1:0)][Livre ansible chapitre git]]
+** Setup git
+#+begin_src bash
+$ git init # Cela va créer un répertoire
+#+end_src
+** Ajout d'un fichier dans le répertoir git
+#+begin_src bash
+$ git add mon.fichier # Ajoute le fichier au répertoire
+$ git add * # tout les fichiers
+#+end_src
+** Suppression d'un fichier dans le répertoir git
+#+begin_src bash
+$ git rm --cached chemin/vers/fichier.ext
+#+end_src
+** Voir le status
+#+begin_src bash
+$ git status
+#+end_src
+** Valider un changement / commmit
+#+begin_src bash
+$ git commit -m "commentaire" # le flag -m défini un commentaire
+#+end_src
+** Paramètres
+#+begin_src bash
+$ git config color.ui true # Ajoute des couleurs
+#+end_src
+** .gitignore
+Fichier qui contient les fichiers à ne plus inclure dans le repo
+#+begin_src
+#+end_src
+*** Ajout d'un fichier
+echo "config/secret.yaml >> .gitignore"
+** Hunk staging
+Fragmentation de fichier à commit
+#+begin_src bash
+git add --patch
+# ou la forme courte
+git add -p
+#+end_src
+* Setup un repo depuis github
+** http
+#+begin_src bash
+git init
+git remote add origin https://github.com/ton-nom-utilisateur/nom-du-repo.git
+git add .
+git commit -m "Premier commit du projet Flutter"
+git branch -M master
+git push -u origin master
+#+end_src
+** ssh
+#+begin_src bash
+git init
+git remote add origin git@github.com:AlexandreLuedo/Ganache.lab.git
+git add .
+git commit -m "nanana"
+git branch -M master
+git push -u origin master
+#+end_src
+* Gestion de branch
+** Suppr une branch en local
+#+begin_src bash
+git branche -d main
+#+end_src
+** Suppr en distant (github)
+#+begin_src bash
+git push origin --delete main
+#+end_src
+** Pousser origin sur une branch
+#+begin_src bash
+git push -u origin master
+#+end_src

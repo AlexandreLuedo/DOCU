@@ -1,0 +1,69 @@
+#+title: Magit
+#+LANGUAGE:en
+* Shortcuts
+** Open help
+In the magit buffer type =?=
+** Open repo's status
+SPC g s / M-x magit-status
+** Open repo's status without any buffer
+C-x g
+** Close magit buffer
+Q
+** Stag a file
+- SPC g g
+Select the file
+- s
+** Stagging (commit)
+s c c
+** Hunk stagging
+Used to stag a part of a file.
+** Push
+p (prefix)
+P u (push upstream)
+** CheatSheet
+C-x g      → open magit-status (Doom default)
+s          → stage the file/hunk under the cursor
+c c        → commit (opens the commit‑message editor)
+c a        → amend the most recent commit
+b b        → checkout/create a branch
+P u        → push upstream
+F p        → pull (fetch + merge/rebase)
+r i        → start an interactive rebase
+z s        → stash save (store uncommitted changes)
+l l        → view the repository log
+?          → show the Magit reference card (cheat‑sheet)
+q          → quit the Magit buffer
+** Branch
+*** Create
+- SPC gg
+- bc
+*** Push
+- SPC gg
+- P (push popup)
+- u (push upstream)
+*** Remove
+**** Local
+- b k
+**** Remote
+1. Remove local branch
+   - b k
+2. Remove remote branch
+   - P -
+*** Merge
+**** Select the reciever branch (master)
+- b b <branch-name> RET
+
+
+
+* Make a full commit
+- SPC gg
+- s
+- cc
+- C-c C-c
+- pu
+Answer from [[https://www.reddit.com/r/DoomEmacs/comments/uimlwb/github_and_doom_emacs/][reddit]]
+#+begin_quote
+SPC gg to bring up magit. s to stage your change. cc write your message. C-c C-c finish commit message. pu push to origin.
+
+Magit is what you want. I used it use the git CLI exclusively, but nowadays I just jump into magit to do everything with git. It's worth taking the time to learn. You're not going to find a better git client in Emacs, or anywhere I'd say.
+#+end_quote

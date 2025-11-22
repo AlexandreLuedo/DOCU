@@ -1,0 +1,9 @@
+#+title: Cli Github
+#+LANGUAGE:en
+See also:[[https://cli.github.com/manual/][ Cli Github Manual]]
+Us
+* Repo
+** [[https://cli.github.com/manual/gh_repo_create][Init]]
+#+begin_src bash
+$ gh repo create [name] [flags]
+#+end_src
