@@ -46,6 +46,8 @@ allowed_hosts = "*"
 # File generatore by Ansible – {{ ansible_date_time.iso8601 }}
 # ---------------------------------------------
 #+end_src
+* Location
+Config file must be always in =/templates/= folder.
 * For changing value
 #+begin_src jinja2
 {{ myapp_listen_address | default('0.0.0') }}
