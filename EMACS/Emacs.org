@@ -220,7 +220,7 @@ cmd t
                                 (goto-char (point-min))))))))
 ** Link content
 - SPC n l store link
-- SPC n ll insert link
+- SPC m ll insert link
 - C-c C-l insert link
 
 ** Go to item
