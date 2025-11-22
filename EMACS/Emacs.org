@@ -140,6 +140,25 @@ C-c C-,
 ,#+ATTR_ORG: :width: 100
 [[~/path/to/image.svg]]
 #+end_src
+** Blockquote
+See also: [[https://github.com/orgs/community/discussions/16925][Github Block quote]]
+Works well with .org
+#+begin_src markdown
+> [!NOTE]
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+#+end_src
 ** Date
 - SPC m d
 *** Insert date
