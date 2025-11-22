@@ -1,0 +1,52 @@
+#+title: Jinja2
+#+LANGUAGE:en
+Files in: .j2
+* Example config.j2
+#+begin_src jinja2
+# ----------------------------------------------
+# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
+# ---------------------------------------------
+
+# listen service adress
+listen_address = {{ myapp_listen_address | default('0.0.0.0') }}
+
+# Listen port (maybe integer or string)
+listen_port = {{ myapp_port | default(8080) }}
+
+# Data path
+data_dir = {{ myapp_data_dir | default('/var/lib/myapp') }}
+
+# Log level (debug, info, warning, error)
+log_level = {{ myapp_log_level | default('info') }}
+
+# Boolean options – use `bool` filter for ensure 0/1 or true/false
+enable_tls = {{ myapp_enable_tls | bool }}
+
+{% if myapp_enable_tls %}
+# TLS certificat (only if TLS certificate is enable)
+tls_cert_file = {{ myapp_tls_cert_path }}
+tls_key_file  = {{ myapp_tls_key_path }}
+{% endif %}
+
+# Allowed hosts list (loop example)
+{% if myapp_allowed_hosts is defined and myapp_allowed_hosts | length > 0 %}
+allowed_hosts = [
+{% for host in myapp_allowed_hosts %}
+    "{{ host }}"{% if not loop.last %},{% endif %}
+{% endfor %}
+]
+{% else %}
+# No hosts explicitly allowed - all is accepted
+allowed_hosts = "*"
+{% endif %}
+#+end_src
+* Header for config file
+#+begin_src jinja2
+# ----------------------------------------------
+# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
+# ---------------------------------------------
+#+end_src
+* For changing value
+#+begin_src jinja2
+{{ myapp_listen_address | default('0.0.0') }}
+#+end_src
