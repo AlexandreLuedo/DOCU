@@ -1,0 +1,7 @@
+#+title: Network
+#+LANGUAGE: en
+* Wireless access point ip
+#+begin_src bash
+$ ip route | grep default
+#+end_src
+
