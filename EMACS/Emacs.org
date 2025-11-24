@@ -2,8 +2,6 @@
 #+LANGUAGE:en
 #+OPTIONS:  num:nil
 #+OPTIONS: toc:nil
-# [OPTIONNAL] #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
-#+SETUPFILE:~/org/templates/PdfTemplate.org
 * Mainshortcuts
 - SPC m #Mode
 - SPC c #Compile
