@@ -20,6 +20,10 @@ Used to stag a part of a file.
 ** Push
 p (prefix)
 P u (push upstream)
+** Remove a file / untrack
+SPC gg
+K
+Select the file
 ** CheatSheet
 C-x g      → open magit-status (Doom default)
 s          → stage the file/hunk under the cursor
@@ -33,6 +37,11 @@ z s        → stash save (store uncommitted changes)
 l l        → view the repository log
 ?          → show the Magit reference card (cheat‑sheet)
 q          → quit the Magit buffer
+** Commit
+*** NO Remove a commit
+SPC gg
+ee
+
 ** Branch
 *** Create
 - SPC gg
