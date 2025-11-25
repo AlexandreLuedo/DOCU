@@ -1,6 +1,9 @@
 #+title: Chrony
 #+LANGUAGE:en
-See also: [[https://chrony-project.org/][Chrony-project.org]] 
+See also:
+- [[https://chrony-project.org/][Chrony-project.org]] 
+- [[https://chrony-project.org/examples.html][Chrony-project.org/examples.html]]
+  
 * Package
 ** Debian
 #+begin_src aptitude & ap
