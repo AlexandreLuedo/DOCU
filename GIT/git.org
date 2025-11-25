@@ -73,3 +73,25 @@ git push origin --delete main
 #+begin_src bash
 git push -u origin master
 #+end_src
+** Merge une branche
+#+begin_src bash
+$ git checkout master #or# $ git switch master # s'assurer d'être sur la bonne branche
+$ git pull origin main #or# $ git pull origin master # Mettre à jour le git
+$ git merge [source_branch] # quand l'on est sur la bonne branche
+# Options:
+# -m pour attribuer un message
+$ git push origin main #or# $ git push origin master # pour mettre à jour pour les autres membres de l'équipe.
+#+end_src
+
+** Vérifier si la branche est fusionnée
+#+begin_src bash
+$ git branch --merged master
+$ git branch --merged
+$ git branch --no-merged
+# Par défaut, cela va s'appliquer aux branches locales uniquement.
+# Options:
+# -a va montrer les branches locales & distantes
+# -r va montrer les branches distantes
+#+end_src
+** 
+
