@@ -1,7 +1,15 @@
 #+title: Network
 #+LANGUAGE: en
+* Vocable
+** Gateway IP
+It's the start of all ip. Commonly =192.168.1.1=
 * Wireless access point ip
+This return gateway IP
 #+begin_src bash
 $ ip route | grep default
+#+end_src
+* Obtain all devices on network
+#+begin_src bash
+nmap -sn 192.168.1.1/24
 #+end_src
 
