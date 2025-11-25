@@ -1399,8 +1399,6 @@ $ hdparm -I /dev/sda
 ++ Pas encore utilisable en prod
   #+end_src
 
-  #+RESULTS:
-  [[file:/tmp/babel-hsaRR2/plantuml-PvFl4T.png]]
 *** Les FAT
 #+begin_src plantuml
 @startmindmap
@@ -1612,8 +1610,9 @@ $ stat /boot/vmlinuz-5.10.0-22-amd64
 ** Installation sur clé usb iso
 - N'est pas tiré du livre.
   #+begin_src bash
-$ sudo mkdir /mnt/usb # créer un point de montage
-$ sudo dd if=/path/to/os.iso of=/dev/sdx bs=4M status=progress
+$ lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL
+$ sudo wipefs -a /dev/nomdudisque # wipe l'entête du disque
+$ sudo dd if=/path/to/os.iso of=/dev/sdx bs=4M status=progress oflag=sync
 $ sudo umount /mnt/usb # alternativement /dev/sdx
   #+end_src
 **** Méthode alternative
