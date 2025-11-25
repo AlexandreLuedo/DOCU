@@ -8,6 +8,7 @@
 - SPC o #Open
 * Shortcuts
 [[https://github.com/niyumard/Doom-Emacs-Cheat-Sheet][Ultimate cheatsheet]]
+[[https://cheatography.com/karronqiu/cheat-sheets/the-ultimate-doom-emacs/][Ultimate doom emacs cheatsheet]]
 ** Archive
 - SPC m A
 ** DOC
@@ -182,8 +183,10 @@ Used to translate when exporting (eg: table of content)
 :org-table-eval-formula or C-c =
 dedicated buffer C-c '
 @6$2: ligne6 colonne2
-***     ou ajouter en dessous du tableau
+*** ou ajouter en dessous du tableau
 #+TBLFM: $2=vsum(@1..@5
+*** Visualise table
+C-c }
 *** Mettre à jour automatiquement (recalculer les formules)
 C-c * ou M-x org-ctrl-star
 ** [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Showing table reference (where you are)]]
