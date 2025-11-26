@@ -1,6 +1,97 @@
 #+title: Jinja2
 #+LANGUAGE:en
 Files in: .j2
+See also: [[https://jinja.palletsprojects.com/en/stable/templates/][Jinja2 documentation]] 
+* With ansible
+** Location
+Config file must be always in =/templates/= folder.
+
+** Header for config file
+#+begin_src jinja2
+# ----------------------------------------------
+# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
+# ---------------------------------------------
+#+end_src
+
+* Variables
+** Access to attributes
+#+begin_src jinja2
+{# The twice works #}
+{{ foo.bar }}
+{{ foo['bar'] }}
+#+end_src
+** Filters
+Separated from the variable with a pipe symbole =|=
+#+begin_src jinja2
+{{ name|striptags|title }} {# Will remove all HTML Tags from variable name and title-case. #}
+#+end_src
+See[[https://jinja.palletsprojects.com/en/stable/templates/#builtin-filters][ List of Builtin Filters]]
+** Tests 
+Test can test a variable to output a result. It can test =variable= or =expression=.
+#+begin_src jinja2
+{# find out if the variable is defined #}
+{% variable is defined %} {# will return true or false #}
+
+{# Other example #}
+{% if loop.index is divisibleby 3 %} 
+{% if loop.index is devisibleby (3) %} {# also works #}
+#+end_src
+See [[https://jinja.palletsprojects.com/en/stable/templates/#builtin-tests][List of Builtin Test]]
+** [[https://jinja.palletsprojects.com/en/stable/templates/#whitespace-control][Whitespace Control]]
+* Control structures
+** For
+#+begin_src jinja2
+{# basic explaination #}
+{% for server in chrony_servers %}
+  server {{ server }} iburst
+{% endfor %}
+{# Expert explaination
+List of users provided in a variable called users #}
+<h1>Members</h1>
+<ul>
+{% for user in users %}
+  <li>{{ user.username|e }}</li>
+{% endfor %}
+</ul>
+#+end_src
+*** [[https://jinja.palletsprojects.com/en/stable/templates/#template-inheritance:~:text=Inside%20of%20a%20for%2Dloop%20block%2C%20you%20can%20access%20some%20special%20variables%3A][Special variables]]
+** If
+#+begin_src jinja2
+{# Simple statement #}
+{% if users %}
+  <ul>
+    {% for user in users %}
+      <li>{{ user.username|e }}</li>
+    {% endfor %}
+   </ul>
+{% endif %}
+
+{# Multiple statement #}
+{% if kenny.sick %}
+  Kenny is sick.
+{% elif kenny.dead %}
+  You killed Kenny! You bastard!!!
+{% else %}
+  Kenny looks okay --- so far
+{% endif %}
+#+end_src
+** Changing value
+#+begin_src jinja2
+{{ myapp_listen_address | default('0.0.0') }}
+#+end_src
+* Conditionnal
+Never put curly braces inside other curly braces.
+#+begin_src jinja2
+{% if ssl_enabled %}
+  SSLEngine on
+{% endif %}
+#+end_src
+* For loop
+See the [[file:~/INFOR/INFRA/ANSIBLE/ROLES/chrony/templates/chrony.conf.j2::{% for server in chrony_server %} server {{ server }} iburst {% endfor %}][Jinja2 config file example]] 
+#+begin_src jinja2
+{% for server in chrony_servers %} server {{ server }} iburst {% endfor %}
+#+end_src
+
 * Example config.j2
 #+begin_src jinja2
 # ----------------------------------------------
@@ -39,16 +130,4 @@ allowed_hosts = [
 # No hosts explicitly allowed - all is accepted
 allowed_hosts = "*"
 {% endif %}
-#+end_src
-* Header for config file
-#+begin_src jinja2
-# ----------------------------------------------
-# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
-# ---------------------------------------------
-#+end_src
-* Location
-Config file must be always in =/templates/= folder.
-* For changing value
-#+begin_src jinja2
-{{ myapp_listen_address | default('0.0.0') }}
 #+end_src
