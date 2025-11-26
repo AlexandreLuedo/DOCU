@@ -120,6 +120,7 @@ C-C-;
 C-x + or - or C-+ or C--
 ** Comment line
 C-x C-;
+M-;
 ** Execute a terminal command
 #+begin_src
 SUPER s-L (SUPER shift l)
