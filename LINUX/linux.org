@@ -128,127 +128,129 @@ cat /etc/console-setup
 # syntax
 commande [options] [arguments]
 #+end_src
-| nom       | explications                          | options                                                        | arguments                               |
-|-----------+---------------------------------------+----------------------------------------------------------------+-----------------------------------------|
-| date      | Aff. date + heure                     |                                                                |                                         |
-| pwd       | chemin d'accès                        |                                                                |                                         |
-| cal       | affiche calendrier                    | mois + année / -m (monday) -s (sunday)                         |                                         |
-| cal -m3   | affiche trois mois                    | -3 marche aussi                                                |                                         |
-| echo      | Aff. texte                            |                                                                | texte                                   |
-|           |                                       |                                                                | \n saut ligne                           |
-|           |                                       |                                                                | \t tabulation horizontale (en gros TAB) |
-|           |                                       |                                                                | \c pas de saut ligne après arguments    |
-|           |                                       |                                                                | \b retour un caractère arrière          |
-|           |                                       |                                                                | \\ aff. antislash                       |
-|           |                                       |                                                                | \nnn affiche caractère code octal ~nnn~   |
-| type      | Aff. si com. externe ou interne       |                                                                |                                         |
-| sort      | trie les lignes                       | -f non-case sensitive                                          |                                         |
-|           |                                       | -n tri numérique                                               |                                         |
-|           |                                       | -u affiche qu'une fois les doublons                            |                                         |
-|           |                                       | -t trie en fonction des ASCII mais sans la casse (case-sens.)  |                                         |
-|           |                                       | -r trie inverse                                                |                                         |
-|           |                                       | -k trie selon la définition chclef                             |                                         |
-|           |                                       | -c affiche le nombre devant chaques ligne                      |                                         |
-|           |                                       | -d affiche qu'une fois les ligne en doublons groupe par grpe.  |                                         |
-|           |                                       | -i pas de distinctions majuscules minuscules.                  |                                         |
-| history   | historique des commandes              | -s [int] réexecution                                           |                                         |
-| file      | infor nature contenu d'un fichier     |                                                                |                                         |
-| cat       | affiche contenu du fichier            |                                                                |                                         |
-| man       | explique la commande                  |                                                                |                                         |
-| ls        | liste                                 | -l informations détaillés                                      |                                         |
-|           |                                       | -a fichiers cachés                                             |                                         |
-|           |                                       | -d informations répertoire & contenu                           |                                         |
-|           |                                       | -F spécifier type: * (exec) @ (lien symbolique) / (repertoire) |                                         |
-|           |                                       | -R parcours toute l'arborescence depuis folder (mode récurcif) |                                         |
-|           |                                       | -t trier par date de mof recent vers ancien                    |                                         |
-|           |                                       | -c date de changement état du fichier                          |                                         |
-|           |                                       | -u date accès au fichier                                       |                                         |
-|           |                                       | -r inversé                                                     |                                         |
-|           |                                       | -i numéro inode                                                |                                         |
-|           |                                       | -C colonnes (par défault)                                      |                                         |
-|           |                                       | -1 colonne                                                     |                                         |
-|           |                                       | -Z attribut fichier lié système fichier / contexte sécurité    |                                         |
-| touche    | créer un fichier                      |                                                                |                                         |
-| >         | créer une redirection (stdout)        |                                                                |                                         |
-| >>        | ne remet pas à zéro le fichier cible  |                                                                |                                         |
-| 2>        | sortie d'erreure standart (stderr)    |                                                                |                                         |
-| 2>&1      | stdout & stderr                       |                                                                |                                         |
-| mkdir     | créer un répertoire                   | -p (créer l'arborescence complète)                             |                                         |
-| rmdir     | suppr un répertoire                   |                                                                |                                         |
-| cp        | copier                                | -i demande confirmation pour chaques fichiers                  |                                         |
-|           |                                       | -r recursif: copie repertoire + arborescence                   |                                         |
-|           |                                       | -p perms et dates du fichiers sont conservés                   |                                         |
-|           |                                       | -f forcer la copie                                             |                                         |
-| mv        | déplace                               | -i confirmation                                                |                                         |
-|           |                                       | -f force                                                       |                                         |
-|           |                                       | -u si objet cible plus rescent, n'est pas écrasé               |                                         |
-| rm        | suppr                                 | -i confirmation                                                |                                         |
-|           |                                       | -r si argument répertoire alors récurcif                       |                                         |
-|           |                                       | -f force                                                       |                                         |
-| ln -s     | créer un lien simbolique              | -s symbolique                                                  |                                         |
-|           |                                       | -i                                                             |                                         |
-|           |                                       | -f                                                             |                                         |
-| find      | chercher un fichier                   |                                                                |                                         |
-| fd        | chercher également un fichier         |                                                                |                                         |
-| whereis   | localise la commande                  | -b uniquetement executables                                    |                                         |
-|           |                                       | -m uniquement manuels                                          |                                         |
-|           |                                       | -s uniquemtn sources                                           |                                         |
-| which     | trouve l'executable dans PATH         |                                                                |                                         |
-| wc        | workd counter                         | -l nombre de ligne                                             |                                         |
-|           |                                       | -c nombre d'octets                                             |                                         |
-|           |                                       | -w nombre de mots                                              |                                         |
-|           |                                       | -m nombre de caractères                                        |                                         |
-| grep      | selectionne des lignes                | -v recherche inverse: affiche lignes pas en recherche          |                                         |
-|           |                                       | -c nombre lignes trouvés sans les aff.                         |                                         |
-|           |                                       | -i pas distinctions entre majuscules et minuscules             |                                         |
-|           |                                       | -n affiche numéro devant chaques lignes trouvées               |                                         |
-|           |                                       | -l affiche nom du fichier ayant des lignes qui correspondes.   |                                         |
-| egrep     | plus critères de recherche            |                                                                |                                         |
-| sed       | remplace et edite un fichier          | -f lit les commandes d'éditions dans le fichier                |                                         |
-| cut       | coupe une position sur une ligne      | [[*Position][Position]]                                                       |                                         |
-|           |                                       | -f selection par champ (mots)                                  |                                         |
-|           |                                       | -d délimitateur fonctionne avec champ                          |                                         |
-| who       | liste les infos sur les utilisateurs  |                                                                |                                         |
-| split     | copie et divise le fichier copier     | -l en fonction des lignes -l 2 fichier fichierSplited*         |                                         |
-|           |                                       | -b en fonction dse bytes -b 2 fichier fichierSplited*          |                                         |
-| tr        | substitue un caractère d'un fichier   |                                                                |                                         |
-| basename  | extrait la partie nom de fichier      |                                                                |                                         |
-| dirname   | extrait la partie chemin d'accès      |                                                                |                                         |
-| diff      | compare fichier  diff [-b] fic1 fic2  | -b enlève les blancs                                           |                                         |
-| fg        | relance une commande foreground       | n de la commande (eg: 1)                                       |                                         |
-| bg        | relance une commande background       | "                                                              |                                         |
-| jobs      | liste les commandes en actions        |                                                                |                                         |
-| ps        | liste les processus (/process status/)  | -f affiche détaillé                                            |                                         |
-|           |                                       | -e tous les processus du système                               |                                         |
-|           |                                       | -u un ou plusieurs utilisateurs                                |                                         |
-|           |                                       | -g groupes                                                     |                                         |
-|           |                                       | -t terminaux                                                   |                                         |
-|           |                                       | -p PID précis                                                  |                                         |
-|           |                                       | -l liste processus infos plus techniques                       |                                         |
-| kill      | envoie un signal via le PID           | kill [-l] [-Num_signal] PID [PID2...]                          |                                         |
-| pkill     | envoie signal via le noms             |                                                                |                                         |
-| nohup     | tourner la commande après ferm. term. | nohup ls -l                                                    |                                         |
-| nice      | priorise l'execution d'une commande   | -20 à 19 (+ la valeur négative, plus elle est forte)           |                                         |
-| renice    | priorise l'exec. en fonction de user  | -p [[*PID][PID]]                                                         |                                         |
-|           |                                       | -g GID                                                         |                                         |
-|           |                                       | -u UID                                                         |                                         |
-| time      | mesure le temps d'exec d'une commande |                                                                |                                         |
-| alias     | raccourcis pour exec commande         | Alias NomAlias = 'ligne de commande'                           |                                         |
-|           |                                       | alias # liste les différents alias par défaut                  |                                         |
-| chmod     | give perm pour exec. un script        | chmod u+x monscript                                            |                                         |
-| systemctl | gère un systeme                       | start démarre un service                                       |                                         |
-|           |                                       | enable démarre le service dès la mise en route du pc           |                                         |
-| sudo      |                                       |                                                                |                                         |
+| nom       | explications                                   | options                                                        | arguments                               |
+|-----------+------------------------------------------------+----------------------------------------------------------------+-----------------------------------------|
+| date      | Aff. date + heure                              |                                                                |                                         |
+| pwd       | chemin d'accès                                 |                                                                |                                         |
+| cal       | affiche calendrier                             | mois + année / -m (monday) -s (sunday)                         |                                         |
+| cal -m3   | affiche trois mois                             | -3 marche aussi                                                |                                         |
+| echo      | Aff. texte                                     |                                                                | texte                                   |
+|           |                                                |                                                                | \n saut ligne                           |
+|           |                                                |                                                                | \t tabulation horizontale (en gros TAB) |
+|           |                                                |                                                                | \c pas de saut ligne après arguments    |
+|           |                                                |                                                                | \b retour un caractère arrière          |
+|           |                                                |                                                                | \\ aff. antislash                       |
+|           |                                                |                                                                | \nnn affiche caractère code octal ~nnn~   |
+| type      | Aff. si com. externe ou interne                |                                                                |                                         |
+| sort      | trie les lignes                                | -f non-case sensitive                                          |                                         |
+|           |                                                | -n tri numérique                                               |                                         |
+|           |                                                | -u affiche qu'une fois les doublons                            |                                         |
+|           |                                                | -t trie en fonction des ASCII mais sans la casse (case-sens.)  |                                         |
+|           |                                                | -r trie inverse                                                |                                         |
+|           |                                                | -k trie selon la définition chclef                             |                                         |
+|           |                                                | -c affiche le nombre devant chaques ligne                      |                                         |
+|           |                                                | -d affiche qu'une fois les ligne en doublons groupe par grpe.  |                                         |
+|           |                                                | -i pas de distinctions majuscules minuscules.                  |                                         |
+| history   | historique des commandes                       | -s [int] réexecution                                           |                                         |
+| file      | infor nature contenu d'un fichier              |                                                                |                                         |
+| cat       | affiche contenu du fichier                     |                                                                |                                         |
+| man       | explique la commande                           |                                                                |                                         |
+| ls        | liste                                          | -l informations détaillés                                      |                                         |
+|           |                                                | -a fichiers cachés                                             |                                         |
+|           |                                                | -d informations répertoire & contenu                           |                                         |
+|           |                                                | -F spécifier type: * (exec) @ (lien symbolique) / (repertoire) |                                         |
+|           |                                                | -R parcours toute l'arborescence depuis folder (mode récurcif) |                                         |
+|           |                                                | -t trier par date de mof recent vers ancien                    |                                         |
+|           |                                                | -c date de changement état du fichier                          |                                         |
+|           |                                                | -u date accès au fichier                                       |                                         |
+|           |                                                | -r inversé                                                     |                                         |
+|           |                                                | -i numéro inode                                                |                                         |
+|           |                                                | -C colonnes (par défault)                                      |                                         |
+|           |                                                | -1 colonne                                                     |                                         |
+|           |                                                | -Z attribut fichier lié système fichier / contexte sécurité    |                                         |
+| touche    | créer un fichier                               |                                                                |                                         |
+| >         | créer une redirection (stdout)                 |                                                                |                                         |
+| >>        | ne remet pas à zéro le fichier cible           |                                                                |                                         |
+| 2>        | sortie d'erreure standart (stderr)             |                                                                |                                         |
+| 2>&1      | stdout & stderr                                |                                                                |                                         |
+| mkdir     | créer un répertoire                            | -p (créer l'arborescence complète)                             |                                         |
+| rmdir     | suppr un répertoire                            |                                                                |                                         |
+| cp        | copier                                         | -i demande confirmation pour chaques fichiers                  |                                         |
+|           |                                                | -r recursif: copie repertoire + arborescence                   |                                         |
+|           |                                                | -p perms et dates du fichiers sont conservés                   |                                         |
+|           |                                                | -f forcer la copie                                             |                                         |
+| mv        | déplace                                        | -i confirmation                                                |                                         |
+|           |                                                | -f force                                                       |                                         |
+|           |                                                | -u si objet cible plus rescent, n'est pas écrasé               |                                         |
+| rm        | suppr                                          | -i confirmation                                                |                                         |
+|           |                                                | -r si argument répertoire alors récurcif                       |                                         |
+|           |                                                | -f force                                                       |                                         |
+| ln -s     | créer un lien simbolique                       | -s symbolique                                                  |                                         |
+|           |                                                | -i                                                             |                                         |
+|           |                                                | -f                                                             |                                         |
+| find      | chercher un fichier                            |                                                                |                                         |
+| fd        | chercher également un fichier                  |                                                                |                                         |
+| whereis   | localise la commande                           | -b uniquetement executables                                    |                                         |
+|           |                                                | -m uniquement manuels                                          |                                         |
+|           |                                                | -s uniquemtn sources                                           |                                         |
+| which     | trouve l'executable dans PATH                  |                                                                |                                         |
+| wc        | workd counter                                  | -l nombre de ligne                                             |                                         |
+|           |                                                | -c nombre d'octets                                             |                                         |
+|           |                                                | -w nombre de mots                                              |                                         |
+|           |                                                | -m nombre de caractères                                        |                                         |
+| grep      | selectionne des lignes                         | -v recherche inverse: affiche lignes pas en recherche          |                                         |
+|           |                                                | -c nombre lignes trouvés sans les aff.                         |                                         |
+|           |                                                | -i pas distinctions entre majuscules et minuscules             |                                         |
+|           |                                                | -n affiche numéro devant chaques lignes trouvées               |                                         |
+|           |                                                | -l affiche nom du fichier ayant des lignes qui correspondes.   |                                         |
+| egrep     | plus critères de recherche                     |                                                                |                                         |
+| sed       | remplace et edite un fichier                   | -f lit les commandes d'éditions dans le fichier                |                                         |
+| cut       | coupe une position sur une ligne               | [[*Position][Position]]                                                       |                                         |
+|           |                                                | -f selection par champ (mots)                                  |                                         |
+|           |                                                | -d délimitateur fonctionne avec champ                          |                                         |
+| who       | liste les infos sur les utilisateurs           |                                                                |                                         |
+| split     | copie et divise le fichier copier              | -l en fonction des lignes -l 2 fichier fichierSplited*         |                                         |
+|           |                                                | -b en fonction dse bytes -b 2 fichier fichierSplited*          |                                         |
+| tr        | substitue un caractère d'un fichier            |                                                                |                                         |
+| basename  | extrait la partie nom de fichier               |                                                                |                                         |
+| dirname   | extrait la partie chemin d'accès               |                                                                |                                         |
+| diff      | compare fichier  diff [-b] fic1 fic2           | -b enlève les blancs                                           |                                         |
+| fg        | relance une commande foreground                | n de la commande (eg: 1)                                       |                                         |
+| bg        | relance une commande background                | "                                                              |                                         |
+| jobs      | liste les commandes en actions                 |                                                                |                                         |
+| ps        | liste les processus (/process status/)           | -f affiche détaillé                                            |                                         |
+|           |                                                | -e tous les processus du système                               |                                         |
+|           |                                                | -u un ou plusieurs utilisateurs                                |                                         |
+|           |                                                | -g groupes                                                     |                                         |
+|           |                                                | -t terminaux                                                   |                                         |
+|           |                                                | -p PID précis                                                  |                                         |
+|           |                                                | -l liste processus infos plus techniques                       |                                         |
+| kill      | envoie un signal via le PID                    | kill [-l] [-Num_signal] PID [PID2...]                          |                                         |
+| pkill     | envoie signal via le noms                      |                                                                |                                         |
+| nohup     | tourner la commande après ferm. term.          | nohup ls -l                                                    |                                         |
+| nice      | priorise l'execution d'une commande            | -20 à 19 (+ la valeur négative, plus elle est forte)           |                                         |
+| renice    | priorise l'exec. en fonction de user           | -p [[*PID][PID]]                                                         |                                         |
+|           |                                                | -g GID                                                         |                                         |
+|           |                                                | -u UID                                                         |                                         |
+| time      | mesure le temps d'exec d'une commande          |                                                                |                                         |
+| alias     | raccourcis pour exec commande                  | Alias NomAlias = 'ligne de commande'                           |                                         |
+|           |                                                | alias # liste les différents alias par défaut                  |                                         |
+| chmod     | give perm pour exec. un script                 | chmod u+x monscript                                            |                                         |
+| systemctl | gère un systeme                                | start démarre un service                                       |                                         |
+|           |                                                | enable démarre le service dès la mise en route du pc           |                                         |
+| sudo      |                                                |                                                                |                                         |
+| chown     | change le propriétaire et le groupe du fichier |                                                                |                                         |
+| chmod     | modifie la permission d'accès.                 | chmod [otpions] mode fichier...                                |                                         |
 
 **** Exemple
 #+begin_src shell
 echo -e "Salut.\tJe m'appelle XXX\b\b\bPesronne\n"
 #+end_src
 *** Commandes avancées
-| nom    | explication                           | options | arguments |
-|--------+---------------------------------------+---------+-----------|
-| mknode | créer un fichier spécial périphérique |         |           |
-| efibootmgr | Permet de voir la variable de la NVRAM |-v verbose |           |
+| nom        | explication                            | options    | arguments |
+|------------+----------------------------------------+------------+-----------|
+| mknode     | créer un fichier spécial périphérique  |            |           |
+| efibootmgr | Permet de voir la variable de la NVRAM | -v verbose |           |
 *** Echainements de commandes
 - ~&&~
 - ~;~
