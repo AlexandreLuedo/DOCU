@@ -195,6 +195,32 @@ tasks:
     mode: "0640"
     notify: Restart {{ networkd }} service
 #+end_src
+** Inclure un role
+*** Tâches
+** Inclure une tâche de role
+#+begin_src yaml
+- name: Link "{{ vip_ip_adress }}" to open the server NTP port
+  include_role:
+    name: vip
+    tasks_from: add_vip
+#+end_src
+* Facts
+#+begin_src yaml
+- name: Redémarrage conditionnel
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Décider s’il faut redémarrer nginx
+      set_fact:
+        need_restart: "{{ ansible_facts['distribution'] == 'Ubuntu' }}"
+
+    - name: Appliquer le rôle uniquement si besoin
+      include_role:
+        name: my_one_task_role
+      when: need_restart
+#+end_src
+
 * Vault
 ** Création d'un vault
 #+begin_src bash
