@@ -116,6 +116,11 @@ C-C-;
 - C-x o
 - SPC-w w
 - SPC-TAB TAB
+** Focus view of a text / Narrow
+# Enter
+SPC m s n org-narrow-to-subtree
+# Exit
+SPC m s N org-narrow-widen
 ** Resize text
 C-x + or - or C-+ or C--
 ** Comment line
