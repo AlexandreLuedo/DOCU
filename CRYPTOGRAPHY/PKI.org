@@ -3,8 +3,68 @@
 Source: https://pki-tutorial.readthedocs.io/en/latest/
 
 * Concept
+#+NAME: testnameimg
+[[https://pki-tutorial.readthedocs.io/en/latest/_images/PKIProcess.png]]
+1. Requestor create a CSR and submit to the CA
+2. CA issue a certificate based on CSR and returns it ot the requestor
+3. Should certificate be revoked, the CA adds it to its CRL
 * Compoments
+** Public Key Infrastructure (PKI)
+Security architecture where trust is conveyed through the signature of certificates
+** Authority Certificate (CA)
+Entity issuing:
+- Certificates
+- CRL's
+** Registration Authority (RA)
+Entity handling:
+- PKI enrolment (may be identical with the CA)
+** Certificate
+Contain:
+- Public Key
+- Id bound by CA signature
+** Certificate Signing Request (CSR)
+Request for certification, contain:
+- Public Key
+- ID to be certified
+** Certificate Revocation List (CRL)
+List of revoked certificaters: Issued by a CA at regular intervals.
+** Certificvation Practice Statement (CPS)
+Document describing structure and processes of a CA.
 * CA Types
+** Root CA (top)
+CA at the root of the architecture. Issue only:
+- CA certificates
+** Intermediate CA (mid)
+Ca below the root CA but not a signing CA. Issue only:
+- CA certificates
+** Signing CA (bottom)
+CA at the bottom of a PKI hierarchy. Issue only:
+- User certificates
 * Certificates Types
+** CA Certificate
+Certificate of a CA. Used to sign:
+- Certificates
+- CRLs
+** Root Certificate
+Self-signed CA certificate at the root of a PKIE Hierarchy.
+Serve as PKI's trust anchor.
+** Cross Certificate
+CA Certificate issued by a CA external to the primary PKI hierarchy.
+Used to connect two PKIs and thus usually comes in pairs.
+** User Certificate
+End-entity certificate issued fo one or more purpose: email-protection, server-auth, client-auth, code-signing, etc. A user certificate cannot other certificates.
 * File Formats
+** Privacy Enhanced Mail (PEM)
+- Text format
+- Base-64 encoded data with header & footer lines.
+- Preferred format in OpenSSL
+- Most software based on it (e.g. Apache mod_ssl, stunnel)
+** Distinguished Encoding Rules (DER)
+- Binary format
+- Preferred in Windows environnements
+- Official format for internet download of:
+  - Certificates
+  - CRLs
 * Examples
+#+begin_src bash
+#+end_src
