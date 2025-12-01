@@ -12,4 +12,7 @@ $ ip route | grep default
 #+begin_src bash
 nmap -sn 192.168.1.1/24
 #+end_src
-
+* Obtain ipv4 macos
+#+begin_src bash
+$ ipconfig getifaddr en0
+#+end_src
