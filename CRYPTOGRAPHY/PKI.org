@@ -12,9 +12,10 @@ Source: https://pki-tutorial.readthedocs.io/en/latest/
 ** Public Key Infrastructure (PKI)
 Security architecture where trust is conveyed through the signature of certificates
 ** Authority Certificate (CA)
-Entity issuing:
+This is an Entity issuing (it's like a passport):
 - Certificates
 - CRL's
+to *subscribers* -- *end entity.*
 ** Registration Authority (RA)
 Entity handling:
 - PKI enrolment (may be identical with the CA)
@@ -30,6 +31,8 @@ Request for certification, contain:
 List of revoked certificaters: Issued by a CA at regular intervals.
 ** Certificvation Practice Statement (CPS)
 Document describing structure and processes of a CA.
+** Relying party
+Is a certificate user that verifies and trusts certificates issued by a CA.
 * CA Types
 ** Root CA (top)
 CA at the root of the architecture. Issue only:
@@ -65,6 +68,10 @@ End-entity certificate issued fo one or more purpose: email-protection, server-a
 - Official format for internet download of:
   - Certificates
   - CRLs
-* Examples
-#+begin_src bash
-#+end_src
+* Deployement
+** Simple PKI
+Using the configs file for each compenent.
+1. Creating folders
+2. Creating db
+3. Creating the CA request (CSR)
+4. Create CA certificate (base on CSR)
