@@ -114,8 +114,17 @@ Un playbooks doit être *idempotent*
     - { regex: '^UPLOAD_LOCATION=.*$', replace: 'UPLOAD_LOCATION=./Librairie' }
     - { regex: '^DB_HOST=.*$',           replace: 'DB_HOST=db.example.local' }
     - { regex: '^DB_PORT=.*$',           replace: 'DB_PORT=5432' }
-#+end_src
 
+
+- name: C'est une loop
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    loop:
+      - /var/test
+      - /bin/test
+      - /etc/test
+#+end_src
 * Role
 #+begin_quote
 [!NOTE]
@@ -318,6 +327,51 @@ ansible_command_timeout:       # timeout exécution en seconde
 ansible_become:                # élévation de privilège (yes ou no)
 ansible_become_method:         # enable
 #+end_src
+* Ansible builtin
+** File
+See also: [[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/file_module.html][Ansible doc]] 
+*** Loop
+#+begin_src yaml
+- name: Create loop
+  ansible.builtin.file:
+    path: {{ item }}
+    state: directory
+    loop:
+      - /var/etc
+      - /bin/etc
+      - /etc/etc
+- name: Create a folder who hasn't folder parent
+  ansible.builtin.file:
+    path: path/to/folder        # Assuming path & folder doesn't exist
+    state: directory
+    recurse: yes
+#+end_src
+*** Directory
+#+begin_src yaml
+- name: Create loop
+  ansible.builtin.file:
+    path: {{ item }}
+    state: directory
+    loop:
+      - /var/etc
+      - /bin/etc
+      - /etc/etc
+      
+- name: Create a folder who hasn't folder parent
+  ansible.builtin.file:
+    path: path/to/folder        # Assuming path & folder doesn't exist
+    state: directory
+    recurse: yes
+    
+ - name: Create a directory with specific ownership and permissions
+  ansible.builtin.file:
+    path: /srv/www
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0775'      
+#+end_src
+
 * Alex
 1. Créer des playbooks
 2. Maîtriser les Buildin copy et config de fichiers
