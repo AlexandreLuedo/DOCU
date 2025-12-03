@@ -2,12 +2,16 @@
 #+LANGUAGE: en
 Source: https://pki-tutorial.readthedocs.io/en/latest/
 
-* Concept
-#+NAME: testnameimg
-[[https://pki-tutorial.readthedocs.io/en/latest/_images/PKIProcess.png]]
+* Concept :ATTACH:
+:PROPERTIES:
+:ID:       65d8ba6c-bd4f-4120-a66a-eca73ce5870e
+:END:
+[[attachment:_20251202_111820screenshot.png]]
+
 1. Requestor create a CSR and submit to the CA
 2. CA issue a certificate based on CSR and returns it ot the requestor
 3. Should certificate be revoked, the CA adds it to its CRL
+* Signature
 * Compoments
 ** Public Key Infrastructure (PKI)
 Security architecture where trust is conveyed through the signature of certificates
