@@ -1,3 +1,11 @@
 #+title: Mac
 #+LANGUAGE: en
 Message Authentification Code
+See also : [[https://smallstep.com/blog/everything-pki/#macs-and-signatures-authenticate-stuff][Everything PKI]] 
+* How it works :ATTACH:
+:PROPERTIES:
+:ID:       f4569baa-f8d8-41aa-83a4-230d0b53f654
+:END:
+We use [[https://en.wikipedia.org/wiki/HMAC][HMAC]] who use hash function. It allows to hash a message with a password. And return an hashed output. A recipient that also knows the shared secret can produce their owsn MAC and compare it to the one provided.
+
+[[attachment:_20251202_111553screenshot.png]]
