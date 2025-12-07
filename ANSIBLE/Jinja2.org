@@ -95,8 +95,8 @@ See the [[file:~/INFOR/INFRA/ANSIBLE/ROLES/chrony/templates/chrony.conf.j2::{% f
 * Example config.j2
 #+begin_src jinja2
 # ----------------------------------------------
-# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
-# ---------------------------------------------
+# File generate by Ansible – {{ ansible_date_time.iso8601 }}
+# ----------------------------------------------
 
 # listen service adress
 listen_address = {{ myapp_listen_address | default('0.0.0.0') }}
