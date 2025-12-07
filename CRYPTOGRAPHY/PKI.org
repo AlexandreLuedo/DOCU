@@ -1,7 +1,8 @@
 #+title: Pki
 #+LANGUAGE: en
-Source: https://pki-tutorial.readthedocs.io/en/latest/
-
+Sources:
+- https://pki-tutorial.readthedocs.io/en/latest/
+- https://smallstep.com/blog/everything-pki/#macs-and-signatures-authenticate-stuff
 * Concept :ATTACH:
 :PROPERTIES:
 :ID:       65d8ba6c-bd4f-4120-a66a-eca73ce5870e
