@@ -13,4 +13,23 @@ hp-makeuri 192.168.1.25
 #+begin_src bash
 $ hp-scan -d "escl:https://192.168.1.25:443" --size=a4 -r 300 -m gray --file=fiche_de_livraison.pdf
 #+end_src
+* Scan multiples pages in one document
+** Scan
+#+begin_src bash
+# Page 1
+$ hp-scan -d "escl:https://192.168.1.25:443" --size=a4 -r 300 --file=page1.pdf
+
+# Page 2
+$ hp-scan -d "escl:https://192.168.1.25:443" --size=a4 -r 300 --file=page2.pdf
+
+# Page 3... etc.
+#+end_src
+** Assembly them
+#+begin_src bash
+$ pdfunite page1.pdf page2.pdf document_final.pdf
+#+end_src
+** Beginner script
+#+begin_src bash
+$ hp-scan -d "escl:https://192.168.1.25:443" --size=a4 -r 300 --file=p1.pdf && read -p "Change la feuille et appuie sur Entrée..." && hp-scan -d "escl:https://192.168.1.25:443" --size=a4 -r 300 --file=p2.pdf && pdfunite p1.pdf p2.pdf final.pdf && rm p1.pdf p2.pdf
+#+end_src
 
