@@ -1,0 +1,16 @@
+#+title: Printing
+#+LANGUAGE: en
+Using sane based software like hp-scan
+* Installing hp-scan
+#+begin_src bash
+$ sudo pacman -S cups sane hplip
+#+end_src
+* Found the hpaio adress
+#+begin_src bash
+hp-makeuri 192.168.1.25
+#+end_src
+* Scan in grayscall output
+#+begin_src bash
+$ hp-scan -d "escl:https://192.168.1.25:443" --size=a4 -r 300 -m gray --file=fiche_de_livraison.pdf
+#+end_src
+
