@@ -1652,3 +1652,10 @@ $ passwd nomUtilisateur
 #+end_src
 *** Gestion des utilisateurs
 On peux modif les fichiers =/etc/passwd /etc/shadow= à la main mais aussi utiliser des commandes qui seront plus complètes et gèrerons mieux les modifications.
+* Gestion de logiciels
+** Discord
+*** Installation or manual updating
+#+begin_src bash
+$ sudo tar -xvzf discord-*.tar.gz -C /opt
+$ sudo ln -sf /opt/Discord/Discord /usr/bin/discord
+#+end_src
