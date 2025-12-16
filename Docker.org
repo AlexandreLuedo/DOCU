@@ -1,1 +1,33 @@
 #+title: Docker
+#+LANGUAGE: en
+Source: [[https://www.wikiwand.com/en/articles/Docker_(software)][Wikipedia (wrapper)]]
+* Components
+** Software
+The deamon known as =Dockerd=
+*** Manage
+**** Containers
+*** Handle
+**** Containers objects
+*** Listen
+**** Docker Engine API (has known as Docker API)
+** Docker
+As client software.
+**** Provide
+***** CLI to interact with docker
+** Object
+*** Docker object
+*Various entities who assemble an application in Docker.
+**** Container
+***** Managed
+****** Docker Engine API
+****** CLI
+**** Image
+***** Read-only template
+***** Used to store & ship applications
+**** Service
+***** Allows
+****** [?] Scale across multiples Docker daemons
+***** Result
+****** Swarm
+Set of cooperative deamons communicta trough the Docker Engine API
+** Registries
