@@ -1,0 +1,5 @@
+#+title: Lazyvim
+#+LANGUAGE: en
+* Visual
+** Comment selection
+gc
