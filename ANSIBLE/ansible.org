@@ -3,7 +3,6 @@
 * [[https://docs.ansible.com/ansible/latest/getting_started/get_started_inventory.html][Inventory]]
 - L'inventaire ~inventory.ini~ (ou .yaml) regroupe les ~nodes~ du projet (les points d'accès, ex: serveurs).
 - Utiliser le format de fichier ini est plus court que la syntaxe yaml mais sur le long terme c'est mieux yaml
-
   #+begin_src ini
 [hosts]
 192.1.0
@@ -20,15 +19,25 @@ myhosts:
     my_host_03:
       ansible_host: 192.0.2.52
 #+end_src
+** Inventaire d'exemple
+~/INFOR/INFRA/INVENTORIES/Invetory.yaml
 ** Vérifier son ~inventory~
 #+begin_src bash
-$ ansible-inventory -i inventory.ini --list
+$ ansible-inventory -i <Path/to/the/inventory/file.yaml> --list
 #+end_src
 ** Ping
 #+begin_src bash
-$ ansible nomDuFichierInventaire -m ping -i inventory.ini
+$ ansible <Nom_du_serveur> -m ping -i <Path/to/the/inventory/file.yaml>
 #+end_src
 * Playbooks
+** Execution
+*** Playbook "Missing sudo password"
+#+begin_src bash
+$ ansible-playbook <playbook> -i <inventory> -k # Act like --ask-become-pass
+#+end_src
+
+#+RESULTS:
+
 ** Guide
   #+begin_example yaml
   --- #start
@@ -205,13 +214,29 @@ tasks:
     notify: Restart {{ networkd }} service
 #+end_src
 ** Inclure un role
+*** Début de playbooks
+#+begin_src yaml
+- name: nom du playbook
+  hosts: localhost
+  roles:
+    - role1                     # Ces deux roles vont s'executer
+    - role2                     # avant toute les autres tâches.
+  tasks:
+#+end_src
 *** Tâches
 **** Inclure une tâche de role
 #+begin_src yaml
+# Avec déclaration direct
 - name: Link "{{ vip_ip_adress }}" to open the server NTP port
   include_role:
     name: vip
     tasks_from: add_vip
+
+# Avec déclaration au préalable
+- roles:
+    - mon_role
+  tasks:
+    - name: fait d'autre choses:
 #+end_src
 * Facts
 #+begin_src yaml
