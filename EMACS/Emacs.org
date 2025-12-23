@@ -145,6 +145,11 @@ C-c C-,
 ,#+ATTR_ORG: :width: 100
 [[~/path/to/image.svg]]
 #+end_src
+** Insert current name file or path
+*** File name
+SPC i f
+*** Path
+SPC i F
 ** Blockquote
 See also: [[https://github.com/orgs/community/discussions/16925][Github Block quote]]
 Works well with .org
