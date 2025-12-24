@@ -8,11 +8,34 @@ This return gateway IP
 #+begin_src bash
 $ ip route | grep default
 #+end_src
-* Obtain all devices on network
+* Obtain
+** Scan devices on network
 #+begin_src bash
 nmap -sn 192.168.1.1/24
 #+end_src
-* Obtain ipv4 macos
+** ipv4
+*** macos
 #+begin_src bash
 $ ipconfig getifaddr en0
 #+end_src
+*** arch
+#+begin_src bash
+$ ip addr show | grep 192.168.
+#+end_src
+** ip adress opened ports
+#+begin_src bash
+sudo nmap -sS -p 80,443 --open 192.168.1.0/24
+#+end_src
+* Connect
+** Arch
+#+begin_src bash
+$ iwctl
+$ station [<interface>] connect-hidden "[<SSID>]" # For hidden networks
+
+# Forget network if doesn't work
+$ known-networks list           # verify SSID name
+$ known-networks "[<SSID>]" forget
+# And then reconnect using the station command upper
+
+#+end_src
+
