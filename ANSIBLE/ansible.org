@@ -37,6 +37,15 @@ $ ansible-playbook <playbook> -i <inventory> -k # Act like --ask-become-pass
 #+end_src
 
 #+RESULTS:
+*** Flags
+#+begin_src bash
+$ ansible-playbook <flag> [<file>]
+-C, --check                     # Ne fait pas de changements, prédit ce qu'il va se passer
+-D, --diff                      # Montre les différences de fichiers, fonctionne bien avec check
+--syntax-check                  # Vérifie la syntaxe, retourne si vrai chemin du playbook
+#+end_src
+
+#+RESULTS:
 
 ** Guide
   #+begin_example yaml
@@ -175,6 +184,7 @@ my_role/
 **** meta/main.yml : indique les dépendances éventuelles à d’autres rôles ou les exigences de plateforme.
 ***   Tasks
 Pour intégrer d'autre fichiers dans le dossier "tasks", il suffit. Grâce à import_tasks: file.yml
+*** Templates
 *** Placement des roles
 Placement par defaut des roles :
 ~/.ansible/roles:/usr/share/ansible/role:/etc/ansible/roles
@@ -481,6 +491,15 @@ Doc:[[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarch
         remote_src: yes         # The file is already present on host
         keep_newer: no          # owerwrite files
         mode: preserve          # Preserve zip perms
+#+end_src
+* Ansible community
+** Obtenir la doc
+#+begin_src bash
+$ ansible-doc community.general.<module_name>
+#+end_src
+** Lister les modules communautaires
+#+begin_src bash
+ansible-galaxy collection list
 #+end_src
 * Alex
 1. Créer des playbooks
