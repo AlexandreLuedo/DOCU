@@ -258,6 +258,10 @@ $ diskutil list # macOS
 sudo dd if=<file> of=<device> bs=16M status=progress oflag=sync
 #+end_src
 ** pantuml
+* Dired view
+** Change view
+F
+
 * Config files
 ** Config
 -[[file:~/.config/doom/config.el][ ~/.config/doom/]]
