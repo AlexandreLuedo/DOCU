@@ -61,6 +61,8 @@ ee
 *** Merge
 **** Select the reciever branch (master)
 - b b <branch-name> RET
+*** Change
+b b
 
 
 
