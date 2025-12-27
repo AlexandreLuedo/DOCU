@@ -1,0 +1,5 @@
+#+title: Git
+#+LANGUAGE: en
+A new Git documentation using [[https://github.com/progit/progit2][ProGit2]] as source.
+
+
