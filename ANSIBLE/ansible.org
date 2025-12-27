@@ -185,6 +185,14 @@ my_role/
 ***   Tasks
 Pour intégrer d'autre fichiers dans le dossier "tasks", il suffit. Grâce à import_tasks: file.yml
 *** Templates
+**** Déployer une template
+#+begin_src yaml
+- name: Deploy an template
+  ansible.builtin.template:
+    src: templates/file.conf.j2
+    dest: /path/to/destination/file.conf
+#+end_src
+
 *** Placement des roles
 Placement par defaut des roles :
 ~/.ansible/roles:/usr/share/ansible/role:/etc/ansible/roles
