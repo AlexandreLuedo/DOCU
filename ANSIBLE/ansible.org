@@ -500,6 +500,18 @@ Doc:[[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarch
         keep_newer: no          # owerwrite files
         mode: preserve          # Preserve zip perms
 #+end_src
+** Service
+*** Start
+[[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_module.html#parameter-state][State différents]]
+#+begin_src yaml
+- name: start service
+  ansible.builtin.service:
+    name: [<service_name>]
+    state: started
+    enabled: yes                # Enable the service
+#+end_src
+** Package
+Doc: [[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/apt_module.html#examples][Examples]]
 * Ansible community
 ** Obtenir la doc
 #+begin_src bash
