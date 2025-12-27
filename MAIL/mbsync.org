@@ -1,0 +1,5 @@
+#+title: Mbsync
+#+LANGUAGE: en
+Package used to sync email.
+* Config file
+=~/.mbsyncrc
