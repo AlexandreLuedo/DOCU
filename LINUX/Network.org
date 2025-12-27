@@ -1,0 +1,36 @@
+#+title: Network
+#+LANGUAGE: en
+This file is used to store network stuff for linux.
+See also:[[file:~/INFOR/DOCU/NETWORK/Network.org][Network.org in Network documentation folder]] if you doesn't find your answer.
+
+* Interface
+** File
+=/etc/network/interfaces=
+* DNS
+** Configure DNS
+*** ARCH
+**** Using systemd-resolved (recommended)
+#+begin_src bash
+$ sudo nvim /etc/systemd/resolved.conf
+#+end_src
+#+begin_src conf
+[Resolve]
+DNS=[<dns.adress>] <second.dns.adress>
+FallbackDNS=[<fallback.dns.adress>]
+#+end_src
+#+begin_src bash
+# Create an symlink (just making that one time)
+$ sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+# Restart service
+$ sudo systemctl restart systemd-resolved
+#+end_src
+**** Using NetworkManager
+#+begin_src bash
+# Configure
+$ nmcli connection modify "[<SSID>]" ipv4.dns "[<dns.adress>]" ipv4.ignore-auto-dns yes
+
+# Up
+$ nmcli connection up "[<SSID>]"
+#+end_src
+*** Debian
