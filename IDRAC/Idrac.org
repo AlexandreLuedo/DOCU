@@ -1,0 +1,11 @@
+#+title: Idrac
+#+LANGUAGE: en
+* setup domain access
+#+begin_src bash
+$ ssh [<user>]@[<idrac>]
+$ racadm set iDRAC.NIC.DNSDomainName [<domain.name>]
+$ racadm set iDRAC.NIC.DNSRacName [<subdomain>]
+$ racadm racreset               # Restart
+#+end_src
+
+
