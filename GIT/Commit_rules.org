@@ -1,0 +1,14 @@
+#+title: Commit Rules
+#+LANGUAGE: en
+** Most Common Types
+
+| Type        | Usage                                                                           | Example                                         |
+|-------------+---------------------------------------------------------------------------------+-------------------------------------------------|
+| ~feat:~     | A new feature (addition of code).                                               | =feat(pki): add certificate generation task=    |
+| ~fix:~      | A bug fix.                                                                      | =fix(network): correct ip address regex=        |
+| ~refactor:~ | A code change that neither fixes a bug nor adds a feature.                      | =refactor: simplify loop in systemd role=       |
+| ~docs:~     | Documentation only changes (README, comments).                                  | =docs: update installation instructions=         |
+| ~style:~    | Changes that do not affect the meaning of the code (white-space, formatting).   | =style: fix indentation in main.yml=            |
+| ~test:~     | Adding missing tests or correcting existing tests (Molecule, etc.).             | =test: add verification for service status=      |
+| ~chore:~    | Maintenance tasks or tool configuration (e.g., .gitignore).                     | =chore: update ansible-lint version=            |
+| ~ci:~       | Changes to CI configuration files and scripts (GitHub Actions, GitLab CI).      | =ci: add workflow for automatic linting=        |
