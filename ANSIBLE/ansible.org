@@ -272,7 +272,17 @@ tasks:
         name: my_one_task_role
       when: need_restart
 #+end_src
-
+** hostname facts
+Pour avoir le nom de sa machine
+#+begin_src yaml
+hostname['item']
+#+end_src
+** Obtenir un group dans un inventaire
+#+begin_src yaml
+groups['<nom_de_groupe>']
+#+end_src
+** Obtenir nom d'un host dans un group + ip
+hostvar['item']['ansible_host']
 * Vault
 ** Création d'un vault
 #+begin_src bash
