@@ -1,0 +1,11 @@
+#+title: Mu
+#+LANGUAGE: en
+* Init the database
+#+begin_src bash
+$ mu init --maildir=[<path/to/mail/dir>] --my-address=<your@email.me>
+#+end_src
+* Indexing the database
+#+begin_src bash
+$ mu index
+#+end_src
+
