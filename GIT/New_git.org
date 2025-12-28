@@ -3,13 +3,12 @@
 A new Git documentation using [[https://github.com/progit/progit2][ProGit2]] as source.
 
 * Config & settings
-
 #+begin_src bash
-git config --list --show-origin
+git config --list --show-origin # Show all settings
 #+end_src
 ** User infos
 #+begin_src bash
-git config <flags> [<variable.suffix>] [<infos>]
+git config <flags> <variable.suffix> <infos>
 #+end_src
 *** Name
 #+begin_src bash
@@ -23,4 +22,30 @@ git config --global core.editor emacs # Must provide full path on Windows
 #+end_src
 
 #+RESULTS:
+** branch config
+[[*set name to default branch][set name to default branch]] 
+* Repo
+** Init
+#+begin_src bash
+cd ~/your/path/for/your/repo
+git init
+#+end_src
+** Adding file
+#+begin_src bash
+git add <file>
+#+end_src
+** Commit changes
+#+begin_src bash
+git commit -m "<msg>"       
+#+end_src
+** checking
+*** status
+#+begin_src bash
+git status
+#+end_src
+* Branch
+** set name to default branch
+#+begin_src bash
+git config --global init.defaultBranch <branch_name>
+#+end_src
 
