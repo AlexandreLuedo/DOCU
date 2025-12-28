@@ -16,7 +16,7 @@ $ sudo wg-quick up confFileName
 #+end_src
 4. 
 #+begin_src bash
-$ sudo wb
+$ sudo wg
 return infos # normallyl
 #+end_src
 * Umbrel
