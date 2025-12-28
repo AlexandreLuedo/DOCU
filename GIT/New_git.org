@@ -2,4 +2,25 @@
 #+LANGUAGE: en
 A new Git documentation using [[https://github.com/progit/progit2][ProGit2]] as source.
 
+* Config & settings
+
+#+begin_src bash
+git config --list --show-origin
+#+end_src
+** User infos
+#+begin_src bash
+git config <flags> [<variable.suffix>] [<infos>]
+#+end_src
+*** Name
+#+begin_src bash
+git config --global user.name [<username>]
+git config --global user.email [<mail.address>]
+#+end_src
+*** Email
+*** Editor
+#+begin_src bash
+git config --global core.editor emacs # Must provide full path on Windows
+#+end_src
+
+#+RESULTS:
 
