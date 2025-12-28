@@ -34,7 +34,6 @@ $ sudo chmod 775 /nfs/exports/myshare
 
 # In /etc/exports
 /nfs/exports/myshare 192.168.122.0/24(rw,sync,no_subtree_check)
-
 #+end_src
 *** Reload config
 #+begin_src bash
