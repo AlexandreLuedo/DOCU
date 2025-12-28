@@ -3,3 +3,13 @@
 Package used to sync email.
 * Config file
 =~/.mbsyncrc
+* Ping proton
+#+begin_src bash
+echo -e "Subject: Test Terminal\n\nCeci est un test." | msmtp --debug --account=proton ton_email@proton.me
+#+end_src
+* Print folder
+#+begin_src bash
+mbsync -Vn [<channel-name>]
+#+end_src
+
+#+RESULTS:
