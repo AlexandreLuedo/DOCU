@@ -1,0 +1,17 @@
+#+title: Manual And Docu
+#+LANGUAGE: en
+* Syntax
+** Optionnal
+#+begin_src bash
+$ command <optionnal_var>
+#+end_src
+** Required
+#+begin_src bash
+$ command [<required_var>]
+#+end_src
+** Path vs Pathspec
+*** Path
+Used the path of file and the regex rules like "*.log" for obtaining all logs
+*** Pathspec
+Used only the path of file. Regex options wouldn't work.
+
