@@ -39,6 +39,10 @@ git add <file>
 rm <file_name>
 git rm [<file_name>...]         # The tree dots maining that it can be repeat
 #+end_src
+** Moving file
+#+begin_src bash
+git mv <source> <destination>
+#+end_src
 ** Checking changes
 #+begin_src bash
 git diff
