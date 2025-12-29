@@ -43,6 +43,10 @@ git rm [<file_name>...]         # The tree dots maining that it can be repeat
 #+begin_src bash
 git diff
 #+end_src
+** Remove stagged
+#+begin_src bash
+git rm [--cached] [<pathspec>...]
+#+end_src
 ** Commit changes
 #+begin_src bash
 git commit -m "<msg>"       
