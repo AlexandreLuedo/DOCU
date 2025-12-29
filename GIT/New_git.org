@@ -25,7 +25,7 @@ git config --global core.editor emacs # Must provide full path on Windows
 ** branch config
 [[*set name to default branch][set name to default branch]] 
 * Repo
-** Init
+** Initialyse
 #+begin_src bash
 cd ~/your/path/for/your/repo
 git init
