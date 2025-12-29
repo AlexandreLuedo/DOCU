@@ -55,10 +55,15 @@ git rm [--cached] [<pathspec>...]
 #+begin_src bash
 git commit -m "<msg>"       
 #+end_src
-** checking
+** Checking
 *** status
 #+begin_src bash
 git status
+#+end_src
+*** history or logs
+#+begin_src bash
+git log
+git log --patch                 # Show the diff introduced in each commits (see ProGit2 Viewing the Commit History)
 #+end_src
 * Branch
 ** set name to default branch
