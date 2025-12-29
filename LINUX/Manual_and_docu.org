@@ -3,11 +3,11 @@
 * Syntax
 ** Optionnal
 #+begin_src bash
-$ command <optionnal_var>
+$ command [<optionnal_var>]
 #+end_src
 ** Required
 #+begin_src bash
-$ command [<required_var>]
+$ command <required_var>
 #+end_src
 ** Path vs Pathspec
 *** Path
