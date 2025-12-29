@@ -34,6 +34,15 @@ git init
 #+begin_src bash
 git add <file>
 #+end_src
+** Remove file
+#+begin_src bash
+rm <file_name>
+git rm [<file_name>...]         # The tree dots maining that it can be repeat
+#+end_src
+** Checking changes
+#+begin_src bash
+git diff
+#+end_src
 ** Commit changes
 #+begin_src bash
 git commit -m "<msg>"       
@@ -48,4 +57,3 @@ git status
 #+begin_src bash
 git config --global init.defaultBranch <branch_name>
 #+end_src
-
