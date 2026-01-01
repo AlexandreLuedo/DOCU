@@ -12,7 +12,15 @@ $ gh repo create [name] [flags]
 ** Create
 #+begin_src bash
 gh issue create
-# template
 gh issue create --title "<issue_title>" [--body "<body>"]
+# template
+gh issue create --template "bug_report.md"
 #+end_src
-** 
+** View
+#+begin_src bash
+gh issue view <issue_tag_only_integer> [<--web>]
+#+end_src
+** List
+#+begin_src bash
+gh issue list
+#+end_src
