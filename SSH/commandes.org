@@ -1,4 +1,5 @@
 #+title: Commandes
+#+LANGUAGE: fr
 * [[https://www.openssh.com/manual.html][DOC]]
 * Connections
 ** Connection simple
