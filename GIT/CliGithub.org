@@ -12,4 +12,7 @@ $ gh repo create [name] [flags]
 ** Create
 #+begin_src bash
 gh issue create
+# template
+gh issue create --title "<issue_title>" [--body "<body>"]
 #+end_src
+** 
