@@ -8,3 +8,8 @@ Us
 $ gh repo create [name] [flags]
 #+end_src
 * Connection
+* Issue
+** Create
+#+begin_src bash
+gh issue create
+#+end_src
