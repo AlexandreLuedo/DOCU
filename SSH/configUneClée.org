@@ -1,4 +1,6 @@
 #+title: Config Une Clée
+#+LANGUAGE: fr
+
 #+begin_src bash
 # Génère une clé SSH si elle n'existe pas déjà
 [ -f ~/.ssh/id_ed25519 ] || ssh-keygen -t ed25519 -C "tonemail@example.com" -f ~/.ssh/id_ed25519 -N ""
