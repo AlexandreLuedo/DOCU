@@ -30,9 +30,13 @@ git config --global core.editor emacs # Must provide full path on Windows
 cd ~/your/path/for/your/repo
 git init
 #+end_src
-** Adding file
+** Adding file / Stagging
 #+begin_src bash
 git add <file>
+#+end_src
+** Unstaging file
+#+begin_src bash
+$ git reset HEAD <file>
 #+end_src
 ** Remove file
 #+begin_src bash
@@ -43,10 +47,7 @@ git rm [<file_name>...]         # The tree dots maining that it can be repeat
 #+begin_src bash
 git mv <source> <destination>
 #+end_src
-** Checking changes
-#+begin_src bash
-git diff
-#+end_src
+** [[*changes][Checking changes]]
 ** Remove stagged
 #+begin_src bash
 git rm [--cached] [<pathspec>...]
@@ -55,7 +56,17 @@ git rm [--cached] [<pathspec>...]
 #+begin_src bash
 git commit -m "<msg>"       
 #+end_src
+** Redo commit
+If you ommit a file, or didn't commment the commit:
+#+begin_src bash
+git commit --amend
+#+end_src
+After run the stagging aera will look exactly the same before commiting changes.
 ** Checking
+*** changes
+#+begin_src bash
+git diff
+#+end_src
 *** status
 #+begin_src bash
 git status
