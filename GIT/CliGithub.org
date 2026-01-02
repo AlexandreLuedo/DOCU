@@ -24,3 +24,7 @@ gh issue view <issue_tag_only_integer> [<--web>]
 #+begin_src bash
 gh issue list
 #+end_src
+** Close
+#+begin_src bash
+gh issue close 123 --comment "<comment>"
+#+end_src
