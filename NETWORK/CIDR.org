@@ -1,0 +1,6 @@
+#+title: Cidr
+#+LANGUAGE: en
+* netmask for /24
+255.255.255.0
+* netmask for /22
+255.255.252.0
