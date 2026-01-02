@@ -34,3 +34,8 @@ $ nmcli connection modify "[<SSID>]" ipv4.dns "[<dns.adress>]" ipv4.ignore-auto-
 $ nmcli connection up "[<SSID>]"
 #+end_src
 *** Debian
+** Print DNS Settings
+*** Arch
+#+begin_src bash
+$ resolvectl status
+#+end_src
