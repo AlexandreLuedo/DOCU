@@ -1661,3 +1661,8 @@ On peux modif les fichiers =/etc/passwd /etc/shadow= à la main mais aussi utili
 $ sudo tar -xvzf discord-*.tar.gz -C /opt
 $ sudo ln -sf /opt/Discord/Discord /usr/bin/discord
 #+end_src
+* Backup
+Créer une backup pour un fichier
+#+begin_src bash
+sudo cp /etc/network/interfaces /etc/network/interfaces.bak
+#+end_src
