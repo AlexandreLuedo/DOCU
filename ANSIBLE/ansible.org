@@ -282,6 +282,7 @@ hostname['item']
 groups['<nom_de_groupe>']
 #+end_src
 ** Obtenir nom d'un host dans un group + ip
+Docu: [[https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_vars_facts.html#id9][Ansible facts]]
 hostvar['item']['ansible_host']
 * Vault
 ** Création d'un vault
