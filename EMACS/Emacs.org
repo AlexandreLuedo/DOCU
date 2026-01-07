@@ -258,6 +258,21 @@ $ diskutil list # macOS
 sudo dd if=<file> of=<device> bs=16M status=progress oflag=sync
 #+end_src
 ** pantuml
+* Editing
+** Replacing
+#+begin_src
+:%s/<string>/<string>/g
+#+end_src
+=:= emacs command mode
+=%= apply on all the file
+=s= mean substitue
+=g= mean global, modify all the lines
+=c= mean idk, but it's ask you if you delete for each lines
+In regexp, if you use {{  }} in the replacement string, you must add =\= before the caracter like that :
+#+begin_src
+:%s/<\{\{ string \}\}>/<string>/g
+#+end_src
+
 * Dired view
 ** Change view
 F
