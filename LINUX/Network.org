@@ -39,3 +39,4 @@ $ nmcli connection up "[<SSID>]"
 #+begin_src bash
 $ resolvectl status
 #+end_src
+* 
