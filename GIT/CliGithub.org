@@ -26,5 +26,8 @@ gh issue list
 #+end_src
 ** Close
 #+begin_src bash
-gh issue close 123 --comment "<comment>"
+$ gh issue close 123 -c <string> -r <string>
+# -r flag include 
 #+end_src
+
+#+RESULTS:
