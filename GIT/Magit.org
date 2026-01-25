@@ -63,9 +63,6 @@ ee
 - b b <branch-name> RET
 *** Change
 b b
-
-
-
 * Make a full commit
 - SPC gg
 - s
