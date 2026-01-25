@@ -34,6 +34,29 @@ $ nmcli connection modify "[<SSID>]" ipv4.dns "[<dns.adress>]" ipv4.ignore-auto-
 $ nmcli connection up "[<SSID>]"
 #+end_src
 *** Debian
+**** Using systemd-resolved (recommended)
+#+begin_src bash
+# Setup systemd-resolved
+$ sudo apt install systemd-resolved 
+$ sudo systemctl enable systemd-resolved
+
+# Configure the DNS servers 
+$ sudo nvim /etc/systemd/resolved.conf
+#+end_src
+#+begin_src conf
+# Modify this lines
+[Resolve]
+DNS=<your.dns.adress>
+FallbakcDNS=<if.first.failed>
+Domains=~.                      # Route all DNS queries to the DNS servers associated with specific IP
+#+end_src
+#+begin_src bash
+$ sudo systemctl restart systemd-resolved
+# Ensuring /etc/resolv.conf points to systemd-resolved
+$ sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+# Verify the changes
+resolvectl status
+#+end_src
 ** Print DNS Settings
 *** Arch
 #+begin_src bash
