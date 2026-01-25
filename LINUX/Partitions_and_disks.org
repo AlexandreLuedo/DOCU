@@ -1,0 +1,22 @@
+#+title: Partitions And Disks
+#+LANGUAGE: en
+* Configure a file system
+** Create a partition table
+#+begin_src bash
+$ fdisk /dev/sdX
+o                               # Create new partition table
+n                               # New partition
+# (you can press "enter" for all question, if you want to use all device space) 
+t                               # Change the type (exFAT, FAT32 etc...)
+7                               # For changing to exFAT/HPFS
+b                               # For changing to FAT32
+w                               # Writing changes
+#+end_src
+** Format the partition
+#+begin_src bash
+$ sudo mkfs.exfat -n "key_name" /dev/sdX1 # For context it's in exfat partition format
+#+end_src
+* Eject
+#+begin_src bash
+$ sudo eject /dev/sdX
+#+end_src
