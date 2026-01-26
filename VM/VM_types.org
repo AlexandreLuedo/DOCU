@@ -1,0 +1,22 @@
+#+title: Vm Types
+#+LANGUAGE: en
+* Hypervisor or VMM - Virtual Machine Monitor
+** Type 1
+This hypervisor, is at same level has kernel for hardware speaking. It's called /bare metale hypervisor/
+*** Emulate
+**** Hardrive virtualisation
+**** NIC virtualisation
+*** ESX
+By Vmware
+*** HyperV
+By Microsoft
+*** KVM
+*** Xen
+**
+** Type 2
+This hypervisor use the kernel for hardware speaking. It is like an application.
+*** Virtual box
+*** VMware workstation
+*** WMware fusion
+For macos
+*** QEMU
