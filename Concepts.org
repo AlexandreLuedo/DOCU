@@ -1,0 +1,15 @@
+#+title: Concepts
+* Others concepts
+** [[/home/alexandre/INFOR/DOCU/VM/Concepts.org][VM Concepts]] 
+* Philosophy
+It handle the concepts who are software and hardware based
+** Single source of true - SSOT
+** Single point of failure - SPOF
+* Software
+* Hardware
+** Random Access Memory - RAM
+** Graphical Processing Unit - GPU
+** Calculations Processing Unit - CPU
+** Motherboard
+** Network Interface Controller - NIC (carte réseau)
+
