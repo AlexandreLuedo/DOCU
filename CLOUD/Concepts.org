@@ -1,0 +1,12 @@
+#+title: Concepts
+#+LANGUAGE: en
+Concepts for the [[https://www.cloudflare.com/learning/cloud/what-is-the-cloud/][cloud.]]
+* Content Delivery Network - CDR
+See also: [[https://www.cloudflare.com/learning/cdn/what-is-a-cdn/][Cloudflare docs]]
+Often used for webservices.
+** Client
+It is a service who act when a client want to retrieve website ressources (images, javascript...). CDR are all over the world to ensure the client can retrieve all data. The CDR store only parts of a website.
+The CDR hold in cache parts and then resend it to the client. For way better performances.
+** Rent a webserver
+Like explain above, the CDR store in cache, so you pay less bandwith.
+
