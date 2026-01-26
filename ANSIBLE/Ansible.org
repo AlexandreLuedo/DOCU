@@ -1,0 +1,539 @@
+#+title: Ansible
+#+LANGUAGE:fr
+* [[https://docs.ansible.com/ansible/latest/getting_started/get_started_inventory.html][Inventory]]
+- L'inventaire ~inventory.ini~ (ou .yaml) regroupe les ~nodes~ du projet (les points d'accès, ex: serveurs).
+- Utiliser le format de fichier ini est plus court que la syntaxe yaml mais sur le long terme c'est mieux yaml
+  #+begin_src ini
+[hosts]
+192.1.0
+102921.9208.90218 #titre d'exemple
+  #+end_src
+
+#+begin_src yaml
+myhosts:
+  hosts:
+    my_host_01:
+      ansible_host: 192.0.2.50
+    my_host_02:
+      ansible_host: 192.0.2.51
+    my_host_03:
+      ansible_host: 192.0.2.52
+#+end_src
+** Inventaire d'exemple
+~/INFOR/INFRA/INVENTORIES/Invetory.yaml
+** Vérifier son ~inventory~
+#+begin_src bash
+$ ansible-inventory -i <Path/to/the/inventory/file.yaml> --list
+#+end_src
+** Ping
+#+begin_src bash
+$ ansible <Nom_du_serveur> -m ping -i <Path/to/the/inventory/file.yaml>
+#+end_src
+* Playbooks
+** Execution
+*** Playbook "Missing sudo password"
+#+begin_src bash
+$ ansible-playbook <playbook> -i <inventory> -k # Act like --ask-become-pass
+#+end_src
+
+#+RESULTS:
+*** Flags
+#+begin_src bash
+$ ansible-playbook <flag> [<file>]
+-C, --check                     # Ne fait pas de changements, prédit ce qu'il va se passer
+-D, --diff                      # Montre les différences de fichiers, fonctionne bien avec check
+--syntax-check                  # Vérifie la syntaxe, retourne si vrai chemin du playbook
+#+end_src
+
+#+RESULTS:
+
+** Guide
+  #+begin_example yaml
+  --- #start
+- name: This is a example
+  ... #end
+
+  #+end_example
+  - Indentation via ~espaces~
+** Différents concepts
+- *Hosts* : le serveur géré qui va effectuer les tâches
+- *Tasks* l'opération qui va être menée grâce aux modules Ansibles, en passant par des options
+- *become* l'élécation des privilèges dans les *playbooks*
+- *role* le role est comme un morceau de code (un fichier), il permet de gérer des actions plus complètes.
+    #+begin_src
+- name: Install web server
+ hostst: web_servers
+ roles:
+ - nginx
+    #+end_src
+
+#+begin_example
+L'ordre des contenus est important
+Un playbooks doit être *idempotent*
+#+end_example
+
+#+begin_src
+---
+- name: Apache server installed
+  hosts: web
+  become: true
+  tasks:
+
+  - name: latest Apache version installed
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Apache enabled and running
+    service:
+      name: httpd
+      enabled: true
+      state: started
+
+  - name: copy index.html
+    copy:
+      src: web.html
+      dest: /var/www/html/index.html
+#+end_src
+** Création et structuration des dossiers et des fichiers
+*** Définir "play"
+#+begin_src yaml
+---
+- name: Apache server installed
+ hosts: node1
+ become: yes #toujours ajouter pour les privilèges
+#+end_src
+***   Définir "tasks"
+#+begin_src yaml
+---
+- name: Apache server installed
+  hosts: node1
+  become: yes
+  tasks:
+
+    - name: Install Apache
+      ansible.builtin.dnf:
+        name: httpd
+#+end_src
+** Cycle de creation d'un playbook
+1. Type "ansible module install package" into a search engine
+2. Open the docs.ansible.com result that looks most helpful
+3. Read through available parameters and the (often helpful) examples at the bottom
+4. Copy an example into my playbook and modify parameters as needed
+5. Go back to step 1, searching for the next task (e.g. "ansible module template file")
+** LOOPS
+#+begin_src yaml
+- name: Remplacer plusieurs variables
+  ansible.builtin.replace:
+    path: ~/INFOR/DOCU/ANSIBLE/IMMICH/example.env
+    regexp: "{{ item.regex }}"
+    replace: "{{ item.replace }}"
+  loop:
+    - { regex: '^UPLOAD_LOCATION=.*$', replace: 'UPLOAD_LOCATION=./Librairie' }
+    - { regex: '^DB_HOST=.*$',           replace: 'DB_HOST=db.example.local' }
+    - { regex: '^DB_PORT=.*$',           replace: 'DB_PORT=5432' }
+
+
+- name: C'est une loop
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    loop:
+      - /var/test
+      - /bin/test
+      - /etc/test
+#+end_src
+* Role
+#+begin_quote
+[!NOTE]
+- Les roles sont une façon d'organiser ses packages de code pour qu'ils soit réutilisable.
+Ils sont utilisé pour gérer des charges complexes et les roles peuvent être utilisé dans des playbooks.
+#+end_quote
+#+begin_quote
+[!TIP]
+- *Analogie :* Un playbook est une liste de directive et un role et un composant de cette liste.
+#+end_quote
+** Structure et dossier
+#+begin_quote
+[!NOTE]
+Un role ansible à une structuration de dossier spéciale. Il comporte normalement un certains nombre de dossiers, cependant si ils ne sont pas utilisés ils ne sont pas nécéssaires.
+#+end_quote
+***   Organisation
+#+begin_src ascii
+my_role/
+├── defaults/        # variables par défaut (lowest priority)
+│   └── main.yml
+├── vars/            # variables spécifiques (higher priority)
+│   └── main.yml
+├── files/           # fichiers à copier tels quels
+│   └── my.conf
+├── templates/       # fichiers Jinja2 à rendre
+│   └── my.conf.j2
+├── tasks/           # liste ordonnée des actions
+│   └── main.yml
+├── handlers/        # actions déclenchées par « notify »
+│   └── main.yml
+└── meta/            # dépendances vers d’autres rôles, informations
+    └── main.yml
+#+end_src
+
+**** tasks/main.yml : le cœur du rôle, où l’on décrit les étapes (installation de paquets, configuration, etc.).
+**** handlers/main.yml : actions exécutées lorsqu’une tâche notifie un handler (ex. redémarrer un service après modification d’un fichier).
+**** defaults/main.yml et vars/main.yml : permettent de paramétrer le rôle tout en gardant la possibilité de surcharger les valeurs depuis le playbook appelant.
+**** files/ et templates/ : contiennent respectivement des fichiers statiques et des modèles Jinja2 qui seront déployés sur les hôtes.
+**** meta/main.yml : indique les dépendances éventuelles à d’autres rôles ou les exigences de plateforme.
+***   Tasks
+Pour intégrer d'autre fichiers dans le dossier "tasks", il suffit. Grâce à import_tasks: file.yml
+*** Templates
+**** Déployer une template
+#+begin_src yaml
+- name: Deploy an template
+  ansible.builtin.template:
+    src: templates/file.conf.j2
+    dest: /path/to/destination/file.conf
+#+end_src
+
+*** Placement des roles
+Placement par defaut des roles :
+~/.ansible/roles:/usr/share/ansible/role:/etc/ansible/roles
+Placement dans un playbook:
+    folder: roles
+
+- L'indication dans le playbook
+  #+begin_src
+roles:
+ -role:'/path/to/the/role'
+  #+end_src
+
+**** Utilisation
+- avec l'option 'role' dans playbook(methode classique)
+- Dans l'option 'tasks' avec l'argument 'include_role'
+- Pareil qu'au dessus, en changeant 'include' par 'import'.
+***** Include
+L'inclusion permet une réutilisation du role
+ - l'importance de cette inclusion est dans l'execution du play, ça permet à une tâche de s'executer avant.
+   #+begin_src
+tasks:
+ -name: test
+ include_role:
+  name: role_test
+   #+end_src
+***** Import
+** Handlers
+*** Utilisation dans un role (fonctionne aussi dans un playbook)
+#+begin_src yaml
+- Name: Deploy {{ networkd }} config
+  templates:
+    src: 25-wired.network.j2
+    dest: /etc/systemd/network/25-wired.network
+    owner: root
+    group: root
+    mode: "0640"
+    notify: Restart {{ networkd }} service
+#+end_src
+** Inclure un role
+*** Début de playbooks
+#+begin_src yaml
+- name: nom du playbook
+  hosts: localhost
+  roles:
+    - role1                     # Ces deux roles vont s'executer
+    - role2                     # avant toute les autres tâches.
+  tasks:
+#+end_src
+*** Tâches
+**** Inclure une tâche de role
+#+begin_src yaml
+# Avec déclaration direct
+- name: Link "{{ vip_ip_adress }}" to open the server NTP port
+  include_role:
+    name: vip
+    tasks_from: add_vip
+
+# Avec déclaration au préalable
+- roles:
+    - mon_role
+  tasks:
+    - name: fait d'autre choses:
+#+end_src
+* Facts
+#+begin_src yaml
+- name: Redémarrage conditionnel
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Décider s’il faut redémarrer nginx
+      set_fact:
+        need_restart: "{{ ansible_facts['distribution'] == 'Ubuntu' }}"
+
+    - name: Appliquer le rôle uniquement si besoin
+      include_role:
+        name: my_one_task_role
+      when: need_restart
+#+end_src
+** hostname facts
+Pour avoir le nom de sa machine
+#+begin_src yaml
+hostname['item']
+#+end_src
+** Obtenir un group dans un inventaire
+#+begin_src yaml
+groups['<nom_de_groupe>']
+#+end_src
+** Obtenir nom d'un host dans un group + ip
+Docu: [[https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_vars_facts.html#id9][Ansible facts]]
+hostvars['item']['ansible_host']
+* Vault
+** Création d'un vault
+#+begin_src bash
+$ ansible-vault encrypt file.yaml
+#+end_src
+** Voir
+#+begin_src bash
+$ ansible-vault view file.yaml
+#+end_src
+** Modifier
+#+begin_src bash
+$ ansible-vault edit file.yaml
+#+end_src
+** Déchiffrer
+#+begin_src bash
+$ ansible-vault decrypt file.yaml
+#+end_src
+** Changer la clé
+#+begin_src bash
+ansible-vault rekey password.yml
+#+end_src
+* Configuration
+La config se nomme =ansible.cfg= peux être dans le dossier =~/.ansible=
+* Artifacts
+L'artifact est un fichier généré lors de l'execution d'un programme Ansible, il décrit se que fait le programme et donne des informations spécifiques. Nous pouvons voir ça comme une photo prise à l'instant T.
+* Collections
+** requirements files
+#+begin_src yaml
+#requirement.yaml
+---
+collections:
+# With just the collection name
+- my_namespace.my_collection
+
+# With the collection name, version, and source options
+- name: my_namespace.my_other_collection
+  version: ">=1.2.0" # Version range identifiers (default: ``*``)
+  source: ... # The Galaxy URL to pull the collection from (default: ``--api-server`` from cmdline)
+#+end_src
+* Exemples
+Afficher distribution du serveur
+#+begin_src yml
+---
+- name: Exemple d'utilisation des facts
+  hosts: localhost
+  tasks:
+    - name: Afficher la distribution Linux
+      debug:
+        var: ansible_facts['ansible_distribution']
+
+#+end_src
+
+* Mots clés
+~become: yes~ execute en tant que root
+~state: present~ On veux qu'il soit installé, si déjà installé alors rien (indépotant)
+|---------------+------------+-----------------------------------------------------|
+| Noms          | Attributs  | Explications                                        |
+|---------------+------------+-----------------------------------------------------|
+| become:       | yes / no   | execute en tant que root                            |
+|               |            |                                                     |
+| state:        | present    | Installé si déjà installer alors rien (indépotance) |
+|               | absent     |                                                     |
+|               | removed    |                                                     |
+|               | latest     |                                                     |
+|               |            |                                                     |
+| update cache: | yes / no   | Si yes: effectue une màj du gestionnaire de paquet  |
+|               | true/false |                                                     |
+|---------------+------------+-----------------------------------------------------|
+* Inventaires
+Peuvent être en =.yaml= ou =.ini=
+** Commandes utiles
+#+begin_src bash
+$ ansible-inventory --graph -i inventory.yml # Vue grpahique de l'inventaire
+$ ansible-inventory --list -i inventory.yml # Liste complète des inventaires et de leurs variables
+$ ansibile-inventory --host R1 # Voir les détails d'un host
+
+#+end_src
+* Debugage
+#+begin_src bash
+$ ansible routers -m ping -i inventory.yml # Test connexion à tout les hotes de l'inventaire
+$ ansible-doc -l | grep cisco.ios # Obtenir la doc avec des modules de connections
+$ ansible-doc ios_bgp # Afficher la docu d'un module
+#+end_src
+* Connexions
+#+begin_src bash
+ansible_connection:            # local ou network_cli
+ansible_network_os:            # plateforme (Cisco -> ios)
+ansible_user:                  # username ssh
+ansible_ssh_pass:              # password ssh
+ansible_ssh_private_key_file:  # clé ssh
+#+end_src
+* Execution
+#+begin_src bash
+ansible_command_timeout:       # timeout exécution en seconde
+ansible_become:                # élévation de privilège (yes ou no)
+ansible_become_method:         # enable
+#+end_src
+* Ansible builtin
+** File
+See also: [[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/file_module.html][Ansible doc]] 
+*** Loop
+#+begin_src yaml
+- name: Create loop
+  ansible.builtin.file:
+    path: {{ item }}
+    state: directory
+    loop:
+      - /var/etc
+      - /bin/etc
+      - /etc/etc
+- name: Create a folder who hasn't folder parent
+  ansible.builtin.file:
+    path: path/to/folder        # Assuming path & folder doesn't exist
+    state: directory
+    recurse: yes
+#+end_src
+*** Directory
+#+begin_src yaml
+- name: Create loop
+  ansible.builtin.file:
+    path: {{ item }}
+    state: directory
+    loop:
+      - /var/etc
+      - /bin/etc
+      - /etc/etc
+      
+- name: Create a folder who hasn't folder parent
+  ansible.builtin.file:
+    path: path/to/folder        # Assuming path & folder doesn't exist
+    state: directory
+    recurse: yes
+    
+ - name: Create a directory with specific ownership and permissions
+  ansible.builtin.file:
+    path: /srv/www
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0775'      
+#+end_src
+** Pause
+Used to pause the playbook and can opt. interact with the user
+Doc: [[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/pause_module.html][Ansible]]
+#+begin_src yaml
+vars:
+    confirmation_msg: |
+            ----------------------------------------------------------------
+            Please connect your Pixel device to your computer !
+            Answer "done" when the operation is complete.
+            You have 3mn to connect your device until playbook will continue
+            ----------------------------------------------------------------
+    custom_timeout: 180         # 3mn
+
+tasks:
+    - name: Requesting the user to connect his Pixel device.
+      ansible.builtin.pause:
+        prompt: "{{ confirmation_msg }}"
+        timeout: "{{ custom_timeout }}"
+      register: user_reply
+
+    - name: normalise answer
+      ansible.builtin.set_fact:
+        user_answer: "{{ user_reply.user_input | lower | trim }}"
+        until: user_answer in ["done"]
+        retries: 3
+        delay: 1
+
+    - name: Play when connected
+      ansible.builtin.debug:
+        msg: "You attest {{ DEVICE }} is connected, playbook will continue."
+      when: user_answer in ['done', 'd']
+
+#+end_src
+** Get url
+Doc: [[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/get_url_module.html][Ansible]]
+#+begin_src yaml
+    - name: "Download the .zip & the .sig"
+      ansible.builtin.get_url:
+        url: "{{ base_url }}/{{ device_name }}-install-{{ version }}.zip{{ item }}"
+        dest: "{{ dest_dir }}/"
+        mode: "0644"
+        force: no
+        validate_certs: yes
+      loop:
+        - ""
+        - ".sig"
+      registers: dl_results
+#+end_src
+** Debug
+Doc: [[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/debug_module.html][Ansible]]
+#+begin_src yaml
+    - name: Display download result
+      ansible.builtin.debug:
+        var: del_results.results
+#+end_src
+** Command
+Doc: [[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/command_module.html][Ansible]]
+#+begin_src yaml
+    - name: Verify the signature with ssh-keygen (without redirection)
+      ansible.builtin.command: >
+        ssh-keygen -Y verify
+        -f {{ allowed_signers_path }}
+        -I {{ signer_id }}
+        -n "{{ key_namespace }}"
+        -s {{ zip_sig }}
+        {{ zip_path }}
+      register: verify_yes
+      failed_when: verify_res.sc !=0
+
+    - name: Result of verification
+      ansible.builtin.debug:
+        msg: >-
+          {{ device_name }}-{{ version }} :
+            {{ 'signature valide' if verify_res.rc == 0 else 'signature is false' }}
+#+end_src
+** Unarchive
+Doc:[[https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarchive_module.html][Ansible]] 
+#+begin_src yaml
+    - name: Extracting for flashing factory images
+      ansible.builtin.unarchive:
+        src: "{{ zip_path }}"
+        dest: "{{ dest_dir }}"
+        remote_src: yes         # The file is already present on host
+        keep_newer: no          # owerwrite files
+        mode: preserve          # Preserve zip perms
+#+end_src
+** Service
+*** Start
+[[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_module.html#parameter-state][State différents]]
+#+begin_src yaml
+- name: start service
+  ansible.builtin.service:
+    name: [<service_name>]
+    state: started
+    enabled: yes                # Enable the service
+#+end_src
+** Package
+Doc: [[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/apt_module.html#examples][Examples]]
+* Ansible community
+** Obtenir la doc
+#+begin_src bash
+$ ansible-doc community.general.<module_name>
+#+end_src
+** Lister les modules communautaires
+#+begin_src bash
+ansible-galaxy collection list
+#+end_src
+* Alex
+1. Créer des playbooks
+2. Maîtriser les Buildin copy et config de fichiers
+3. Installer un tuc
+4. Config un serveur DNS
