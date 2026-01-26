@@ -1,0 +1,4 @@
+#+title: VM
+#+LANGUAGE: en
+* Hypervisor
+It's an Kernel like, who can access to all the ressources of the hardware.
