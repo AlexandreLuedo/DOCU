@@ -62,7 +62,23 @@ Pools hwo deal with:
 Require a dedicated load balancer device
 **** Software based
 Can run on a server or on a VM. Also in the [[https://www.cloudflare.com/learning/cloud/what-is-the-cloud/][cloud]].
+**** Static load balencing algorithm
+- Will not be aware of which server is not to used or has to eavy workloads.
+- Assign hardware trough a plan
+- Quick and easy to setup
+**** Dynamic load balencing algorithm
+- More difficulte to setup
+- Take care of the workload, availability, health
 ** Failover
+*** Server failover
+Must be connected :
+**** Wirelessly
+Example for cloudflare :
+#+begin_quote
+ Cloudflare Load Balancing periodically sends HTTP/HTTPS requests to server pools to monitor their status. If the HTTP/HTTPS check reveals that a server is unhealthy or offline, Cloudflare will reroute traffic to an available server.
+#+end_quote
+**** Wirely
+- Physical "heartbeat" cables.
 ** Dynamics allocations
 * Hardware
 ** vCPU
