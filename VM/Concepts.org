@@ -1,0 +1,71 @@
+#+title: Concepts
+#+LANGUAGE: en
+* Software
+** VM
+Virtual machine, who are like it's name, an non-real machine inside an bare-metal or kernel based machine.
+** Ressource allocations strategy
+Distributing like :
+- CPU
+- Memory
+- Storage
+- Network
+*** Mechanism
+**** Reservations
+Reservations guarented an minimum of ressources available. Based on the minimum for workloads (like a min. config recommended for a game). Leaving like 10% of unreserved to maintain flexibility.
+***** GPU - MHz
+***** RAM - Mb
+**** Limits
+It's hold max ressources
+**** Shares
+Shares only matters when ressources are scares. Shares use parts to distribute power like :
+- 1000 CPU parts per vCPU
+- 10 Memory parts per Mb RAM
+Using 4:2:1 ratio :
+***** High shares
+2000 parts
+***** Normal shares
+1000 parts
+***** Low shares
+500 parts
+*** Practices
+**** Using [[*Ressources pools][Ressources pools]] 
+To group VM with similars priorities
+**** Enabling [[*Distributed ressources scheduler - DRS][Distributed ressources scheduler - DRS]] & [[*High availablity - CA][High availablity - CA]]
+For automate [[*Load balancing][Load balancing]] and [[*Failover][Failover]]
+**** Monitoring real-time usage
+**** Applying [[*Dynamics allocations][Dynamics allocations]]
+Via =host-add/removal= features to adapt to the workload who change.
+**** Align with the demand
+Regulary reviewing configurations to fite the business SLA's
+** Ressources pools
+*** Compute pools
+Pools who deal with:
+- RAM
+- CPU
+*** Storage pools
+Pools who deal with:
+- NAS
+- SAN
+*** Network pools
+Pools hwo deal with:
+- [[*Loadbalencer][Loadbalencer]]
+- Shared Network Infrastructures
+- Firewalls
+- Virtual switches
+
+** Distributed ressources scheduler - DRS
+** High availablity - CA
+** Load balancing
+*** Load balencer
+- tools or application
+**** Hardware based
+Require a dedicated load balancer device
+**** Software based
+Can run on a server or on a VM. Also in the [[https://www.cloudflare.com/learning/cloud/what-is-the-cloud/][cloud]].
+** Failover
+** Dynamics allocations
+* Hardware
+** vCPU
+It's a virtual CPU used in Virtual Machine
+
+
