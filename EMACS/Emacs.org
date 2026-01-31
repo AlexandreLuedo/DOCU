@@ -169,7 +169,7 @@ Works well with .org
 > [!CAUTION]
 > Negative potential consequences of an action.
 #+end_src
-** Date
+** Date / Schedule
 - SPC m d
 *** Insert date
 M-x org-timestamp =or= :org-timestamp
