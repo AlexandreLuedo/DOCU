@@ -31,3 +31,13 @@ As client software.
 ****** Swarm
 Set of cooperative deamons communicta trough the Docker Engine API
 ** Registries
+* Build & run
+Create a docker image => run
+#+begin_src bash
+# Build the image
+$ docker build -t <path/to/project> .
+# List the image
+$ docker image ls
+# Run the image
+$ docker container run [OPTIONS] IMAGE [COMMAND] [ARG...]
+#+end_src
