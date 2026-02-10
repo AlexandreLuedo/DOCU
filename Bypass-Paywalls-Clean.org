@@ -1,0 +1,8 @@
+#+title: Bypass Paywalls Clean
+#+LANGUAGE: en
+Browser extension who block paywalls.
+See also: [[Repo][https://gitflic.ru/project/magnolia1234/bpc_uploads]]
+
+* Installation
+Download the wholle extension by clicking [[https://gitflic.ru/project/magnolia1234/bpc_uploads/blob/raw?file=bypass-paywalls-chrome-clean-master.zip][here]].
+* [[https://gitflic.ru/project/magnolia1234/bypass-paywalls-chrome-clean#update][Update]]
