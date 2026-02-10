@@ -22,6 +22,7 @@ As client software.
 ****** Docker Engine API
 ****** CLI
 **** Image
+***** Created by [[*Dockerfile][Dockerfile]]
 ***** Read-only template
 ***** Used to store & ship applications
 **** Service
@@ -31,6 +32,20 @@ As client software.
 ****** Swarm
 Set of cooperative deamons communicta trough the Docker Engine API
 ** Registries
+** Dockerfile
+Used for creating a container at 0
+#+begin_src dockerfile
+FROM package:[tag]
+WORKDIR /path/to/working/directory
+RUN command
+EXPOSE port
+ENV environment_variable
+#+end_src
+** Docker-compose
+Allow to run multiples containers or packages for one container, [[https://www.youtube.com/watch?v=dWcoIxRfs8Y&list=PL8SZiccjllt1jz9DsD4MPYbbiGOR_FYHu&index=3https://www.youtube.com/watch?v=dWcoIxRfs8Y&list=PL8SZiccjllt1jz9DsD4MPYbbiGOR_FYHu&index=3][ex]]: a python app require redis, you must specifie in docker-compose the redis instance.
+#+begin_src yaml
+versions: "3"                   # Version of docker-compose
+#+end_src
 * Build & run
 Create a docker image => run
 #+begin_src bash
