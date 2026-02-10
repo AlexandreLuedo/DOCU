@@ -1,0 +1,83 @@
+#+title: Git
+#+LANGUAGE: en
+A new Git documentation using [[https://github.com/progit/progit2][ProGit2]] as source.
+
+* Config & settings
+#+begin_src bash
+git config --list --show-origin # Show all settings
+#+end_src
+** User infos
+#+begin_src bash
+git config <flags> <variable.suffix> <infos>
+#+end_src
+*** Name
+#+begin_src bash
+git config --global user.name [<username>]
+git config --global user.email [<mail.address>]
+#+end_src
+*** Email
+*** Editor
+#+begin_src bash
+git config --global core.editor emacs # Must provide full path on Windows
+#+end_src
+
+#+RESULTS:
+** branch config
+[[*set name to default branch][set name to default branch]] 
+* Repo
+** Initialyse
+#+begin_src bash
+cd ~/your/path/for/your/repo
+git init
+#+end_src
+** Adding file / Stagging
+#+begin_src bash
+git add <file>
+#+end_src
+** Unstaging file
+#+begin_src bash
+$ git reset HEAD <file>
+#+end_src
+** Remove file
+#+begin_src bash
+rm <file_name>
+git rm [<file_name>...]         # The tree dots maining that it can be repeat
+#+end_src
+** Moving file
+#+begin_src bash
+git mv <source> <destination>
+#+end_src
+** [[*changes][Checking changes]]
+** Remove stagged
+#+begin_src bash
+git rm [--cached] [<pathspec>...]
+#+end_src
+** Commit changes
+#+begin_src bash
+git commit -m "<msg>"       
+#+end_src
+** Redo commit
+If you ommit a file, or didn't commment the commit:
+#+begin_src bash
+git commit --amend
+#+end_src
+After run the stagging aera will look exactly the same before commiting changes.
+** Checking
+*** changes
+#+begin_src bash
+git diff
+#+end_src
+*** status
+#+begin_src bash
+git status
+#+end_src
+*** history or logs
+#+begin_src bash
+git log
+git log --patch                 # Show the diff introduced in each commits (see ProGit2 Viewing the Commit History)
+#+end_src
+* Branch
+** set name to default branch
+#+begin_src bash
+git config --global init.defaultBranch <branch_name>
+#+end_src
