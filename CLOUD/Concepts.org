@@ -9,4 +9,3 @@ It is a service who act when a client want to retrieve website ressources (image
 The CDR hold in cache parts and then resend it to the client. For way better performances.
 ** Rent a webserver
 Like explain above, the CDR store in cache, so you pay less bandwith.
-
