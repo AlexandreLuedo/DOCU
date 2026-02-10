@@ -1,0 +1,4 @@
+#+title: Keepalived
+#+LANGUAGE: EN
+See tutor:[[https://www.redhat.com/en/blog/keepalived-basics][Keepalived basics Redhat]] 
+
