@@ -76,6 +76,7 @@ SPC-TAB
 SPC-TAB-TAB
 
 ** Export
+See also: [[https://emacsdocs.org/docs/org/Export-Settings][Doc]]
 - C-c C-e
 - SPC m e
 *** Table of content
@@ -83,7 +84,7 @@ SPC-TAB-TAB
 ,#+OPTIONS: toc:nil        (no default TOC at all)
 ,#+OPTIONS: toc:2 (only show 2 column)
 #+end_src
-**** [[https://emacsdocs.org/docs/org/Table-of-Contents][doc]]
+**** [[https://emacsdocs.org/docs/org/Table-of-Contents][toc doc]]
 
 *** Export to org
 :org-export-to-org
