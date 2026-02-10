@@ -15,3 +15,12 @@ Is the whol path of an DNS request trough the entire DNS network. Computer => In
 There is a list of server who store a precise TLD (for eg: .com)
 **** TLD server
 For each request, TLD server can localize who manage the requested domain name zone
+* Clear cache & restart DNS
+Debian-based
+#+begin_src bash eval: no
+# Clear cache
+sudo resolvectl flush-caches
+
+# Verify if cashe is clear
+sudo resolvectl statistics      # Current cache Size must be 0
+#+end_src
