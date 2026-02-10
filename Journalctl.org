@@ -1,0 +1,14 @@
+#+title: Journalctl
+#+LANGUAGE: en
+* basic
+#+begin_src bash
+sudo journalctl 
+#+end_src
+* More presize output
+#+begin_src bash
+sudo journalctl -u pdns -f
+# -u for unite (service)
+# -f follow (in real time)
+# -n <int> number of lines
+#+end_src
+
