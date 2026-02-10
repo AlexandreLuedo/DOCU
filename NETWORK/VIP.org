@@ -47,3 +47,4 @@ $ networkctl status eth0
 #+begin_src bash
 $ sudo ip addr del 192.168.1.30/24 dev eth0
 #+end_src
+* [[file:~/INFOR/INFRA/serv3.org::*Processus][Infra plannification]]
