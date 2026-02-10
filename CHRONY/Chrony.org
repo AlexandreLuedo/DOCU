@@ -34,3 +34,7 @@ rtcsync
 * Ansible
 See blog : [[https://www.redhat.com/en/blog/ansible-chrony-daemon][Redhat blog]]
 [[https://github.com/metno/ansible-role-chrony][Role]]
+* See if it works
+#+begin_src bash eval: :no
+chronyc -n sources -v
+#+end_src
