@@ -1,9 +1,20 @@
 #+title: Shell Command
 #+LANGUAGE: en
 This file ise used to reffer all GNU/Linux commands
+* Views
+#+begin_src bash
+less                            # Use for displaying output without screetching terminal
+# Using like
+cat file.txt | less
+#+end_src
+
 * Network
 See also: [[file:~/INFOR/DOCU/NETWORK/Network.org][Network specific doc]] 
 ** ALL
+*** See domain
+#+begin_src bash
+whois <domain.name>
+#+end_src
 *** Knowing his ip configuration
 #+begin_src bash
 $ ip link
