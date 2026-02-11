@@ -51,6 +51,12 @@ $ sudo firewall-cmd --reload
 $ sudo mkdir /nfs/imports/myshare
 $ sudo mount -t nfs 192.168.122.17:/nfs/exports/myshare /nfs/imports/myshare
 #+end_src
+* Warns
+#+begin_quote
+[!WARNING]
+In order for NFS to work with a default installation of Red Hat Enterprise Linux with a firewall enabled, configure IPTables with the default TCP port 2049. Without proper IPTables configuration, NFS will not function properly.
+The NFS initialization script and rpc.nfsd process now allow binding to any specified port during system start up. However, this can be error-prone if the port is unavailable, or if it conflicts with another daemon.
+#+end_quote
 * Start
 ** Found [[https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/storage_administration_guide/ch-nfs#s2-nfs-how-daemons][here]] (not sure about the infos)
 #+begin_src bash
