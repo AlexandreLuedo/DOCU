@@ -283,7 +283,9 @@ groups['<nom_de_groupe>']
 #+end_src
 ** Obtenir nom d'un host dans un group + ip
 Docu: [[https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_vars_facts.html#id9][Ansible facts]]
+#+begin_src yaml
 hostvars['item']['ansible_host']
+#+end_src
 * Vault
 ** Création d'un vault
 #+begin_src bash
@@ -552,6 +554,55 @@ Doc: [[https://docs.ansible.com/projects/ansible/latest/collections/ansible/buil
 - name: Install the version '1.00' of package "foo"
   ansible.builtin.apt:
     name: foo=1.00   
+#+end_src
+** Template
+[[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/template_module.html][Doc]]
+#+begin_src yaml
+- name: Template a file to /etc/file.conf
+  ansible.builtin.template:
+    src: /mytemplates/foo.j2
+    dest: /etc/file.conf
+    owner: bin
+    group: wheel
+    mode: '0644'
+
+- name: Template a file, using symbolic modes (equivalent to 0644)
+  ansible.builtin.template:
+    src: /mytemplates/foo.j2
+    dest: /etc/file.conf
+    owner: bin
+    group: wheel
+    mode: u=rw,g=r,o=r
+
+- name: Copy a version of named.conf that is dependent on the OS. setype obtained by doing ls -Z /etc/named.conf on original file
+  ansible.builtin.template:
+    src: named.conf_{{ ansible_os_family }}.j2
+    dest: /etc/named.conf
+    group: named
+    setype: named_conf_t
+    mode: '0640'
+
+- name: Create a DOS-style text file from a template
+  ansible.builtin.template:
+    src: config.ini.j2
+    dest: /share/windows/config.ini
+    newline_sequence: '\r\n'
+
+- name: Copy a new sudoers file into place, after passing validation with visudo
+  ansible.builtin.template:
+    src: /mine/sudoers
+    dest: /etc/sudoers
+    validate: /usr/sbin/visudo -cf %s
+
+- name: Update sshd configuration safely, avoid locking yourself out
+  ansible.builtin.template:
+    src: etc/ssh/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0600'
+    validate: /usr/sbin/sshd -t -f %s
+    backup: yes
 #+end_src
 * Ansible community
 ** Obtenir la doc
