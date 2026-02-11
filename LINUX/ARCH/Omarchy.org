@@ -1,9 +1,5 @@
 #+title: Omarchy
 #+LANGUAGE:en
-* Shortcuts
-SUPER k
-* Turn of windows
-SUPER esc
 * Search/walker prefixes
 prefix = "/"
 provider = "providerlist"
@@ -23,9 +19,17 @@ provider = "websearch"
 prefix = "$"
 provider = "clipboard"
 
-[[emergencies]]
 text = "Restart Walker"
 command = "omarchy-restart-walker"
+* Shortcuts
+** Shorcuts help
+SUPER k
+** Switch audio input
+SUPER Mute
+** Audio controll
+SUPER CTRL A
+** Close all windows
+CTRL ALT DELETE
 * Modify default walker search engine
 ~/.config/elephant/websearch.toml
 ^ If not present, create it
@@ -35,3 +39,5 @@ default = true
 name = "Search Brave"
 url = "https://search.brave.com/search?q=%TERM%"
 #+end_src
+* Modify walker settings
+~/.config/walker/
