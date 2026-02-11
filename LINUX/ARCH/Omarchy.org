@@ -4,4 +4,34 @@
 SUPER k
 * Turn of windows
 SUPER esc
+* Search/walker prefixes
+prefix = "/"
+provider = "providerlist"
 
+prefix = "."
+provider = "files"
+
+prefix = ":"
+provider = "symbols"
+
+prefix = "="
+provider = "calc"
+
+prefix = "@"
+provider = "websearch"
+
+prefix = "$"
+provider = "clipboard"
+
+[[emergencies]]
+text = "Restart Walker"
+command = "omarchy-restart-walker"
+* Modify default walker search engine
+~/.config/elephant/websearch.toml
+^ If not present, create it
+#+begin_src toml
+[[entries]]
+default = true
+name = "Search Brave"
+url = "https://search.brave.com/search?q=%TERM%"
+#+end_src
