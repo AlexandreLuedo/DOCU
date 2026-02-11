@@ -80,4 +80,14 @@ git log --patch                 # Show the diff introduced in each commits (see 
 ** set name to default branch
 #+begin_src bash
 git config --global init.defaultBranch <branch_name>
-#+end_src* 
+#+end_src*
+** Update branch (pull & rebase)
+#+begin_src bash
+git pull
+git rebase
+#+end_src
+** Force to update a file
+#+begin_src bash
+git checkout master -- <path/to/file>
+git commit -m "Reset <file> to match master version"
+#+end_src
