@@ -41,7 +41,6 @@ q          → quit the Magit buffer
 *** NO Remove a commit
 SPC gg
 ee
-
 ** Branch
 *** Create
 - SPC gg
@@ -63,6 +62,17 @@ ee
 - b b <branch-name> RET
 *** Change
 b b
+*** Pull & rebase
+**** Pull when upstream
+F
+u
+**** Pull with rebase
+F
+-r
+u
+**** Pull elsewhere
+F
+e
 * Make a full commit
 - SPC gg
 - s
