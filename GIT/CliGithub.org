@@ -7,6 +7,10 @@ Us
 #+begin_src bash
 $ gh repo create [name] [flags]
 #+end_src
+** List
+#+begin_src bash
+$ gh repo list
+#+end_src
 * Connection
 * Issue
 ** Create
