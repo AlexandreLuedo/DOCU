@@ -1,0 +1,58 @@
+#+title: Ripping
+#+begin_src bash
+# Verify if cdrom is here
+$ lsblk
+# Install ripping tools
+sudo apt update
+sudo apt install abcde lame eyed3 flac imagemagick glyrc
+#+end_src
+
+Edit =~/.abcde.conf=
+#+begin_src bash eval: no
+
+OUTPUTDIR="/path/to/music/on/the/server"
+OUTPUTTYPE=flac
+
+# Nothing to tell, all interactive
+INTERACTIVE=n
+
+# Things to do
+ACTIONS=cddb,read,encode,tag,move,clean
+
+OUTPUTFORMAT='${ARTISTFILE} - ${ALBUMFILE}/${TRACKNUM} - ${TRACKFILE}'
+
+# At the end
+EJECTCDS=y
+
+# Quality, doesn't know if it support flac
+LAMEOPTS='-V 0'
+
+# Correct reading errors
+CDPARANOIAOPTS="--never-skip=40"
+#+end_src
+
+Use Udev for automation
+
+#+begin_src sh
+/usr/local/bin/autorip.sh
+
+#!/bin/bash
+# For detection
+sleep 10
+sudo -u <user_name> abcde -N -c ~/.abcde.conf >> /tmp/abcde.log 2>&1
+#+end_src
+
+Make executable
+#+begin_src bash
+$ sudo chmod +x /usr/local/bin/autorip.sh
+#+end_src
+
+Udev rule
+#+begin_src rules
+SUBSYSTEM=="block", KERNEL=="sr0", ACTION=="change", RUN+="/usr/bin/systemd-run --no-block --unit=autorip-cd /usr/local/bin/autorip.sh"
+#+end_src
+
+Apply changes
+#+begin_src bash
+sudo udevadm control --reload
+#+end_src
