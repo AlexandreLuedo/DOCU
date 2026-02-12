@@ -1,4 +1,30 @@
 #+title: Keepalived
 #+LANGUAGE: EN
 See tutor:[[https://www.redhat.com/en/blog/keepalived-basics][Keepalived basics Redhat]] 
+* Compile the package
+Sources: [[https://www.redhat.com/en/blog/keepalived-basics][Redhat tutor]]
+#+begin_src bash eval: no
+# Install prerequisites
+yum install -y gcc openssl-devel
+
+# Download the latest version of the code. Be sure to check the downloads page for the most recent version:https://www.keepalived.org/download.html
+[root@localhost ~]# wget https://www.keepalived.org/software/keepalived-2.0.20.tar.gz
+
+# Extract the code
+[root@localhost ~]# tar -xf keepalived-2.0.20.tar.gz
+
+# Run the configure scripts
+[root@localhost ~]# cd keepalived-2.0.20
+[root@localhost keepalived-2.0.20]# ./configure
+
+# Build and install keepalived
+[root@localhost keepalived-2.0.20]# make
+[root@localhost keepalived-2.0.20]# make install
+
+# Test your installation
+[root@localhost keepalived-2.0.20]# keepalived --version
+Keepalived v2.0.20 (01/22,2020)
+#+end_src
+* Config path
+/etc/keepalived/keepalived.conf
 
