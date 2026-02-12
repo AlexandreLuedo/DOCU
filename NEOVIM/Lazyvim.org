@@ -1,5 +1,14 @@
 #+title: Lazyvim
 #+LANGUAGE: en
 * Visual
-** Comment selection
+* comment selection
 gc
+* See hidden files (in neotree)
+  H
+* Increment or decrement header
+>> ecrement
+<< decrement
+* Recent files
+<leader> f r
+* Restore session
+<leader> q s
