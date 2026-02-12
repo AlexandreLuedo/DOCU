@@ -91,6 +91,38 @@ See the [[file:~/INFOR/INFRA/ANSIBLE/ROLES/chrony/templates/chrony.conf.j2::{% f
 #+begin_src jinja2
 {% for server in chrony_servers %} server {{ server }} iburst {% endfor %}
 #+end_src
+* Using list & dictionnary fake loops
+I write "fake loops", because it's doesn't follow the declaration idea of a loop.
+#+begin_src yaml example of fakes loops
+# Vars :
+power_nodes:
+  - hostname: "serv3"
+    role: "master"
+    state: MASTER
+    priority: 100
+  - hostname: "serv2"
+    role: "master"
+    state: BACKUP
+    priority: 90
+
+# Loop :
+- name: Deploy master config
+  ansible.builtin.template:
+    src: /templates/keepalived_conf.conf.j2
+    dest: "{{ keepalived_config_path }}/keepalived.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  vars:
+    my_config: "{{ power_nodes | selectattr('hostname', 'equalto', inventory_hostname) | first }}"
+
+# my_config syntaxe explaination :
+"|" = is a filter, who pass attributes
+"selectattr()" = function who store selected attributes of the given var, if there's are any of attributes, she return an error
+"equalto" = logic attribute
+"inventory_hostname" = fact / magical var
+"first" = final selector, who select a single value in the attribute
+#+end_src
 
 * Example config.j2
 #+begin_src jinja2
