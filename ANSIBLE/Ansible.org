@@ -164,6 +164,7 @@ power_nodes:
     # On cherche dans la liste l'objet qui correspond au nom de la machine actuelle
     my_config: "{{ power_nodes | selectattr('hostname', 'equalto', inventory_hostname) | first }}"
 #+end_src
+
 * Role
 #+begin_quote
 [!NOTE]
@@ -403,6 +404,10 @@ $ ansibile-inventory --host R1 # Voir les détails d'un host
 $ ansible routers -m ping -i inventory.yml # Test connexion à tout les hotes de l'inventaire
 $ ansible-doc -l | grep cisco.ios # Obtenir la doc avec des modules de connections
 $ ansible-doc ios_bgp # Afficher la docu d'un module
+#+end_src
+** Obtain a var value
+#+begin_src bash
+ansible <host> -m setup -a "filter=ansible_default_ipv4"
 #+end_src
 * Connexions
 #+begin_src bash
