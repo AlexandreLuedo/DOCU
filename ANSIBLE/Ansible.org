@@ -143,6 +143,27 @@ Un playbooks doit être *idempotent*
       - /bin/test
       - /etc/test
 #+end_src
+** Declare a list of dict
+#+begin_src yaml
+power_nodes:
+  - hostname: "router-01"
+    role: "master"
+    state: "MASTER"
+    priority: 100
+  - hostname: "router-02"
+    role: "backup"
+    state: "BACKUP"
+    priority: 90
+
+    # Access :
+    - name: Configuration VRRP
+  template:
+    src: keepalived.conf.j2
+    dest: /etc/keepalived/keepalived.conf
+  vars:
+    # On cherche dans la liste l'objet qui correspond au nom de la machine actuelle
+    my_config: "{{ power_nodes | selectattr('hostname', 'equalto', inventory_hostname) | first }}"
+#+end_src
 * Role
 #+begin_quote
 [!NOTE]
