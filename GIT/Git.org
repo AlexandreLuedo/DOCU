@@ -79,12 +79,20 @@ git log --patch                 # Show the diff introduced in each commits (see 
 * Branch
 ** Create a branch & switch
 #+begin_src bash eval: no
-git che-ckout -b <branch/name>
+git checkout -b <branch/name>
+git push -u origin <branch/name>
+# Using -u make a link between the local & the remote branch. Without that, branches will be unlinked
+git branch -vv                  # Verify links
 #+end_src
 ** set name to default branch
 #+begin_src bash
 git config --global init.defaultBranch <branch/name>
 #+end_src*
+** Link a branch
+Even if commits are already mades on branch
+#+begin_src bash eval: no
+git push -u origin <branch/name>
+#+end_src
 ** Update branch (pull & rebase)
 #+begin_src bash
 git pull
