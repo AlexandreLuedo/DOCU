@@ -307,6 +307,20 @@ Docu: [[https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbook
 #+begin_src yaml
 hostvars['item']['ansible_host']
 #+end_src
+** Obtain interface
+#+begin_src yaml
+# Old
+{{ ansible_default_ipv4.interface }}
+# New
+ansible_facts[ansible_default_ipv4][interface]
+#+end_src
+** Obtain ip
+#+begin_src yaml
+# Old
+{{ ansible_default_ipv4.interface }}
+# New
+ansible_facts[ansible_default_ipv4][address]
+#+end_src
 * Vault
 ** Création d'un vault
 #+begin_src bash
