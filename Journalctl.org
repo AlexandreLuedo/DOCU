@@ -1,12 +1,16 @@
 #+title: Journalctl
 #+LANGUAGE: en
 * basic
-#+begin_src bash
+#+begin_src bash eval: no
 sudo journalctl 
 #+end_src
+* Full
+#+begin_src bash eval: no
+sudo journalctl -xeu <service>.service
+#+end_src
 * More presize output
-#+begin_src bash
-sudo journalctl -u pdns -f
+#+begin_src bash eval: no
+sudo journalctl -u <service> -f
 # -u for unite (service)
 # -f follow (in real time)
 # -n <int> number of lines
