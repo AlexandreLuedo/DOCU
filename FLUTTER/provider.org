@@ -3,3 +3,79 @@
 
 * Principes
 Provider sert à gérer l'état des widgets en évitant à l'utilisateur de gérer les ~callbacks~ (c'est un retour de l'informations au dessus)ou les ~InheritedWidgets~ (les widgets sans parents).
+** Le cycle "Action => Donnée => Affichage"
+** Action
+Utilisateur tappe un nombre
+** Donnée
+Mettre à jour la variable (rôle de =notifyListeners()=)
+** Afficher
+Flutter entend =notifyListeners=, regarde quels widgets sont branchés sur ce modèle, et les redessine instantanément
+** Read vs Watch
+** Watch (Guetter)
+=watch=
+Utilisation dans l'affichage. Le widget surveille la donnée, si elle bouge: reconstruction immédiate.
+#+begin_src dart
+final value = context.watch<T>();
+#+end_src
+** Read
+=read=
+Utilisation pour une action ponctuelle (clic surun bouton "Valider").
+Le widget dit donne la valeure
+#+begin_src dart
+final value = context.read<T>();
+#+end_src
+* Problèmes
+** Accéder à une variable n'importe où
+Discussion tirée de Gemini. Il m'a indiquer comment récupérer et lire n'importe quelle variable en utilisant Provider. Il ne faut PLUS que ce cas de figure se reproduise. Cet example à pour but d'éviter que cette situation ne se reproduise.
+*** Créer la classe qui tiendra les données
+#+begin_src dart
+class DataModel extends ChangeNotifier{
+  // Déclarer le nom
+  String? _exampleString;
+
+  // Accéder à la variable pour une lecture
+  String? get exampleString => _exampleString;
+
+  // Fonction appelée quand l'utilisateur clique
+  void updateString (String? newValue) {
+    _exampleString = newValue;
+    notifyListeners(); // Dit à toute l'app : "Hé, ça a changé, mets-toi à jour."
+    /// Donc la variable _exampleString stockera la donnée mise à jour grâce à Notify Listeners.
+  }
+}
+#+end_src
+*** Dire à l'application que la "pool" existe
+L'on doit entourer l'application avec ce =Provider=
+#+begin_src dart
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => DataModel(),
+      child: const myApp(),
+    )
+  )
+}
+#+end_src
+*** Envoyer la donnée depuis le Widget de sélection
+#+begin_src dart
+/// Par exemple
+/// Dans la fonction onSelected du ChoiceChip :
+onSelected: (bool selected) {
+  final newValue = selected ? chocolateType[index] : null;
+
+  // Envoyer l'info au provider
+  Provider.of<DataModel>(context, listen: false).updateString(newValue);
+}
+#+end_src
+*** Utiliser la valeur n'importe où
+#+begin_src dart
+final selection = Provider.of<DataModel>(context, listen: false).exampleString;
+if (selection == null) {
+  selection == "Noir" 
+} else if (selection == "Noir") {
+  print("C'est intense !")
+} else if (selection -- "Lait") {
+// Faire autre chose
+}
+#+end_src
+

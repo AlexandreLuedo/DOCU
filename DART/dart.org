@@ -1,5 +1,6 @@
 #+title: Dart
-*   Variables constantes
+#+LANGUAGE: fr en
+* Variables constantes
 | Nom                   | Spécification                                                                                               |
 |-----------------------+-------------------------------------------------------------------------------------------------------------|
 | var                   | ne peux changer le type sous le même nom de variable                                                        |
@@ -7,9 +8,10 @@
 | const                 | constante où la valeur est connue                                                                           |
 | String interpollation | ~"ceci est un exemple de string $interpollation~                                                              |
 | bool                  | déclaration de type ~boolean~                                                                                 |
-| %                     | *modulo* employé pour retourner le reste d'une fraction                                                      |
+| %                     | *modulo* employé pour retourner le reste d'une fraction                                                       |
 | double                | nombre à virgule                                                                                            |
 | nullsafety            | système de sécurité pour ne pas accéder à des variables vides. Pour empêcher déclarer comme ça ~int? points;~ |
+| ??                    | Précédée de valeur par défaut =String? test = testNomDéclarer ?? "test par défaut";=                        |
 |-----------------------+-------------------------------------------------------------------------------------------------------------|
 * Opérateurs d'affectation
 | 1+1                                 |
@@ -91,7 +93,10 @@ Calendar calendarView = Calendar.day;
 Utilisé pour contenir des donnée qui ne sont pas en doublons par exemple pour une série de mail dont il ne faut pas dupliquer
 #+end_quote
 ** Get (getter)
-
+#+begin_src dart
+  int get totalPrice => _items.length * 42;
+  // get will dynamicly calculate
+#+end_src
 **   var name = {};
 déclaration
 ** .add("bowser")
@@ -127,3 +132,22 @@ for (score in scores)
 méthode .where()         pour chaques index qui est égal à 100
 * User input
 **  String? value = stdin.readLineSync();
+* class usage
+#+begin_src dart
+// Affiche les containaires sur fond orange clair.
+class CustomContainerItem {
+  final String title;
+  final String subtitle;
+  final IconData? icon;
+  final Color? color;
+  final void Function()? onTap;
+
+  CustomContainerItem({
+    required this.title,
+    required this.subtitle,
+    this.icon,
+    this.color,
+    this.onTap,
+  });
+}
+#+end_src

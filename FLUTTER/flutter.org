@@ -268,6 +268,13 @@ context,
 https://jakearchibald.github.io/svgomg/
 * Packages interressents
 https://pub.dev/packages/settings_tiles/install
+** Afficher les nombres d'une certaine façon
+#+begin_src dart
+import 'package:intl/intl.dart';
+
+final formatter = NumberFormat("#,##0.00");
+Text(formatter.format(1234.567)); // Displays: "1,234.57"   
+#+end_src
 * Run
 ** Tourner sous web
 #+begin_src bash
@@ -328,10 +335,9 @@ lib/
 #+END_SRC
 
 *** Cas pratique : une liste de paramètres
-
 ** 1. Définir le modèle
 Dans ~lib/models/list_item.dart~ :
-
+See also:[[file:~/INFOR/DOCU/DART/dart.org::*class usage][ dart doc]] 
 #+BEGIN_SRC dart
 class ListItem {
   final Widget? leading;
@@ -550,3 +556,16 @@ class CustomContainerDemo extends StatelessWidget {
 *** Conclusion
 En suivant ce modèle, vous gardez un projet Flutter organisé, clair, et facilement évolutif.
 Vous pouvez ajouter autant de modèles, données et widgets que nécessaire, la structure reste la même.
+* Widgets
+** Consumer widget - reconstruciton partielle de widget
+Si l'on a un long widget, et que l'on veux uniquement redessiné une partie. On peux utiliser le widget =Consumer=
+#+begin_src dart
+Consumer<YourModel>(
+  builder: (context, model, child) {
+    return Text('${model.counter}')
+  }
+)
+#+end_src
+
+* Problèmes
+** [[file:provider.org::*Accéder à une variable n'importe où][Accéder à une variable n'importe où]]
