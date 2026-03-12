@@ -52,16 +52,42 @@ git mv <source> <destination>
 #+begin_src bash
 git rm [--cached] [<pathspec>...]
 #+end_src
-** Commit changes
+** Commit
+*** Commit changes
 #+begin_src bash
 git commit -m "<msg>"       
 #+end_src
-** Redo commit
-If you ommit a file, or didn't commment the commit:
+*** Undo commit
+Rewrite commit text
 #+begin_src bash
 git commit --amend
 #+end_src
-After run the stagging aera will look exactly the same before commiting changes.
+
+Undo
+#+begin_src bash
+$ git reset --soft HEAD~1 # ~1 for one previous commit
+#+end_src
+*** Link an commit to a issue
+Just include #xxx in your commit message to reference an issue without closing it.
+
+With new GitHub issues 2.0 you can use these synonyms to reference an issue and close it (in your commit message):
+
+fix #xxx
+fixes #xxx
+fixed #xxx
+close #xxx
+closes #xxx
+closed #xxx
+resolve #xxx
+resolves #xxx
+resolved #xxx
+You can also substitute #xxx with gh-xxx.
+
+Referencing and closing issues across repos also works:
+
+fixes user/repo#xxx
+Check out the documentation available in their Help section.
+Source: [[https://stackoverflow.com/questions/1687262/link-to-the-issue-number-on-github-within-a-commit-message][StackOverflow]]
 ** Checking
 *** changes
 #+begin_src bash
@@ -75,6 +101,11 @@ git status
 #+begin_src bash
 git log
 git log --patch                 # Show the diff introduced in each commits (see ProGit2 Viewing the Commit History)
+#+end_src
+** Pushing
+*** Undo pushing
+#+begin_src bash
+$ git revert HEAD
 #+end_src
 * Branch
 ** Create a branch & switch
@@ -103,3 +134,6 @@ git rebase
 git checkout master -- <path/to/file>
 git commit -m "Reset <file> to match master version"
 #+end_src
+* [?] Issue
+Don't know if it is his right place to be here.
+** Link an commit to a

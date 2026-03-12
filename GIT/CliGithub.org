@@ -33,5 +33,12 @@ gh issue list
 $ gh issue close 123 -c <string> -r <string>
 # -r flag include 
 #+end_src
+** Subissue
+#+begin_src bash
+$ gh sub-issue create --parent 123 --title "title" --body "body"
 * Make a pull request
 gh pr create --body-editor nvim
+   #+end_src
+* Plugins
+** Install sub-issue plugin
+$ gh extension install yahsan2/gh-sub-issue
