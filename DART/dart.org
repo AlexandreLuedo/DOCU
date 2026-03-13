@@ -11,7 +11,7 @@
 | %                     | *modulo* employé pour retourner le reste d'une fraction                                                       |
 | double                | nombre à virgule                                                                                            |
 | nullsafety            | système de sécurité pour ne pas accéder à des variables vides. Pour empêcher déclarer comme ça ~int? points;~ |
-| ??                    | Précédée de valeur par défaut =String? test = testNomDéclarer ?? "test par défaut";=                        |
+| ??                    | *null-aware* Précédée de valeur par défaut =String? test = testNomDéclarer ?? "test par défaut";=           |
 |-----------------------+-------------------------------------------------------------------------------------------------------------|
 * Opérateurs d'affectation
 | 1+1                                 |
@@ -130,6 +130,8 @@ for (score in scores)
 **   Demander uniquement une valeur précise par filtre
 ~for(score in scores.where((s)=>s == 100))~
 méthode .where()         pour chaques index qui est égal à 100
+** Switch
+Excellent exemple de switch : [[file:~/INFOR/DOCU/FLUTTER/provider.org::*Faire les calculs dans la pool][Faire les calculs dans la pool]] 
 * User input
 **  String? value = stdin.readLineSync();
 * class usage

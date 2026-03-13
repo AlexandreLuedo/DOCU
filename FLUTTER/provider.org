@@ -44,6 +44,35 @@ class DataModel extends ChangeNotifier{
   }
 }
 #+end_src
+*** Faire les calculs dans la pool
+#+begin_src dart
+class DataModel extends ChangeNotifier{
+  String? _exampleString;
+  String? get exampleString => _exampleString;
+
+  // Faire les calculs dans une variable
+  double get exampleType {
+    switch (_selection) {
+      case "Noir":
+      return 0.18;
+      case "Lait":
+      return 0.22;
+      case "Noir/Lait":
+      return 0.20;
+      case "Blanc":
+      return 0.23;
+      case "Autre":
+      default: // important si selection est null
+      return 0.0;
+    }
+  }
+  
+  void updateString (String? newValue) {
+    _exampleString = newValue;
+    notifyListeners();
+  }
+}
+#+end_src
 *** Dire à l'application que la "pool" existe
 L'on doit entourer l'application avec ce =Provider=
 #+begin_src dart
@@ -62,12 +91,12 @@ void main() {
 /// Dans la fonction onSelected du ChoiceChip :
 onSelected: (bool selected) {
   final newValue = selected ? chocolateType[index] : null;
-
-  // Envoyer l'info au provider
-  Provider.of<DataModel>(context, listen: false).updateString(newValue);
+  // Envoyer l'info au provider Provider.of<DataModel>(context, listen: false).updateString(newValue);
 }
 #+end_src
 *** Utiliser la valeur n'importe où
+Attention, ne fonctionne que dans le cas d'un widget qui possède un context. Dans une classe dart, le context ne fonctionnera pas.
+Ne pas hésiter à faire les calculs dans la =pool= montrée au début. Comme ça tout est déjà fait.
 #+begin_src dart
 final selection = Provider.of<DataModel>(context, listen: false).exampleString;
 if (selection == null) {

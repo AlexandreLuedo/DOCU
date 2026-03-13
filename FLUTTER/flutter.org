@@ -65,6 +65,8 @@ class MyWidget extends StatelessWidget {
 #+end_src
 ** State
 relatif et ressemblant à [[*StatefullWidgets][StatefullWidgets]], cet objet est persistant dans sa manière à stocker l'état / ~state~. Il retient les informations.
+** Await / Future
+L'utilisation de Future et await permet à Dart de continuer à faire tourner l'interface utilisateur pendant que la requête voyage sur internet si l'on demande à une api par exemple.
 ** Explication rapide de la différence entre stateless et statefull
 - Utilisez StatelessWidget si le widget n'a pas besoin de changer après sa création.
 - Utilisez StatefullWidget si le widget doit changer sson apparence ou ses données itnernes en réponses à des événements ou des interactions.
@@ -565,6 +567,42 @@ Consumer<YourModel>(
     return Text('${model.counter}')
   }
 )
+#+end_src
+* API / Packages
+** fields
+Paramètre =fields= est une liste qui définit quelles informations l'on souhaite recevoir du serveur.
+Cela se traduit par une list d'[[file:~/INFOR/DOCU/DART/dart.org::*Enum][Enum]] (=ProductField=):
+#+begin_src dart
+// Exemple pour l'api d'openfoodfact
+fields: [
+  ProductField.NAME, 
+  ProductField.BARCODE,
+  ProductField.NUTRIEMENTS,
+  ProductField.INGREDIENTS,
+  ProductField.IMAGES,
+]
+#+end_src
+*** Potentiels problèmes
+"Si j'essaie d'accéder à product.nutriments et que j'obtiens null alors que le produit existe, c'est probablement que j'ai oublié d'ajouter ProductField.NUTRIMENTS dans ma configuration de requête."
+** Logique d'une requête API
+*CONFIG, CALL, CHECK, USE
+*** Préparation / CONFIG
+Avant appeler le serveur, il faut savoir =qui= je cherche et =quoi= je veux savoir. Pour api OpenFoodFact ça va être =ProductQueryConfiguration=.
+*** Expedition / CALL
+L'appel se fait avec [[L'utilisation de Future et await permet à Dart de continuer à faire tourner l'interface utilisateur pendant que la requête voyage sur internet.][await.]] Pour pouvoir attendre la requête.
+*** Réception / CHECK
+Quand les données reveinnent elles arrivent sous forme de JSON.
+- Le package =OpenFoodFact= fati le travail de transformation de texte en un objet Dart (=Product=).
+- C'est du =Parsing= (ou désérialisation)
+*** Vérification / USE
+Toujours 3 vérifications de sécurités :
+1. *Try/Catch* Est ce que j'ai internet ? Le =try/catch= capture l'erreur pour éviter un arrêt de l'app.
+2. *Status* Le serveur à t il trouvé le produit ? On vérifie si ~status == success~.
+3. *Null-Safety* Même si le produit existe, certaines infos peuvent manquer. On utilise =?= ou des vérifications ~!= null~.
+*** Exemple d'utilisation
+#+begin_src dart
+print(product.name); // Mauvaise implémentation peux crasher
+print(product?.name ?? "Nom inconnu"); // Utilisation de null-aware pour être en sécurité
 #+end_src
 
 * Problèmes
