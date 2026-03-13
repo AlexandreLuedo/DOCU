@@ -1334,6 +1334,10 @@ $ sudo usermod -aG sudo username
 ++ Thunderbold
 @endmindmap
 #+end_src
+
+#+RESULTS:
+: /tmp/babel-hmcKdW/plantuml-xbi6kM.png
+
 *** Norme SCSI
 - Distingue les divers types de supports & fichiers spéciaux. (CD, DVD, Blue-ray)
 - Maintenant remplacée par SATA pour les hdd, NVMe pour les SSD
@@ -1360,6 +1364,8 @@ $ hdparm -I /dev/sda
   #+end_src
 ** Système de fichiers
 - Les ext*, XFS, BTRFS, exFAT, etc... sont des systèmes de fichiers, et donc des types de formatages de périphériques de stockages.
+*** Problèmes & résolutions
+**** [[file:Partitions_and_disks.org::*Disk full & read-only for updating omarchy][Disk is in read-only mode]]
 *** Métadonnées
 - Elles sont stockés dans un fichier appelé ~inode~.
 *** ext*
@@ -1400,6 +1406,9 @@ $ hdparm -I /dev/sda
 +++ RAID
 ++ Pas encore utilisable en prod
   #+end_src
+
+  #+RESULTS:
+  [[file:/tmp/babel-hmcKdW/plantuml-gYvjAk.png]]
 
 *** Les FAT
 #+begin_src plantuml

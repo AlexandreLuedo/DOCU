@@ -1,5 +1,10 @@
 #+title: Partitions And Disks
 #+LANGUAGE: en
+* See disks
+#+begin_src bash
+$ df -h # for disk space
+-h # human-readable
+#+end_src
 * Configure a file system
 ** Create a partition table
 #+begin_src bash
@@ -20,3 +25,28 @@ $ sudo mkfs.exfat -n "key_name" /dev/sdX1 # For context it's in exfat partition 
 #+begin_src bash
 $ sudo eject /dev/sdX
 #+end_src
+* Mount & unmount
+Using the =mount= command
+* Linux habits with a full disk/partition
+The kernel will mount the partition in =read-only= if they full. To prevent data corruption
+* Problems
+** Disk full & read-only for updating omarchy
+#+begin_src bash
+# See the usage of disks
+$ df -h
+$ lsblk # to know where is the file system
+$ mount | grep boot # See more about mounted infos for /boot partition
+# It's a vfat type, so it's very sensible, it can be brocken if the pc shutdown brutally.
+$ fsck # We will check the /boot disk
+$ sudo umount /boot # Never repear an mounted file system.
+# When umounting a file system, the directory must be empty
+$ sudo fsck /dev/nvmeOn1p1
+$ sudo mout -o remount,rw /boot
+$ sudo touch /boot/test_write # to see if I can write in the disk
+#+end_src
+#+begin_quote
+What I do to fix?
+- Identification : We have see that /boot was stuck as =ro= (read-only) because errors.
+- Repairation : With =fsck=, we have clean up the "dirty bit"
+- Remount : We remount the partition in =rw= (read-write) mode.
+#+end_quote

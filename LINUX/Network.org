@@ -62,4 +62,8 @@ resolvectl status
 #+begin_src bash
 $ resolvectl status
 #+end_src
-* 
+* Restart internet service
+For omarchy
+#+begin_src bash
+sudo systemctl restart systemd-networkd
+#+end_src
