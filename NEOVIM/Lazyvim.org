@@ -12,3 +12,42 @@ gc
 <leader> f r
 * Restore session
 <leader> q s
+* Adding yaml indentation
+Modify .config/nvim/lua/config/lazy.lua
+Add it to the end off the file
+#+begin_src lua eval: no
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "yaml",
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+#+end_src
+* Navigate code propositions
+- p :: previous
+- n :: next
+
+* Zoom
+ - <leader>wm :: Toggle zoom mode
+ - <leader> uZ :: Toggle Zoom mode
+ - <leader> uz :: Toggle Zen mode
+* Windows
+** Move windows
+   - C-h :: Left
+   - C-l :: right
+     etc..
+** Split window Below
+   - <leader> |
+** Split window Right
+   - <leader> -
+** Delete window
+* Navigate doc propositions
+- f :: forward
+- b :: before
+* Linters
+** Desactivate linters
+:lua vim.diagnostic.enable(false)
+    

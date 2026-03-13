@@ -134,6 +134,15 @@ git rebase
 git checkout master -- <path/to/file>
 git commit -m "Reset <file> to match master version"
 #+end_src
+** TODO Make a pull request
+** After github pull request validated
+#+begin_src bash
+$ git checkout master
+$ git pull # update the local
+$ git branch -d {branch/name}
+$ git push origin --delete {branch/name}
+$ git fetch -p # clean up
+#+end_src
 * [?] Issue
 Don't know if it is his right place to be here.
 ** Link an commit to a

@@ -299,6 +299,10 @@ Pour avoir le nom de sa machine
 #+begin_src yaml
 hostname['item']
 #+end_src
+** distribution name version
+#+begin_src yaml
+ansible_facts['ansible_distribution_release']
+#+end_src
 ** Obtenir un group dans un inventaire
 #+begin_src yaml
 groups['<nom_de_groupe>']
@@ -643,6 +647,25 @@ Doc: [[https://docs.ansible.com/projects/ansible/latest/collections/ansible/buil
     mode: '0600'
     validate: /usr/sbin/sshd -t -f %s
     backup: yes
+#+end_src
+** Line in file
+[[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/lineinfile_module.html][doc]]
+#+begin_src yaml
+- name: Add a line to a file if the file does not exist, without passing regexp
+  ansible.builtin.lineinfile:
+    path: "{{ apt_mirror_config_path }}/acng.conf"
+    line: "ExTreshold: {{ days }}"
+    create: yes
+    mode: '0644'
+#+end_src
+** Systemd service
+[[https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/systemd_service_module.html][doc]]
+#+begin_src yaml
+- name: Make sure a service unit is running
+  ansible.builtin.systemd_service:
+    state: started
+    name: httpd
+    enabled: true
 #+end_src
 * Ansible community
 ** Obtenir la doc

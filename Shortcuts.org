@@ -27,7 +27,8 @@
 - a = insert but after one letter
 - o = insert below the cursor
 - O = insert upper the cursor
-
+- p = insert one or multiples lines below
+- P = insert one or multiples lines above
 ** Undo & Redo
 - u = undo
 - U = fix the whole line
