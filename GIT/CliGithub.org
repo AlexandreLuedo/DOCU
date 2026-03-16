@@ -39,6 +39,23 @@ $ gh sub-issue create --parent 123 --title "title" --body "body"
 * Make a pull request
 gh pr create --body-editor nvim
    #+end_src
+* Pull Request
+  #+begin_src bash
+# Authentifiez‑vous (une fois seulement)
+gh auth login
+# Choisissez GitHub.com, méthode d’authentification (browser ou token)
+
+# Créez la PR
+gh pr create \
+  --base main \               # branche cible du repo original
+  --head <votre-utilisateur>:feature/ma-nouvelle-fonctionnalité \
+  --title "Titre de la PR" \
+  --body "Description détaillée de la PR.
+
+  - Référence ticket #123
+  - Points clés…
+  "
+  #+end_src
 * Plugins
 ** Install sub-issue plugin
 $ gh extension install yahsan2/gh-sub-issue
