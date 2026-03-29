@@ -1,6 +1,12 @@
 #+title: Shorctus
 * VIM
 
+** Exit the editor
+- ZZ :: exit & save
+- wq :: exit & save
+- x :: exit & save
+- w <name> :: save in the <name> file (without exiting the ide)
+- 1,10w <name> :: save line 1 to 10 in the <name> file
 ** Structuring vim sentences
 - *b* + *number* + *motion
 - b = an operator

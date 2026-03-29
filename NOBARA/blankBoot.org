@@ -1,3 +1,0 @@
-#+title: Blank Boot
-ctrl + alt + f3
-$ nobara-sync cli
