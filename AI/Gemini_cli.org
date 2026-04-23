@@ -1,0 +1,44 @@
+#+title: Gemini Cli
+#+LANGUAGE: en
+* Commands
+- */extensions list* :: view all isntalled extesions
+- /skills list :: Manage availabhle skills
+- /hooks panel :: Visualise active hooks
+
+* Update gemini cli
+#+begin_src bash
+npm install -g @google/gemini-cli@latest
+#+end_src
+
+* Sandbox mode
+** User settings
+[[~/.gemini/settings.json]]
+#+begin_src json
+"tools": {
+    "sandbox": "docker"
+  }
+#+end_src
+** Workspace settings
+[[.gemini/setttings.json]] (in your projecth)
+** Environnement variable
+=GEMINI_SANDBOX=
+** Commad-line flag
+#+begin_src bash
+gemini -s
+#+end_src
+
+* Extensions
+** MCP servers (Model Context Protocol)
+Allows the model to interact with externals APIs, databases, or locales applications.
+** Agent skills
+Directories of expertise. The model "activates" these on-demand when it identifies a matching task, which saves context tokens.
+** Hooks
+Scripts that run at specific points in the agent's lifecycle (e.g., before executing a tool to validate arguments or after a model response to filter content).
+** Custom Commands
+User-defined shortcuts (e.g., /my-action) triggered prompt or shell commands
+** Context Files
+(GEMINI.md): Instructions that define the "personnality" loaded automatically at each startup session.
+** LIST
+*** Gemini-Kit Team of agents
+[[https://github.com/nth5693/gemini-kit]]
+

@@ -1,0 +1,51 @@
+#+title: Mirrors
+#+LANGUAGE: EN
+Hosting your mirrors with  a [[~/INFOR/DOCU/NETWORK/VIP.org][VIP]] using [[~/INFOR/INFRA/ANSIBLE/ROLES/Keepalived/README.org][Keepalived role]].
+* Apt & aptitude
+** Complete mirror
+*** Download
+#+begin_src bash eval: no
+sudo apt install apt-mirror
+#+end_src
+*** Config file
+/etc/apt/mirror.list
+Add your debian version name:
+#+begin_src bash eval: no
+# eg:
+bullseye
+#+end_src
+*** Execute
+can working during one night
+#+begin_src bash eval: no
+apt-mirror
+#+end_src
+*** Expose the folder
+Using a webserver
+
+** Cached mirrors
+using =apt-cacher-ng=
+#+begin_quote
+[!NOTE]
+Service will start on 3142 port
+#+end_quote
+#+begin_src bash eval: no
+sudo apt update
+sudo apt install apt-cacher-ng
+#+end_src
+*** Server config
+/etc/apt-cacher-ng/acng.conf
+#+begin_src conf
+ExTreshold: 15                   # days, after deleted by the official repos
+#+end_src
+*** Client config
+On client
+/etc/apt/apt.conf.d/00proxy
+#+begin_src
+Acquire::http::Proxy "<server.ip>:3142";
+#+end_src
+*** Force cleaning up the cache
+#+begin_src bahs eval: no
+# Force la mise à jour des index puis nettoie
+curl http://localhost:3142/acng-report.html?doExpire=Start+Scan+and+Expiration
+#+end_src
+
