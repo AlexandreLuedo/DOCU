@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       20ad84bb-8020-4e0a-9e9e-7bf957529768
+:END:
+#+title: Nat
+#+LANGUAGE: en
+Make the transformation between the local IP to the public IP. And inverse.
+See also: [[attachment:_20260311_170738screenshot.png][Nat concept diagram]]
