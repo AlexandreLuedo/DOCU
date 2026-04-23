@@ -1,0 +1,82 @@
+#+title: Riverpod
+#+LANGUAGE: en
+The replacement for Provider. Same author.
+* Philosophy
+The data's aren't stored in the widgets. Their are stored in a scope. Another dimension. For hearing this dimension we wrap the MyApp() into ProviderScope(), like [[*Main][that]].
+* Usage
+** Main
+#+begin_src dart
+void main() {
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
+#+end_src
+** Notifier & NotifierProvider
+1. We need a class who contains logic & values (notifier)
+2. We need a global variable who allows your UI to find the class (NotifierProvider)
+*** Notifier
+#+begin_src dart
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// They use one type of value (here, a double)
+class WeightNotifier extends Notifier<double> {
+
+  // Need to build
+  @override
+  double build() {
+    return 0.0; // The needed started value
+  }
+
+  // To modify the value
+  void updateWeight(double newWeight) {
+
+    state = newWeight;
+  }
+}
+
+// The provider : the global varaible
+// NEED TO BE OUTSIDE OF THE CLASS
+final weightProvider = NotifierProvider<WeightNotifier, double>(() {
+  return WeightNotifier();
+});
+#+end_src
+** Accessing the provider
+- =ConsumerWidget= & =ref=
+We doesn't need a stateless widget, we need a consumer widget. The build method gain the ability to use =Widget Ref ref=
+*** Read
+=read.watch(provider)=
+*** Watch
+=ref.read(provider.notifier)=
+*** Example
+#+begin_src dart
+// Sateless become ConsumerWidget
+class ResultScreen extends ConsumerWidget {
+  const ResultScreen({super.key});
+
+  // Ref appear here
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    // watch the value
+    final currentWeight = ref.watch(weightProvider);
+
+    return Column(
+      children: [
+        Text('Poids: $currentWeight g'),
+
+        ElevatedButton(
+          onPressed: () {
+            // Read the notifier to make what we write
+            // Using read because we are in a button
+            ref.read(weightProvider.notifier).updateWeight(500.0);
+          },
+          child: const Text('Mettre à 500g'),
+        )
+      ],
+    );
+  }
+}
+#+end_src

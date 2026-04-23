@@ -1,0 +1,17 @@
+#+title: Brew
+* Install homebrew
+* Uninstall homebrew
+Seel doc: [[https://github.com/homebrew/install#uninstall-homebrew][Github]]
+** With all packages
+#+begin_src bash :eval no
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+#+end_src
+** For reinstalation or migrate Intel to ARM
+#+begin_src bash :eval no
+curl -fsSLO https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh
+/bin/bash uninstall.sh --path /usr/local
+#+end_src
+** Help & options
+#+begin_src bash :eval no
+/bin/bash uninstall.sh --help
+#+end_src

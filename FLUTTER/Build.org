@@ -1,0 +1,35 @@
+#+title: Build
+* Android
+#+begin_src bash
+flutter build apk --release --obfuscate --split-debug-info=./debug_info --split-per-abi
+#+end_src
+* Web
+#+begin_src bash
+flutter build web --release --wasm --tree-shake-icons
+#+end_src
+** setup github page
+#+begin_src bash
+# 1. On va dans le dossier construit
+cd build/web
+
+# 2. On initialise un mini-dépôt git local juste ici
+git init
+git add .
+git commit -m "Déploiement converter.lab"
+
+# 3. On force l'envoi vers ton dépôt GitHub sur la branche gh-pages
+# Remplace UTILISATEUR et DEPOT par tes vraies infos
+git push -f https://github.com/TON_PSEUDO/converter_lab.git master:gh-pages
+
+# 4. On revient à la racine du projet
+cd ../..
+#+end_src
+* Macos
+#+begin_src bash
+flutter build macos --release --obfuscate --split-debug-info=./debug_info
+#+end_src
+* Compress
+** Macos
+#+begin_src bash
+tar -czvf converter_lab_macos.tar.gz build/macos/Build/Products/Release/converter_lab.app
+#+end_src

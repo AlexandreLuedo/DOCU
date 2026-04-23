@@ -1,0 +1,15 @@
+#+title: Share Plus
+#+LANGUAGE: en
+* Installation
+#+begin_src bash
+$ flutter pub add share_plus
+#+end_src
+* Send content
+** Text
+#+begin_src bash
+$ Share.share("your text");
+#+end_src
+** Email
+#+begin_src bash
+$ Share.share('text of the mail', subject: 'subject mail')
+#+end_src

@@ -1,0 +1,8 @@
+#+title: Gradle
+#+LANGUAGE: en
+* Build
+** Clean build
+#+begin_src bash
+# command path: <project_folder>/android/
+$ ./gradlew clean build
+#+end_src
