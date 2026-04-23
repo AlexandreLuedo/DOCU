@@ -1,0 +1,14 @@
+#+title: Root Directories
+#+LANGUAGE: EN
+* bin
+User binaries
+* etc
+Config files
+* home
+Personnal user directory
+* usr
+/Unix System Ressourcse/
+Store majority of installed programs
+* var
+Files weights who change (logs, db)
+

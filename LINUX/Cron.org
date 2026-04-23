@@ -1,0 +1,26 @@
+#+title: Cron
+#+LANGUAGE: en
+A deamon (=crond=) who execute commands or scripts at a specified intervall. These tasks are kown as "Cron Jobs".
+* Launch command
+#+begin_src bash
+ *  *  *  *  *  command_to_execute
+ ┬  ┬  ┬  ┬  ┬
+ │  │  │  │  └─ Day of Week (0-6, Sunday=0)
+ │  │  │  └──── Month (1-12)
+ │  │  └─────── Day of Month (1-31)
+ │  └────────── Hour (0-23)
+ └───────────── Minute (0-59)
+#+end_src
+* Environnements usages
+ - Local/Development: Used for simple tasks like clearing temporary files, local database backups, or triggering certificates renewal (Certbot).
+ - Single Servers: It is the "gold standard" for log rotation, system maintenance, and simple periodic scripts.
+* Why not using it for large infras
+- SPOF (Single Point Of failure)
+- No particulary logs
+* Modern Alternatives in Big Infrastructure:
+   1. Distributed Schedulers (e.g., Nomad, Airflow, Dagster): These manage complex workflows across many servers, providing retry logic, UI dashboards, and dependency mapping.
+   2. Kubernetes CronJobs: In containerized environments, K8s creates a temporary pod to run a task and terminates it afterward. This ensures the task runs somewhere in the
+      cluster, regardless of individual node failures.
+   3. Cloud Native (e.g., AWS Lambda + EventBridge): Functions are triggered by time events without maintaining a persistent server.
+   4. Systemd Timers: Many modern Linux distributions (including Arch/Debian in your docs) are moving toward systemd timers. They offer better logging (via journalctl) and more
+      flexible triggering conditions than traditional CRON.

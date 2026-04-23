@@ -1,0 +1,111 @@
+#+title: Omarchy
+#+LANGUAGE:en
+* Config
+** Search/walker prefixes
+#+begin_src toml
+prefix = "/"
+provider = "providerlist"
+
+prefix = "."
+provider = "files"
+
+prefix = ":"
+provider = "symbols"
+
+prefix = "="
+provider = "calc"
+
+prefix = "@"
+provider = "websearch"
+
+prefix = "$"
+provider = "clipboard"
+
+text = "Restart Walker"
+command = "omarchy-restart-walker"
+#+end_src
+** Modify walker settings
+~/.config/walker/
+* Network
+** [[file:~/INFOR/DOCU/LINUX/Network.org::*Restart internet service][Restart internet service]]
+** Discover SSID
+See also : [[https://wiki.archlinux.org/title/Network_configuration/Wireless#Discover_access_points][Arch wiki]] 
+*** Normal
+#+begin_src bash
+iw dev wlan0 scan
+#+end_src
+*** Hidden
+#+begin_src bash
+iwconfig wlan0 essid [ROUTER_NAME]
+#+end_src
+* Disks
+** Snapchots
+** Paths
+global: =/.snapchots=
+user: =~/.snapchots=
+** List snapchots
+Using snapper
+#+begin_src bash :eval no
+sudo snapper list -a
+#+end_src
+** Delete snapchots
+#+begin_src bash :eval no
+sudo btrfs subvolume delete ./snapchots/{NUMBER}/snapchot/
+#+end_src
+** boot partition full
+** Clean the old kernel files Limine/Snapper
+#+begin_src bash
+$ pacman -Qq linux # see the installed kernel
+$ pacman -Qq linux-lts # if installed
+
+# Clean the packages caches
+sudo pacman -Sc
+#+end_src
+** Clean journal files manually
+See [[https://wiki.archlinux.org/title/Systemd/Journal#Clean_journal_files_manually][arch wiki]]
+* Issues
+** Microphone activated  
+#+begin_src bash
+systemctl --user restart pipewire
+#+end_src
+** One of two screen can't find the output source after sleep
+Maybe that :
+#+begin_quote
+1. Désactiver le "Deep Sleep" dans le menu de l'écran (Priorité n°1)
+C'est souvent une option interne à l'écran Lenovo lui-même, indépendante d'Omarchy.
+
+Utilisez les boutons physiques sur le cadre de votre écran Lenovo pour ouvrir le Menu (OSD).
+
+Cherchez une section nommée "Port Settings", "Advanced Settings" ou "Énergie".
+
+Désactivez l'option "Monitor Sleep" ou "Deep Sleep".
+
+Si vous voyez une option "DDC/CI", assurez-vous qu'elle est sur On.
+
+2. Forcer la version du DisplayPort/HDMI
+Si vous êtes branché en DisplayPort, les écrans Lenovo essaient souvent de négocier la version 1.2 ou 1.4.
+
+Dans le menu de l'écran Lenovo, cherchez le réglage "DisplayPort Daisy Chain" et mettez-le sur Off.
+
+Essayez de forcer la version du port (ex: passer de DP 1.4 à DP 1.2) dans les réglages de l'écran. C'est souvent plus stable pour le réveil sous Linux.
+
+3. Forcer l'EDID sous Linux (La solution "Hard")
+Puisque vous êtes sous une base Arch (Omarchy), vous pouvez forcer le système à "croire" que l'écran est toujours branché, même s'il ne répond pas.
+
+Installez l'outil de diagnostic : sudo pacman -S edid-decode
+
+L'idée est de copier la configuration de l'écran dans un fichier pour que le noyau Linux la lise au démarrage au lieu de la demander à l'écran.
+
+Note : C'est une manipulation avancée. Si vous ne vous sentez pas à l'aise, commencez par tester un autre câble (un câble HDMI de meilleure qualité ou passer du HDMI au DisplayPort règle souvent le problème sur les Lenovo).
+
+4. Le "Power Cycle" matériel
+Le fait que vous deviez débrancher le secteur indique que le condensateur du port vidéo du Lenovo ou du PC reste chargé avec une erreur.
+
+Testez ceci : quand l'écran ne s'allume pas, au lieu de débrancher le PC, débranchez uniquement la prise d'alimentation de l'écran Lenovo, attendez 10 secondes, et rebranchez-le.
+
+Si l'écran revient, le coupable est définitivement le firmware de l'écran Lenovo et non votre PC.
+#+end_quote
+
+** Fix external monitors doesn't work afters suspends
+  - Ctrl Alt F3 :: Goes to another virtual terminal
+  - Ctrl Alt F1 :: Goes to hyprland

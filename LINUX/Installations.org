@@ -1,0 +1,37 @@
+#+title: Installations
+#+LANGUAGE: en
+* tar.gz
+** Compress
+#+begin_src bash :eval no
+$ tar -czvf {archive_name}.tar.gz /path/to/directory
+-c : create an archive
+-z : compress archive with gzip
+-v : verbose
+-f : file name of the archive
+#+end_src
+** Extract
+#+begin_src bash :eval no
+$ tar -xvzf {archive_name}.tar.gz
+- x : extract, get
+- v : verbose
+- z : decompress archive with gzip
+- f : file name
+#+end_src
+** List files in archive
+#+begin_src bash :eval no
+$ tar -tzf {archive_name}.tar.gz
+- t : list content of the archive
+#+end_src
+* Executing
+Asuming you have extract the tar.gz file. Navigate to the file
+#+begin_src bash
+./{file_name}
+#+end_src
+* Compiling
+#+begin_src bash
+./{configure} # it's normally their name
+make
+sudo make install
+#+end_src
+
+

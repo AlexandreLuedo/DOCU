@@ -1,0 +1,25 @@
+#+title: Apt
+#+LANGUAGE: EN
+/Advancing Packaging Tools/
+* Repos list path
+/etc/apt/sources.list
+/etc/apt/sources.list.d
+* Update
+#+begin_src bash
+apt-get update
+#+end_src
+* Upgrade
+#+begin_src bash
+apt-get upgrade
+#+end_src
+* Search a package
+#+begin_src bash
+apt-cache search <package_name>
+-s                              # Simulate an installation
+-f                              # repair dependancies issues
+#+end_src
+* Visual tool
+Synaptic
+#+begin_src 
+apt-get install synaptic
+#+end_src
