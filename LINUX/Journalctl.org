@@ -15,4 +15,35 @@ sudo journalctl -u <service> -f
 # -f follow (in real time)
 # -n <int> number of lines
 #+end_src
+* Diagnose software crashes
+** Check system logs
+Using systemctl
+#+begin_src bash
+journalctl -xe --since "5 minutes ago"
+#+end_src
+if knowing process name :
+#+begin_src bash
+journalctl -u process_name
+# or
+journalctl /usr/bin/app_name
+#+end_src
+** Analyze Core Dumps
+Arch store a core dump for each crash or error
+Using =coredumpctl=
+#+begin_src bash
+coredumpctl list # list recent crashes
+coredumpctl info # view details of last crash
+coredumpctl debug [PID] # debug with Gnu Debugger
+#+end_src
+** Trace system calls
+If hangs or exits without a message conedering using =strace=.
+#+begin_src bash
+strace -e openat,access,connect <app_name>
+#+end_src
+** Check application-specific logs
+Modern linux apps store in :
+*** ~/.cache/[app_name]
+*** ~/.config/[app_name]
+*** /var/log// (primarily for system services)
+
 

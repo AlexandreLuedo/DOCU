@@ -1,3 +1,48 @@
 #+title: Encryptions
 #+LANGUAGE: en
 This doc refferse uniquely for Linux kernel
+* Encrypt the kernel
+** Using LVM (guided)
+Used for serv3.
+*** Layer 0 - Physical partitionning
+Separate the disk into two partitions :
+- boot =/dev/sda1= (enuncrypted)
+- =/dev/sda2= (encrypted) for running an Logical Volume Manager
+*** Layer 1 - Encryption
+ Everything inside /dev/sda2 is encrypted.
+   - At boot, the kernel from /boot loads a small set of drivers and asks for your password.
+   - Once you enter the correct password, the kernel "opens" the container, creating a virtual device (usually at /dev/mapper/sda2_crypt).
+   - Data is decrypted on-the-fly in RAM. It is never stored unencrypted on the physical SSD.
+*** Layer 2 - LVM
+Instead of putting a filesystem directly on the encrypted device, Debian puts LVM on top of it. This provides extreme flexibility:
+   - Volume Group (VG): The whole encrypted space is treated as one big pool of storage.
+   - Logical Volumes (LV): Inside that pool, the installer creates "virtual partitions":
+       - root (the system files)
+       - swap (the virtual memory)
+       - home (optional, if you chose the "separate home" guided option)
+* Decrypt the kernel
+
+* TODO Rewrite this 4 bigs fellas
+** TODO Dropbear SSH (Remote Manual Unlock)
+  If you don't trust automation and want to type the password yourself from your bed:
+   * How it works: You install a tiny SSH server called Dropbear inside the initramfs (the tiny unencrypted part of the boot process).
+   * The Magic: When the server restarts, it stays at the "Enter Password" screen but also starts a basic SSH service. You SSH into the server from your laptop, run a command
+     like cryptroot-unlock, type the password, and the server finishes booting.
+   * Security: Very high, but requires a human to be awake.
+** Network-Bound Disk Encryption (NBDE) – The Most Common
+  This is the "Enterprise" way. It uses two tools: Tang (a server) and Clevis (a client).
+   * How it works: You set up a small "Tang" server elsewhere in your secure internal network.
+   * The Magic: When the encrypted server boots, it sends a "challenge" to the Tang server over the network. If the Tang server recognizes the machine, it sends back the "key" to
+     unlock the drive automatically.
+   * Security: If someone steals the physical server and takes it to another building (outside your network), it won't be able to talk to the Tang server, and it will still ask
+     for a password that the thief doesn't have.
+** TPM (Hardware-Bound) – The "Windows BitLocker" Style
+  Modern baremetal servers have a TPM (Trusted Platform Module) chip on the motherboard.
+   * How it works: You "seal" the encryption key inside the TPM chip.
+   * The Magic: During boot, the TPM chip checks if the BIOS, Secure Boot, and Kernel haven't been tampered with. If everything looks "healthy" and original, the TPM releases the
+     key directly to the OS to unlock the drive.
+   * Security: If a thief pulls the SSD out and puts it in their own computer, the TPM chip (on your motherboard) stays behind, and the disk remains locked.
+** Key Files on External Media (USB/Virtual Media)
+   * How it works: Instead of a password, LUKS looks for a "Key File."
+   * The Magic: You store this key on a USB stick plugged into the server (risky) or, more commonly on professional servers (Dell/HP/Supermicro), you use the IPMI/iDRAC/iLO (the
+     remote management hardware). You can "mount" a virtual USB drive containing the key over the network just for the boot duration.
