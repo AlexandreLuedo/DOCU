@@ -1,5 +1,5 @@
 #+TITLE: Doom Emacs & Org-Mode Cheat Sheet
-#+AUTHOR: Moi
+#+AUTHOR: Alexandre Luedo
 #+STARTUP: fold
 
 * CORE & HELP
@@ -67,12 +67,18 @@
 - =g= mean global (modify all lines)
 - =c= ask for confirmation before deleting
 *Note:* In regexp, if you use {{ }} in replacement, add =\= before the caracter: =:%s/<\{\{ string \}\}>/<string>/g=
+** Remove last caracters of each lines
+#+begin_src bash
+sed -i 's/\r$//' <file>
+#+end_src
 ** Narrowing (Focus view)
 - =SPC m s n= :: org-narrow-to-subtree (Focus on a text)
 - =SPC m s N= :: org-narrow-widen (Exit focus)
 ** Insert snippets
 - =SPC i f= :: Insert file name
 - =SPC i F= :: Insert file path
+** Insert headers
+- C-c-m :: below or on a blank line
 
 * ORG-MODE MAGIC
 ** Capture & Notes
@@ -96,6 +102,8 @@
 - =SPC m d s= :: Scheduled
 - =M-x org-timestamp= or =:org-timestamp= :: Insert date (ex: <2025-09-17 Wed>)
 *Tip:* Use "+1d" (tomorrow), "fri" (friday), "+2d 10:00" in date picker.
+** Effort
+- *C-c C-x e :: Set the effort for a task (1:30, 15, ...)
 ** Links & Images
 - =SPC n l= :: Store link
 - =SPC m l l= or =C-c C-l= :: Insert link
