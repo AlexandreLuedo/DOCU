@@ -1,0 +1,11 @@
+#+title: Quantization
+#+LANGUAGE: en
+* TODO Pre-requisit
+** TODO Knowing matrics
+** TODO How to an LLM works
+* Mathematical relation
+$$x = s \cdot (q - Z)$$
+** [?] $S$ (Scale Factor): A positive floating-point number that determine the "step size" of the quantization levels.
+** [?] $Z$ (Zero-point): An integer that ensures the floating-point value $0.0$ maps exactly to a representable integer (crucial for padding and ReLU).
+** Symmetric Quantization: A simplified version where $Z = 0$. This is faster for computation but can be less precise if the weight distribution is skewed.
+* Quantization Granularity

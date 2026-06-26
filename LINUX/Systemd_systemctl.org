@@ -1,5 +1,0 @@
-#+title: Systemd & systemctl
-#+LANGUAGE: en
-* Systemd
-* Systemctl
-

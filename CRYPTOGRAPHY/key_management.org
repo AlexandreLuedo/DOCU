@@ -1,0 +1,5 @@
+#+title: Key Management
+#+LANGUAGE: en
+* Setting up key for ssh
+See also : [[https://github.com/imthenachoman/How-To-Secure-A-Linux-Server#ssh-publicprivate-keys][SSH Public/Private Keys github]]
+Preffering /Ed25519/

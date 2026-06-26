@@ -37,7 +37,7 @@ class WeightNotifier extends Notifier<double> {
   }
 }
 
-// The provider : the global varaible
+// The provider : the global variable
 // NEED TO BE OUTSIDE OF THE CLASS
 final weightProvider = NotifierProvider<WeightNotifier, double>(() {
   return WeightNotifier();

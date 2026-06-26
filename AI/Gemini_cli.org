@@ -28,8 +28,8 @@ gemini -s
 #+end_src
 
 * Extensions
-** MCP servers (Model Context Protocol)
-Allows the model to interact with externals APIs, databases, or locales applications.
+** [[file:MCP.org][MCP servers (Model Context Protocol)
+]]Allows the model to interact with externals APIs, databases, or locales applications.
 ** Agent skills
 Directories of expertise. The model "activates" these on-demand when it identifies a matching task, which saves context tokens.
 ** Hooks
@@ -41,4 +41,3 @@ User-defined shortcuts (e.g., /my-action) triggered prompt or shell commands
 ** LIST
 *** Gemini-Kit Team of agents
 [[https://github.com/nth5693/gemini-kit]]
-

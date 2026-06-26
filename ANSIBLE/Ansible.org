@@ -348,7 +348,20 @@ $ ansible-vault decrypt file.yaml
 ansible-vault rekey password.yml
 #+end_src
 * Configuration
+See also : [[https://docs.ansible.com/projects/ansible/latest/reference_appendices/config.html][Ansible doc]]
 La config se nomme =ansible.cfg= peux être dans le dossier =~/.ansible=
+** Generating a config file
+#+begin_src bash
+# Fully commented ansible.cfg file
+ansible-config init --disabled > ansible.cfg
+
+# More complete file
+ansible-config init --disabled -t all > ansible.cfg
+#+end_src
+** Config path var
+#+begin_src 
+ANSIBLE_CONFIG 
+#+end_src
 * Artifacts
 L'artifact est un fichier généré lors de l'execution d'un programme Ansible, il décrit se que fait le programme et donne des informations spécifiques. Nous pouvons voir ça comme une photo prise à l'instant T.
 * Collections

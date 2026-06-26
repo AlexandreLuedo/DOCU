@@ -1,3 +1,0 @@
-#+title: Asymmetric Cryptography
-#+LANGUAGE:en
-See also : [[https://en.wikipedia.org/wiki/Public-key_cryptography][Wikipedia]]

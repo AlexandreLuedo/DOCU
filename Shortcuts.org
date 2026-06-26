@@ -1,5 +1,6 @@
 #+title: Shorctus
 * VIM
+
 ** Exit the editor
 - ZZ :: exit & save
 - wq :: exit & save
@@ -37,5 +38,3 @@
 ** Undo & Redo
 - u = undo
 - U = fix the whole line
-* Shell
-** Del

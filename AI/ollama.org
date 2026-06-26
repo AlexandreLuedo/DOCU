@@ -1,0 +1,11 @@
+#+title: Ollama
+
+* Logs
+#+begin_src bash
+nvim ~/.ollama/logs
+#+end_src
+* Set path to model
+#+begin_src bash
+launchctl setenv OLLAMA_MODELS "/Volumes/T7 Shield/ARCH/MACOS/INFOR/MODELS"
+export OLLAMA_MODELS="/path/to/your/models" #in .zshrc
+#+end_src

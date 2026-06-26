@@ -1,0 +1,12 @@
+#+title: Dry
+#+subtitle: Don't repeat yourself
+#+begin_quote
+[!NOTE]
+This doc has to mission, to learn how to reusse parts of Flutter application.
+#+end_quote
+
+#+begin_quote
+[!WARNING]
+#+end_quote
+See also : 
+* 
