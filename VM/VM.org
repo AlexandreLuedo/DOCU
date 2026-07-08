@@ -1,4 +1,5 @@
-#+title: Concepts
+#+title: VM
+#+subtitle: Virtual Machine
 #+LANGUAGE: en
 * Software
 ** VM
