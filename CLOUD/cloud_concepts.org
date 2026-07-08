@@ -1,4 +1,4 @@
-#+title: Concepts
+#+title: Cloud Concepts
 #+LANGUAGE: en
 Concepts for the [[https://www.cloudflare.com/learning/cloud/what-is-the-cloud/][cloud.]]
 * Content Delivery Network - CDR
