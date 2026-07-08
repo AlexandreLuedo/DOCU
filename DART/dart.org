@@ -88,7 +88,7 @@ Calendar.day
 Calendar calendarView = Calendar.day;
 #+end_src
 * Getter and Setter
-** Set (setter)
+** TODO Set (setter)
 #+begin_quote
 Utilisé pour contenir des donnée qui ne sont pas en doublons par exemple pour une série de mail dont il ne faut pas dupliquer
 #+end_quote
@@ -110,10 +110,9 @@ supprime
 #+begin_quote
 Cela concerne les boucles et les "si" "sinon" etc..
 #+end_quote
-**  for (int i = 0; i < 5; i ++);
+** for (int i = 0; i < 5; i ++);
 |déclaration|limite|action|
-
-**   Combiner avec list
+** Combiner avec list
 #+begin_src dart
 List<String> scores=[12, 23, 45];
 for (score in scores)
@@ -127,14 +126,14 @@ for (score in scores)
   }
 }
 #+end_src
-**   Demander uniquement une valeur précise par filtre
+** Demander uniquement une valeur précise par filtre
 ~for(score in scores.where((s)=>s == 100))~
 méthode .where()         pour chaques index qui est égal à 100
 ** Switch
 Excellent exemple de switch : [[file:~/INFOR/DOCU/FLUTTER/provider.org::*Faire les calculs dans la pool][Faire les calculs dans la pool]] 
 * User input
 **  String? value = stdin.readLineSync();
-* class usage
+* TODO class usage
 #+begin_src dart
 // Affiche les containaires sur fond orange clair.
 class CustomContainerItem {
