@@ -1,0 +1,7 @@
+#+title: Debug
+* First things to do
+- *C-h C-d* :: Will open the debug docs
+* See logs
+log stream --predicate 'process == "emacs"' --last 1m
+* Macos
+
