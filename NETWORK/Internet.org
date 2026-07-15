@@ -2,7 +2,7 @@
 #+LANGUAGE: en
 See also : [[https://www.youtube.com/watch?v=lL3ElCmq6jc][Cocadmin video]]
 * [[file:DNS.org][DNS]]
-* HSTS preload list
+* [[https://hstspreload.org/][HSTS preload list]]
 This list stored on user's device web browser, who force a list of sites to connect firstly with https protocole.
 * TCP
 =Transmission Control Protocole=
@@ -22,7 +22,7 @@ Hide footbox
 #+end_src
 
 #+RESULTS:
-[[file:/var/folders/kr/_kvnstpx04x4y2qn892y7tm80000gn/T/babel-zzYH7L/plantuml-wCLvgs.png]]
+: /tmp/babel-evVcK5/plantuml-8IiURt.png
 * TLS / SSL
 =Transport Layer security=, before it was SSL. Newest version is =1.3=
 #+begin_src plantuml
@@ -55,7 +55,6 @@ The choosen one encryption protocole selected by the server
 Same as [[ClientHello][ClientHello]]
 *** Certificat
 *** [[https://en.wikipedia.org/wiki/Cryptographic_nonce][Nonce]]
-
 
 ** [[https://en.wikipedia.org/wiki/Server_Name_Indication][SNI]]
 =Server Name Indication=

@@ -1,0 +1,26 @@
+#+title: Ports
+#+LANGUAGE: fr
+* Named ports
+| Port | Service                   |
+|------+---------------------------|
+|   20 | Données FTP               |
+|   21 | Protocole FTP             |
+|   22 | ssh                       |
+|   23 | telnet (envoi de mail)    |
+|   25 | smtp (envoi de mail)      |
+|   53 | DNS                       |
+|   80 | HTTP                      |
+|  110 | pop3 (réception de mail)  |
+|  123 | NTP                       |
+|  139 | netbios (service windows) |
+|  143 | imap                      |
+|  161 | snmp                      |
+|  162 | traps snmp                |
+|  389 | ldap (non sécurisé)       |
+|  443 | https                     |
+|  465 | smtps (smtp sur SSL)      |
+|  514 | syslog                    |
+|  636 | ldaps (ldap sur SSL)      |
+|  993 | imaps (imap sur SSL)      |
+|  995 | pop3s (pop3 sur SSL)      |
+

@@ -2,6 +2,10 @@
 #+LANGUAGE:en
 * Domain Name System
 This is a system who store a name for each public ip adress.
+See on [[https://wiki.archlinux.org/title/Domain_name_resolution#:~:text=The%20DNS%20protocol,hijacking%2E][Arch Linux Wiki: DNS]]
+#+begin_src 
+The DNS protocol (Do53) is unencrypted and does not account for confidentiality, integrity or authentication, so if you use an untrusted network or a malicious ISP, your DNS queries can be eavesdropped and the responses manipulated. Furthermore, DNS servers can conduct DNS hijacking. 
+#+end_src
 * Fondamentals
 ** For DNS
 *** TTL
