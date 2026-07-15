@@ -1,5 +1,6 @@
 #+title: Ansible
 #+LANGUAGE:fr
+See also [[https://www.ansiblebyexample.com][Ansible by example]]
 * [[https://docs.ansible.com/ansible/latest/getting_started/get_started_inventory.html][Inventory]]
 - L'inventaire ~inventory.ini~ (ou .yaml) regroupe les ~nodes~ du projet (les points d'accès, ex: serveurs).
 - Utiliser le format de fichier ini est plus court que la syntaxe yaml mais sur le long terme c'est mieux yaml
