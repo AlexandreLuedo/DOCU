@@ -1,5 +1,5 @@
 #+title: Ports
-#+LANGUAGE: fr
+#+LANGUAGE: en fr
 * Named ports
 | Port | Service                   |
 |------+---------------------------|
@@ -23,4 +23,9 @@
 |  636 | ldaps (ldap sur SSL)      |
 |  993 | imaps (imap sur SSL)      |
 |  995 | pop3s (pop3 sur SSL)      |
+* Listening all opened and used ports
+#+begin_src bash :eval no
+sudo lsof -i -n -P | grep LISTEN
+#+end_src
+
 
