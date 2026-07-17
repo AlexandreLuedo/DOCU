@@ -1,5 +1,8 @@
 #+title: Ports
 #+LANGUAGE: en fr
+* Definition
+Ports are access points who make the link between client and server instances. You have multiples ports for each physicial/virtual machines.
+* TODO Translate in full english
 * Named ports
 | Port | Service                   |
 |------+---------------------------|
