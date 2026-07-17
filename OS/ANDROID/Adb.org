@@ -1,0 +1,8 @@
+#+title: Adb
+* Root phone
+#+begin_src bash
+adb reboot bootloader
+fastboot flash recovery recovery_name.zip
+fastboot reboot recovery
+#+end_src
+Or download locally and patch with magick.
