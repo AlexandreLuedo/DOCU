@@ -1,0 +1,189 @@
+#+title: Omarchy
+#+LANGUAGE:en
+* Search/walker prefixes
+prefix = "/"
+provider = "providerlist"
+
+prefix = "."
+provider = "files"
+
+prefix = ":"
+provider = "symbols"
+
+prefix = "="
+provider = "calc"
+
+prefix = "@"
+provider = "websearch"
+
+prefix = "$"
+provider = "clipboard"
+
+text = "Restart Walker"
+command = "omarchy-restart-walker"
+* Shortcuts
+** Shorcuts help
+SUPER k
+** Switch audio input
+SUPER Mute
+** Audio controll
+SUPER CTRL A
+** Close all windows
+CTRL ALT DELETE
+* Keyboard
+** Caps lock by default
+See manual : [[https://learn.omacom.io/2/the-omarchy-manual/88/troubleshooting#why-isn-39-t-caps-lock-working][Omarchy manual]] 
+~/.config/hyprl/input.conf
+#+begin_src conf
+kb_options = compose:ralt
+#+end_src
+* Modify default walker search engine
+~/.config/elephant/websearch.toml
+^ If not present, create it
+#+begin_src toml
+[[entries]]
+default = true
+name = "Search Brave"
+url = "https://search.brave.com/search?q=%TERM%"
+#+end_src
+* Modify [[https://walkerlauncher.com/][walker]] settings
+~/.config/walker/
+* Modify DNS settings
+[[file:~/INFOR/DOCU/OS/LINUX/Network.org::*ARCH][Network doc]]
+* [[file:~/INFOR/DOCU/OS/LINUX/Network.org::*Resolve a domain name using NSS][Resolve domain name]]
+* [[file:~/INFOR/DOCU/OS/LINUX/Network.org::*Restart internet service][Restart internet service]]
+* Snapchots
+** Paths global: =/.snapchots=
+user: =~/.snapchots=
+** List snapchots
+Using snapper
+#+begin_src bash :eval no
+sudo snapper list -a
+#+end_src
+** Delete snapchots
+#+begin_src bash :eval no
+sudo btrfs subvolume delete ./snapchots/{NUMBER}/snapchot/
+#+end_src
+* boot partition full
+** Clean the old kernel files Limine/Snapper
+#+begin_src bash
+$ pacman -Qq linux # see the installed kernel
+$ pacman -Qq linux-lts # if installed
+
+# Clean the packages caches
+sudo pacman -Sc
+#+end_src
+** Clean journal files manually
+See [[https://wiki.archlinux.org/title/Systemd/Journal#Clean_journal_files_manually][arch wiki]]
+* Issues
+** Microphone activated  
+#+begin_src bash
+systemctl --user restart pipewire
+#+end_src
+** One of two screen can't find the output source after sleep
+Maybe that :
+#+begin_quote
+1. Désactiver le "Deep Sleep" dans le menu de l'écran (Priorité n°1)
+C'est souvent une option interne à l'écran Lenovo lui-même, indépendante d'Omarchy.
+
+Utilisez les boutons physiques sur le cadre de votre écran Lenovo pour ouvrir le Menu (OSD).
+
+Cherchez une section nommée "Port Settings", "Advanced Settings" ou "Énergie".
+
+Désactivez l'option "Monitor Sleep" ou "Deep Sleep".
+
+Si vous voyez une option "DDC/CI", assurez-vous qu'elle est sur On.
+
+2. Forcer la version du DisplayPort/HDMI
+Si vous êtes branché en DisplayPort, les écrans Lenovo essaient souvent de négocier la version 1.2 ou 1.4.
+
+Dans le menu de l'écran Lenovo, cherchez le réglage "DisplayPort Daisy Chain" et mettez-le sur Off.
+
+Essayez de forcer la version du port (ex: passer de DP 1.4 à DP 1.2) dans les réglages de l'écran. C'est souvent plus stable pour le réveil sous Linux.
+
+3. Forcer l'EDID sous Linux (La solution "Hard")
+Puisque vous êtes sous une base Arch (Omarchy), vous pouvez forcer le système à "croire" que l'écran est toujours branché, même s'il ne répond pas.
+
+Installez l'outil de diagnostic : sudo pacman -S edid-decode
+
+L'idée est de copier la configuration de l'écran dans un fichier pour que le noyau Linux la lise au démarrage au lieu de la demander à l'écran.
+
+Note : C'est une manipulation avancée. Si vous ne vous sentez pas à l'aise, commencez par tester un autre câble (un câble HDMI de meilleure qualité ou passer du HDMI au DisplayPort règle souvent le problème sur les Lenovo).
+
+4. Le "Power Cycle" matériel
+Le fait que vous deviez débrancher le secteur indique que le condensateur du port vidéo du Lenovo ou du PC reste chargé avec une erreur.
+
+Testez ceci : quand l'écran ne s'allume pas, au lieu de débrancher le PC, débranchez uniquement la prise d'alimentation de l'écran Lenovo, attendez 10 secondes, et rebranchez-le.
+
+Si l'écran revient, le coupable est définitivement le firmware de l'écran Lenovo et non votre PC.
+#+end_quote
+** Fix external monitors doesn't work afters suspends
+  - Ctrl Alt F3 :: Goes to another virtual terminal
+  - Ctrl Alt F1 :: Goes to hyprland
+** Old dns resolutions errors
+I must fix wlan0
+#+begin_src bash
+~ ❯ resolvectl status
+Global
+           Protocols: +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+    resolv.conf mode: stub
+  Current DNS Server: 192.168.8.164
+         DNS Servers: 192.168.8.164
+Fallback DNS Servers: 9.9.9.9
+
+Link 4 (wlan0)
+    Current Scopes: DNS LLMNR/IPv4 LLMNR/IPv6
+         Protocols: +DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+Current DNS Server: 192.168.8.1
+       DNS Servers: 192.168.1.43 192.168.8.1
+     Default Route: yes
+
+Link 6 (docker0)
+    Current Scopes: none
+         Protocols: -DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+     Default Route: no
+
+Link 3 (eno1)
+    Current Scopes: none
+         Protocols: -DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+     Default Route: no
+
+Link 5 (tailscale0)
+    Current Scopes: none
+         Protocols: +DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+     Default Route: yes
+#+end_src
+Changing the wlan0 config
+#+begin_src bash :eval no
+$ sudo nvim /etc/systemd/network/20-wlan.network
+# Change 192.168.1.43 to
+DNS=192.168.8.164
+#+end_src
+Verify the current dns
+#+begin_src bash :eval no
+resolvectl
+#+end_src
+If 'Current DNS Server' is alway wrong :
+#+begin_src bash :eval no
+resolvectl <interface> <server_dns_address> [<fallback_dns_address>]
+# In this case :
+resolvectl wlan0 192.168.8.164 9.9.9.9
+#+end_src
+Maybe trying to get more infos by using
+#+begin_src bash :eval no
+$ nslookup idrac.cloud
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	idrac.cloud
+Address: 192.168.1.83
+#+end_src
+After I see that, I think, the problem is where the computer store the address.
+#+begin_src bash :eval no
+# Changing address of the resolv.conf
+$ nvim /etc/resolv.conf
+
+# Old nameserver 127.0.0.53
+nameserver 127.0.0.50
+#+end_src

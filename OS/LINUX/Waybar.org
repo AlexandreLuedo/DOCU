@@ -1,0 +1,14 @@
+#+title: Waybar
+#+LANGUAGE: en
+* Start waybar
+#+begin_src bash
+$ waybar
+#+end_src
+* Start after changes
+#+begin_src bash
+$ killall waybar
+$ waybar & disown
+# or
+$ pkill waybar && hyprctl dispatch exec waybar
+#+end_src
+

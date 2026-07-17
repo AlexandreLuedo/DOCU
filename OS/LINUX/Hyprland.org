@@ -1,0 +1,8 @@
+#+title: Hyprland
+#+LANGUAGE:en
+* Monitors
+see also : [[https://wiki.hypr.land/Configuring/Monitors/][wiki.hyprl.land]]
+** list monitors
+#+begin_src bash
+$ hyprctl monitors all
+#+end_src

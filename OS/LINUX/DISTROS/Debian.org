@@ -1,0 +1,20 @@
+#+title: Debian
+* APT
+** Config sources
+#+begin_src bash
+vi /etc/apt/sources.list
+#+end_src
+Trouver liste de source
+#+begin_src bash
+sudo apt update # rafraichir la liste
+#+end_src
+** Mettre à jour
+#+begin_src bash
+sudo apt upgarde
+sudo apt full-upgrade # autorise les changements de dépendances (ex: suppression de paquets obselètes)
+#+end_src
+** Mise à jour auto de sécurité
+#+begin_src bash
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure unattended-upgrades # choisir "yes"
+#+end_src

@@ -1,0 +1,69 @@
+#+title: Shell Command
+#+LANGUAGE: en
+This file ise used to reffer all GNU/Linux commands
+* Views
+#+begin_src bash
+less                            # Use for displaying output without screetching terminal
+# Using like
+cat file.txt | less
+#+end_src
+* Redirections
+#+begin_src 
+<command> > <file>
+#+end_src
+** Stderr 
+#+begin_src bash
+<command> 2> <file>
+#+end_src
+** View Stderr
+#+begin_src bash
+<command> 2>&1 >/dev/null | less
+# 2>&1 send errors with normal
+# >/dev/null send normal in null (blackhole)
+#+end_src
+** Redirect all in view
+#+begin_src 
+<command> |& less
+#+end_src
+* Network
+See also: [[file:~/INFOR/DOCU/NETWORK/Network.org][Network specific doc]] 
+** ALL
+*** See domain
+#+begin_src bash
+whois <domain.name>
+#+end_src
+*** Knowing his ip configuration
+#+begin_src bash
+$ ip link
+#+end_src
+*** Listening all devices on network
+#+begin_src bash
+$ sudo nmap [-sn] <192.168.1.0/24>
+#+end_src
+** Distro specifics
+*** Debian
+*** Arch
+* Files & directories
+** Knowing working location
+#+begin_src bash
+$ pwd                           # Print of Working Directory
+#+end_src
+** Creating directory
+#+begin_src bash
+$ mkdir [options] <directory_name> [<other_directory_name>]                         
+-p                              # Parents
+-v                              # Verbose
+-m, --mode=<mode>               # Set file mode (as in chmod), not a=rwx - umask
+-Z                              # Set SELinux security context of each created diurectory to the default type
+#+end_src
+* Services
+** Start, restart, enable etc...
+#+begin_src bash
+$ sudo systemctl [<task>] [<service_name>]
+#+end_src
+** Read log
+#+begin_src bash
+$ sudo journalctl -xeu [<service_name>]
+#+end_src
+
+

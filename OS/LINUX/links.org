@@ -1,0 +1,6 @@
+#+title: Links
+#+LANGUAGE: en
+* Create a symlink
+#+begin_src bash
+ln -s source_file [target_file]
+#+end_src

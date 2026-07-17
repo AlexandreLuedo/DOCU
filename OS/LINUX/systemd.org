@@ -1,0 +1,11 @@
+#+title: Systemd
+#+subtitle: System & service manager for the Linux Kernel
+#+LANGUAGE: en
+See also: [[https://wiki.archlinux.org/title/Systemd][Arch wiki]]
+* Usage
+#+begin_src bash :eval no
+sudo systemctl <action> <name.service>
+#+end_src
+** TODO Man page
+*** IDEA Maybe add that with =man systemctl >> systemd.org
+

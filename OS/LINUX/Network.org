@@ -1,0 +1,84 @@
+#+title: Network
+#+Subtitle: Reffering all network config and misk
+#+LANGUAGE: en
+See also: [[file:~/INFOR/DOCU/NETWORK/Network.org][Network.org in Network documentation folder]] if you doesn't find your answer.
+
+* Interface
+** File
+=/etc/network/interfaces=
+* DNS
+** Configure DNS
+*** ARCH
+**** Using systemd-resolved (recommended)
+#+begin_src bash
+$ sudo nvim /etc/systemd/resolved.conf
+#+end_src
+#+begin_src conf
+[Resolve]
+DNS=[<dns.adress>] <second.dns.adress>
+FallbackDNS=[<fallback.dns.adress>]
+#+end_src
+#+begin_src bash
+# Create an symlink (just making that one time)
+$ sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+# Restart service
+$ sudo systemctl restart systemd-resolved
+#+end_src
+**** Using NetworkManager
+#+begin_src bash
+# Configure
+nmcli connection modify "[<SSID>]" ipv4.dns "[<dns.adress>]" ipv4.ignore-auto-dns yes
+
+# Up
+$ nmcli connection up "[<SSID>]"
+#+end_src
+*** Debian
+**** Using systemd-resolved (recommended)
+#+begin_src bash
+# Setup systemd-resolved
+$ sudo apt install systemd-resolved 
+$ sudo systemctl enable systemd-resolved
+
+# Configure the DNS servers 
+$ sudo nvim /etc/systemd/resolved.conf
+#+end_src
+#+begin_src conf
+# Modify this lines
+[Resolve]
+DNS=<your.dns.adress>
+FallbakcDNS=<if.first.failed>
+Domains=~.                      # Route all DNS queries to the DNS servers associated with specific IP
+#+end_src
+#+begin_src bash
+$ sudo systemctl restart systemd-resolved
+# Ensuring /etc/resolv.conf points to systemd-resolved
+$ sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+# Verify the changes
+resolvectl status
+#+end_src
+** Print DNS Settings
+*** Arch
+#+begin_src bash :eval no
+resolvectl status
+#+end_src
+** [[https://wiki.archlinux.org/title/Domain_name_resolution#:~:text=Resolve%20a%20domain%20name%20using%20NSS,-NSS][Resolve a domain name using NSS]]
+Used for [[https://archlinux.org/][arch based systems]]
+#+begin_src bash :eval no
+getent ahosts <domain_name>
+# works also
+dig <domain_name>
+#+end_src
+** [[https://wiki.archlinux.org/title/Domain_name_resolution#:~:text=Lookup%20utilities,-To][Lookup dns]]
+#+begin_src bash :eval no
+drill <domain> @<nameserver> TXT
+#+end_src
+* Restart internet service
+For omarchy
+#+begin_src bash
+sudo systemctl restart systemd-networkd
+#+end_src
+* Issues
+Because majors issues are os specifics I wrote them in their own files.
+[[org:../INFOR/DOCU/OS/LINUX/DISTROS/ARCH/Omarchy.org][Omarchy]]
+
