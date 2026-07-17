@@ -1,0 +1,22 @@
+#+title: Usefull Packages
+* CLI
+** [[https://github.com/hotchpotch/mac-translate-cli][Mac translate cli]]
+#+begin_src bash :eval no
+brew tap hotchpotch/mac-translate-cli https://github.com/hotchpotch/mac-translate-cli
+brew install hotchpotch/mac-translate-cli/trn
+#+end_src
+*** Usage
+#+begin_src bash
+trn --to ja "Hello world!"
+#=> こんにちは、世界！
+#+end_src
+
+Pipeline
+#+begin_src bash
+echo "Hello world!" | trn --to ja
+#=> こんにちは、世界！
+#+end_src
+
+* CASK
+** [[https://rectangleapp.com][Rectangle]]
+

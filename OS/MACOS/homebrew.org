@@ -1,0 +1,51 @@
+#+title: Homebrew
+#+LANGUAGE: en
+* Where is homebrew
+#+begin_src bash
+# $ which brew
+/opt/homebrew/bin/brew
+#+end_src
+* [[https://stackoverflow.com/questions/53549988/where-are-homebrew-services-logs][Where is logs]]
+#+begin_src bash
+/opt/homebrew/var/log
+#+end_src
+* Return the config in shell
+#+begin_src bash
+brew config
+#+end_src
+* Debugging
+#+begin_src bash
+brew update
+brew upgrade
+brew cleanup
+brew doctor
+brew info package_name
+#+end_src
+
+#+RESULTS:
+
+* Issues
+** Make sure to have all infos !!
+#+begin_src bash
+brew info package_name
+#+end_src
+** Warning: No available formula with the name "openssl@1.1". Did you mean openssl@3.5, openssl@3.0, openssl@4 or openssl@3?
+Likely when I install openssl, the issue was in openssl installed & outdated dependencies. In a clean way I cleanup the homebrew cache :
+#+begin_src bash
+brew cleanup
+rm -rf $(brew --cache)
+#+end_src
+Then I check the package informations
+#+begin_src bash
+brew info gnupg
+#+end_src
+See this output :
+#+begin_src bash
+Required (10): gnutls ↑, libassuan, libgcrypt, libgpg-error, libksba, libusb ↑, npth, pinentry, readline ✔, gettext ✔
+# Notice the ↑ symbol next to gnutls and libusb
+#+end_src
+In Homebrew-speak, ↑ means "this package is already installed on your system, but it is outdated." In this case, we need to reinstall all this outdated package by removing them, clean packages, and install gnupg
+#+begin_src bash
+brew autoremove # Uninstall formulae that were only installed as a dependency of another formula and are now no longer needed.
+brew install gnupg
+#+end_src
