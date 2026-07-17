@@ -1,0 +1,11 @@
+#+title: Keybindings
+#+LANGUAGE: en
+See also : [[https://gist.github.com/tuxfight3r/60051ac67c5f0445efee][Shell Shortcuts github]]
+* Erase
+- C-w :: word before cursor
+- C-u :: all before cursor
+- M-d :: word after cursor (alt + d)
+- C-h :: Backspace
+* Manage shell
+- C-d :: exit shell 
+

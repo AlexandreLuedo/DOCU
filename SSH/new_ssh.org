@@ -1,0 +1,19 @@
+#+title: New Ssh
+#+subtitle: Secure Shell Protocol
+* SSH
+* SSHD - SSH Deamon
+* Troubleshooting
+** Can't connect to the hosts
+See also : [[https://www.hostinger.com/tutorials/ssh-connection-refused]]
+*** Verify the deamon on the hosts
+#+begin_src bash :eval no
+sudo systemctl status sshd
+#+end_src
+if inactive :
+#+begin_src bash :eval no
+sudo systemctl enable sshd
+sudo systemctl start sshd
+#+end_src
+
+
+
