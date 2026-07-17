@@ -17,3 +17,36 @@ cat ~/.ssh/id_ed25519.pub
 ssh -T git@github.com
 
 #+end_src
+* Typical usage of GPG keys
+For github it's used to verify the commits
+#+begin_src org
+# Typical usage
+gpg --encrypt file.txt             # Encrypt a file
+gpg --sign file.txt                # Sign a file
+gpg --verify file.txt.sig          # Verify someone's signature
+gpg --list-keys                    # See your keys
+#+end_src
+* Create a full gpg key
+See also: [[https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key][Github docs]]
+#+begin_src bash :eval no
+gpg --full-generate-key
+# parameters => ECC (sign & encrypt) => Curve 25519 => 6m
+#+end_src
+* [[https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account][Add to github]]
+** Open Github account settings > [[https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account#about-addition-of-gpg-keys-to-your-account][SSH and GPG keys]]
+** Print gpg key in terminal
+#+begin_src bash :eval no
+# List all gpg keys infos
+gpg --list-secret-keys --keyid-format=long
+
+# key_type/ >>>>grab_me<<<< date [expires: date ]
+# Grab the grab_me
+gpg --armor --export <grab_me>
+# Copy paste the output in github website
+#+end_src
+** Ensure to have git sign with gpg
+#+begin_src bash :eval no
+git config commit.gpgsign true
+#+end_src
+* Storage for gnupg keys
+~/.gnpg
