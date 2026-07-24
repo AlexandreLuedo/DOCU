@@ -1,62 +1,70 @@
 #+title: Linux
+#+subtitle: A basic GNU/Linux personnal documentation
+#+email: alexandreluedo@pm.me
+#+author: Alexandre Luedo
 #+TODO: TODO | DONE | WAITING | [?]
-#+language: fr
+#+language: en
 
-
-* Paquets de logiciels
+* Packages
 ** Rpm
-redhat, opensuse
-~/var/lib/rpm~ (jamais modifier cette base de donnée)
-ne fonctionnera pas si les dépendances ne sont pas résolues.
-*** .rpm
+Used on: *redhat, opensuse*
+#+begin_quote
+[!WARNING]
+Never modify this database :
+/var/lib/rpm
+#+end_quote
+#+begin_quote
+[!NOTE]
+Installation doesn't work if dependencies aren't downloaded
+#+end_quote
+*** .rpm file extension
 ~nom-version-edition.architecture.rpm~
 *** .rpmsave
 sauvegarde d'ancienne config si update d'un package.
 *** Options
-  | Options  | Explication                | Exemple      |
-  |----------+----------------------------+--------------|
-  | -i       | installation               | ~rpm -i *.rpm~ |
-  | --force  | va avec installtion        |              |
-  | --nodeps | si problème de dépendances |              |
-  | -v       | nom du paquet              |              |
-  | -h       | progression installation   |              |
-  | -U       | Update paquet              |              |
-  | -e       | suppr                      |              |
-  #+begin_src shell
+  | Flags    | Meanings                 | Example      |
+  |----------+--------------------------+--------------|
+  | -i       | Installation             | ~rpm -i *.rpm~ |
+  | --force  | Used with installation   |              |
+  | --nodeps | If dependencies issues   |              |
+  | -v       | Package name             |              |
+  | -h       | Installation progression |              |
+  | -U       | rpdate paquet            |              |
+  | -e       | Erase                    |              |
+  #+begin_src bash
+# Example
 rpm -e php
   #+end_src
   #+begin_verse
-  Eviter d'utiliser ~--force~ et ~--nodeps~ peux casser des dépendances
+  Avoid using =--force= and =--nodeps= can broke dependencies
   #+end_verse
-**** Requêtes RPM
-| Options     | Explications                                   | Exemple |
-|-------------+------------------------------------------------+---------|
-| -a          | tout les paquets                               |         |
-| -i          | information (résumé)                           |         |
-| -l          | list                                           |         |
-| -f          | trouve le paquet qui contient le fichier donné |         |
-| -p          | recherche dans le fichier de paquet            |         |
-| --requires  | dépendances du paquet                          |         |
-| --provides  | ce que fournit le paquet                       |         |
-| --scripts   | scripts exécutés à installation & suppression  |         |
-| --changelog | changelog                                      |         |
+**** RPM requests
+|-------------+---------------------------------------------------+---------|
+| Flags       | Meanings                                          | Example |
+|-------------+---------------------------------------------------+---------|
+| -a          | All packages                                      |         |
+| -i          | Infos (summaries)                                 |         |
+| -l          | List                                              |         |
+| -f          | Find the package who contain the file             |         |
+| -p          | Search the file in the package                    |         |
+| --requires  | Package dependencies                              |         |
+| --provides  | What provide the package                          |         |
+| --scripts   | Scripts executed at installation & uninstallation |         |
+| --changelog | changelog                                         |         |
 #+begin_src shell
-// informations et fichierse installés par le paquet
-rpm -qil emacss-27.2-6.e19_1.1.x86_64
+# Infos and files installed by the package
+rpm -qil emacs-27.2-6.e19_1.1.x86_64
 #+end_src
 #+begin_src shell
-// dépendances
+# Dependencies
 rpm -gp --requires php-8.1.14
 #+end_src
 **** Vérification des paquets
-| Options | Explications       | Exemples |
-|---------+--------------------+----------|
-| -V      | Contrôle le paquet |          |
-#+begin_src shell
-rpm -V emacs
-#+end_src
-***** Erreures
-| S | taille du fichier modifié               |
+| Flags | Meaning              | Examples     |
+|-------+----------------------+--------------|
+| -V    | controle the package | =rpm -V emacs= |
+***** Issues
+| S | File size modified                      |
 | 5 | somme MD5 ne coresspond plus            |
 | T | date de modification n'est plus la même |
 | U | propriétaire modifié                    |
@@ -1659,11 +1667,16 @@ Les mots de passes sont encoder avec algoritmes. Et son contenu dans le fichier 
 $ passwd nomUtilisateur
 # passwd hadrien
 #+end_src
-*** Gestion des utilisateurs
+*** Users management
 On peux modif les fichiers =/etc/passwd /etc/shadow= à la main mais aussi utiliser des commandes qui seront plus complètes et gèrerons mieux les modifications.
+**** Create user account
+#+begin_src bash :eval no
+useradd <new_user>
+#+end_src
+
 ** Scanne & imprimerie
 *** [[file:Scanning.org][Scanner]]
-* Gestion de logiciels
+* Software management
 ** Discord
 *** Installation or manual updating
 #+begin_src bash
