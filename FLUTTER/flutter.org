@@ -1,10 +1,11 @@
 #+title: Flutter
 #+lang: fr en
-Sources [[*Container][flutter docs]] 
-* Principe
-** [[https://docs.flutter.dev/ui#basic-widgets][Tout es widget]]
-- chaques composants sont considérés comme des widgets.
+See also: [[https://docs.flutter.dev][Flutter.dev documentation]]\
+* How it works
+** [[https://docs.flutter.dev/ui#basic-widgets][Widgets]]
+Each component is a widget.
 #+begin_src dart
+// runApp() function take the Center() bring them root function 
 void main(){
   runApp(
     const Center(
@@ -14,10 +15,38 @@ void main(){
     );
 }
 #+end_src
-la fonction ~runApp()~ prend le widget ~Center()~ et le rend fonction racine de l'ensemble.
-*** Text
+*** [[https://docs.flutter.dev/ui/widgets/text][Text widgets]]
+#+begin_quote
+[!INFO]
+If you find yourself using DefaultTextStyle everywhere to keep your app consistent, you are likely looking for ThemeData.
+Instead of wrapping your app in DefaultTextStyle widgets, define your typography in your MaterialApp's theme property using TextTheme. This provides a global, scalable way to maintain font sizes, weights, and colors throughout your entire application.  
+#+end_quote
+**** [[https://api.flutter.dev/flutter/widgets/Text-class.html][Text class]]
+#+begin_src dart
+// Simple text snippets
+child: const Text('Hello');
+#+end_src
+You can also use =TextStyle= inside a Text class. Used to overwrite a style or define one component in the UI.
+#+begin_src dart
+child: const Text('Hello', style: TextStyle(fontSize: 20, color: Colors.blue));
+#+end_src
+**** DefaultTextStyle
+It propagate down his style to his childs.
+#+begin_src dart
+DefaultTextStyle(
+  style: TextStyle(fontSize: 20, color: Colors.blue)
+  child: Columm(
+    children: <Widgets>[
+      Text('Inherited style 1'), // Uses the DefaultTextStyle
+      Text('Inherited style 2'), // Uses the DefaultTextStyle
+      Text('Custom style', style: TextStyle(color: Colors.red)), // Overrides the default
+    ]
+  )
+)
+#+end_src
 *** Row column
-sert au layout
+**** Row
+
 *** Stack
 Sert à placer les widgets les uns sur les autres
 **** Positioned
@@ -34,6 +63,11 @@ Sert à placer les widgets les uns sur les autres
 #+begin_src dart
 const Expanded(child: Center(child: Text('Hello world')))
 #+end_src
+** [[https://docs.flutter.dev/ui/layout][Layout]]
+*** [[https://docs.flutter.dev/tools/devtools/inspector#debugging-layout-issues-visually][Debugging]]
+*** Axis
+[[file:IMG/row-diagram.png]]
+
 ** MaterialApp
 - Beaucoup de widget en material design on besoin d'être dedans.
 *** GestureDetector()
@@ -50,6 +84,7 @@ child: Container(
 child: const Center(child: Text('engage')),
 )
 #+end_src
+*** [[https://api.flutter.dev/flutter/material/Card-class.html][Card]]
 ** StatefullWidgets
 ~StatefulWidgets~ sont des widgets qui servent à gérer l'état (a ~state~) d'un objet, qui sont ensuite utilisés pour stocker cet état. [[*Exemple d'ajout de ~stateless widget~ avec un bouton plutôt esthétique][exemple]]
 *** Déclaration
