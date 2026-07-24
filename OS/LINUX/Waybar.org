@@ -1,8 +1,13 @@
 #+title: Waybar
 #+LANGUAGE: en
+See also: [[https://waybar.net/][site]], [[https://waybar.net/category/guide/][guide]], [[https://wiki.hypr.land/Useful-Utilities/Status-Bars/#waybar][Hyprland Wiki]]
 * Start waybar
 #+begin_src bash
-$ waybar
+waybar
+#+end_src
+* Where is waybar
+#+begin_src bash :eval no
+whereis waybar
 #+end_src
 * Start after changes
 #+begin_src bash
@@ -11,4 +16,9 @@ $ waybar & disown
 # or
 $ pkill waybar && hyprctl dispatch exec waybar
 #+end_src
+* [[https://wiki.hypr.land/Useful-Utilities/Status-Bars/#how-to-launch][Enable waybar]]
+#+begin_src bash :eval no
+systemctl --user enable --now waybar.service
+#+end_src
+
 
