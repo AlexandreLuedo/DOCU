@@ -1,5 +1,0 @@
-#+title: Cdn
-#+LANGUAGE:en
-* Content Delivery Netwwork
-* Examples
-** [[https://www.cloudflare.com/][Cloudflare]]
