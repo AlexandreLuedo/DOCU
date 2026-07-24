@@ -1,6 +1,8 @@
 #+TITLE: Doom Emacs & Org-Mode Cheat Sheet
 #+AUTHOR: Alexandre Luedo
 #+STARTUP: fold
+#+LANGUAGE: en
+See also: [[https://github.com/niyumard/Doom-Emacs-Cheat-Sheet][The Ultimate Doom Emacs Cheatsheet]] 
 
 * CORE & HELP
 ** Cheatsheets & Help
@@ -36,12 +38,13 @@
 ** Buffers
 - =SPC b b= :: Afficher les principaux buffers
 - =SPC b B= :: Afficher tous les buffers
+- SPC s i  :: Jump to a place in the buffer
 ** Windows & Splits
 - =C-x 2= / =C-x 3= :: Split horizontal / vertical
 - =C-x 0= :: Delete current window
 - =C-x o= / =SPC w w= :: Move to another window
 ** Tabs
-- =SPC TAB TAB= :: Afficher les tabs
+- =SPC TAB TAB= :: Display tabs
 - =cmd t= :: Create tab
 - =SPC TAB 1/2/3= / =SPC TAB .= :: Switch tab
 - =cmd w= / =SPC TAB d= :: Delete tab
@@ -55,6 +58,7 @@
 - =SPC s i= :: Go to item
 - =alt right= :: Add *
 - [[https://emacsrocks.com/e13.html][Tutorial: Multiples line selection]]
+- [[*Buffers][Find header in the file]]
 ** Editing text
 - =C-x C-;= or =M-;= :: Comment line
 - =C-x + / -= or =C-+ / C--= :: Resize text
@@ -79,8 +83,9 @@ sed -i 's/\r$//' <file>
 - =SPC i F= :: Insert file path
 ** Insert headers
 - C-c-m :: below or on a blank line
-
 * ORG-MODE MAGIC
+** Navigate trough files
+- *SPC n s* :: Search a sentence in any org directory file
 ** Capture & Notes
 - =SPC X= :: Open Org Capture (Todo, Notes, etc...)
 - =SPC n= :: Notes
