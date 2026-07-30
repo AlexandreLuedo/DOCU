@@ -1,8 +1,0 @@
-#+title: Drawing Tablet
-* Arch
-Package name: huiontablet
-** Install
-#+begin_src bash :eval no
-sudo yay -Sy huiontablet
-#+end_src
-

@@ -1,0 +1,263 @@
+#+title: Packages Manager
+#+LANGUAGE: en
+* Rpm
+Used on: *redhat, opensuse*
+#+begin_quote
+[!WARNING]
+Never modify this database :
+/var/lib/rpm
+#+end_quote
+#+begin_quote
+[!NOTE]
+Installation doesn't work if dependencies aren't downloaded
+#+end_quote
+** .rpm file extension
+~nom-version-edition.architecture.rpm~
+** .rpmsave
+sauvegarde d'ancienne config si update d'un package.
+** Options
+  | Flags    | Meanings                 | Example      |
+  |----------+--------------------------+--------------|
+  | -i       | Installation             | ~rpm -i *.rpm~ |
+  | --force  | Used with installation   |              |
+  | --nodeps | If dependencies issues   |              |
+  | -v       | Package name             |              |
+  | -h       | Installation progression |              |
+  | -U       | rpdate paquet            |              |
+  | -e       | Erase                    |              |
+  #+begin_src bash
+# Example
+rpm -e php
+  #+end_src
+  #+begin_verse
+  Avoid using =--force= and =--nodeps= can broke dependencies
+  #+end_verse
+*** RPM requests
+|-------------+---------------------------------------------------+---------|
+| Flags       | Meanings                                          | Example |
+|-------------+---------------------------------------------------+---------|
+| -a          | All packages                                      |         |
+| -i          | Infos (summaries)                                 |         |
+| -l          | List                                              |         |
+| -f          | Find the package who contain the file             |         |
+| -p          | Search the file in the package                    |         |
+| --requires  | Package dependencies                              |         |
+| --provides  | What provide the package                          |         |
+| --scripts   | Scripts executed at installation & uninstallation |         |
+| --changelog | changelog                                         |         |
+#+begin_src shell
+# Infos and files installed by the package
+rpm -qil emacs-27.2-6.e19_1.1.x86_64
+#+end_src
+#+begin_src shell
+# Dependencies
+rpm -gp --requires php-8.1.14
+#+end_src
+*** Package verification
+| Flags | Meaning              | Examples     |
+|-------+----------------------+--------------|
+| -V    | controle the package | =rpm -V emacs= |
+**** Issues
+| S | File size modified                      |
+| 5 | somme MD5 ne coresspond plus            |
+| T | date de modification n'est plus la même |
+| U | propriétaire modifié                    |
+| G | groupe modifié                          |
+| L | lien symbolique modifié                 |
+| M | perms modifiées                         |
+| D | Périférique modifié                     |
+| c | indique un fichier de config            |
+**** GPG keys with rpm
+***** Generate a gpg key
+#+begin_src shell
+rpm -qa gpg-pubkey*
+#+end_src
+***** Control package key
+#+begin_src shell
+rpm --checksig libjpeg-turbo-1.5.3-10.e18.x86_64.rpm
+#+end_src
+*** Extraction cpio
+archive format ~cpio~
+#+begin_src shell
+# extraction
+rpm2cpio
+#+end_src
+*** Kernel cases
+Update the kernel :
+- install with ~-i~ flag
+- reboot and test softwares/medias (periphercal)
+- if all working, potentially remove the old kernel with =-e=
+**** Grub1
+Modify ~/boot/grub/grub.conf~ the =default= line for reboot on the new kernel
+**** Grub2
+- launch commands
+#+begin_src shell
+grub2-mkconfig
+#+end_src
+Regen ~/boot/grub2/grub.cfg~
+* TODO YUM 
+(Yellow dog Updater Modified)
+** TODO Config des dépôts
+** TODO Utilisation des dépôts
+* TODO DNF
+(Dantified Yum)
+* TODO DPKG
+Equivalent de [[*RPM][RPM]] pour les paquets ~.deb~
+* APT
+/Advancing Packaging Tools/
+** Repos list path
+/etc/apt/sources.list
+/etc/apt/sources.list.d
+** Update & upgrade
+#+begin_src bash :eval no
+apt-get update
+apt-get upgrade
+# Also use
+apt full-upgrade # Allow depedencies changes (e.g. removing old obsolete packages)
+#+end_src
+** Security update & upgrade
+#+begin_src bash :eval no
+apt install unattended-upgrades
+dpkg-reconfigure unattended-upgrades # choose "yes"
+#+end_src
+** Search a package
+#+begin_src bash
+apt-cache search <package_name>
+-s                              # Simulate an installation
+-f                              # repair dependancies issues
+#+end_src
+** Visual tool
+Synaptic
+#+begin_src 
+apt-get install synaptic
+#+end_src
+* TODO APTITUDE
+* TODO ZYPPER
+* Pacman
+See also: [[https://wiki.archlinux.org/title/Pacman][Arch wiki]]
+** Usage
+*** Search a package
+#+begin_src bash :eval no
+sudo pacman -Ss <package-name>
+#+end_src
+* AUR
+Arch User Repository
+** Installing yay
+#+begin_src bash
+$ sudo pacma -S --needed git base-devel
+$ git clone https://aur.archlinux.org/yay.git
+$ cd yay
+$ makepkg -si
+#+end_src
+** Using yay
+*** Update
+#+begin_src bash
+$ yay
+# or
+$ yay -Syu
+#+end_src
+*** Installing a package
+#+begin_src bash
+$ yay -S package_name
+#+end_src
+*** Searching a package
+#+begin_src bash
+$ yay search_term
+#+end_src
+*** Cleaning up
+**** Removed unneeded depedencies
+#+begin_src bash
+$ yay -Yc
+#+end_src
+**** Clean package cache
+#+begin_src bash
+$ yay -Scc
+#+end_src
+* Brew
+See also : [[https://brew.sh/][Homebrew website]]
+** Where is homebrew
+#+begin_src bash
+# $ which brew
+/opt/homebrew/bin/brew
+#+end_src
+** [[https://stackoverflow.com/questions/53549988/where-are-homebrew-services-logs][Where is logs]]
+#+begin_src bash
+/opt/homebrew/var/log
+#+end_src
+** Return the config in shell
+#+begin_src bash
+brew config
+#+end_src
+** Debugging
+#+begin_src bash
+brew update
+brew upgrade
+brew cleanup
+brew doctor
+brew info package_name
+#+end_src
+
+#+RESULTS:
+
+** Troubleshooting
+** Make sure to have all infos !!
+#+begin_src bash
+brew info package_name
+#+end_src
+** Warning: No available formula with the name "openssl@1.1". Did you mean openssl@3.5, openssl@3.0, openssl@4 or openssl@3?
+Likely when I install openssl, the issue was in openssl installed & outdated dependencies. In a clean way I cleanup the homebrew cache :
+#+begin_src bash
+brew cleanup
+rm -rf $(brew --cache)
+#+end_src
+Then I check the package informations
+#+begin_src bash
+brew info gnupg
+#+end_src
+See this output :
+#+begin_src bash
+Required (10): gnutls ↑, libassuan, libgcrypt, libgpg-error, libksba, libusb ↑, npth, pinentry, readline ✔, gettext ✔
+# Notice the ↑ symbol next to gnutls and libusb
+#+end_src
+In Homebrew-speak, ↑ means "this package is already installed on your system, but it is outdated." In this case, we need to reinstall all this outdated package by removing them, clean packages, and install gnupg
+#+begin_src bash
+brew autoremove # Uninstall formulae that were only installed as a dependency of another formula and are now no longer needed.
+brew install gnupg
+#+end_src
+
+* Install a service without package manager
+** tar.gz
+*** Compress
+#+begin_src bash :eval no
+$ tar -czvf {archive_name}.tar.gz /path/to/directory
+-c : create an archive
+-z : compress archive with gzip
+-v : verbose
+-f : file name of the archive
+#+end_src
+*** Extract
+#+begin_src bash :eval no
+$ tar -xvzf {archive_name}.tar.gz
+- x : extract, get
+- v : verbose
+- z : decompress archive with gzip
+- f : file name
+#+end_src
+*** List files in archive
+#+begin_src bash :eval no
+$ tar -tzf {archive_name}.tar.gz
+- t : list content of the archive
+#+end_src
+** Executing
+Asuming you have extract the tar.gz file. Navigate to the file
+#+begin_src bash
+./{file_name}
+#+end_src
+** Compiling
+#+begin_src bash
+./{configure} # it's normally their name
+make
+sudo make install
+#+end_src
+
+

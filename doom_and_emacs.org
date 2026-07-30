@@ -1,0 +1,266 @@
+#+title: Doom And Emacs
+#+STARTUP: fold
+#+LANGUAGE: en
+
+* Doom
+** Reinstall
+#+begin_src bash
+$ rm -rf ~/.doom.d/ && rm -rf ~/.emacs.d
+#+end_src
+** Install
+#+begin_src bash
+$ git clone http://github.com/hlissner/doom-emacs ~/.emacs.d
+$ ~/.emacs.d/bin/doom install
+#+end_src
+
+
+
+
+See also: [[https://github.com/niyumard/Doom-Emacs-Cheat-Sheet][The Ultimate Doom Emacs Cheatsheet]] 
+
+* Emacs
+** Debug
+*** First things to do
+- C-h C-d* :: Will open the debug docs
+*** See logs
+(maybe on macos)
+#+begin_src bash :eval no
+# I never try this command maybe run that in Linux based OS
+log stream --predicate 'process == "emacs"' --last 1m
+#+end_src
+*** Using shell
+#+begin_src bash :eval no
+# <emacs/path> --debug-init
+# or just command: $ emacs --debug-init
+# can also work $ whereis emacs 
+/Applications/Emacs.app/Contents/MacOS/Emacs --debug-init
+#+end_src
+*** Macos
+** Avoiding versions
+#+begin_quote
+[!WARNING]
+Do not install this version
+#+end_quote
+#+begin_src bash :eval no
+# Please no
+# Doesn't work on Macos27 (which is ARM Only systemjs)
+brew tap railwaycat/emacsmacport
+brew install emacs-mac --with-modules
+ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
+#+end_src
+** Remove old version
+#+begin_src bash
+# In case for the 
+brew uninstall emacs-mac
+brew untap railwaycat/emacsmacport
+rm /Applications/Emacs.app
+#+end_src
+** Installing the right version
+Using native comp flag will allows Emacs to get much faster in the execution.
+#+begin_src bash
+brew tap d12frosted/emacs-plus
+brew install emacs-plus@29 --with-native-comp
+#+end_src
+
+
+* CORE & HELP
+** Cheatsheets & Help
+- [[https://github.com/niyumard/Doom-Emacs-Cheat-Sheet][Ultimate cheatsheet]]
+- [[https://cheatography.com/karronqiu/cheat-sheets/the-ultimate-doom-emacs/][Ultimate doom emacs cheatsheet]]
+- =SPC h C-q= :: Help on screen
+- =:sheat-sheet= :: Open sheetsheat
+** Main Shortcuts
+- =SPC m= :: #Mode
+- =SPC c= :: #Compile
+- =SPC o= :: #Open
+** Documentation
+- =:org-info= :: Org doc
+** System Commands
+- =SPC h r r= :: Reload doom
+- =SUPER s-L= :: Execute a terminal command
+- =eww= / =M-k= :: Browse internet / Recherche internet
+
+* WORKSPACE
+** Files & Dired
+- =SPC .= :: Open local file / Dired (même façon pour mettre en plein écran)
+- =C-x C-f= :: Open local file
+- =C-x C-f /ssh:user@host:/path/to/file= :: Open file via SSH
+- =SPC f R= :: Rename/Move a file
+- =:delete-file= / =:rename-file= :: Remove & rename file
+*** Dired shortcuts
+- =+= :: Create a directory (in dired)
+- =M-w= :: Open file with default application (in dired mode)
+- =F= :: Change view in dired
+- D :: Delete
+- R :: Rename
+- TAB :: Go to item
+** Buffers
+- =SPC b b= :: Afficher les principaux buffers
+- =SPC b B= :: Afficher tous les buffers
+- SPC s i  :: Jump to a place in the buffer
+** Windows & Splits
+- =C-x 2= / =C-x 3= :: Split horizontal / vertical
+- =C-x 0= :: Delete current window
+- =C-x o= / =SPC w w= :: Move to another window
+** Tabs
+- =SPC TAB TAB= :: Display tabs
+- =cmd t= :: Create tab
+- =SPC TAB 1/2/3= / =SPC TAB .= :: Switch tab
+- =cmd w= / =SPC TAB d= :: Delete tab
+** UI Elements
+- =SPC o p= :: Open treemacs
+- =C-c ;= :: Open embarked (bottom pop-up)
+
+* EDITING & NAVIGATION
+** Move & Select
+- =Alt Shift j / k= :: Move line through the file
+- =SPC s i= :: Go to item
+- =alt right= :: Add *
+- [[https://emacsrocks.com/e13.html][Tutorial: Multiples line selection]]
+- [[*Buffers][Find header in the file]]
+** Editing text
+- =C-x C-;= or =M-;= :: Comment line
+- =C-x + / -= or =C-+ / C--= :: Resize text
+- =M-x toggle-read-only= :: Change read-only to read/write mode
+** Search & Replace (Vim / Evil mode)
+=:%s/<string>/<string>/g=
+- =:= emacs command mode
+- =%= apply on all the file
+- =s= mean substitue
+- =g= mean global (modify all lines)
+- =c= ask for confirmation before deleting
+*Note:* In regexp, if you use {{ }} in replacement, add =\= before the caracter: =:%s/<\{\{ string \}\}>/<string>/g=
+** Remove last caracters of each lines
+#+begin_src bash
+sed -i 's/\r$//' <file>
+#+end_src
+** Narrowing (Focus view)
+- =SPC m s n= :: org-narrow-to-subtree (Focus on a text)
+- =SPC m s N= :: org-narrow-widen (Exit focus)
+** Insert snippets
+- =SPC i f= :: Insert file name
+- =SPC i F= :: Insert file path
+** Insert headers
+- C-c-m :: below or on a blank line
+- M-right :: decrement header
+- M-left :: increment header
+* ORG-MODE MAGIC
+** Navigate trough files
+- SPC f :: Show files related shortcuts
+- *SPC n s* :: Search a sentence in any org directory file
+** Capture & Notes
+- SPC n :: Show notes related shortcuts
+- =SPC X= :: Open Org Capture (Todo, Notes, etc...)
+- =SPC n= :: Notes
+- =SPC M-x j= :: Journal
+** TODOs & Priorities
+- SPC n t :: Show all todo
+- =C-c C-t= :: Make a title TODO
+- SPC m t :: Make a title TODO
+- =S-right / S-left= :: Change todo and list format
+- =S-up / S-down= :: Change priority
+- SPC o A :: View agenda
+#+begin_src org
+#+TODO: TODO | DONE | WAITING
+#+end_src
+*** All TODO view
+When you hit =SPC n t=
+- s r :: Show regexp (tips: type #A to display all #A priority tasks)
+** Tags, Archive & Refile
+- =:1tag:2tag:= :: Define a tag
+- =SPC m q= :: Open tags manager
+- SPC m n :: Show headlines for all tags in org dir.
+- =SPC m A= :: Archive
+- =org-refile= :: Move title content into a specific file
+** Time & Dates
+- =SPC m d= :: Date schedule / Calendar
+- =SPC m d s= :: Scheduled
+- =M-x org-timestamp= or =:org-timestamp= :: Insert date (ex: <2025-09-17 Wed>)
+*Tip:* Use "+1d" (tomorrow), "fri" (friday), "+2d 10:00" in date picker.
+** Effort
+- *C-c C-x e :: Set the effort for a task (1:30, 15, ...)
+** Links & Images
+- =SPC n l= :: Store link
+- =SPC m l l= or =C-c C-l= :: Insert link
+*** Insert Image
+#+begin_src org
+#+CAPTION: This is a test
+#+NAME: testnameimg
+#+ATTR_ORG: :width 100
+[[./path/to/img]]
+#+end_src
+** Tables
+- =C-c == or =:org-table-eval-formula= :: Calculating table formula
+- =C-c '= :: Open dedicated buffer for formulas / table ref
+- =C-c }= :: Visualise table
+- =C-c *= or =M-x org-ctrl-star= :: Mettre à jour automatiquement (recalculer)
+*Exemple:* =@6$2= (ligne 6, colonne 2). =#+TBLFM: $2=vsum(@1..@5=
+** Export & Structure
+- =C-c C-,= :: Insert structure template
+- =C-c C-e= or =SPC m e= :: Export menu
+- =:org-export-to-org= :: Export to org
+#+begin_src org
+#+OPTIONS: toc:nil (no default TOC)
+#+OPTIONS: toc:2 (only show 2 columns)
+#+LANGUAGE: fr
+#+end_src
+** Blockquotes (GitHub style)
+Works well with .org
+#+begin_src markdown
+> [!NOTE]
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+#+end_src
+
+* CONFIGURATION & MISC
+** Doom Emacs Config Files
+- [[file:~/.config/doom/init.el][~/.config/doom/init.el]]
+- [[file:~/.config/doom/config.el][~/.config/doom/config.el]]
+- [[file:~/.config/doom/packages.el][~/.config/doom/packages.el]]
+- [[file:~/.config/doom/custom.el][~/.config/doom/custom.el]]
+- [[https://github.com/doomemacs/doomemacs/blob/5ad99220b86ae1bf421861dfad24492d768ac4d9/templates/config.example.el][Config files templates]]
+** Time Display Config
+- =:display-time-mode= :: Toggle time
+- =:display-time-world= :: Display float time
+#+begin_src elisp
+;; Config time
+(setq display-time-24hr-format t
+      display-time-day-and-date t)
+(display-time-mode 1)
+#+end_src
+*** Display buffered time
+#+begin_src elisp
+(defun open-clock-buffer ()
+  "Open a buffer displaying the current time."
+  (interactive)
+  (let ((buf (get-buffer-create "*Clock*")))
+    (with-current-buffer buf
+      (erase-buffer)
+      (insert (format-time-string "%A, %d %B %Y\n%H:%M:%S"))
+      (goto-char (point-min))
+      (display-buffer buf)
+      (run-with-timer 1 nil (lambda ()
+                              (with-current-buffer "*Clock*"
+                                (erase-buffer)
+                                (insert (format-time-string "%A, %d %B %Y\n%H:%M:%S"))
+                                (goto-char (point-min))))))))
+#+end_src
+** Snippets (Bash / Scripts)
+*** Install ISO on USB (macOS/Linux)
+#+begin_src bash
+$ diskutil list # macOS
+sudo dd if=<file> of=<device> bs=16M status=progress oflag=sync
+#+end_src
+** Extensions
+- =pantuml= :: (PlantUML integration)

@@ -1,0 +1,132 @@
+#+title: Storage, Partitions And Disks
+#+LANGUAGE: en
+* See disks
+* Show disk
+** Available space
+#+begin_src bash
+ df -h # disk space
+# -h for human-readable
+#+end_src
+** Path
+#+begin_src bash :eval no
+lsblk
+#+end_src
+** Identifiers 
+#+begin_src bash :eval no
+blkid
+#+end_src
+
+* Configure a file system
+** Create a partition table
+#+begin_src bash
+$ fdisk /dev/sdX
+o                               # Create new partition table
+n                               # New partition
+# (you can press "enter" for all question, if you want to use all device space) 
+t                               # Change the type (exFAT, FAT32 etc...)
+7                               # For changing to exFAT/HPFS
+b                               # For changing to FAT32
+w                               # Writing changes
+#+end_src
+** Format the partition
+#+begin_src bash
+$ sudo mkfs.exfat -n "key_name" /dev/sdX1 # For context it's in exfat partition format
+#+end_src
+* Eject
+#+begin_src bash
+$ sudo eject /dev/sdX
+#+end_src
+* TODO Mount & unmount / Please describe flags commands usage like: rw etc...
+Using the =mount= command
+* Linux habits with a full disk/partition
+The kernel will mount the partition in =read-only= if they full. To prevent data corruption
+* DNS
+* NFS
+Network file system
+See also : [[https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/storage_administration_guide/ch-nfs][Redhat NFS documentation]]
+** Versions
+Theres are 3 versions of NFS :
+*** NFSv2 (older but wildely supported)
+**** TCP
+Optionnal
+*** NFSv3 (newer and support asynchronous)
+**** TCP
+Optionnal
+*** NFSv4 (use TCP)
+**** TCP
+Use it
+** Download
+*** Server
+#+begin_src bash
+$ sudo apt-install nfs-kernel-server
+#+end_src
+*** Client
+#+begin_src bash
+$ sudo apt install nfs-common
+#+end_src
+** Config
+*** Server
+**** Approriate access and permissiosn
+For example purposes
+#+begin_src bash
+$ sudo chown root:staff /nfs/exports/myshare
+$ sudo chmod 775 /nfs/exports/myshare
+#+end_src
+**** Editing config
+#+begin_src bash
+
+# In /etc/exports
+/nfs/exports/myshare 192.168.122.0/24(rw,sync,no_subtree_check)
+#+end_src
+**** Reload config
+#+begin_src bash
+sudo exportfs -arv
+#+end_src
+**** Configure firewall
+Only if =firewalld= run.
+#+begin_src bash
+$ sudo firewall-cmd --add-service nfs --permanent
+$ sudo firewall-cmd --reload
+#+end_src
+*** Client
+**** Create a local mount point and mount the NFS share using the server’s IP address and the shared directory path
+#+begin_src bash
+$ sudo mkdir /nfs/imports/myshare
+$ sudo mount -t nfs 192.168.122.17:/nfs/exports/myshare /nfs/imports/myshare
+#+end_src
+** Warns
+#+begin_quote
+[!WARNING]
+In order for NFS to work with a default installation of Red Hat Enterprise Linux with a firewall enabled, configure IPTables with the default TCP port 2049. Without proper IPTables configuration, NFS will not function properly.
+The NFS initialization script and rpc.nfsd process now allow binding to any specified port during system start up. However, this can be error-prone if the port is unavailable, or if it conflicts with another daemon.
+#+end_quote
+** Start
+*** Found [[https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/storage_administration_guide/ch-nfs#s2-nfs-how-daemons][here]] (not sure about the infos)
+#+begin_src bash
+$ service nfs start
+#+end_src
+*** Verify if NFS service run
+#+begin_src bash
+$ systemctl status nfs-kernel-server
+#+end_src
+* Troubleshooting
+** Disk full & read-only for updating omarchy
+#+begin_src bash
+# See the usage of disks
+$ df -h
+$ lsblk # to know where is the file system
+$ mount | grep boot # See more about mounted infos for /boot partition
+# It's a vfat type, so it's very sensible, it can be brocken if the pc shutdown brutally.
+$ fsck # We will check the /boot disk
+$ sudo umount /boot # Never repear an mounted file system.
+# When umounting a file system, the directory must be empty
+$ sudo fsck /dev/nvmeOn1p1
+$ sudo mout -o remount,rw /boot
+$ sudo touch /boot/test_write # to see if I can write in the disk
+#+end_src
+#+begin_quote
+What I do to fix?
+- Identification : We have see that /boot was stuck as =ro= (read-only) because errors.
+- Repairation : With =fsck=, we have clean up the "dirty bit"
+- Remount : We remount the partition in =rw= (read-write) mode.
+#+end_quote

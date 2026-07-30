@@ -1,0 +1,129 @@
+#+title: Cloud Concepts
+#+LANGUAGE: en
+Concepts not only present in GNU/Linux
+Concepts for the [[https://www.cloudflare.com/learning/cloud/what-is-the-cloud/][cloud.]]
+* CDR
+See also: [[https://www.cloudflare.com/learning/cdn/what-is-a-cdn/][Cloudflare docs]]
+Often used for webservices.
+** Client
+It is a service who act when a client want to retrieve website ressources (images, javascript...). CDR are all over the world to ensure the client can retrieve all data. The CDR store only parts of a website.
+The CDR hold in cache parts and then resend it to the client. For way better performances.
+** Rent a webserver
+Like explain above, the CDR store in cache, so you pay less bandwith.
+* LB
+Load Balancer
+** Concept
+- tools or application
+**** Hardware based
+Require a dedicated load balancer device
+**** Software based
+Can run on a server or on a VM. Also in the [[https://www.cloudflare.com/learning/cloud/what-is-the-cloud/][cloud]].
+**** Static load balencing algorithm
+- Will not be aware of which server is not to used or has to eavy workloads.
+- Assign hardware trough a plan
+- Quick and easy to setup
+**** Dynamic load balencing algorithm
+- More difficulte to setup
+- Take care of the workload, availability, health
+* NTP
+see also: [[https://www.ntp.org/documentation/4.2.8-series/warp/][ntp.org]]
+** Network Time Protocole
+This protocol aimed to old time trough an infrastructure. It's stratum layers based trough 1 to 16 value. There is a master server who host time and syncrhonise to slaves devices Each layer increment 1 stratum value.
+*** Stratum
+This is a hierarchical system, who organise the time. Each level represent the distance between primary reference clock.
+- 0 is primary reference clock, being the most accurante, (atomic clocks, GPS clocks)
+- 1 
+- 2 is based on primary
+- etc...
+- 16 is to far from the reference clock, it's unsynchronised clock.
+** Convergence time :ATTACH:
+:PROPERTIES:
+:ID:       e8ce53e1-c3b8-4cee-b365-b19e55f2d24c
+:END:
+It is the time between the ntp instance start and the synchronise state. It is the period that the deamon thakes from the moment the deamon beghins this process until the local clock is stable within the target accuracy.
+1. Intial measumerement: The deamon contact one or more ntp servers and record the round-trip delay & offset.
+2. Filtering: Raw measurement contain jitter, netswork & occasionnal spikes. The deamon applied a filter to obtain a cleaner estimate.
+3. CLock discipline: 
+   - Slew the clock, micro ajustements
+   - Step the clock, large & immediate changes
+4. Stability check : Deamon monitors the offset and jitter over a sliding window. 
+
+[[attachment:_20251111_122929screenshot.png]]
+* Ports
+** Definition
+Ports are access points who make the link between client and server instances. You have multiples ports for each physicial/virtual machines.
+** Named ports
+| Port | Service                   |
+|------+---------------------------|
+|   20 | FTP datas                 |
+|   21 |  FTP protocol            |
+|   22 | ssh                       |
+|   23 | telnet (sending mail)     |
+|   25 | smtp (sending mail)       |
+|   53 | DNS                       |
+|   80 | HTTP                      |
+|  110 | pop3 (get mail)           |
+|  123 | NTP                       |
+|  139 | netbios (service windows) |
+|  143 | imap                      |
+|  161 | snmp                      |
+|  162 | traps snmp                |
+|  389 | ldap (not secure)         |
+|  443 | https                     |
+|  465 | smtps (smtp on SSL)       |
+|  514 | syslog                    |
+|  636 | ldaps (ldap on SSL)       |
+|  993 | imaps (imap on SSL)       |
+|  995 | pop3s (pop3 on SSL)       |
+** Listening all opened and used ports
+#+begin_src bash :eval no
+sudo lsof -i -n -P | grep LISTEN
+#+end_src
+* VIP
+** Virtual IP
+An flexible IP adress who is floating. Instead of being attached to a device. This IP can be assigned to multiples servers.
+1. Each of server can handle a precise VIP.
+2. One is using it.
+3. [[https://en.wikipedia.org/wiki/Failover][fail-over]] switch the VIP to another server.
+4. [OPT] Can be place behind an [[https://en.wikipedia.org/wiki/Load_balancing_(computing)][load-balancer]] to share traffic between multiples servers.
+** Config
+*** Temp vip assignation
+#+begin_src bash
+$ sudo ip addr add 192.168.56.109/24 brd 192.168.56.255 dev enp0s8
+#+end_src
+*** Debian
+**** Identify physical interface
+#+begin_src bash
+$ ip link show
+#+end_src
+**** Enable and active systemd-networkd
+#+begin_src
+$ sudo systemctl enable systemd-networkd
+$ sudo systemctl start systemd-networkd
+#+end_src
+**** Create config file
+#+begin_src /etc/systemd/network/25-wired.network
+[Match]
+Name=eth0
+
+[Network]
+Addres=192.168.1.10/24
+Gateway=192.168.1.1
+
+[Address]
+# Virtual ip adress
+Adres=192.168.1.20/24
+#+end_src
+**** Restart
+#+begin_src bash
+$ sudo systemctl restart systemd-networkd
+#+end_src
+**** Verify
+#+begin_src bash
+$ networkctl status eth0
+#+end_src
+**** Delete vip
+#+begin_src bash
+$ sudo ip addr del 192.168.1.30/24 dev eth0
+#+end_src
+** [[file:~/INFOR/INFRA/serv3.org::*Processus][Infra plannification]]

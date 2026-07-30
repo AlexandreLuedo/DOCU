@@ -1,0 +1,26 @@
+#+title: OSINT
+#+subtitle: Open Source Inteligence
+* Maigret
+See also :[[https://github.com/soxoj/maigret][ Maigret repo]] 
+** Usage
+#+begin_src bash :eval no
+# make HTML, PDF, and Xmind8 reports
+maigret user --html
+maigret user --pdf
+maigret user --xmind #Output not compatible with xmind 2022+
+
+# machine-readable exports
+maigret user --json ndjson   # newline-delimited JSON (also: --json simple)
+maigret user --csv
+maigret user --txt
+maigret user --graph         # interactive D3 graph (HTML)
+
+# search on sites marked with tags photo & dating
+maigret user --tags photo,dating
+
+# search on sites marked with tag us
+maigret user --tags us
+
+# search for three usernames on all available sites
+maigret user1 user2 user3 -a
+#+end_src

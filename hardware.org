@@ -1,0 +1,11 @@
+#+title: Hardware
+#+subtitle: Related to physical hardware components
+#+LANGUAGE: en
+** Random Access Memory - RAM
+** Graphical Processing Unit - GPU
+** Calculations Processing Unit - CPU
+** Motherboard
+** Network Interface Controller - NIC (carte réseau)
+
+
+

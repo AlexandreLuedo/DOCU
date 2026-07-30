@@ -1,0 +1,11 @@
+#+title: Fonts
+* Local path
+~/.local/share/fonts
+* Global path
+~/.usr/share/fonts
+* Refresh font cache
+#+begin_src bash
+fc-cache -fv
+#+end_src
+
+

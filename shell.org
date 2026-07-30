@@ -1,0 +1,109 @@
+#+title: Shell Command
+#+LANGUAGE: en
+This file ise used to reffer all GNU/Linux commands
+* Shorcuts
+See also : [[https://gist.github.com/tuxfight3r/60051ac67c5f0445efee][Shell Shortcuts github]]
+* Erase
+- C-w :: word before cursor
+- C-u :: all before cursor
+- M-d :: word after cursor (alt + d)
+- C-h :: Backspace
+* Manage shell
+- C-d :: exit shell 
+* Views
+#+begin_src bash
+less                            # Use for displaying output without screetching terminal
+# Using like
+cat file.txt | less
+#+end_src
+* Redirections
+#+begin_src 
+<command> > <file>
+#+end_src
+** Stderr 
+#+begin_src bash
+<command> 2> <file>
+#+end_src
+** View Stderr
+#+begin_src bash
+<command> 2>&1 >/dev/null | less
+# 2>&1 send errors with normal
+# >/dev/null send normal in null (blackhole)
+#+end_src
+** Redirect all in view
+#+begin_src 
+<command> |& less
+#+end_src
+* Network
+See also: [[file:~/INFOR/DOCU/NETWORK/Network.org][Network specific doc]] 
+** ALL
+*** See domain
+#+begin_src bash
+whois <domain.name>
+#+end_src
+*** Knowing his ip configuration
+#+begin_src bash
+$ ip link
+#+end_src
+*** Listening all devices on network
+#+begin_src bash
+$ sudo nmap [-sn] <192.168.1.0/24>
+#+end_src
+** Distro specifics
+*** Debian
+*** Arch
+* Files & directories
+** Knowing working location
+#+begin_src bash
+$ pwd                           # Print of Working Directory
+#+end_src
+** Creating directory
+#+begin_src bash
+$ mkdir [options] <directory_name> [<other_directory_name>]                         
+-p                              # Parents
+-v                              # Verbose
+-m, --mode=<mode>               # Set file mode (as in chmod), not a=rwx - umask
+-Z                              # Set SELinux security context of each created diurectory to the default type
+#+end_src
+* Services
+** Start, restart, enable etc...
+#+begin_src bash
+$ sudo systemctl [<task>] [<service_name>]
+#+end_src
+** Read log
+#+begin_src bash
+$ sudo journalctl -xeu [<service_name>]
+#+end_src
+* Cron
+A deamon (=crond=) who execute commands or scripts at a specified intervall. These tasks are kown as "Cron Jobs".
+** Launch command
+#+begin_src bash
+ *  *  *  *  *  command_to_execute
+ ┬  ┬  ┬  ┬  ┬
+ │  │  │  │  └─ Day of Week (0-6, Sunday=0)
+ │  │  │  └──── Month (1-12)
+ │  │  └─────── Day of Month (1-31)
+ │  └────────── Hour (0-23)
+ └───────────── Minute (0-59)
+#+end_src
+** Environnements usages
+ - Local/Development: Used for simple tasks like clearing temporary files, local database backups, or triggering certificates renewal (Certbot).
+ - Single Servers: It is the "gold standard" for log rotation, system maintenance, and simple periodic scripts.
+** Why not using it for large infras
+- SPOF (Single Point Of failure)
+- No particulary logs
+** Modern Alternatives in Big Infrastructure:
+   1. Distributed Schedulers (e.g., Nomad, Airflow, Dagster): These manage complex workflows across many servers, providing retry logic, UI dashboards, and dependency mapping.
+   2. Kubernetes CronJobs: In containerized environments, K8s creates a temporary pod to run a task and terminates it afterward. This ensures the task runs somewhere in the
+      cluster, regardless of individual node failures.
+   3. Cloud Native (e.g., AWS Lambda + EventBridge): Functions are triggered by time events without maintaining a persistent server.
+   4. Systemd Timers: Many modern Linux distributions (including Arch/Debian in your docs) are moving toward systemd timers. They offer better logging (via journalctl) and more
+      flexible triggering conditions than traditional CRON.
+
+
+* Links
+** TODO Symlinks
+#+begin_src bash
+ln -s source_file [target_file]
+#+end_src
+** TODO Hardlinks

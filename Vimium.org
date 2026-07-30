@@ -1,4 +1,0 @@
-#+title: Vimium
-#+LANGUAGE:en
-* Open help commands
-- Maj !

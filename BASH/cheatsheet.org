@@ -1,8 +1,0 @@
-#+title: Cheatsheet
-See also : [[https://devhints.io/bash]]
-* Loop
-#+begin_src bash
-for i in /etc/rc.*; do
-  echo "$i"
-done
-#+end_src

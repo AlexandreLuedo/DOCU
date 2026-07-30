@@ -1,0 +1,184 @@
+#+title: Cryptography
+#+subtitle: An unified document for all cryptography stuff
+#+language: en
+* PKI
+Sources:
+- https://pki-tutorial.readthedocs.io/en/latest/
+- https://smallstep.com/blog/everything-pki/#macs-and-signatures-authenticate-stuff
+  Sources:
+- https://pki-tutorial.readthedocs.io/en/latest/
+- https://smallstep.com/blog/everything-pki/#macs-and-signatures-authenticate-stuff
+** Concept :ATTACH:
+:PROPERTIES:
+:ID:       65d8ba6c-bd4f-4120-a66a-eca73ce5870e
+:END:
+[[attachment:_20251202_111820screenshot.png]]
+
+1. Requestor create a CSR and submit to the CA
+2. CA issue a certificate based on CSR and returns it ot the requestor
+3. Should certificate be revoked, the CA adds it to its CRL
+** Signature
+** Compoments
+** Public Key Infrastructure (PKI)
+Security architecture where trust is conveyed through the signature of certificates
+** Authority Certificate (CA)
+This is an Entity issuing (it's like a passport):
+- Certificates
+- CRL's
+to *subscribers* -- *end entity.*
+** Registration Authority (RA)
+Entity handling:
+- PKI enrolment (may be identical with the CA)
+** Certificate
+Contain:
+- Public Key
+- Id bound by CA signature
+** Certificate Signing Request (CSR)
+Request for certification, contain:
+- Public Key
+- ID to be certified
+** Certificate Revocation List (CRL)
+List of revoked certificaters: Issued by a CA at regular intervals.
+** Certificvation Practice Statement (CPS)
+Document describing structure and processes of a CA.
+** Relying party
+Is a certificate user that verifies and trusts certificates issued by a CA.
+** CA Types
+** Root CA (top)
+CA at the root of the architecture. Issue only:
+- CA certificates
+** Intermediate CA (mid)
+Ca below the root CA but not a signing CA. Issue only:
+- CA certificates
+** Signing CA (bottom)
+CA at the bottom of a PKI hierarchy. Issue only:
+- User certificates
+** Certificates Types
+** CA Certificate
+Certificate of a CA. Used to sign:
+- Certificates
+- CRLs
+** Root Certificate
+Self-signed CA certificate at the root of a PKIE Hierarchy.
+Serve as PKI's trust anchor.
+** Cross Certificate
+CA Certificate issued by a CA external to the primary PKI hierarchy.
+Used to connect two PKIs and thus usually comes in pairs.
+** User Certificate
+End-entity certificate issued fo one or more purpose: email-protection, server-auth, client-auth, code-signing, etc. A user certificate cannot other certificates.
+** File Formats
+** Privacy Enhanced Mail (PEM)
+- Text format
+- Base-64 encoded data with header & footer lines.
+- Preferred format in OpenSSL
+- Most software based on it (e.g. Apache mod_ssl, stunnel)
+** Distinguished Encoding Rules (DER)
+- Binary format
+- Preferred in Windows environnements
+- Official format for internet download of:
+  - Certificates
+  - CRLs
+** Deployement
+** Simple PKI
+Using the configs file for each compenent.
+1. Creating folders
+2. Creating db
+3. Creating the CA request (CSR)
+4. Create CA certificate (base on CSR)
+
+* TODO Asymmetric Cryptography
+See also : [[https://en.wikipedia.org/wiki/Public-key_cryptography][Wikipedia]]
+* File Encryption
+** Using gpg
+See also : [[https://www.gnupg.org/gph/en/manual/x110.html][Encrypting Encrypting and decrypting documents]]
+#+begin_quote
+Standart for encrypting files
+#+end_quote
+** Encrypt
+#+begin_src bash :eval no
+gpg --symmetric --cipher-algo AES256 filename.txt
+#+end_src
+
+#+RESULTS:
+
+** Decrypt
+#+begin_src bash :eval no
+gpg --decrypt --symmetric --cipher-algo AES256 filename.txt.gpg > filename.txt
+#+end_src
+** Using openssl enc
+So a long command
+#+begin_src bash :eval no
+openssl enc -aes-256-cbc -salt -pbkdf2 -iter 100000 -in input.txt -out output.enc -pass pass:your_password
+#+end_src
+* Cryptgraphics Keys
+** Sorts
+|------+-------------+--------------+--------------------------------------------------------|
+| Name | Algorithm   | Description  | Generation                                             |
+|------+-------------+--------------+--------------------------------------------------------|
+| TSIG | HMAC‑SHA256 | Used for DNS | =$ openssl rand -base64 32=                              |
+|      |             |              | =$ dnssec-keygen -a HMAC-SHA256 -b 256 -n HOST nsupdate= |
+|------+-------------+--------------+--------------------------------------------------------|
+** Storage
+*** SSH keys
+~/.ssh
+*** Ansible
+- Using ansible [[file:~/INFOR/DOCU/ANSIBLE/ansible.org::Vault][vault]]
+** Management
+*** Setting up key for ssh
+See also : [[https://github.com/imthenachoman/How-To-Secure-A-Linux-Server#ssh-publicprivate-keys][SSH Public/Private Keys github]]
+Preffering /Ed25519/
+** Github
+#+begin_src bash :eval no
+[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -t ed25519 -C "tonemail@example.com" -f ~/.ssh/id_ed25519 -N ""
+
+echo -e "\nHost github.com\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_ed25519\n  IdentitiesOnly yes" >> ~/.ssh/config
+
+# Run ssh agent, add key
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+# Display the pubkey to paste into GitHub
+cat ~/.ssh/id_ed25519.pub
+
+# Try the ssh connection
+ssh -T git@github.com
+#+end_src
+** GPG
+*** Typical usage of GPG keys
+For github it's used to verify the commits
+#+begin_src org
+# Typical usage
+gpg --encrypt file.txt             # Encrypt a file
+gpg --sign file.txt                # Sign a file
+gpg --verify file.txt.sig          # Verify someone's signature
+gpg --list-keys                    # See your keys
+#+end_src
+*** Create a full gpg key
+See also: [[https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key][Github docs]]
+#+begin_src bash :eval no
+gpg --full-generate-key
+# parameters => ECC (sign & encrypt) => Curve 25519 => 6m
+#+end_src
+*** [[https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account][Add to github]]
+** Open Github account settings > [[https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account#about-addition-of-gpg-keys-to-your-account][SSH and GPG keys]]
+** Print gpg key in terminal
+#+begin_src bash :eval no
+# List all gpg keys infos
+gpg --list-secret-keys --keyid-format=long
+
+# key_type/ >>>>grab_me<<<< date [expires: date ]
+# Grab the grab_me
+gpg --armor --export <grab_me>
+# Copy paste the output in github website
+#+end_src
+** Ensure to have git sign with gpg
+#+begin_src bash :eval no
+git config commit.gpgsign true
+#+end_src
+*** Storage for gnupg keys
+~/.gnpg
+
+
+
+
+

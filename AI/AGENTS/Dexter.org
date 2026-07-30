@@ -1,4 +1,0 @@
-#+title: Dexter
-See also : [[https://github.com/virattt/dexter][Dexter repo]]
-An financial agent
-

@@ -1,4 +1,0 @@
-#+title: Encryptions
-#+LANGUAGE: en
-This doc reffers to encryptions applying for ansible.
-

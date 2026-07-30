@@ -1,0 +1,490 @@
+#+title: Versionning Ci Cd
+#+subtitle: A file who handle versionning, and whole CI/CD pipelines
+#+tags: git
+* Git
+A new Git documentation using [[https://github.com/progit/progit2][ProGit2]] as source.
+
+** Config & settings
+#+begin_src bash
+git config --list --show-origin # Show all settings
+#+end_src
+** User infos
+#+begin_src bash
+git config <flags> <variable.suffix> <infos>
+#+end_src
+*** Name
+#+begin_src bash
+git config --global user.name [<username>]
+git config --global user.email [<mail.address>]
+#+end_src
+*** Email
+*** Editor
+#+begin_src bash
+git config --global core.editor emacs # Must provide full path on Windows
+#+end_src
+
+#+RESULTS:
+** branch config
+[[*set name to default branch][set name to default branch]] 
+** Repo
+** Initialyse
+#+begin_src bash
+cd ~/your/path/for/your/repo
+git init
+#+end_src
+** Remote to origin
+#+begin_src bash :eval no
+# For example Github
+git remote add origin <REMOTE_URL>
+#+end_src
+** Adding file / Stagging
+#+begin_src bash
+git add <file>
+#+end_src
+** Unstaging file
+#+begin_src bash
+$ git reset HEAD <file>
+#+end_src
+** Remove file
+#+begin_src bash
+rm <file_name>
+git rm [<file_name>...]         # The tree dots maining that it can be repeat
+#+end_src
+** Moving file
+#+begin_src bash
+git mv <source> <destination>
+#+end_src
+** [[*changes][Checking changes]]
+** Remove stagged
+#+begin_src bash
+git rm [--cached] [<pathspec>...]
+#+end_src
+** Commit
+*** Commit changes
+#+begin_src bash
+git commit -m "<msg>"       
+#+end_src
+*** Undo commit
+Rewrite commit text
+#+begin_src bash
+git commit --amend
+#+end_src
+
+Undo
+#+begin_src bash
+$ git reset --soft HEAD~1 # ~1 for one previous commit
+#+end_src
+*** Link an commit to a issue
+Just include #xxx in your commit message to reference an issue without closing it.
+
+With new GitHub issues 2.0 you can use these synonyms to reference an issue and close it (in your commit message):
+
+fix #xxx
+fixes #xxx
+fixed #xxx
+close #xxx
+closes #xxx
+closed #xxx
+resolve #xxx
+resolves #xxx
+resolved #xxx
+You can also substitute #xxx with gh-xxx.
+
+Referencing and closing issues across repos also works:
+
+fixes user/repo#xxx
+Check out the documentation available in their Help section.
+Source: [[https://stackoverflow.com/questions/1687262/link-to-the-issue-number-on-github-within-a-commit-message][StackOverflow]]
+*** Rules
+| Type        | Usage                                                                           | Example                                         |
+|-------------+---------------------------------------------------------------------------------+-------------------------------------------------|
+| ~feat:~     | A new feature (addition of code).                                               | =feat(pki): add certificate generation task=    |
+| ~fix:~      | A bug fix.                                                                      | =fix(network): correct ip address regex=        |
+| ~refactor:~ | A code change that neither fixes a bug nor adds a feature.                      | =refactor: simplify loop in systemd role=       |
+| ~docs:~     | Documentation only changes (README, comments).                                  | =docs: update installation instructions=         |
+| ~style:~    | Changes that do not affect the meaning of the code (white-space, formatting).   | =style: fix indentation in main.yml=            |
+| ~test:~     | Adding missing tests or correcting existing tests (Molecule, etc.).             | =test: add verification for service status=      |
+| ~chore:~    | Maintenance tasks or tool configuration (e.g., .gitignore).                     | =chore: update ansible-lint version=            |
+| ~ci:~       | Changes to CI configuration files and scripts (GitHub Actions, GitLab CI).      | =ci: add workflow for automatic linting=        |
+
+** Checking
+*** changes
+#+begin_src bash
+git diff <path> # for unstagged file 
+git diff --cached <path> # for stagged files
+#+end_src
+*** status
+#+begin_src bash
+git status
+#+end_src
+*** history or logs
+#+begin_src bash
+git log
+git log --patch                 # Show the diff introduced in each commits (see ProGit2 Viewing the Commit History)
+git log --oneline
+#+end_src
+** Pushing
+*** Undo pushing
+#+begin_src bash
+$ git revert HEAD
+#+end_src
+** Commit
+** Undo a pushed shared commit
+#+begin_src bash
+git log
+# Get hash commit
+git revert <commit-hash>
+#+end_src
+** Force undo pushed commit
+#+begin_src bash
+# Keep changes unstagged
+git reset --soft HEAD~1
+# or discard changes entirely
+git reset --hard HEAD~1
+#+end_src
+** See a commited commit
+#+begin_src bash :eval no
+git diff <hash>
+#+end_src
+** Branch
+** See remote branch
+#+begin_src bash :eval no
+git ls-remote --heads origin
+#+end_src
+** Create a branch & switch
+#+begin_src bash eval: no
+git checkout -b <branch/name>
+git push -u origin <branch/name>
+# Using -u make a link between the local & the remote branch. Without that, branches will be unlinked
+git branch -vv                  # Verify links
+#+end_src
+Another command more recently implemented
+#+begin_src bash eval: no
+git switch <branch/name>
+#+end_src
+** Delete a branch
+*** Local
+#+begin_src bash :eval no
+git branch -d <branch/origin>
+# If you want to force deleting 
+git branch -D <branch/name> 
+#+end_src
+*** Remote
+#+begin_src bash :eval no
+git push origin --delete <branch/name>
+#+end_src
+** set name to default branch
+#+begin_src bash
+git config --global init.defaultBranch <branch/name>
+#+end_src*
+** List a branch
+*** Local
+#+begin_src bash
+git branch
+#+end_src
+*** Origin
+#+begin_src bash
+git branch -a
+#+end_src
+** Link a branch
+Even if commits are already mades on branch
+#+begin_src bash eval: no
+git push -u origin <branch/name>
+#+end_src
+** Update branch (pull & rebase)
+#+begin_src bash
+git pull
+git rebase
+#+end_src
+** Get the a branch content to master
+#+begin_src bash :eval no
+git pull <branch/name>
+#+end_src
+** Force to update a file
+#+begin_src bash
+git checkout master -- <path/to/file>
+git commit -m "Reset <file> to match master version"
+#+end_src
+** Move a file to new branch
+#+begin_src bash
+# create a branch
+git checkout -b <branch/name>
+# Retrive some files from master branch
+git checkout master -- file1 file2 file3 file4
+# commit changes
+git commit -m "create a new branch"
+#+end_src
+** Move files/commits to another branch
+*** Move files
+For unstagged files
+#+begin_src bash :eval no
+# move ALL unstagged files outside the working area
+git stash -u # using -u will include unstagged files
+# Create or move to branch
+git checkout <branch_name> # moving in this case
+# Get your modifications
+git stash pop
+#+end_src
+*** Move commits
+Assuming the "target" is the branch who need to have the commit. You can also use [[cmd:rebase][rebase]] if you got a lot of commits to move.
+#+begin_src bash :eval no
+# Get history
+git log --oneline
+# Go to the targeted branch
+git checkout <branch/name>
+# Grab the commits
+git cherry-pick <commit-hash-code-1> [<commit-hash-code-2>]
+# Clean by removing old unusued commits
+git checkout <branch/name>
+git reset --hard <commit-hash-code-1> [<commit-hash-code-2>]
+#+end_src
+*** By creating a new branch
+Making a new branch assuming changes are made to master
+#+begin_src bash :eval no
+# Create a new branche
+git checkout <new/branch/name>
+# Go to master
+git checkout master
+# Remove old commits using reset 
+git reset --hard HEAD~1 # the last commit before HEAD
+#+end_src
+** TODO Make a pull request
+** After github pull request validated
+#+begin_src bash
+# Go on master
+git checkout master
+# Update local side
+git pull 
+# Delete local branch
+git branch -d {branch/name}
+# Delete origin branch
+git push origin --delete {branch/name}
+# Clean up
+git fetch -p 
+** [?] Issue
+* Github CLi
+See also:[[https://cli.github.com/manual/][ Cli Github Manual]]
+#+begin_src bash :eval no
+# Usage
+gh <command> <subcommand> [flags]
+#+end_src
+** Repo
+** [[https://cli.github.com/manual/gh_repo_create][Init]]
+#+begin_src bash
+$ gh repo create [name] [flags]
+#+end_src
+** List
+#+begin_src bash
+$ gh repo list
+#+end_src
+** Connection
+** Issue
+** Create
+#+begin_src bash
+gh issue create
+gh issue create --title "<issue_title>" [--body "<body>"]
+# template
+gh issue create --template "bug_report.md"
+#+end_src
+** View
+#+begin_src bash
+gh issue view <issue_tag_only_integer> [<--web>]
+#+end_src
+** List
+#+begin_src bash
+gh issue list
+#+end_src
+** Close
+#+begin_src bash
+$ gh issue close 123 -c <string> -r <string>
+# -r flag include 
+#+end_src
+** Subissue
+#+begin_src bash
+$ gh sub-issue create --parent 123 --title "title" --body "body"
+** Make a pull request
+gh pr create --body-editor nvim
+   #+end_src
+** Pull Request
+  #+begin_src bash
+# Authentifiez‑vous (une fois seulement)
+gh auth login
+# Choisissez GitHub.com, méthode d’authentification (browser ou token)
+
+# Créez la PR
+gh pr create \
+  --base main \               # branche cible du repo original
+  --head <votre-utilisateur>:feature/ma-nouvelle-fonctionnalité \
+  --title "Titre de la PR" \
+  --body "Description détaillée de la PR.
+
+  - Référence ticket #123
+  - Points clés…
+  "
+  #+end_src
+** Plugins
+** Install sub-issue plugin
+$ gh extension install yahsan2/gh-sub-issue
+* Github actions
+#+begin_src bash :eval no
+# Usage
+/path/to/project/.github/workflows/<file>.yaml
+#+end_src
+** Yaml lint action
+[[https://github.com/ibiqlik/action-yamllint][Project sources]]
+*** Example usage in workflows
+**** For one file
+#+begin_src yaml
+---
+name: Yaml Lint
+on: [push]  # yamllint disable-line rule:truthy
+jobs:
+  lintAllTheThings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: yaml-lint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: myfolder/*values*.yaml
+          config_file: .yamllint.yml
+#+end_src
+**** For all files
+#+begin_src yaml
+---
+name: Yaml Lint
+on: [push]  # yamllint disable-line rule:truthy
+jobs:
+  lintAllTheThings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: yaml-lint
+        uses: ibiqlik/action-yamllint@v3
+#+end_src
+* Lazygit
+
+** Global Navigation
+- ~1~ to ~5~ :: Jump directly to panels (1: Status, 2: Files, 3: Branches, 4: Commits, 5: Stash).
+- ~[~ / ~]~ :: Cycle through tabs within a panel (e.g., Local/Remotes).
+- ~h~ / ~l~ :: Navigate the tree view (Collapse/Expand folders).
+- ~Enter~ :: Zoom into the active panel or enter a directory.
+- ~Esc~ / ~q~ :: Go back or quit the application.
+** File Management (Status)
+The main area for staging and preparing commits.
+
+- ~Space~ :: *Stage / Unstage* (Toggle file selection for the index).
+- ~a~ :: *Stage All* (Add all modified files).
+- ~d~ :: *Discard* (Revert all changes for the selected file).
+- ~c~ :: *Commit* (Open the simple commit dialog box).
+- ~C~ :: *Commit* (Open the full editor for the commit message).
+- ~i~ :: *Ignore* (Add the file to .gitignore).
+
+** Branches & Sync
+- ~Space~ :: *Checkout* (Switch to the selected branch).
+- ~n~ :: *New Branch* (Create a new branch from the current one).
+- ~p~ :: *Pull* (Fetch and merge remote changes).
+- ~P~ :: *Push* (Send local commits to remote).
+- ~M~ :: *Merge* (Open the merge menu for the selected branch).
+
+** Advanced Actions
+** Stash & Reset
+- ~s~ :: *Stash* (Save changes temporarily).
+- ~g~ :: *Reset* (Open the reset menu: Soft, Mixed, Hard).
+
+** History & Corrections
+- ~f~ :: *Fixup* (Mark as a fixup for the previous commit).
+- ~R~ :: *Rename* (Rename a commit or a branch).
+
+** The Secret Weapon
+- ~x~ :: **Context Menu** (Opens a list of all possible actions for the item under the cursor).
+- ~?~ :: **Global Help** (Displays all keyboard shortcuts).
+
+---
+#+NOTES: Simplified documentation generated by Gemini.
+* Magit
+** Shortcuts
+*** Open help
+In the magit buffer type =?=
+*** Open repo's status
+SPC g s / M-x magit-status
+*** Open repo's status without any buffer
+C-x g
+*** Close magit buffer
+Q
+*** Stag a file
+- SPC g g
+Select the file
+- s
+*** Stagging (commit)
+s c c
+*** Hunk stagging
+Used to stag a part of a file.
+*** Push
+p (prefix)
+P u (push upstream)
+*** Remove a file / untrack
+SPC gg
+K
+Select the file
+*** CheatSheet
+C-x g      → open magit-status (Doom default)
+s          → stage the file/hunk under the cursor
+c c        → commit (opens the commit‑message editor)
+c a        → amend the most recent commit
+b b        → checkout/create a branch
+P u        → push upstream
+F p        → pull (fetch + merge/rebase)
+r i        → start an interactive rebase
+z s        → stash save (store uncommitted changes)
+l l        → view the repository log
+?          → show the Magit reference card (cheat‑sheet)
+q          → quit the Magit buffer
+*** Commit
+**** NO Remove a commit
+SPC gg
+ee
+*** Branch
+**** Create
+- SPC gg
+- bc
+**** Push
+- SPC gg
+- P (push popup)
+- u (push upstream)
+**** Remove
+***** Local
+- b k
+***** Remote
+1. Remove local branch
+   - b k
+2. Remove remote branch
+   - P -
+**** Merge
+***** Select the reciever branch (master)
+- b b <branch-name> RET
+**** Change
+b b
+**** Pull & rebase
+***** Pull when upstream
+F
+u
+***** Pull with rebase
+F
+-r
+u
+***** Pull elsewhere
+F
+e
+** Make a full commit
+- SPC gg
+- s
+- cc
+- C-c C-c
+- pu
+Answer from [[https://www.reddit.com/r/DoomEmacs/comments/uimlwb/github_and_doom_emacs/][reddit]]
+#+begin_quote
+SPC gg to bring up magit. s to stage your change. cc write your message. C-c C-c finish commit message. pu push to origin.
+
+Magit is what you want. I used it use the git CLI exclusively, but nowadays I just jump into magit to do everything with git. It's worth taking the time to learn. You're not going to find a better git client in Emacs, or anywhere I'd say.
+#+end_quote

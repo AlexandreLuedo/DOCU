@@ -1,0 +1,24 @@
+#+title: Internet Browser
+#+subtitle: Stuff related to internet browsing extensions & stuff
+* Extensions
+** Bypass Paywalls Clean
+Browser extension who block paywalls.
+See also: [[Repo][https://gitflic.ru/project/magnolia1234/bpc_uploads]]
+
+*** Installation
+Download the wholle extension by clicking [[https://gitflic.ru/project/magnolia1234/bpc_uploads/blob/raw?file=bypass-paywalls-chrome-clean-master.zip][here]].
+*** [[https://gitflic.ru/project/magnolia1234/bypass-paywalls-chrome-clean#update][Update]]
+** Vimium
+*** Open help commands
+- Maj !
+
+* Google search operators
+[[https://kinsta.com/blog/google-search-operators/][Google search operator list]]
+|--------------+-----------------------------------|
+| Syntax       | Description                       |
+|--------------+-----------------------------------|
+| "word"       | Find strictly this word as result |
+| filetype:pdf |                                   |
+|              |                                   |
+|--------------+-----------------------------------|
+** TODO Include [[filetype:pdf][Others file types pdf]]

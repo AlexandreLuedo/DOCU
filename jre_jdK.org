@@ -1,0 +1,20 @@
+#+title: Installation
+#+subtitle: How to deal with any java & installation versions
+** JRE
+Known as the =Java Runtime Environment=
+** JDK
+Known as the =Java Developpement Kit=
+** Debian
+See: [[https://wiki.debian.org/Java][Debian Wiki]]
+#+begin_src bash :eval no
+apt-get install default-jre # or default-jdk
+# aptitude works well
+#+end_src
+** Arch
+#+begin_src bash
+pacman -S 
+#+end_src
+** MacOS
+
+
+

@@ -1,0 +1,278 @@
+#+title: Internet
+#+LANGUAGE: en
+See also : [[https://www.youtube.com/watch?v=lL3ElCmq6jc][Cocadmin video]]
+* DNS 
+#+begin_quote
+[!INFO]
+A instance/server who store an address for each public ip adress.
+#+end_quote
+See on [[https://wiki.archlinux.org/title/Domain_name_resolution#:~:text=The%20DNS%20protocol,hijacking%2E][Arch Linux Wiki: DNS]]
+#+begin_src 
+The DNS protocol (Do53) is unencrypted and does not account for confidentiality, integrity or authentication, so if you use an untrusted network or a malicious ISP, your DNS queries can be eavesdropped and the responses manipulated. Furthermore, DNS servers can conduct DNS hijacking. 
+#+end_src
+** Fondamentals
+*** For DNS
+**** TTL
+=Time to live= is the longevity of a domain name in cache of an DNS system.
+**** Recursive resolution
+Is the whol path of an DNS request trough the entire DNS network. Computer => Internet Box => FAI => DNS server who store TLD => DNS server who handle the domain name zone.
+*** For Name system
+**** TLD
+=Top level domain= are the =.com= that you can find in an adress.
+***** Whereis
+There is a list of server who store a precise TLD (for eg: .com)
+***** TLD server
+For each request, TLD server can localize who manage the requested domain name zone
+** Clear cache & restart DNS
+Debian-based
+#+begin_src bash :eval no
+# Clear cache
+sudo resolvectl flush-caches
+
+# Verify if cashe is clear
+sudo resolvectl statistics      # Current cache Size must be 0
+#+end_src
+** Bind
+Reffer to bind format syntax configuration file. Synonym is also: zonefile
+file.zone
+*** Vocabulary
+**** Base
+|------------------------------+-------------------------------------------------------------------------------------------------------------------|
+| Name                         | Description                                                                                                       |
+|------------------------------+-------------------------------------------------------------------------------------------------------------------|
+| $TTL                         | Time-to-*,  his Lifetime                                                                                          |
+| @                            | Represent the zone (example.com)                                                                                  |
+| IN                           | Internet, this is a DNS class                                                                                     |
+| SOA                          | Start of authority, store main zone (example.com) also admin infos (admin.example.com) other administration infos |
+| NS                           | Authoritary server names                                                                                          |
+| A, AAAA, CNAME, MX, TXT, SRV | Other types of records                                                                                            |
+|------------------------------+-------------------------------------------------------------------------------------------------------------------|
+**** Other types of records
+|-------+----------------------------------------------------+----------------------------------|
+| Name  | Example                                            | Description                      |
+|-------+----------------------------------------------------+----------------------------------|
+| A     | A 192.158.1.23                                     | Ipv4                             |
+| AAAA  | AAAA 3818:8991:53d3:9e34:c2bd:79e8:cf7d:3406       | Ipv6                             |
+| CNAME | blog IN CNAME www                                  | alias forward another name       |
+| MX    | @ IN MX 10 mail.example.com                        | Mail server (priority)           |
+| TXT   | @ IN TXT "v=spf1 -all"                             | Free text (SPF/DKIM)             |
+| NS    | @ IN NS ns1.example.com                            | Authoritary name server          |
+| PTR   | 10.0.0.127.in‑addr.arpa. IN PTR localhost.         | Inverse resolution (IP => name)  |
+| SRV   | _sip._tcp IN SRV 10 60 5060 sipserver.example.com. | Service (port, priority, weight) |
+| CAA   | @ IN CAA 0 issue "letsencrypt.org"                 | Autorisation CA                  |
+|-------+----------------------------------------------------+----------------------------------|
+**** Directives
+|-------------+-------------------------------------------+--------------------------------------------|
+| Name        | Example                                   | Description                                |
+|-------------+-------------------------------------------+--------------------------------------------|
+| $ORIGIN     | Change suffix name by default             | $ORIGIN sub.example.com                    |
+| $TTL        | Default TTL for all followings records    | $TTL 859598                                |
+| $INCLUDE    | Include another file to the conf          | $INCLUDE db.subzone                        |
+| $GENERATION | Generate multiples records (for Ip block) | $GENERATE 1-254 $ CNAME host$.example.com. |
+|-------------+-------------------------------------------+--------------------------------------------|
+#+begin_quote Warning
+ending every absolute name with a =.= (example.com.)
+#+end_quote
+*** Example
+#+begin_src conf
+$TTL    <valeur_par_défaut>
+@       IN      SOA     ns1.exemple.com. admin.exemple.com. (
+                2025110401 ; Serial
+                7200       ; Refresh (2 h)
+                1800       ; Retry   (30 min)
+                1209600    ; Expire  (14 j)
+                3600 )     ; Minimum (1 h)
+
+        IN      NS      ns1.exemple.com.
+        IN      NS      ns2.exemple.com.
+
+ns1     IN      A       192.0.2.10
+ns2     IN      A       192.0.2.11
+www     IN      A       192.0.2.20
+mail    IN      A       192.0.2.30
+        IN      MX 10   mail.exemple.com.
+#+end_src
+** Debian
+*** Bind file location
+/etc/bind/ (named.conf, db.*)
+
+** Debug dns resolutions
+*** Dig
+#+begin_src bash :eval no
+dig <example.com> any
+#+end_src
+*** Can't connect trough the web page
+**** Dig dns resolution if working
+#+begin_src bash :eval no
+dig <dns.resolution>
+#+end_src
+**** Adding to hosts the resolution
+#+begin_src bash :eval no
+# On MacOS
+sudo echo "192.168.x.x    serv3.server.cloud" >> /etc/hosts
+#+end_src
+**** Clear DNS cache
+#+begin_src bash :eval no
+# On MacOS
+sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
+#+end_src
+#+begin_src bash :eval no
+# On Linux
+sudo systemd-resolve --flush-caches ou reboot
+#+end_src
+**** Dig dns resolution if working
+#+begin_src bash :eval no
+dig <dns.resolution>
+#+end_src
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------
+* [[https://hstspreload.org/][HSTS preload list]]
+This list stored on user's device web browser, who force a list of sites to connect firstly with https protocole.
+* TCP
+=Transmission Control Protocole=
+The browser attempt to connect with TCP requests to the internet site
+** TCP Handshake
+The discussions who can certify the communication can be establish between two machines.
+#+begin_src plantuml
+@startuml
+actor Client
+participant Server
+Client->Server: Syn
+Server->Client: Syn/Ack
+Client->Server: Ack
+Client<->Server: DATA
+Hide footbox
+@enduml
+#+end_src
+
+#+RESULTS:
+: /tmp/babel-evVcK5/plantuml-8IiURt.png
+* TLS / SSL
+=Transport Layer security=, before it was SSL. Newest version is =1.3=
+#+begin_src plantuml
+@startuml
+actor Client
+participant Server
+Client->Server: ClientHello
+Client<-Server: ServerHello
+Client<->Server: Encrypted !
+Hide footbox
+@enduml
+#+end_src
+
+#+RESULTS:
+[[file:/var/folders/kr/_kvnstpx04x4y2qn892y7tm80000gn/T/babel-zzYH7L/plantuml-CYGBwn.png]]
+** ClientHello
+What is inside
+*** Version of TLS
+*** Domain ([[SNI][SNI]])
+*** Ciphers
+Encryptions algorithms list that the browser can deal with it.
+*** Public Key
+Short-lived
+*** [[https://en.wikipedia.org/wiki/Cryptographic_nonce][Nonce
+]]Random data trough the paquets to ensure more security
+** ServerHello
+*** Cypher
+The choosen one encryption protocole selected by the server
+*** Public key
+Same as [[ClientHello][ClientHello]]
+*** Certificat
+*** [[https://en.wikipedia.org/wiki/Cryptographic_nonce][Nonce]]
+
+** [[https://en.wikipedia.org/wiki/Server_Name_Indication][SNI]]
+=Server Name Indication=
+Is an extension of TLS
+* HTTP
+** HTTP1
+Can send only one ressources per paquet,
+** HTTP2
+Can handle multiples ressources per connection.
+** HTTP3
+** QUIC
+Inside an UDP protocole. Arrange paquets in the right order, and verify theirs presence, to gain TCP's advantages without TCP.
+*** UDP
+More quickly than TCP but send paquet randomely and doesn't verify theirs integrity (ideal for a video conf or call).
+*** 0RT
+=0 Round Trip= is the system to disable TLS echange before enabeling connection for known server (server who already have a previous connection)
+* CIDR
+** netmask for /24
+255.255.255.0
+** netmask for /22
+255.255.252.0
+* MAC
+gMessae Authentification Code
+See also : [[https://smallstep.com/blog/everything-pki/#macs-and-signatures-authenticate-stuff][Everything PKI]] 
+** How it works :ATTACH:
+:PROPERTIES:
+:ID:       f4569baa-f8d8-41aa-83a4-230d0b53f654
+:END:
+We use [[https://en.wikipedia.org/wiki/HMAC][HMAC]] who use hash function. It allows to hash a message with a password. And return an hashed output. A recipient that also knows the shared secret can produce their owsn MAC and compare it to the one provided.
+* NAT
+Make the transformation between the local IP to the public IP. And inverse.
+See also: [[attachment:_20260311_170738screenshot.png][Nat concept diagram]]
+* IP/Network
+** Vocable
+*** Gateway IP
+It's the start of all ip. Commonly =192.168.1.1=
+** Wireless access point ip
+This return gateway IP
+#+begin_src bash
+$ ip route | grep default
+#+end_src
+** Obtain
+*** Scan devices on network
+#+begin_src bash
+nmap -sn 192.168.1.1/24
+#+end_src
+*** ipv4
+**** macos
+#+begin_src bash
+$ ipconfig getifaddr en0
+#+end_src
+**** arch
+#+begin_src bash
+$ ip addr show | grep 192.168.
+#+end_src
+*** ip adress opened ports
+#+begin_src bash
+sudo nmap -sS -p 80,443 --open 192.168.1.0/24
+#+end_src
+** Connect
+*** Arch
+#+begin_src bash
+$ iwctl
+$ station [<interface>] connect-hidden "[<SSID>]" # For hidden networks
+
+# Forget network if doesn't work
+$ known-networks list           # verify SSID name
+$ known-networks "[<SSID>]" forget
+# And then reconnect using the station command upper
+
+#+end_src
+* ARP
+Address Resolution Protocol
+wikipedia:Address Resolution Protocol]] 
+* Summary
+Link hosts using [[org:../INFOR/DOCU/NETWORK/MAC.org][mac]] address with an internet layer address (ipv4 for eg.). It gave the ability to send packets trough a network.
+* [[https://www.geeksforgeeks.org/computer-networks/what-is-ipv4/][ipv4]] :ATTACH:
+#+CAPTION: Types of IPv4
+#+ATTR_ORG: :width 300
+[[file:IMG/types_of_ipv4_addressing.webp]]
+
+
+

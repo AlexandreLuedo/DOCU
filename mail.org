@@ -1,0 +1,24 @@
+#+title: Mail
+* Mbsync
+** Config file
+=~/.mbsyncrc=
+** Ping proton
+#+begin_src bash :eval no
+echo -e "Subject: Test Terminal\n\nCeci est un test." | msmtp --debug --account=proton ton_email@proton.me
+#+end_src
+** Print folder
+#+begin_src bash :eval no
+mbsync -Vn [<channel-name>]
+#+end_src
+* Mu
+* Init the database
+#+begin_src bash :eval no
+$ mu init --maildir=[<path/to/mail/dir>] --my-address=<your@email.me>
+#+end_src
+* Indexing the database
+#+begin_src bash :eval no
+$ mu index 
+#+end_src
+
+
+
